@@ -40,6 +40,68 @@ const proofRequestTypes = {
     },
     name: 'Customer Proof Request',
   },
+  proofForCreditCard: {
+    request: {
+      submission_requirements: [{
+        name: 'Credit Card Informations',
+        rule: 'all',
+        from: 'A'
+      }],
+      input_descriptors: [
+        {
+          id: 'CustomerCredentialProof',
+          name: 'Customer Proof Request',
+          group: ['A'],
+          purpose: 'Customer Credential with name, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.name',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'CustomerCredential'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'KYCCredentialProof',
+          name: 'KYC Proof Request',
+          group: ['A'],
+          purpose: 'KYC Credential with verifiedBy, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.verifiedBy',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'KYCCredential'
+                }
+              }
+            ]
+          }
+        },
+      ]
+    },
+    name: 'Credit Card Proof Request',
+  },
 };
 
 export default async (req, res) => {
