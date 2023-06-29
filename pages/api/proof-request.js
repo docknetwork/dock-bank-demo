@@ -40,6 +40,151 @@ const proofRequestTypes = {
     },
     name: 'Customer Proof Request',
   },
+  proofForSignIn: {
+    request: {
+      submission_requirements: [{
+        name: 'Sign In Informations',
+        rule: 'all',
+        from: 'A'
+      }],
+      input_descriptors: [
+        {
+          id: 'CustomerCredentialProof',
+          name: 'Customer Proof Request',
+          group: ['A'],
+          purpose: 'Customer Credential with name, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.name',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'CustomerCredential'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'RewardsProgramProof',
+          name: 'Rewards Program Request',
+          group: ['A'],
+          purpose: 'Rewards Program with eligibility, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.credentialSubject.eligibility'
+                ],
+                filter: {
+                  type: 'boolean',
+                  const: true
+                }
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'RewardsProgram'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'ProofOfAddressProof',
+          name: 'Proof Of Address Proof Request',
+          group: ['A'],
+          purpose: 'Proof Of Address with issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.issuanceDate',
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'ProofOfAddress'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'KYCCredentialsProof',
+          name: 'KYC Credentials Proof Request',
+          group: ['A'],
+          purpose: 'KYC Credentials with verifiedBy and issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.issuanceDate',
+                  '$.credentialSubject.verifiedBy'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'KYCCredentials'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'BankAccountDetailsProof',
+          name: 'Bank Account Details Proof Request',
+          group: ['A'],
+          purpose: 'Bank Account Details with checkingAccount, routingNumber and issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.issuanceDate',
+                  '$.credentialSubject.checkingAccount',
+                  '$.credentialSubject.routingNumber'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'BankAccountDetails'
+                }
+              }
+            ]
+          }
+        },
+      ]
+    },
+    name: 'Sign In Proof Request',
+  },
 };
 
 export default async (req, res) => {
