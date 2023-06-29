@@ -156,7 +156,7 @@ export default function RewardsProgram() {
       )}
       {isSubmitted && !isCheckCompleted && (
         <>
-          <p className="mb-8 text-gray-800">Scan to share your information and confirm membership</p>
+          <p className="mb-8 text-center text-gray-800">Scan to share your information and confirm membership</p>
           <RequireProof type="proofForRewards" onPresentedProof={() => setIsCheckCompleted(true)} />
         </>
       )}

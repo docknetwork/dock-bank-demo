@@ -35,7 +35,7 @@ const credentialTypes = {
       algorithm: 'dockbbs+',
     };
   },
-  kycCredentials({ holderDID }) {
+  kycCredential({ holderDID }) {
     return {
       name: 'KYC Credentials',
       type: ['VerifiableCredential', 'KYCCredential'],

@@ -36,22 +36,14 @@ const customerCredentialDescriptor = {
 const rewardsProgramDescriptor = {
   id: 'RewardsProgramProof',
   name: 'Rewards Program Request',
-  purpose: 'Rewards Program with eligibility, issued date requested',
+  purpose: 'Rewards Program with eligibility and issued date requested',
   constraints: {
     fields: [
       {
         path: [
-          '$.issuanceDate'
-        ]
-      },
-      {
-        path: [
+          '$.issuanceDate',
           '$.credentialSubject.eligibility'
-        ],
-        filter: {
-          type: 'boolean',
-          const: true
-        }
+        ]
       },
       {
         path: [
@@ -69,12 +61,13 @@ const rewardsProgramDescriptor = {
 const proofOfAddressDescriptor = {
   id: 'ProofOfAddressProof',
   name: 'Proof Of Address Proof Request',
-  purpose: 'Proof Of Address with issued date requested',
+  purpose: 'Proof Of Address with address and issued date requested',
   constraints: {
     fields: [
       {
         path: [
           '$.issuanceDate',
+          '$.credentialSubject.address'
         ]
       },
       {
@@ -90,10 +83,10 @@ const proofOfAddressDescriptor = {
   }
 };
 
-const kycCredentialsDescriptor = {
-  id: 'KYCCredentialsProof',
-  name: 'KYC Credentials Proof Request',
-  purpose: 'KYC Credentials with verifiedBy and issued date requested',
+const kycCredentialDescriptor = {
+  id: 'KYCCredentialProof',
+  name: 'KYC Credential Proof Request',
+  purpose: 'KYC Credential with verifiedBy and issued date requested',
   constraints: {
     fields: [
       {
@@ -108,7 +101,7 @@ const kycCredentialsDescriptor = {
         ],
         filter: {
           type: 'string',
-          pattern: 'KYCCredentials'
+          pattern: 'KYCCredential'
         }
       }
     ]
@@ -171,7 +164,7 @@ const proofRequestTypes = {
           group: ['A'],
         },
         {
-          ...kycCredentialsDescriptor,
+          ...kycCredentialDescriptor,
           group: ['A'],
         },
         {
@@ -219,7 +212,7 @@ const proofRequestTypes = {
           group: ['A'],
         },
         {
-          ...kycCredentialsDescriptor,
+          ...kycCredentialDescriptor,
           group: ['A'],
         },
       ]
