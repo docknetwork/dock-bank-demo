@@ -26,7 +26,7 @@ const customerCredentialDescriptor = {
         ],
         filter: {
           type: 'string',
-          pattern: 'CustomerCredential'
+          const: 'CustomerCredential'
         }
       }
     ]
@@ -76,7 +76,7 @@ const proofOfAddressDescriptor = {
         ],
         filter: {
           type: 'string',
-          pattern: 'ProofOfAddress'
+          const: 'ProofOfAddress'
         }
       }
     ]
@@ -101,7 +101,7 @@ const kycCredentialDescriptor = {
         ],
         filter: {
           type: 'string',
-          pattern: 'KYCCredential'
+          const: 'KYCCredential'
         }
       }
     ]
@@ -127,7 +127,7 @@ const bankAccountDetailsDescriptor = {
         ],
         filter: {
           type: 'string',
-          pattern: 'BankAccountDetails'
+          const: 'BankAccountDetails'
         }
       }
     ]
@@ -180,7 +180,7 @@ const proofRequestTypes = {
       submission_requirements: [{
         name: 'Reward Program Informations',
         rule: 'all',
-        from: 'A'
+        from: 'A',
       }],
       input_descriptors: [
         {
