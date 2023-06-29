@@ -40,6 +40,163 @@ const proofRequestTypes = {
     },
     name: 'Customer Proof Request',
   },
+  proofForRewards: {
+    request: {
+      submission_requirements: [{
+        name: 'Reward Program Informations',
+        rule: 'all',
+        from: 'A'
+      }],
+      input_descriptors: [
+        {
+          id: 'CustomerCredentialProof',
+          name: 'Customer Proof Request',
+          group: ['A'],
+          purpose: 'Customer Credential with name, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.name',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'CustomerCredential'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'RewardsProgramProof',
+          name: 'Rewards Program Request',
+          group: ['A'],
+          purpose: 'Rewards Program with eligibility, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.credentialSubject.eligibility'
+                ],
+                filter: {
+                  type: 'boolean',
+                  const: true
+                }
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'RewardsProgram'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'ProofOfAddressProof',
+          name: 'Proof Of Address Proof Request',
+          group: ['A'],
+          purpose: 'Proof Of Address with address and issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.address',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'ProofOfAddress'
+                }
+              }
+            ]
+          }
+        },
+      ],
+    },
+    name: 'Reward Program Proof Request',
+  },
+  proofForCreditCard: {
+    request: {
+      submission_requirements: [{
+        name: 'Credit Card Informations',
+        rule: 'all',
+        from: 'A'
+      }],
+      input_descriptors: [
+        {
+          id: 'CustomerCredentialProof',
+          name: 'Customer Proof Request',
+          group: ['A'],
+          purpose: 'Customer Credential with name, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.name',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'CustomerCredential'
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'KYCCredentialProof',
+          name: 'KYC Proof Request',
+          group: ['A'],
+          purpose: 'KYC Credential with verifiedBy, issued date requested',
+          constraints: {
+            fields: [
+              {
+                path: [
+                  '$.credentialSubject.verifiedBy',
+                  '$.issuanceDate'
+                ]
+              },
+              {
+                path: [
+                  '$.type[*]'
+                ],
+                filter: {
+                  type: 'string',
+                  pattern: 'KYCCredential'
+                }
+              }
+            ]
+          }
+        },
+      ]
+    },
+    name: 'Credit Card Proof Request',
+  },
 };
 
 export default async (req, res) => {
