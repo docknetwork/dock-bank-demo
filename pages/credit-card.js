@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import KYCPassed from 'components/kyc-passed';
 import CustomerInfoForm from 'components/customer-info-form';
 import PageLayout from 'components/page-layout';
-import PageTitle from 'components/page-title';
 import RequireProof from 'components/require-proof';
 
 const CreditCardQRCode = ({ onPresentedProof }) => (
@@ -29,8 +28,7 @@ export default function CreditCard() {
   };
 
   return (
-    <PageLayout>
-      <PageTitle>Dock Bank Credit Card</PageTitle>
+    <PageLayout title="Dock Bank Credit Card">
       {!isFormSubmitted && !isApplicationSubmitted && (
         <div className="grid w-full grid-cols-2 gap-2 px-8 md:px-32 lg:px-24">
           <div className="border-4 border-dashed">

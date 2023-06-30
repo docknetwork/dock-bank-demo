@@ -8,128 +8,224 @@ const axiosHeaders = {
 
 const baseUrl = process.env.DOCK_API_URL;
 
+const customerCredentialDescriptor = {
+  id: 'CustomerCredentialProof',
+  name: 'Customer Proof Request',
+  purpose: 'Customer Credential with name, issued date requested',
+  constraints: {
+    fields: [
+      {
+        path: [
+          '$.credentialSubject.name',
+          '$.issuanceDate'
+        ]
+      },
+      {
+        path: [
+          '$.type[*]'
+        ],
+        filter: {
+          type: 'string',
+          const: 'CustomerCredential'
+        }
+      }
+    ]
+  }
+};
+
+const rewardsProgramDescriptor = {
+  id: 'RewardsProgramProof',
+  name: 'Rewards Program Request',
+  purpose: 'Rewards Program with eligibility and issued date requested',
+  constraints: {
+    fields: [
+      {
+        path: [
+          '$.issuanceDate',
+          '$.credentialSubject.eligibility'
+        ]
+      },
+      {
+        path: [
+          '$.type[*]'
+        ],
+        filter: {
+          type: 'string',
+          pattern: 'RewardsProgram'
+        }
+      }
+    ]
+  }
+};
+
+const proofOfAddressDescriptor = {
+  id: 'ProofOfAddressProof',
+  name: 'Proof Of Address Proof Request',
+  purpose: 'Proof Of Address with address and issued date requested',
+  constraints: {
+    fields: [
+      {
+        path: [
+          '$.issuanceDate',
+          '$.credentialSubject.address'
+        ]
+      },
+      {
+        path: [
+          '$.type[*]'
+        ],
+        filter: {
+          type: 'string',
+          const: 'ProofOfAddress'
+        }
+      }
+    ]
+  }
+};
+
+const kycCredentialDescriptor = {
+  id: 'KYCCredentialProof',
+  name: 'KYC Credential Proof Request',
+  purpose: 'KYC Credential with verifiedBy and issued date requested',
+  constraints: {
+    fields: [
+      {
+        path: [
+          '$.issuanceDate',
+          '$.credentialSubject.verifiedBy'
+        ]
+      },
+      {
+        path: [
+          '$.type[*]'
+        ],
+        filter: {
+          type: 'string',
+          const: 'KYCCredential'
+        }
+      }
+    ]
+  }
+};
+
+const bankAccountDetailsDescriptor = {
+  id: 'BankAccountDetailsProof',
+  name: 'Bank Account Details Proof Request',
+  purpose: 'Bank Account Details with checkingAccount, routingNumber and issued date requested',
+  constraints: {
+    fields: [
+      {
+        path: [
+          '$.issuanceDate',
+          '$.credentialSubject.checkingAccount',
+          '$.credentialSubject.routingNumber'
+        ]
+      },
+      {
+        path: [
+          '$.type[*]'
+        ],
+        filter: {
+          type: 'string',
+          const: 'BankAccountDetails'
+        }
+      }
+    ]
+  }
+};
+
 const proofRequestTypes = {
   proofOfCustomer: {
     request: {
       input_descriptors: [
-        {
-          id: 'CustomerCredentialProof',
-          name: 'Customer Proof Request',
-          purpose: 'Customer Credential with name, issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.credentialSubject.name',
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'CustomerCredential'
-                }
-              }
-            ]
-          }
-        }
+        customerCredentialDescriptor
       ]
     },
     name: 'Customer Proof Request',
   },
-  proofForRewards: {
+  proofForSignIn: {
     request: {
       submission_requirements: [{
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'A',
+      }, {
         name: 'Reward Program Informations',
-        rule: 'all',
-        from: 'A'
+        rule: 'pick',
+        count: 1,
+        from: 'B',
+      }, {
+        name: 'Proof of Address Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'C',
+      }, {
+        name: 'KYC Credential Informations',
+        rule: 'pick',
+        from: 'D',
+        count: 1
+      }, {
+        name: 'Bank Account Details Informations',
+        rule: 'pick',
+        from: 'E',
+        count: 1
       }],
       input_descriptors: [
         {
-          id: 'CustomerCredentialProof',
-          name: 'Customer Proof Request',
+          ...customerCredentialDescriptor,
           group: ['A'],
-          purpose: 'Customer Credential with name, issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.credentialSubject.name',
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'CustomerCredential'
-                }
-              }
-            ]
-          }
         },
         {
-          id: 'RewardsProgramProof',
-          name: 'Rewards Program Request',
-          group: ['A'],
-          purpose: 'Rewards Program with eligibility, issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.credentialSubject.eligibility'
-                ],
-                filter: {
-                  type: 'boolean',
-                  const: true
-                }
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'RewardsProgram'
-                }
-              }
-            ]
-          }
+          ...rewardsProgramDescriptor,
+          group: ['B'],
         },
         {
-          id: 'ProofOfAddressProof',
-          name: 'Proof Of Address Proof Request',
+          ...proofOfAddressDescriptor,
+          group: ['C'],
+        },
+        {
+          ...kycCredentialDescriptor,
+          group: ['D'],
+        },
+        {
+          ...bankAccountDetailsDescriptor,
+          group: ['E'],
+        },
+      ]
+    },
+    name: 'Sign In Proof Request',
+  },
+  proofForRewards: {
+    request: {
+      submission_requirements: [{
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'A',
+      }, {
+        name: 'Reward Program Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'B',
+      }, {
+        name: 'Proof of Address Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'C',
+      }],
+      input_descriptors: [
+        {
+          ...customerCredentialDescriptor,
           group: ['A'],
-          purpose: 'Proof Of Address with address and issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.credentialSubject.address',
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'ProofOfAddress'
-                }
-              }
-            ]
-          }
+        },
+        {
+          ...rewardsProgramDescriptor,
+          group: ['B'],
+        },
+        {
+          ...proofOfAddressDescriptor,
+          group: ['C'],
         },
       ],
     },
@@ -138,60 +234,24 @@ const proofRequestTypes = {
   proofForCreditCard: {
     request: {
       submission_requirements: [{
-        name: 'Credit Card Informations',
-        rule: 'all',
-        from: 'A'
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        from: 'A',
+        count: 1
+      }, {
+        name: 'KYC Credential Informations',
+        rule: 'pick',
+        from: 'B',
+        count: 1
       }],
       input_descriptors: [
         {
-          id: 'CustomerCredentialProof',
-          name: 'Customer Proof Request',
+          ...customerCredentialDescriptor,
           group: ['A'],
-          purpose: 'Customer Credential with name, issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.credentialSubject.name',
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'CustomerCredential'
-                }
-              }
-            ]
-          }
         },
         {
-          id: 'KYCCredentialProof',
-          name: 'KYC Proof Request',
-          group: ['A'],
-          purpose: 'KYC Credential with verifiedBy, issued date requested',
-          constraints: {
-            fields: [
-              {
-                path: [
-                  '$.credentialSubject.verifiedBy',
-                  '$.issuanceDate'
-                ]
-              },
-              {
-                path: [
-                  '$.type[*]'
-                ],
-                filter: {
-                  type: 'string',
-                  pattern: 'KYCCredential'
-                }
-              }
-            ]
-          }
+          ...kycCredentialDescriptor,
+          group: ['B'],
         },
       ]
     },

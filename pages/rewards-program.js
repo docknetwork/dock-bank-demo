@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import PageLayout from 'components/page-layout';
-import PageTitle from 'components/page-title';
 import RequireProof from 'components/require-proof';
 import { informations } from 'utils';
 
@@ -148,19 +147,16 @@ export default function RewardsProgram() {
   };
 
   return (
-    <PageLayout>
-      <PageTitle>
-        {!isCheckCompleted ? 'Dock Bank Freedom Rewards' : 'Checkout'}
-      </PageTitle>
+    <PageLayout title={!isCheckCompleted ? 'Dock Bank Freedom Rewards' : 'Checkout'}>
       {!isCheckCompleted && (
-        <h2 className="mb-6 font-bold text-gray-800 text-l">Dock Bank members receive 20% off</h2>
+        <h2 className="mb-6 font-bold text-center text-gray-800 text-l">Dock Bank members receive 20% off</h2>
       )}
       {!isSubmitted && !isCheckCompleted && (
         <RewardsProgramForm handleFormSubmit={handleFormSubmit} />
       )}
       {isSubmitted && !isCheckCompleted && (
         <>
-          <p className="mb-8 text-gray-800">Scan to share your information and confirm membership</p>
+          <p className="mb-8 text-center text-gray-800">Scan to share your information and confirm membership</p>
           <RequireProof type="proofForRewards" onPresentedProof={() => setIsCheckCompleted(true)} />
         </>
       )}

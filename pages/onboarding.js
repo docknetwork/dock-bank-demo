@@ -8,7 +8,6 @@ import CensoredTextIcon from 'components/icons/censored-text';
 import KYCPassed from 'components/kyc-passed';
 import CustomerInfoForm from 'components/customer-info-form';
 import PageLayout from 'components/page-layout';
-import PageTitle from 'components/page-title';
 import Button from 'components/button';
 
 import { useLocalStorage } from 'utils/hooks';
@@ -73,8 +72,7 @@ export default function Onboarding() {
   };
 
   return (
-    <PageLayout>
-      <PageTitle>Dock Bank</PageTitle>
+    <PageLayout title="Dock Bank - Onboarding">
       <div className="w-full px-8 md:px-32 lg:px-24">
         {!isSubmitted && (
           <OnboardingForm handleFormSubmit={handleFormSubmit} />
