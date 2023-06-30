@@ -42,7 +42,7 @@ const credentialTypes = {
         id: holderDID,
         verifiedBy: 'IDV Provider',
       },
-      issuanceDate: '2023-01-01T14:15:22Z'
+      issuanceDate: '2023-01-01T14:15:22Z',
     };
   },
   rewardsProgram({ holderDID }) {
@@ -65,7 +65,7 @@ const credentialTypes = {
         id: holderDID,
         address: '123 Main St',
       },
-      issuanceDate: '2021-01-01T14:15:22Z'
+      issuanceDate: '2021-01-01T14:15:22Z',
     };
   },
 };
@@ -84,23 +84,25 @@ export default async (req, res) => {
   }
 
   try {
-    const credentials = await Promise.all(Object.keys(credentialTypes).map(async (type) => {
-      const credFn = credentialTypes[type];
-      const credentialData = credFn({ holderDID });
+    const credentials = await Promise.all(
+      Object.keys(credentialTypes).map(async (type) => {
+        const credFn = credentialTypes[type];
+        const credentialData = credFn({ holderDID });
 
-      const { data: credentialsResponse } = await axios.post(
-        `${baseUrl}/credentials`,
-        {
-          anchor: false,
-          persist: false,
-          credential: credentialData,
-          distribute: true,
-        },
-        axiosHeaders
-      );
+        const { data: credentialsResponse } = await axios.post(
+          `${baseUrl}/credentials`,
+          {
+            anchor: false,
+            persist: false,
+            credential: credentialData,
+            distribute: true,
+          },
+          axiosHeaders
+        );
 
-      return credentialsResponse;
-    }));
+        return credentialsResponse;
+      })
+    );
 
     res.json(credentials);
   } catch (e) {

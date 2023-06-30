@@ -36,9 +36,8 @@ const Dashboard = () => {
           {sections.map((section) => (
             <div
               key={section.link}
-              onClick={() => !section.disabled && router.push(section.link)}v
-              className="flex flex-col items-center p-10 text-center cursor-pointer group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50"
-            >
+              onClick={() => !section.disabled && router.push(section.link)}
+              className="flex flex-col items-center p-10 text-center cursor-pointer group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50">
               <p className="mt-3 text-xl font-medium text-slate-700">{section.title}</p>
               {section.description && (
                 <p className="mt-2 text-sm text-slate-500">{section.description}</p>

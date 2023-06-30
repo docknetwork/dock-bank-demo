@@ -10,7 +10,6 @@ export default function Home() {
   const [, setUserData] = useLocalStorage('userData', null);
 
   const onPresentedProof = (data) => {
-    console.log(data);
     setUserData(data);
     router.push('/dashboard');
   };
@@ -22,21 +21,21 @@ export default function Home() {
           className="flex items-center justify-center w-full space-y-8 bg-white lg:w-1/2"
           style={{ width: '100%' }}>
           <div className="w-full px-8 md:px-32 lg:px-24">
-            <p className="text-xl font-bold text-center text-gray-800">Scan the QR Code to Sign In</p>
+            <p className="text-xl font-bold text-center text-gray-800">
+              Scan the QR Code to Sign In
+            </p>
             <RequireProof type="proofForSignIn" onPresentedProof={onPresentedProof} />
 
             <Button
               type="button"
               className="block w-full"
-              onClick={() => router.push('/onboarding')}
-            >
+              onClick={() => router.push('/onboarding')}>
               Onboarding
             </Button>
             <Button
               type="button"
               className="block w-full"
-              onClick={() => router.push('/dashboard')}
-            >
+              onClick={() => router.push('/dashboard')}>
               Dashboard
             </Button>
           </div>
