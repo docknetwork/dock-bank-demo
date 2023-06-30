@@ -19,7 +19,6 @@ const credentialTypes = {
         id: holderDID,
         name: 'Alice Doe',
       },
-      algorithm: 'dockbbs+',
     };
   },
   bankAccountDetails({ holderDID }) {
@@ -32,10 +31,9 @@ const credentialTypes = {
         checkingAccount: '**1234',
         routingNumber: '123456789',
       },
-      algorithm: 'dockbbs+',
     };
   },
-  kycCredential({ holderDID }) {
+  kycCredentials({ holderDID }) {
     return {
       name: 'KYC Credentials',
       type: ['VerifiableCredential', 'KYCCredential'],
@@ -44,7 +42,6 @@ const credentialTypes = {
         id: holderDID,
         verifiedBy: 'IDV Provider',
       },
-      algorithm: 'dockbbs+',
       issuanceDate: '2023-01-01T14:15:22Z'
     };
   },
@@ -57,7 +54,6 @@ const credentialTypes = {
         id: holderDID,
         eligibility: true,
       },
-      algorithm: 'dockbbs+',
     };
   },
   proofOfAddress({ holderDID }) {
@@ -69,7 +65,6 @@ const credentialTypes = {
         id: holderDID,
         address: '123 Main St',
       },
-      algorithm: 'dockbbs+',
       issuanceDate: '2021-01-01T14:15:22Z'
     };
   },
