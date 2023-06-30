@@ -1,6 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 
+import DockBankHelper from 'components/dock-bank-helper';
+
 import '../styles/globals.css';
 
 // Fonts
@@ -12,6 +14,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Dock Bank</title>
       </Head>
+      <DockBankHelper />
       <Component {...pageProps} />
     </>
   );

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import Button from 'components/button';
 import {
   textFields,
 } from 'utils';
@@ -85,13 +87,13 @@ const CustomerInfoForm = ({
         />
       ))}
       {children}
-      <button
+      <Button
         type="submit"
-        className="block w-full py-2 mt-5 mb-2 font-semibold text-white transition-all bg-blue-600 rounded-full hover:bg-blue-700 hover:-translate-y-1 duration-250"
+        className="block w-full"
         disabled={!verified && !Object.values(isInputValuesSet).every(Boolean)}
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 };
