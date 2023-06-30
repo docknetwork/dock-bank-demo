@@ -146,9 +146,30 @@ const proofRequestTypes = {
   proofForSignIn: {
     request: {
       submission_requirements: [{
-        name: 'Sign In Informations',
-        rule: 'all',
-        from: 'A'
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'A',
+      }, {
+        name: 'Reward Program Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'B',
+      }, {
+        name: 'Proof of Address Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'C',
+      }, {
+        name: 'KYC Credential Informations',
+        rule: 'pick',
+        from: 'D',
+        count: 1
+      }, {
+        name: 'Bank Account Details Informations',
+        rule: 'pick',
+        from: 'E',
+        count: 1
       }],
       input_descriptors: [
         {
@@ -157,19 +178,19 @@ const proofRequestTypes = {
         },
         {
           ...rewardsProgramDescriptor,
-          group: ['A'],
+          group: ['B'],
         },
         {
           ...proofOfAddressDescriptor,
-          group: ['A'],
+          group: ['C'],
         },
         {
           ...kycCredentialDescriptor,
-          group: ['A'],
+          group: ['D'],
         },
         {
           ...bankAccountDetailsDescriptor,
-          group: ['A'],
+          group: ['E'],
         },
       ]
     },
@@ -178,9 +199,20 @@ const proofRequestTypes = {
   proofForRewards: {
     request: {
       submission_requirements: [{
-        name: 'Reward Program Informations',
-        rule: 'all',
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        count: 1,
         from: 'A',
+      }, {
+        name: 'Reward Program Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'B',
+      }, {
+        name: 'Proof of Address Informations',
+        rule: 'pick',
+        count: 1,
+        from: 'C',
       }],
       input_descriptors: [
         {
@@ -189,11 +221,11 @@ const proofRequestTypes = {
         },
         {
           ...rewardsProgramDescriptor,
-          group: ['A'],
+          group: ['B'],
         },
         {
           ...proofOfAddressDescriptor,
-          group: ['A'],
+          group: ['C'],
         },
       ],
     },
@@ -202,9 +234,15 @@ const proofRequestTypes = {
   proofForCreditCard: {
     request: {
       submission_requirements: [{
-        name: 'Credit Card Informations',
-        rule: 'all',
-        from: 'A'
+        name: 'Customer Credential Informations',
+        rule: 'pick',
+        from: 'A',
+        count: 1
+      }, {
+        name: 'KYC Credential Informations',
+        rule: 'pick',
+        from: 'B',
+        count: 1
       }],
       input_descriptors: [
         {
@@ -213,7 +251,7 @@ const proofRequestTypes = {
         },
         {
           ...kycCredentialDescriptor,
-          group: ['A'],
+          group: ['B'],
         },
       ]
     },
