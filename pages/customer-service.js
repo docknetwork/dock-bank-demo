@@ -25,12 +25,8 @@ export default function CustomerService() {
 
   return (
     <PageLayout title="Dock Bank Customer Service">
-      {!isValidated && (
-        <CustomerServiceInfo onPresentedProof={() => setIsValidated(true)} />
-      )}
-      {isValidated && (
-        <CustomerServiceValidated />
-      )}
+      {!isValidated && <CustomerServiceInfo onPresentedProof={() => setIsValidated(true)} />}
+      {isValidated && <CustomerServiceValidated />}
     </PageLayout>
   );
 }

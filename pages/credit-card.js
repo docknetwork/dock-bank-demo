@@ -8,7 +8,10 @@ import RequireProof from 'components/require-proof';
 const CreditCardQRCode = ({ onPresentedProof }) => (
   <div className="p-8 mx-auto border-4 border-dashed">
     <h2 className="mb-6 font-bold text-gray-800 text-l">Instant approval</h2>
-    <p className="mb-8 text-gray-800">Fast-track your application and save time completing forms by sharing your credentials and verification check</p>
+    <p className="mb-8 text-gray-800">
+      Fast-track your application and save time completing forms by sharing your credentials and
+      verification check
+    </p>
     <RequireProof type="proofForCreditCard" onPresentedProof={onPresentedProof} />
   </div>
 );
@@ -42,10 +45,7 @@ export default function CreditCard() {
         </div>
       )}
       {isFormSubmitted && !isApplicationSubmitted && (
-        <CustomerInfoForm
-          handleFormSubmit={handleApplicationSubmit}
-          verified
-        >
+        <CustomerInfoForm handleFormSubmit={handleApplicationSubmit} verified>
           <KYCPassed />
         </CustomerInfoForm>
       )}

@@ -14,35 +14,31 @@ import { useLocalStorage } from 'utils/hooks';
 import { SERVER_URL } from 'utils/constants';
 
 const OnboardingForm = ({ handleFormSubmit }) => (
-    <CustomerInfoForm
-      title="New Customer Onboard"
-      handleFormSubmit={handleFormSubmit}
-    >
-      <p className="mb-2">Upload document for KYC check</p>
-      <div className="flex items-center gap-4 px-3 py-2 mb-8 border-2 rounded">
-        <UserCircleIcon width={60} height={60} />
-        <CensoredTextIcon />
-      </div>
-      <p className="mb-2">Take photo for KYC check</p>
-      <div className="flex items-center justify-center p-6 mb-8 border-2 rounded">
-        <CameraIcon width={24} height={24} />
-      </div>
-    </CustomerInfoForm>
+  <CustomerInfoForm title="New Customer Onboard" handleFormSubmit={handleFormSubmit}>
+    <p className="mb-2">Upload document for KYC check</p>
+    <div className="flex items-center gap-4 px-3 py-2 mb-8 border-2 rounded">
+      <UserCircleIcon width={60} height={60} />
+      <CensoredTextIcon />
+    </div>
+    <p className="mb-2">Take photo for KYC check</p>
+    <div className="flex items-center justify-center p-6 mb-8 border-2 rounded">
+      <CameraIcon width={24} height={24} />
+    </div>
+  </CustomerInfoForm>
 );
 
 const OnboardingSuccess = ({ handleSubmit }) => (
-    <div className="mx-auto w-fit">
-      <h2 className="mb-6 text-gray-800 text-l">Congrats! Your account has been created and your credentials are now accessible in your Wallet App </h2>
-      <KYCPassed />
-      <Button
-        type="button"
-        onClick={handleSubmit}
-        className="block w-full"
-      >
-        Submit
-      </Button>
-    </div>
-  );
+  <div className="mx-auto w-fit">
+    <h2 className="mb-6 text-gray-800 text-l">
+      Congrats! Your account has been created and your credentials are now accessible in your Wallet
+      App{' '}
+    </h2>
+    <KYCPassed />
+    <Button type="button" onClick={handleSubmit} className="block w-full">
+      Submit
+    </Button>
+  </div>
+);
 
 export default function Onboarding() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -53,11 +49,15 @@ export default function Onboarding() {
     event.preventDefault();
 
     try {
-      await axios.post(`${SERVER_URL}/api/issue`, {}, {
-        params: {
-          holderDID
+      await axios.post(
+        `${SERVER_URL}/api/issue`,
+        {},
+        {
+          params: {
+            holderDID,
+          },
         }
-      });
+      );
 
       setIsSubmitted(true);
     } catch (error) {
@@ -74,14 +74,8 @@ export default function Onboarding() {
   return (
     <PageLayout title="Dock Bank - Onboarding">
       <div className="w-full px-8 md:px-32 lg:px-24">
-        {!isSubmitted && (
-          <OnboardingForm handleFormSubmit={handleFormSubmit} />
-        )}
-        {isSubmitted && (
-          <OnboardingSuccess
-            handleSubmit={handleOnboardingSuccessSubmit}
-          />
-        )}
+        {!isSubmitted && <OnboardingForm handleFormSubmit={handleFormSubmit} />}
+        {isSubmitted && <OnboardingSuccess handleSubmit={handleOnboardingSuccessSubmit} />}
       </div>
     </PageLayout>
   );
