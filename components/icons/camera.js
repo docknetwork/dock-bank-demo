@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Camera = ({ width = 20, height = 20 }) => (
+const Camera = ({ width = 20, height = 20, onClick, className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
     width={width}
     height={height}
     viewBox="0 0 20 20"
+    onClick={onClick}
+    className={className}
   >
     <path
       fillRule="evenodd"

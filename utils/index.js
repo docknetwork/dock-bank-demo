@@ -89,14 +89,8 @@ export const kycSteps = [
   }
 ];
 
-export const SERVER_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL ||
-  process.env.NEXT_PUBLIC_VERCEL_URL ||
-  'http://localhost:3000';
-
 export default {
   textFields,
   kycSteps,
   informations,
-  SERVER_URL,
 };

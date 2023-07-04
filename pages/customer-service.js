@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import RequireProof from 'components/require-proof';
 import PageLayout from 'components/page-layout';
 
+import { BANK_NAME } from 'utils/constants';
+
 const CustomerServiceInfo = ({ onPresentedProof }) => (
   <div className="w-full max-w-md p-8 mx-auto text-center border rounded shadow">
     <h2 className="mb-6 font-bold text-gray-800 text-l">Customer Services Portal</h2>
@@ -24,7 +26,7 @@ export default function CustomerService() {
   const [isValidated, setIsValidated] = useState(false);
 
   return (
-    <PageLayout title="Dock Bank Customer Service">
+    <PageLayout title={`${BANK_NAME} - Customer Service`}>
       {!isValidated && <CustomerServiceInfo onPresentedProof={() => setIsValidated(true)} />}
       {isValidated && <CustomerServiceValidated />}
     </PageLayout>

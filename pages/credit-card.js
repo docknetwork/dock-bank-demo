@@ -5,6 +5,8 @@ import CustomerInfoForm from 'components/customer-info-form';
 import PageLayout from 'components/page-layout';
 import RequireProof from 'components/require-proof';
 
+import { BANK_NAME } from 'utils/constants';
+
 const CreditCardQRCode = ({ onPresentedProof }) => (
   <div className="p-8 mx-auto border-4 border-dashed">
     <h2 className="mb-6 font-bold text-gray-800 text-l">Instant approval</h2>
@@ -31,7 +33,7 @@ export default function CreditCard() {
   };
 
   return (
-    <PageLayout title="Dock Bank Credit Card">
+    <PageLayout title={`${BANK_NAME} - Credit card`}>
       {!isFormSubmitted && !isApplicationSubmitted && (
         <div className="grid w-full grid-cols-2 gap-2 px-8 md:px-32 lg:px-24">
           <div className="border-4 border-dashed">

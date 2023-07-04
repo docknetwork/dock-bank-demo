@@ -63,7 +63,7 @@ const CustomerInfoForm = ({
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="w-full max-w-lg p-8 mx-auto"
+      className="w-full max-w-lg p-8 mx-auto md:max-w-4xl"
     >
       {title && (
         <h2 className="mb-6 font-bold text-gray-800 text-l">{title}</h2>
@@ -71,22 +71,28 @@ const CustomerInfoForm = ({
       {description && (
         <p className="mb-8 text-gray-800">{description}</p>
       )}
-      {textFields.map((field) => (
-        <InteractiveFormField
-          key={field.id}
-          id={field.id}
-          type={field.type}
-          name={field.name}
-          placeholder={field.placeholder}
-          value={field.value}
-          verified={verified}
-          isValueSet={isInputValuesSet[field.id]}
-          setIsValueSet={
-            (value) => setIsInputValuesSet({ ...isInputValuesSet, [field.id]: value })
-          }
-        />
-      ))}
-      {children}
+      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          {textFields.map((field) => (
+            <InteractiveFormField
+              key={field.id}
+              id={field.id}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={field.value}
+              verified={verified}
+              isValueSet={isInputValuesSet[field.id]}
+              setIsValueSet={
+                (value) => setIsInputValuesSet({ ...isInputValuesSet, [field.id]: value })
+              }
+            />
+          ))}
+        </div>
+        <div>
+          {children}
+        </div>
+      </div>
       <Button
         type="submit"
         className="block w-full"

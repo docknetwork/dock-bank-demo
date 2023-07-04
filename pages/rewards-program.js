@@ -4,6 +4,8 @@ import PageLayout from 'components/page-layout';
 import RequireProof from 'components/require-proof';
 import { informations } from 'utils';
 
+import { BANK_NAME } from 'utils/constants';
+
 const CustomerInfoForm = ({ handleFormSubmit }) => (
   <form onSubmit={handleFormSubmit} className="grid w-full grid-cols-2 gap-4 p-8 mx-auto">
     <div className="w-full">
@@ -140,7 +142,7 @@ export default function RewardsProgram() {
   };
 
   return (
-    <PageLayout title={!isCheckCompleted ? 'Dock Bank Freedom Rewards' : 'Checkout'}>
+    <PageLayout title={!isCheckCompleted ? `${BANK_NAME} Freedom Rewards` : 'Checkout'}>
       {!isCheckCompleted && (
         <h2 className="mb-6 font-bold text-center text-gray-800 text-l">
           Dock Bank members receive 20% off
