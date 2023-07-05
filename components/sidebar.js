@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import clsx from 'clsx';
 
 import { useLocalStorage } from 'utils/hooks';
 
@@ -7,12 +9,33 @@ const navLinks = [
   {
     title: 'Dashboard',
     link: '/dashboard',
-    active: true,
+    target: '_self',
+  },
+  {
+    title: 'Credit Card',
+    link: '/credit-card',
+    target: '_self',
+  },
+  {
+    title: 'Reward Program',
+    link: '/rewards-program',
+    target: '_blank',
+  },
+  {
+    title: 'Customer Service',
+    link: '/customer-service',
+    target: '_self',
   },
 ];
 
 const Sidebar = () => {
+  const router = useRouter();
   const [userData] = useLocalStorage('userData', null);
+
+  const getLinkClassName = (link) => clsx(
+      'relative px-3 py-2 flex items-center space-x-4 rounded-md transition duration-300',
+      link.link === router.pathname ? 'text-gray-600 bg-gray-200' : '',
+    );
 
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-gray-50 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -42,8 +65,9 @@ const Sidebar = () => {
             <li key={link.link}>
               <Link href={link.link} passHref>
                 <a
-                  aria-label="dashboard"
-                  className={`relative px-3 py-2 flex items-center space-x-4 rounded-md transition duration-300${link.active ? ' text-gray-600 bg-gray-200' : ''}`}>
+                  aria-label={link.title}
+                  target={link.target || '_self'}
+                  className={getLinkClassName(link)}>
                   <span className="-mr-1 font-medium">{link.title}</span>
                 </a>
               </Link>

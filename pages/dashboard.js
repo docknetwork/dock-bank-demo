@@ -5,11 +5,6 @@ import PageLayout from 'components/page-layout';
 
 const sections = [
   {
-    title: 'Bank Account',
-    link: '/bank-account',
-    disabled: true,
-  },
-  {
     title: 'Credit Card',
     link: '/credit-card',
     disabled: false,
@@ -32,7 +27,7 @@ const Dashboard = () => {
   return (
     <PageLayout title="Dashboard">
       <div className="px-3 py-5 md:lg:xl:px-10 bg-opacity-10">
-        <div className="grid grid-cols-1 bg-white border rounded-lg shadow-xl md:lg:xl:grid-cols-2 group">
+        <div className="grid grid-cols-1 bg-white border rounded-lg shadow-xl md:grid-cols-3 group">
           {sections.map((section) => (
             <div
               key={section.link}

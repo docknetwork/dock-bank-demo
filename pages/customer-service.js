@@ -10,7 +10,11 @@ const CustomerServiceInfo = ({ onPresentedProof }) => (
     <h2 className="mb-6 font-bold text-gray-800 text-l">Customer Services Portal</h2>
     <p className="mb-8 text-gray-800">Call: 1-800-572-3489</p>
     <p className="mb-8 text-gray-800">Chat support</p>
-    <p className="mb-8 text-gray-800">Scan to confirm your identity</p>
+    <p className="mb-8 text-gray-800">
+      To ensure a seamless customer service experience and safeguard your financial and identity
+      information, please share your credentials. You&apos;ll be swiftly connected to an agent
+      who&apos;s ready to assist you.
+    </p>
     <RequireProof type="proofOfCustomer" onPresentedProof={onPresentedProof} />
   </div>
 );
@@ -18,7 +22,11 @@ const CustomerServiceInfo = ({ onPresentedProof }) => (
 const CustomerServiceValidated = () => (
   <div className="w-full max-w-md p-8 mx-auto text-center border rounded shadow">
     <h2 className="mb-6 font-bold text-gray-800 text-l">Customer Services Portal</h2>
-    <h3 className="mb-6 font-bold text-gray-800 text-l">Customer identity verified</h3>
+    <h3 className="mb-6 font-medium text-gray-800 text-l">
+      Thank you for sharing your credentials and taking steps to protect your information. You are
+      now being connected to an agent who is eager to assist you. We appreciate your trust in{' '}
+      {BANK_NAME}.
+    </h3>
   </div>
 );
 

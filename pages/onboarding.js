@@ -19,8 +19,15 @@ const UploadKYCDocumentsInteractiveFormItem = () => {
     <>
       <p className="mb-2">Upload document for KYC check</p>
       <div className="flex items-center justify-center p-6 mb-8 border-2 rounded">
-        {!isUploaded && (<UploadIcon className="cursor-pointer" width={24} height={24} onClick={() => setIsUploaded(true)} />)}
-        {isUploaded && (<p className="text-green-500 whitespace-nowrap">✓ Uploaded</p>)}
+        {!isUploaded && (
+          <UploadIcon
+            className="cursor-pointer"
+            width={24}
+            height={24}
+            onClick={() => setIsUploaded(true)}
+          />
+        )}
+        {isUploaded && <p className="text-green-500 whitespace-nowrap">✓ Uploaded</p>}
       </div>
     </>
   );
@@ -33,8 +40,15 @@ const TakeKYCPhotoInteractiveFormItem = () => {
     <>
       <p className="mb-2">Take photo for KYC check</p>
       <div className="flex items-center justify-center p-6 mb-8 border-2 rounded">
-        {!isUploaded && (<CameraIcon className="cursor-pointer" width={24} height={24} onClick={() => setIsUploaded(true)} />)}
-        {isUploaded && (<p className="text-green-500 whitespace-nowrap">✓ Uploaded</p>)}
+        {!isUploaded && (
+          <CameraIcon
+            className="cursor-pointer"
+            width={24}
+            height={24}
+            onClick={() => setIsUploaded(true)}
+          />
+        )}
+        {isUploaded && <p className="text-green-500 whitespace-nowrap">✓ Uploaded</p>}
       </div>
     </>
   );
@@ -43,7 +57,10 @@ const TakeKYCPhotoInteractiveFormItem = () => {
 const OnboardingForm = ({ handleFormSubmit }) => (
   <>
     <h2 className="mb-6 text-center text-gray-800 text-l">
-      At {BANK_NAME}, safeguarding your privacy and ensuring seamless control over your data is our utmost priority. We are dedicated to making your banking experience as effortless as possible. You’ll only need to enter your details once, after which we will provide you with reusable credentials, unlocking a world of services and exclusive deals as a member of {BANK_NAME}.
+      At {BANK_NAME}, safeguarding your privacy and ensuring seamless control over your data is our
+      utmost priority. We are dedicated to making your banking experience as effortless as possible.
+      You’ll only need to enter your details once, after which we will provide you with reusable
+      credentials, unlocking a world of services and exclusive deals as a member of {BANK_NAME}.
     </h2>
     <CustomerInfoForm title="New Customer Onboard" handleFormSubmit={handleFormSubmit}>
       <UploadKYCDocumentsInteractiveFormItem />
@@ -55,23 +72,23 @@ const OnboardingForm = ({ handleFormSubmit }) => (
 const OnboardingSuccess = ({ handleSubmit }) => (
   <div className="mx-auto w-fit">
     <h2 className="mb-6 text-center text-gray-800 text-l">
-      Congratulations on joining {BANK_NAME}! We have successfully sent secure credentials. These credentials are exclusively yours, empowering you to seamlessly access your account and an array of services:
+      Congratulations on joining {BANK_NAME}! We have successfully sent secure credentials. These
+      credentials are exclusively yours, empowering you to seamlessly access your account and an
+      array of services:
     </h2>
     <div className="flex flex-wrap justify-between gap-2 mb-6 text-gray-800 text-l">
-      {
-        [
-          'Customer Credential',
-          'Bank Account Details',
-          'KYC Credential',
-          'Reward Program',
-          'Proof of Address',
-        ].map((item) => (
-          <div key={item} className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-green-500 rounded-full" />
-            <div>{item}</div>
-          </div>
-        ))
-      }
+      {[
+        'Customer Credential',
+        'Bank Account Details',
+        'KYC Credential',
+        'Reward Program',
+        'Proof of Address',
+      ].map((item) => (
+        <div key={item} className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-green-500 rounded-full" />
+          <div>{item}</div>
+        </div>
+      ))}
     </div>
     <KYCPassed />
     <Button type="button" onClick={handleSubmit} className="block w-full">
