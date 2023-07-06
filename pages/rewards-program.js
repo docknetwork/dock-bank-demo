@@ -4,9 +4,10 @@ import PageLayout from 'components/page-layout';
 import RequireProof from 'components/require-proof';
 import Button from 'components/button';
 import InteractiveFormField from 'components/interactive-form-field';
+import InfoAlert from 'components/info-alert';
 import { informations } from 'utils';
 
-import { BANK_NAME } from 'utils/constants';
+import { BANK_NAME, HOTEL_NAME } from 'utils/constants';
 
 const CustomerInfoForm = ({ handleFormSubmit }) => (
   <form onSubmit={handleFormSubmit} className="grid w-full grid-cols-2 gap-4 p-8 mx-auto">
@@ -125,33 +126,46 @@ const RewardsProgramForm = ({ handleFormSubmit }) => {
 };
 
 export default function RewardsProgram() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isCheckCompleted, setIsCheckCompleted] = useState(true);
+  const [step, setStep] = useState(0);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitted(true);
+
+    setStep((currentStep) => currentStep + 1);
   };
 
   return (
-    <PageLayout title={!isCheckCompleted ? `${BANK_NAME} Freedom Rewards` : 'Checkout'}>
-      {!isCheckCompleted && (
-        <h2 className="mb-6 font-bold text-center text-gray-800 text-l">
-          {BANK_NAME} members receive 20% off
-        </h2>
+    <PageLayout title={(step === 0 || step === 1) ? `${BANK_NAME} Freedom Rewards` : 'Checkout'} withSidebar={false}>
+      {(step === 0 || step === 1) && (
+        <div className="flex flex-col items-center justify-center bg-bottom bg-cover rounded bg-hero-resort h-96">
+          <h2 className="text-2xl font-bold text-center text-slate-100">
+            Share your membership information and unlock a 20% discount on your booking!
+          </h2>
+          <h3 className="mb-6 text-xl font-medium text-center text-slate-100">
+            Plus, by sharing your verified information, you&apos;ll experience a seamless and easy stay. Savings and convenience are just a click away!
+          </h3>
+        </div>
       )}
-      {!isSubmitted && !isCheckCompleted && (
-        <RewardsProgramForm handleFormSubmit={handleFormSubmit} />
+      {step === 0 && (
+        <RewardsProgramForm handleFormSubmit={(handleFormSubmit)} />
       )}
-      {isSubmitted && !isCheckCompleted && (
+      {step === 1 && (
         <>
-          <p className="mb-8 text-center text-gray-800">
+          <p className="mt-4 mb-2 text-center text-gray-800">
             Scan to share your information and confirm membership
           </p>
-          <RequireProof type="proofForRewards" onPresentedProof={() => setIsCheckCompleted(true)} />
+          <RequireProof type="proofForRewards" onPresentedProof={() => setStep((currentStep) => currentStep + 1)} />
+          <InfoAlert>
+            Required credentials: Customer Credential, Reward Program, Proof of Address
+          </InfoAlert>
         </>
       )}
-      {isCheckCompleted && <CustomerInfoForm handleFormSubmit={handleFormSubmit} />}
+      {step === 2 && <CustomerInfoForm handleFormSubmit={handleFormSubmit} />}
+      {step === 3 && (
+        <h2 className="px-8 mb-6 font-bold text-center text-gray-800 text-l">
+          Your stay has been booked! The following details have been shared with {HOTEL_NAME}, confirming you as a qualified guest. Rest assured, they are well-prepared to ensure you have an exceptional stay.
+        </h2>
+      )}
     </PageLayout>
   );
 }

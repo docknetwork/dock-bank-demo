@@ -4,6 +4,7 @@ import KYCPassed from 'components/kyc-passed';
 import CustomerInfoForm from 'components/customer-info-form';
 import PageLayout from 'components/page-layout';
 import RequireProof from 'components/require-proof';
+import InfoAlert from 'components/info-alert';
 
 import { BANK_NAME } from 'utils/constants';
 
@@ -15,6 +16,9 @@ const CreditCardQRCode = ({ onPresentedProof }) => (
       verification check
     </p>
     <RequireProof type="proofForCreditCard" onPresentedProof={onPresentedProof} />
+    <InfoAlert>
+      Required credentials: Customer Credential, KYC Credential
+    </InfoAlert>
   </div>
 );
 

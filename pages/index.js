@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Button from 'components/button';
 import RequireProof from 'components/require-proof';
+import InfoAlert from 'components/info-alert';
 import { useLocalStorage } from 'utils/hooks';
 
 export default function Home() {
@@ -25,7 +26,9 @@ export default function Home() {
               Scan the QR Code to Sign In
             </p>
             <RequireProof type="proofForSignIn" onPresentedProof={onPresentedProof} />
-
+            <InfoAlert>
+              Required credentials: Customer Credential, Reward Program, Proof of Address, KYC Credential, Bank Account Details
+            </InfoAlert>
             <Button
               type="button"
               className="block w-full"

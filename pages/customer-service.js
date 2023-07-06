@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import RequireProof from 'components/require-proof';
 import PageLayout from 'components/page-layout';
+import InfoAlert from 'components/info-alert';
 
 import { BANK_NAME } from 'utils/constants';
 
@@ -16,6 +17,9 @@ const CustomerServiceInfo = ({ onPresentedProof }) => (
       who&apos;s ready to assist you.
     </p>
     <RequireProof type="proofOfCustomer" onPresentedProof={onPresentedProof} />
+    <InfoAlert>
+      Required credentials: Customer Credential
+    </InfoAlert>
   </div>
 );
 

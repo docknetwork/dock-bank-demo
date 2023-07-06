@@ -89,8 +89,15 @@ export const kycSteps = [
   }
 ];
 
+export const extractCredentialSubjectFromProofRequest = (proofRequest, type) => proofRequest
+  ?.presentation
+  ?.credentials
+  ?.find((credential) => credential.type.includes(type))
+  ?.credentialSubject || null;
+
 export default {
   textFields,
   kycSteps,
   informations,
+  extractCredentialSubjectFromProofRequest,
 };
