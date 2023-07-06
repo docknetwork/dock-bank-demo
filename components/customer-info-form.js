@@ -13,6 +13,7 @@ const CustomerInfoForm = ({
   verified,
   children
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isInputValuesSet, setIsInputValuesSet] = useState(
     textFields.reduce((acc, field) => {
       acc[field.id] = false;
@@ -21,9 +22,18 @@ const CustomerInfoForm = ({
     }, {})
   );
 
+  const onSubmit = async (e) => {
+    try {
+      setIsLoading(true);
+      await handleFormSubmit(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <form
-      onSubmit={handleFormSubmit}
+      onSubmit={onSubmit}
       className="w-full max-w-lg p-8 mx-auto md:max-w-4xl"
     >
       {title && (
@@ -57,7 +67,7 @@ const CustomerInfoForm = ({
       <Button
         type="submit"
         className="block w-full"
-        disabled={!verified && !Object.values(isInputValuesSet).every(Boolean)}
+        disabled={isLoading || (!verified && !Object.values(isInputValuesSet).every(Boolean))}
       >
         Submit
       </Button>

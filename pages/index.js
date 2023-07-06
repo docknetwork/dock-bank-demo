@@ -27,7 +27,7 @@ export default function Home() {
             </p>
             <RequireProof type="proofForSignIn" onPresentedProof={onPresentedProof} />
             <InfoAlert>
-              Required credentials: Customer Credential, Reward Program, Proof of Address, KYC Credential, Bank Account Details
+              Required credentials: Customer Credential, Reward Program, Proof of Address, KYC Credential, Bank Account Details. These credentials can be obtained by going trough the onboarding process.
             </InfoAlert>
             <Button
               type="button"
