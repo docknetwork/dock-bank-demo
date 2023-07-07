@@ -5,11 +5,11 @@ import RequireProof from 'components/require-proof';
 import Button from 'components/button';
 import InteractiveFormField from 'components/interactive-form-field';
 import InfoAlert from 'components/info-alert';
-import { informations } from 'utils';
+import { informations, extractCredentialSubjectFromProofRequest } from 'utils';
 
 import { BANK_NAME, HOTEL_NAME } from 'utils/constants';
 
-const CustomerInfoForm = ({ handleFormSubmit }) => (
+const CustomerInfoForm = ({ handleFormSubmit, proofRequestData = null }) => (
   <form onSubmit={handleFormSubmit} className="grid w-full grid-cols-2 gap-4 p-8 mx-auto">
     <div className="w-full">
       <InteractiveFormField
@@ -17,7 +17,7 @@ const CustomerInfoForm = ({ handleFormSubmit }) => (
         type="text"
         name="name"
         placeholder="Name"
-        value={informations.name}
+        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'CustomerCredential')?.name || '' : informations.name}
         verified
       />
       <InteractiveFormField
@@ -25,7 +25,7 @@ const CustomerInfoForm = ({ handleFormSubmit }) => (
         type="text"
         name="address"
         placeholder="Address"
-        value={informations.address}
+        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'ProofOfAddress')?.address || '' : informations.address}
         verified
       />
       <InteractiveFormField
@@ -33,7 +33,7 @@ const CustomerInfoForm = ({ handleFormSubmit }) => (
         type="text"
         name="rewardId"
         placeholder="Reward ID"
-        value={informations.rewardId}
+        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'RewardsProgram')?.rewardId || '' : informations.rewardId}
         verified
       />
       <div className="p-10 mx-auto border rounded shadow w-fit">
@@ -127,9 +127,16 @@ const RewardsProgramForm = ({ handleFormSubmit }) => {
 
 export default function RewardsProgram() {
   const [step, setStep] = useState(0);
+  const [proofRequestData, setProofRequestData] = useState(null);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    setStep((currentStep) => currentStep + 1);
+  };
+
+  const handlePresentedProof = (data) => {
+    setProofRequestData(data);
 
     setStep((currentStep) => currentStep + 1);
   };
@@ -154,13 +161,13 @@ export default function RewardsProgram() {
           <p className="mt-4 mb-2 text-center text-gray-800">
             Scan to share your information and confirm membership
           </p>
-          <RequireProof type="proofForRewards" onPresentedProof={() => setStep((currentStep) => currentStep + 1)} />
+          <RequireProof type="proofForRewards" onPresentedProof={handlePresentedProof} />
           <InfoAlert>
             Required credentials: Customer Credential, Reward Program, Proof of Address
           </InfoAlert>
         </>
       )}
-      {step === 2 && <CustomerInfoForm handleFormSubmit={handleFormSubmit} />}
+      {step === 2 && <CustomerInfoForm handleFormSubmit={handleFormSubmit} proofRequestData={proofRequestData} />}
       {step === 3 && (
         <h2 className="px-8 mb-6 font-bold text-center text-gray-800 text-l">
           Your stay has been booked! The following details have been shared with {HOTEL_NAME}, confirming you as a qualified guest. Rest assured, they are well-prepared to ensure you have an exceptional stay.

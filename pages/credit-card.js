@@ -25,6 +25,7 @@ const CreditCardQRCode = ({ onPresentedProof }) => (
 export default function CreditCard() {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isApplicationSubmitted, setIsApplicationSubmitted] = useState(false);
+  const [proofRequestData, setProofRequestData] = useState(null);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -34,6 +35,11 @@ export default function CreditCard() {
   const handleApplicationSubmit = (event) => {
     event.preventDefault();
     setIsApplicationSubmitted(true);
+  };
+
+  const handlePresentedProof = (data) => {
+    setProofRequestData(data);
+    setIsFormSubmitted(true);
   };
 
   return (
@@ -47,11 +53,15 @@ export default function CreditCard() {
               handleFormSubmit={handleFormSubmit}
             />
           </div>
-          <CreditCardQRCode onPresentedProof={() => setIsFormSubmitted(true)} />
+          <CreditCardQRCode onPresentedProof={handlePresentedProof} />
         </div>
       )}
       {isFormSubmitted && !isApplicationSubmitted && (
-        <CustomerInfoForm handleFormSubmit={handleApplicationSubmit} verified>
+        <CustomerInfoForm
+          handleFormSubmit={handleApplicationSubmit}
+          proofRequestData={proofRequestData}
+          verified
+        >
           <KYCPassed />
         </CustomerInfoForm>
       )}

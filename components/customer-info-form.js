@@ -4,6 +4,7 @@ import Button from 'components/button';
 import InteractiveFormField from 'components/interactive-form-field';
 import {
   textFields,
+  extractCredentialSubjectFromProofRequest,
 } from 'utils';
 
 const CustomerInfoForm = ({
@@ -11,6 +12,7 @@ const CustomerInfoForm = ({
   title,
   description,
   verified,
+  proofRequestData = null,
   children
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +53,7 @@ const CustomerInfoForm = ({
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              value={field.value}
+              value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, field.credentialType)?.[field.name] || '' : field.value}
               verified={verified}
               isValueSet={isInputValuesSet[field.id]}
               setIsValueSet={

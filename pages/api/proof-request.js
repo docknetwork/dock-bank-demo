@@ -11,11 +11,17 @@ const baseUrl = process.env.DOCK_API_URL;
 const customerCredentialDescriptor = {
   id: 'CustomerCredentialProof',
   name: 'Customer Proof Request',
-  purpose: 'Customer Credential with name, issued date requested',
+  purpose: 'Customer Credential with name, email, dateOfBirth, phone and issuanceDate requested',
   constraints: {
     fields: [
       {
-        path: ['$.credentialSubject.name', '$.issuanceDate'],
+        path: [
+          '$.credentialSubject.name',
+          '$.credentialSubject.email',
+          '$.credentialSubject.dateOfBirth',
+          '$.credentialSubject.phone',
+          '$.issuanceDate'
+        ],
       },
       {
         path: ['$.type[*]'],
@@ -31,11 +37,15 @@ const customerCredentialDescriptor = {
 const rewardsProgramDescriptor = {
   id: 'RewardsProgramProof',
   name: 'Rewards Program Request',
-  purpose: 'Rewards Program with eligibility and issued date requested',
+  purpose: 'Rewards Program with rewardId, eligibility and issued date requested',
   constraints: {
     fields: [
       {
-        path: ['$.issuanceDate', '$.credentialSubject.eligibility'],
+        path: [
+          '$.issuanceDate',
+          '$.credentialSubject.rewardId',
+          '$.credentialSubject.eligibility',
+        ],
       },
       {
         path: ['$.type[*]'],
@@ -232,6 +242,12 @@ const proofRequestTypes = {
           from: 'B',
           count: 1,
         },
+        {
+          name: 'Proof of Address Informations',
+          rule: 'pick',
+          count: 1,
+          from: 'C',
+        },
       ],
       input_descriptors: [
         {
@@ -241,6 +257,10 @@ const proofRequestTypes = {
         {
           ...kycCredentialDescriptor,
           group: ['B'],
+        },
+        {
+          ...proofOfAddressDescriptor,
+          group: ['C'],
         },
       ],
     },
