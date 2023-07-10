@@ -16,9 +16,7 @@ const CreditCardQRCode = ({ onPresentedProof }) => (
       verification check
     </p>
     <RequireProof type="proofForCreditCard" onPresentedProof={onPresentedProof} />
-    <InfoAlert>
-      Required credentials: Customer Credential, KYC Credential
-    </InfoAlert>
+    <InfoAlert>Required credentials: Customer Credential, KYC Credential</InfoAlert>
   </div>
 );
 
@@ -60,8 +58,7 @@ export default function CreditCard() {
         <CustomerInfoForm
           handleFormSubmit={handleApplicationSubmit}
           proofRequestData={proofRequestData}
-          verified
-        >
+          verified>
           <KYCPassed />
         </CustomerInfoForm>
       )}

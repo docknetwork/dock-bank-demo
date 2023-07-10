@@ -31,9 +31,7 @@ const Dashboard = () => (
       <BankingAccountSummary />
       <div className="grid grid-cols-1 bg-white border rounded-lg shadow-xl md:grid-cols-3 group">
         {sections.map((section) => (
-          <div
-            key={section.link}
-            className="fle">
+          <div key={section.link}>
             <Link href={section.link} passHref>
               <a
                 aria-label={section.title}
@@ -47,6 +45,6 @@ const Dashboard = () => (
       </div>
     </div>
   </PageLayout>
-  );
+);
 
 export default Dashboard;

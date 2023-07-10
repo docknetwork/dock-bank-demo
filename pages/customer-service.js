@@ -17,9 +17,7 @@ const CustomerServiceInfo = ({ onPresentedProof }) => (
       who&apos;s ready to assist you.
     </p>
     <RequireProof type="proofOfCustomer" onPresentedProof={onPresentedProof} />
-    <InfoAlert>
-      Required credentials: Customer Credential
-    </InfoAlert>
+    <InfoAlert>Required credentials: Customer Credential</InfoAlert>
   </div>
 );
 

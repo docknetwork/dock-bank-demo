@@ -17,7 +17,12 @@ const CustomerInfoForm = ({ handleFormSubmit, proofRequestData = null }) => (
         type="text"
         name="name"
         placeholder="Name"
-        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'CustomerCredential')?.name || '' : informations.name}
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'CustomerCredential')
+                ?.name || ''
+            : informations.name
+        }
         verified
       />
       <InteractiveFormField
@@ -25,7 +30,12 @@ const CustomerInfoForm = ({ handleFormSubmit, proofRequestData = null }) => (
         type="text"
         name="address"
         placeholder="Address"
-        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'ProofOfAddress')?.address || '' : informations.address}
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'ProofOfAddress')
+                ?.address || ''
+            : informations.address
+        }
         verified
       />
       <InteractiveFormField
@@ -33,7 +43,12 @@ const CustomerInfoForm = ({ handleFormSubmit, proofRequestData = null }) => (
         type="text"
         name="rewardId"
         placeholder="Reward ID"
-        value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, 'RewardsProgram')?.rewardId || '' : informations.rewardId}
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'RewardsProgram')
+                ?.rewardId || ''
+            : informations.rewardId
+        }
         verified
       />
       <div className="p-10 mx-auto border rounded shadow w-fit">
@@ -142,20 +157,21 @@ export default function RewardsProgram() {
   };
 
   return (
-    <PageLayout title={(step === 0 || step === 1) ? `${BANK_NAME} Freedom Rewards` : 'Checkout'} withSidebar={false}>
+    <PageLayout
+      title={step === 0 || step === 1 ? `${BANK_NAME} Freedom Rewards` : 'Checkout'}
+      withSidebar={false}>
       {(step === 0 || step === 1) && (
         <div className="flex flex-col items-center justify-center bg-bottom bg-cover rounded bg-hero-resort h-96">
           <h2 className="text-2xl font-bold text-center text-slate-100">
             Share your membership information and unlock a 20% discount on your booking!
           </h2>
           <h3 className="mb-6 text-xl font-medium text-center text-slate-100">
-            Plus, by sharing your verified information, you&apos;ll experience a seamless and easy stay. Savings and convenience are just a click away!
+            Plus, by sharing your verified information, you&apos;ll experience a seamless and easy
+            stay. Savings and convenience are just a click away!
           </h3>
         </div>
       )}
-      {step === 0 && (
-        <RewardsProgramForm handleFormSubmit={(handleFormSubmit)} />
-      )}
+      {step === 0 && <RewardsProgramForm handleFormSubmit={handleFormSubmit} />}
       {step === 1 && (
         <>
           <p className="mt-4 mb-2 text-center text-gray-800">
@@ -167,10 +183,14 @@ export default function RewardsProgram() {
           </InfoAlert>
         </>
       )}
-      {step === 2 && <CustomerInfoForm handleFormSubmit={handleFormSubmit} proofRequestData={proofRequestData} />}
+      {step === 2 && (
+        <CustomerInfoForm handleFormSubmit={handleFormSubmit} proofRequestData={proofRequestData} />
+      )}
       {step === 3 && (
         <h2 className="px-8 mb-6 font-bold text-center text-gray-800 text-l">
-          Your stay has been booked! The following details have been shared with {HOTEL_NAME}, confirming you as a qualified guest. Rest assured, they are well-prepared to ensure you have an exceptional stay.
+          Your stay has been booked! The following details have been shared with {HOTEL_NAME},
+          confirming you as a qualified guest. Rest assured, they are well-prepared to ensure you
+          have an exceptional stay.
         </h2>
       )}
     </PageLayout>

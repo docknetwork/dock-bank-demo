@@ -20,7 +20,7 @@ const customerCredentialDescriptor = {
           '$.credentialSubject.email',
           '$.credentialSubject.dateOfBirth',
           '$.credentialSubject.phone',
-          '$.issuanceDate'
+          '$.issuanceDate',
         ],
       },
       {
@@ -41,11 +41,7 @@ const rewardsProgramDescriptor = {
   constraints: {
     fields: [
       {
-        path: [
-          '$.issuanceDate',
-          '$.credentialSubject.rewardId',
-          '$.credentialSubject.eligibility',
-        ],
+        path: ['$.issuanceDate', '$.credentialSubject.rewardId', '$.credentialSubject.eligibility'],
       },
       {
         path: ['$.type[*]'],
