@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { informations } from 'utils';
+
 const axiosHeaders = {
   headers: {
     'DOCK-API-TOKEN': process.env.DOCK_API_TOKEN,
@@ -17,7 +19,10 @@ const credentialTypes = {
       issuer: issuerDID,
       subject: {
         id: holderDID,
-        name: 'Alice Doe',
+        name: informations.name,
+        email: informations.email,
+        dateOfBirth: informations.dateOfBirth,
+        phone: informations.phone,
       },
     };
   },
@@ -53,6 +58,7 @@ const credentialTypes = {
       subject: {
         id: holderDID,
         eligibility: true,
+        rewardId: informations.rewardId,
       },
     };
   },
@@ -63,7 +69,7 @@ const credentialTypes = {
       issuer: issuerDID,
       subject: {
         id: holderDID,
-        address: '123 Main St',
+        address: informations.address,
       },
       issuanceDate: '2021-01-01T14:15:22Z',
     };

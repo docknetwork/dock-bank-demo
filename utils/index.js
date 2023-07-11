@@ -4,11 +4,10 @@ export const informations = {
   email: 'alice@dock.io',
   phone: '555-555-5555',
   dateOfBirth: '1990-01-01',
-  password: 'dockdemo',
+  rewardId: '123123123',
   bookingDates: '2022-12-23 - 2022-12-28',
   bookingNoOfGuests: 5,
   bookingRoomType: 'Deluxe',
-  rewardId: '123123123',
 };
 
 export const textFields = [
@@ -18,6 +17,7 @@ export const textFields = [
     type: 'text',
     id: 'name',
     value: informations.name,
+    credentialType: 'CustomerCredential',
   },
   {
     name: 'email',
@@ -25,13 +25,7 @@ export const textFields = [
     type: 'email',
     id: 'email',
     value: informations.email,
-  },
-  {
-    name: 'password',
-    placeholder: 'Password',
-    type: 'password',
-    id: 'password',
-    value: informations.password,
+    credentialType: 'CustomerCredential',
   },
   {
     name: 'address',
@@ -39,6 +33,7 @@ export const textFields = [
     type: 'text',
     id: 'address',
     value: informations.address,
+    credentialType: 'ProofOfAddress',
   },
   {
     name: 'dateOfBirth',
@@ -46,6 +41,7 @@ export const textFields = [
     type: 'date',
     id: 'date-of-birth',
     value: informations.dateOfBirth,
+    credentialType: 'CustomerCredential',
   },
   {
     name: 'phone',
@@ -53,6 +49,7 @@ export const textFields = [
     type: 'tel',
     id: 'phone',
     value: informations.phone,
+    credentialType: 'CustomerCredential',
   }
 ];
 
@@ -89,14 +86,15 @@ export const kycSteps = [
   }
 ];
 
-export const SERVER_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL ||
-  process.env.NEXT_PUBLIC_VERCEL_URL ||
-  'http://localhost:3000';
+export const extractCredentialSubjectFromProofRequest = (proofRequest, type) => proofRequest
+  ?.presentation
+  ?.credentials
+  ?.find((credential) => credential.type.includes(type))
+  ?.credentialSubject || null;
 
 export default {
   textFields,
   kycSteps,
   informations,
-  SERVER_URL,
+  extractCredentialSubjectFromProofRequest,
 };

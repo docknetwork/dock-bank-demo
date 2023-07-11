@@ -36,6 +36,9 @@ export const useLocalStorage = (key, initialValue) => {
       setStoredValue(valueToStore);
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
+
+        // Need to reload to propagate the changes to other pages
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

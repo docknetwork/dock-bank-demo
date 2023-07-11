@@ -2,50 +2,55 @@ import React, { useState } from 'react';
 
 import PageLayout from 'components/page-layout';
 import RequireProof from 'components/require-proof';
-import { informations } from 'utils';
+import Button from 'components/button';
+import InteractiveFormField from 'components/interactive-form-field';
+import InfoAlert from 'components/info-alert';
+import { informations, extractCredentialSubjectFromProofRequest } from 'utils';
 
-const CustomerInfoForm = ({ handleFormSubmit }) => (
+import { BANK_NAME, HOTEL_NAME } from 'utils/constants';
+
+const CustomerInfoForm = ({ handleFormSubmit, proofRequestData = null }) => (
   <form onSubmit={handleFormSubmit} className="grid w-full grid-cols-2 gap-4 p-8 mx-auto">
     <div className="w-full">
-      <div className="flex items-center gap-2 mb-8">
-        <div className="flex items-center w-full px-3 py-2 border-2 rounded">
-          <input
-            id="name"
-            className="w-full pl-2 border-none outline-none "
-            type="text"
-            name="name"
-            placeholder="name"
-            value={informations.name}
-          />
-        </div>
-        <p className="text-green-500 whitespace-nowrap">✓ Verified</p>
-      </div>
-      <div className="flex items-center gap-2 mb-8">
-        <div className="flex items-center w-full px-3 py-2 border-2 rounded">
-          <input
-            id="address"
-            className="w-full pl-2 border-none outline-none "
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={informations.address}
-          />
-        </div>
-        <p className="text-green-500 whitespace-nowrap">✓ Verified</p>
-      </div>
-      <div className="flex items-center gap-2 mb-8">
-        <div className="flex items-center w-full px-3 py-2 border-2 rounded">
-          <input
-            id="reward-id"
-            className="w-full pl-2 border-none outline-none "
-            type="text"
-            name="rewardId"
-            placeholder="Reward ID"
-            value={informations.rewardId}
-          />
-        </div>
-        <p className="text-green-500 whitespace-nowrap">✓ Verified</p>
-      </div>
+      <InteractiveFormField
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'CustomerCredential')
+                ?.name || ''
+            : informations.name
+        }
+        verified
+      />
+      <InteractiveFormField
+        id="address"
+        type="text"
+        name="address"
+        placeholder="Address"
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'ProofOfAddress')
+                ?.address || ''
+            : informations.address
+        }
+        verified
+      />
+      <InteractiveFormField
+        id="reward-id"
+        type="text"
+        name="rewardId"
+        placeholder="Reward ID"
+        value={
+          proofRequestData
+            ? extractCredentialSubjectFromProofRequest(proofRequestData, 'RewardsProgram')
+                ?.rewardId || ''
+            : informations.rewardId
+        }
+        verified
+      />
       <div className="p-10 mx-auto border rounded shadow w-fit">
         <p>Background check passed</p>
         <div className="flex items-center">
@@ -78,86 +83,116 @@ const CustomerInfoForm = ({ handleFormSubmit }) => (
       <br />
       <p>Total: $1,240</p>
     </div>
-    <button
-      type="submit"
-      className="block w-full col-span-2 py-2 mt-5 mb-2 font-semibold text-white transition-all bg-blue-600 rounded-full hover:bg-blue-700 hover:-translate-y-1 duration-250">
-      Book my stay!
-    </button>
+    <Button className="w-full">Book my stay!</Button>
   </form>
 );
 
-const RewardsProgramForm = ({ handleFormSubmit }) => (
-  <form onSubmit={handleFormSubmit} className="w-full max-w-lg p-8 mx-auto">
-    <div className="flex items-center w-full px-3 py-2 mb-8 border-2 rounded">
-      <input
-        id="dates"
-        className="w-full pl-2 border-none outline-none "
-        type="text"
-        name="dates"
-        placeholder="Dates"
-        value={informations.bookingDates}
-      />
-    </div>
-    <div className="flex items-center w-full px-3 py-2 mb-8 border-2 rounded">
-      <input
-        id="no-of-guests"
-        className="w-full pl-2 border-none outline-none "
-        type="tel"
-        name="noOfGuests"
-        placeholder="# of Guests"
-        value={informations.bookingNoOfGuests}
-      />
-    </div>
-    <div className="flex items-center w-full px-3 py-2 mb-8 border-2 rounded">
-      <select
-        name="roomType"
-        id="room-type"
-        className="w-full pl-2 border-none outline-none"
-        placeholder="Type of room">
-        <option value="basic" selected={informations.bookingRoomType === 'basic'}>
-          Basic
-        </option>
-        <option value="deluxe" selected={informations.bookingRoomType === 'deluxe'}>
-          Deluxe
-        </option>
-      </select>
-    </div>
-    <button
-      type="submit"
-      className="block w-full py-2 mt-5 mb-2 font-semibold text-white transition-all bg-blue-600 rounded-full hover:bg-blue-700 hover:-translate-y-1 duration-250">
-      Checkout
-    </button>
-  </form>
-);
+const textFields = [
+  {
+    name: 'bookingDates',
+    placeholder: 'Booking Period',
+    type: 'text',
+    id: 'booking-dates',
+    value: informations.bookingDates,
+  },
+  {
+    name: 'bookingNoOfGuests',
+    placeholder: 'Number of Guests',
+    type: 'text',
+    id: 'booking-no-of-guests',
+    value: informations.bookingNoOfGuests,
+  },
+  {
+    name: 'bookingRoomType',
+    placeholder: 'Room Type',
+    type: 'text',
+    id: 'booking-room-type',
+    value: informations.bookingRoomType,
+  },
+];
+
+const RewardsProgramForm = ({ handleFormSubmit }) => {
+  const [isInputValuesSet, setIsInputValuesSet] = useState(
+    textFields.reduce((acc, field) => {
+      acc[field.id] = false;
+
+      return acc;
+    }, {})
+  );
+
+  return (
+    <form onSubmit={handleFormSubmit} className="w-full max-w-lg p-8 mx-auto">
+      {textFields.map((field) => (
+        <InteractiveFormField
+          key={field.id}
+          id={field.id}
+          type={field.type}
+          name={field.name}
+          placeholder={field.placeholder}
+          value={field.value}
+          verified={false}
+          isValueSet={isInputValuesSet[field.id]}
+          setIsValueSet={(value) => setIsInputValuesSet({ ...isInputValuesSet, [field.id]: value })}
+        />
+      ))}
+      <Button className="w-full">Checkout</Button>
+    </form>
+  );
+};
 
 export default function RewardsProgram() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isCheckCompleted, setIsCheckCompleted] = useState(false);
+  const [step, setStep] = useState(0);
+  const [proofRequestData, setProofRequestData] = useState(null);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitted(true);
+
+    setStep((currentStep) => currentStep + 1);
+  };
+
+  const handlePresentedProof = (data) => {
+    setProofRequestData(data);
+
+    setStep((currentStep) => currentStep + 1);
   };
 
   return (
-    <PageLayout title={!isCheckCompleted ? 'Dock Bank Freedom Rewards' : 'Checkout'}>
-      {!isCheckCompleted && (
-        <h2 className="mb-6 font-bold text-center text-gray-800 text-l">
-          Dock Bank members receive 20% off
-        </h2>
+    <PageLayout
+      title={step === 0 || step === 1 ? `${BANK_NAME} Freedom Rewards` : 'Checkout'}
+      withSidebar={false}>
+      {(step === 0 || step === 1) && (
+        <div className="flex flex-col items-center justify-center bg-bottom bg-cover rounded bg-hero-resort h-96">
+          <h2 className="text-2xl font-bold text-center text-slate-100">
+            Share your membership information and unlock a 20% discount on your booking!
+          </h2>
+          <h3 className="mb-6 text-xl font-medium text-center text-slate-100">
+            Plus, by sharing your verified information, you&apos;ll experience a seamless and easy
+            stay. Savings and convenience are just a click away!
+          </h3>
+        </div>
       )}
-      {!isSubmitted && !isCheckCompleted && (
-        <RewardsProgramForm handleFormSubmit={handleFormSubmit} />
-      )}
-      {isSubmitted && !isCheckCompleted && (
+      {step === 0 && <RewardsProgramForm handleFormSubmit={handleFormSubmit} />}
+      {step === 1 && (
         <>
-          <p className="mb-8 text-center text-gray-800">
+          <p className="mt-4 mb-2 text-center text-gray-800">
             Scan to share your information and confirm membership
           </p>
-          <RequireProof type="proofForRewards" onPresentedProof={() => setIsCheckCompleted(true)} />
+          <RequireProof type="proofForRewards" onPresentedProof={handlePresentedProof} />
+          <InfoAlert>
+            Required credentials: Customer Credential, Reward Program, Proof of Address
+          </InfoAlert>
         </>
       )}
-      {isCheckCompleted && <CustomerInfoForm handleFormSubmit={handleFormSubmit} />}
+      {step === 2 && (
+        <CustomerInfoForm handleFormSubmit={handleFormSubmit} proofRequestData={proofRequestData} />
+      )}
+      {step === 3 && (
+        <h2 className="px-8 mb-6 font-bold text-center text-gray-800 text-l">
+          Your stay has been booked! The following details have been shared with {HOTEL_NAME},
+          confirming you as a qualified guest. Rest assured, they are well-prepared to ensure you
+          have an exceptional stay.
+        </h2>
+      )}
     </PageLayout>
   );
 }
