@@ -100,7 +100,10 @@ const OnboardingSuccess = ({ handleSubmit }) => (
 export default function Onboarding() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [holderDID] = useLocalStorage('holderDID', process.env.NEXT_PUBLIC_HOLDER_DID);
-  const [recipientEmail] = useLocalStorage('recipientEmail', process.env.NEXT_PUBLIC_RECIPIENT_EMAIL);
+  const [recipientEmail] = useLocalStorage(
+    'recipientEmail',
+    process.env.NEXT_PUBLIC_RECIPIENT_EMAIL
+  );
   const router = useRouter();
 
   const handleFormSubmit = async (event) => {
