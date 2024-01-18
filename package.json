@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "dprint fmt && next lint --fix"
+    "format": "dprint fmt && next lint --fix",
+    "format-check": "dprint check && next lint"
   },
   "dependencies": {
     "autoprefixer": "^10.4.7",
