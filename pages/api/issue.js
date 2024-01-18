@@ -82,9 +82,9 @@ export default async (req, res) => {
     return;
   }
 
-  const { holderDID } = req.query;
+  const { holderDID, recipientEmail } = req.query;
 
-  if (!holderDID) {
+  if (!holderDID && !recipientEmail) {
     res.status(400).json({});
     return;
   }
@@ -102,6 +102,7 @@ export default async (req, res) => {
             persist: false,
             credential: credentialData,
             distribute: true,
+            recipientEmail,
           },
           axiosHeaders
         );

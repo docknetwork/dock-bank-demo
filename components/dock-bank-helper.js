@@ -7,13 +7,20 @@ export default function Helper() {
   const [isHelperOpen, setIsHelperOpen] = useState(false);
 
   const [holderDID, setHolderDID] = useLocalStorage('holderDID', null);
+  const [recipientEmail, setRecipientEmail] = useLocalStorage('recipientEmail', null);
   const [formDID, setFormDID] = useState('');
+  const [formRecipientEmail, setFormRecipientEmail] = useState('');
 
-  const actionsNeeded = !holderDID;
+  const actionsNeeded = !holderDID && !recipientEmail;
 
   // This is needed because the tailwind JIT compiler doesn't support dynamic classes
   // eslint-disable-next-line no-unused-vars
   const indicatorBGs = ['bg-green-500', 'bg-red-500'];
+
+  const handleSubmit = () => {
+    setHolderDID(formDID);
+    setRecipientEmail(formRecipientEmail);
+  };
 
   return (
     <>
@@ -51,10 +58,22 @@ export default function Helper() {
                   onChange={(e) => setFormDID(e.target.value)}
                 />
               </div>
+              <p>Current loaded holder email:</p>
+              <p>{recipientEmail}</p>
+              <div className="flex items-center w-full px-3 py-2 border-2 rounded">
+                <input
+                  className="w-full pl-2 border-none outline-none"
+                  type="text"
+                  name="recipientEmail"
+                  placeholder="alice@dock.io"
+                  value={formRecipientEmail}
+                  onChange={(e) => setFormRecipientEmail(e.target.value)}
+                />
+              </div>
               <Button
                 type="button"
-                onClick={() => setHolderDID(formDID)}
-                disabled={!formDID}
+                onClick={handleSubmit}
+                disabled={!formDID && !formRecipientEmail}
               >
                 Submit
               </Button>
