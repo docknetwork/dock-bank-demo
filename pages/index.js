@@ -49,7 +49,7 @@ export default function Home() {
           className="items-center justify-around w-full text-center lg:flex lg:w-1/2 bg-zinc-900"
           style={{
             flexShrink: 0,
-            background: 'url(/bg.jpg);',
+            background: 'url(/bg.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
           }}>
