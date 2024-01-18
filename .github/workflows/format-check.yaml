@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:
       - master
+      - main
 
 # Auto cancels previous running CI jobs in this PR on each new commit
 concurrency:
