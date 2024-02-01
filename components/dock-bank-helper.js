@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Button from 'components/button';
 import { useLocalStorage } from 'utils/hooks';
+import QrReader from './qr-reader';
 
 export default function Helper() {
   const [isHelperOpen, setIsHelperOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Helper() {
   return (
     <>
       <Button
-        className="fixed bottom-2 right-2"
+        className="fixed bottom-2 right-2 "
         type="button"
         onClick={() => setIsHelperOpen(!isHelperOpen)}
       >
@@ -33,7 +34,7 @@ export default function Helper() {
         <div className={`absolute inline-flex items-center justify-center w-3 h-3 bg-${actionsNeeded ? 'red' : 'green'}-500 rounded-full -top-1 -left-1`} />
       </Button>
       {isHelperOpen && (
-        <div className="fixed top-0 bottom-0 left-0 right-0 z-50 w-full max-h-full p-4 overflow-x-hidden overflow-y-auto">
+        <div className="fixed top-0 bottom-0 left-0 right-0 z-50 w-full max-w-screen-sm	m-auto max-h-full p-4 overflow-x-hidden overflow-y-auto">
           <div className="fixed inset-0 bg-gray-500 opacity-50" />
           <div className="relative bg-white rounded-lg shadow">
             <div className="flex items-start justify-between p-4 border-b rounded-t">
@@ -48,6 +49,7 @@ export default function Helper() {
             <div className="flex flex-col items-center p-4 space-y-8">
               <p>Current loaded holder DID:</p>
               <p>{holderDID}</p>
+              <QrReader />
               <div className="flex items-center w-full px-3 py-2 border-2 rounded">
                 <input
                   className="w-full pl-2 border-none outline-none"
