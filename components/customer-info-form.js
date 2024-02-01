@@ -25,6 +25,8 @@ const CustomerInfoForm = ({
   );
 
   const onSubmit = async (e) => {
+    e.preventDefault()
+    
     try {
       setIsLoading(true);
       await handleFormSubmit(e);

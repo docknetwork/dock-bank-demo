@@ -1,5 +1,6 @@
 import React from 'react';
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Sidebar from 'components/sidebar';
 import clsx from 'clsx';
 
@@ -16,6 +17,7 @@ export default function PageLayout({ title, withSidebar = true, children }) {
   return (
     <>
       {withSidebar && (<Sidebar />)}
+
       <div className={mainClasses}>
         {title && (
           <div className="sticky z-10 top-0 h-13 bg-white lg:py-2.5 px-3 md:lg:xl:px-10">
@@ -28,6 +30,7 @@ export default function PageLayout({ title, withSidebar = true, children }) {
           </div>
         )}
         <div className="px-6 pt-6 2xl:container">
+          <ToastContainer />
           {children}
         </div>
       </div>
