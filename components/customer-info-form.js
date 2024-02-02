@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-
 import Button from 'components/button';
 import InteractiveFormField from 'components/interactive-form-field';
+import { userStore } from 'store/appStore';
 import {
   textFields,
   extractCredentialSubjectFromProofRequest,
 } from 'utils';
+import { validateEmail } from 'utils/validation';
+import { toast } from 'react-toastify';
 
 const CustomerInfoForm = ({
   handleFormSubmit,
@@ -15,6 +17,11 @@ const CustomerInfoForm = ({
   proofRequestData = null,
   children
 }) => {
+
+  const holderDID = userStore((state) => state.Did);
+  const holderEmail = userStore((state) => state.userEmail);
+  const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isInputValuesSet, setIsInputValuesSet] = useState(
     textFields.reduce((acc, field) => {
@@ -26,7 +33,13 @@ const CustomerInfoForm = ({
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    
+
+    if (holderDID.length < 5 || !validateEmail(holderEmail)) {
+      setIsHelperOpen(true)
+      toast.info("Please add your DID and email")
+      return
+    }
+
     try {
       setIsLoading(true);
       await handleFormSubmit(e);
