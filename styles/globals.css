@@ -21,3 +21,7 @@ a {
 .text-base {
   font-size: 14px;
 }
+
+#reader img {
+  margin: auto;
+}

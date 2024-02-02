@@ -3,25 +3,25 @@ import Button from 'components/button';
 import QrReader from './qr-reader';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'utils/hooks';
+import { validateEmail } from 'utils/validation';
+import { userStore } from 'store/appStore';
 
 export default function Helper() {
-  const [isHelperOpen, setIsHelperOpen] = useState(false);
   const [holderDID, setHolderDID] = useLocalStorage('holderDID', '');
   const [recipientEmail, setRecipientEmail] = useLocalStorage('recipientEmail', '');
-  const [formDID, setFormDID] = useState(holderDID);
-  const [formRecipientEmail, setFormRecipientEmail] = useState(recipientEmail);
   const [emailError, setEmailError] = useState('');
+
+  const isHelperOpen = userStore((state) => state.isHelperOpen);
+  const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
+  const formDID = userStore((state) => state.Did);
+  const setFormDID = userStore((state) => state.setDid);
+  const formRecipientEmail = userStore((state) => state.userEmail);
+  const setFormRecipientEmail = userStore((state) => state.setUserEmail);
 
   useEffect(() => {
     setFormDID(holderDID);
     setFormRecipientEmail(recipientEmail);
   }, [holderDID, recipientEmail]);
-
-  const validateEmail = (email) => {
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const handleSubmit = () => {
     if (!formDID || !formRecipientEmail) {
@@ -86,9 +86,9 @@ export default function Helper() {
               </button>
             </div>
             <div className="flex flex-col items-center p-4 space-y-8">
-              <p>Current loaded holder DID:</p>
-              {holderDID && <p>{holderDID}</p>}
-              <QrReader />
+              <p>Input your DID or Scan it using the Qr Reader:</p>
+
+              <QrReader setDID={setFormDID} />
               <div className="flex items-center w-full px-3 py-2 border-2 rounded">
                 <input
                   className="w-full pl-2 border-none outline-none"
@@ -100,7 +100,7 @@ export default function Helper() {
                 />
               </div>
               <p>Current loaded holder email:</p>
-              <p>{recipientEmail}</p>
+
               <div className="flex items-center w-full px-3 py-2 border-2 rounded">
                 <input
                   className={`w-full pl-2 border-none outline-none ${emailError ? 'border-red-500' : ''

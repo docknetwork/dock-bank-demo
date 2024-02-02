@@ -3,10 +3,14 @@ import { create } from "zustand";
 export const userStore = create((set) => ({
     Did: "",
     userEmail: "",
-    setDid: async (did) => {
+    setDid: (did) => {
         set(() => ({ Did: did }));
     },
-    setUserEmail: async (email) => {
+    setUserEmail: (email) => {
         set(() => ({ userEmail: email }));
+    },
+    isHelperOpen: false,
+    setIsHelperOpen: (open) => {
+        set(() => ({ isHelperOpen: open }))
     }
 }));

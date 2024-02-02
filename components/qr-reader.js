@@ -1,10 +1,8 @@
 import { Html5QrcodeScanner, Html5QrcodeScanType } from "html5-qrcode";
-import { Fingerprint, Webcam } from "lucide-react";  // Make sure you have the correct import statement for lucide-react
-import { useState } from "react";
-import { toast } from "sonner";
+import { Fingerprint, Webcam } from "lucide-react";
+import { toast } from "react-toastify";
 
-export default function QrReader() {
-    const [scannedDid, setScannedDid] = useState("");
+export default function QrReader({ setDID }) {
 
     let scanner;
 
@@ -35,11 +33,9 @@ export default function QrReader() {
         scanner.clear();
         const result = extractQRData(decodedResult);
 
-        toast.success("QR Code Scanned Successfully", result);
-        console.log(result);
-
-        setScannedDid(result);
-
+        console.log("scanned result: " + result);
+        setDID(result)
+        toast.success("QR Code Scanned Successfully");
         return result;
     }
 
@@ -52,26 +48,16 @@ export default function QrReader() {
     }
 
     return (
-        <div className="card lg:card-side">
+        <div className="card">
             <div className="">
-                <div id="reader" className="w-auto my-4 rounded-lg"></div>
+                <div id="reader" className="w-auto rounded-lg"></div>
 
-                <div className="flex m-2 border-[1.5px] p-4 rounded-lg">
+                <div className="flex m-2 border-[1.5px] p-4 rounded-lg text-center">
                     <Webcam className="flex w-6 h-6 mr-2" />
                     <button className="btn-primary" onClick={startCamera}>
                         Scan Qr code from the users Dock Mobile App
                     </button>
                 </div>
-
-                <br />
-                {scannedDid && (
-                    <>
-                        <p className="text-center mr-2">
-                            <Fingerprint className="w-10 h-10 mr-2" />
-                            <span className="font-bold">{scannedDid}</span>
-                        </p>
-                    </>
-                )}
             </div>
         </div>
     );
