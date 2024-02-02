@@ -28,6 +28,11 @@ const navLinks = [
     link: '/customer-service',
     target: '_self',
   },
+  {
+    title: 'Onboarding',
+    link: '/onboarding',
+    target: '_self',
+  },
 ];
 
 const Sidebar = () => {
