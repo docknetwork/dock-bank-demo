@@ -45,7 +45,7 @@ export default function Helper() {
   return (
     <>
       <Button
-        className="fixed bottom-2 right-2"
+        className="fixed bottom-2 right-2 index-2"
         type="button"
         onClick={() => setIsHelperOpen(!isHelperOpen)}
       >
