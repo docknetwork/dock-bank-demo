@@ -18,6 +18,7 @@ export default function Helper() {
   const formRecipientEmail = userStore((state) => state.userEmail);
   const setFormRecipientEmail = userStore((state) => state.setUserEmail);
 
+
   useEffect(() => {
     setFormDID(holderDID);
     setFormRecipientEmail(recipientEmail);
