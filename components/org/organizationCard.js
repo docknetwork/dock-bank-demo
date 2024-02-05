@@ -7,7 +7,7 @@ export default function OrganizationCard({ org }) {
     return (
         <div className='orgCard'>
 
-            <div className="pt-5 pb-5 cardImg valign-middle">
+            <div className="cardImg valign-middle">
                 <div>
                     <Image src={org.logo} width={org.size[0]} height={org.size[1]} />
                 </div>
