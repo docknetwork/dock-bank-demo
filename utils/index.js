@@ -1,3 +1,6 @@
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 export const informations = {
   name: 'Alice Doe',
   address: '123 Main St',
@@ -92,7 +95,12 @@ export const extractCredentialSubjectFromProofRequest = (proofRequest, type) => 
   ?.find((credential) => credential.type.includes(type))
   ?.credentialSubject || null;
 
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+
 export default {
+  cn,
   textFields,
   kycSteps,
   informations,
