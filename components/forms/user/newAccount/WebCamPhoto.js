@@ -16,8 +16,8 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
             render={({ field }) => (
                 <FormItem>
                     <div className='flex items-center justify-between'>
-                        <FormLabel>Take a webcam photo for KYC check</FormLabel>
-                        <Image src="/id_clarity.png" alt='id_clarity' width={80} height={20} />
+                        <FormLabel className="font-semibold">Take a webcam photo for KYC check</FormLabel>
+                        <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
                     </div>
                     <FormControl>
                         {isCaptureCompleted ? (
@@ -26,7 +26,7 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
                             </div>
                         ) : (
                             <div className='grid justify-items-center gap-4'>
-                                <Image src="/background_replace.png" alt='background_replace' width={120} height={120} />
+                                <Image src="/background_replace.png" alt='background_replace' width={224} height={224} />
                                 <WebCamModal
                                     isCaptureCompleted={isCaptureCompleted}
                                     setIsCaptureCompleted={setIsCaptureCompleted}

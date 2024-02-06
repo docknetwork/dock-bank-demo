@@ -36,10 +36,10 @@ const PassportOrDriversId = ({ control, imageSrc, setImageSrc }) => {
                 control={control}
                 name="govId"
                 render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="h-full relative">
                         <div className='flex items-center justify-between '>
-                            <FormLabel>Upload Passport or Drivers License</FormLabel>
-                            <Image src="/id_clarity.png" alt='id_clarity' width={80} height={20} />
+                            <FormLabel className="font-semibold">Upload Passport or Drivers License</FormLabel>
+                            <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
                         </div>
                         <FormControl>
                             {imageSrc !== undefined ? (
@@ -47,9 +47,16 @@ const PassportOrDriversId = ({ control, imageSrc, setImageSrc }) => {
                                     <Image src={imageSrc} alt='example_passport' width={250} height={250} />
                                 </div>
                             ) : (
-                                <div className='grid justify-items-center gap-4'>
-                                    <Image src="/upload_file.png" alt='upload_file' width={120} height={120} />
-                                    <Button variant="outline" onClick={handleUploadClick}>Upload Government Issued ID</Button>
+                                <div className='text-center h-full relative'>
+                                    <div className='valign-middle w-full'>
+                                        <div>
+                                            <Image className='m-auto' src="/upload_file.png" alt='upload_file' width={149} height={186} />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <Button variant="outline" onClick={handleUploadClick}>Upload Government Issued ID</Button>
+                                    </div>
                                 </div>
                             )}
                         </FormControl>
