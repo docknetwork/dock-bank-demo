@@ -46,7 +46,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
                 )}
                 <div className='grid justify-items-center gap-2'>
                     <p className='text-sm'>Powered by IdentityClarity</p>
-                    <Image src="/id_clarity.png" alt='id_clarity' width={80} height={20} />
+                    <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
                 </div>
             </DialogContent>
         </Dialog>

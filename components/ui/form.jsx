@@ -14,10 +14,10 @@ const FormField = (
     ...props
   }
 ) => (
-    (<FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>)
-  );
+  (<FormFieldContext.Provider value={{ name: props.name }}>
+    <Controller {...props} />
+  </FormFieldContext.Provider>)
+);
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
