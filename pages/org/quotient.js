@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Head from 'next/head';
-import { Loader2 } from 'lucide-react';
+import LoadingModal from 'components/org/quotient/LoadingModal';
+import Header from 'components/org/quotient/Header';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
     Form
 } from 'components/ui/form';
-import {
-    Dialog,
-    DialogContent
-} from 'components/ui/dialog';
 import { Button } from 'components/ui/button';
 import { Separator } from 'components/ui/separator';
 import FormFieldNameAndBirthday from 'components/forms/user/newAccount/form-field-id';
@@ -102,7 +98,7 @@ const QuotientBankForm = () => {
 
     // once form values are valid, do something
     async function onSubmit(values) {
-        console.log();
+        console.log("values", values);
         setIsLoading(true);
         // eslint-disable-next-line no-promise-executor-return
         setTimeout(() => {
@@ -119,11 +115,11 @@ const QuotientBankForm = () => {
             <Header />
             <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
             {isSuccess ? (
-                <div className='pt-10 pl-5'>
+                <d iv className='pt-10 pl-5'>
                     <h2 className='text-2xl font-semibold'>Your account has been opened!</h2>
-                </div>
+                </d>
             ) : (
-                <div className="p-4 min-h-screen">
+                <div className="p-4 min-h-screen mainContainer">
                     <h2 className='font-semibold text-lg'>Open New Banking Account</h2 >
 
                     <Form {...form}>
@@ -153,27 +149,5 @@ const QuotientBankForm = () => {
         </>
     );
 };
-
-const Header = () => <div className="p-4 bg-blue-900 flex justify-center items-center">
-    <Image
-        className=''
-        src='/quotient.png'
-        alt='quotient-logo'
-        width={140}
-        height={30}
-    />
-</div>;
-
-const LoadingModal = ({ isLoading }) => (
-    <Dialog open={isLoading}>
-        <DialogContent>
-            <div className='grid justify-items-center gap-2 p-5'>
-                <Image src="/docklogo.png" alt='id_clarity' width={168} height={64} />
-                <h2 className='text-center text-lg'>Biometrical Checking, please open your Dock Mobile Wallet App</h2>
-                <Loader2 className="h-24 w-24 animate-spin text-blue-400" />
-            </div>
-        </DialogContent>
-    </Dialog>
-);
 
 export default QuotientBankForm;

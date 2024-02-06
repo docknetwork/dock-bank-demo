@@ -5,8 +5,6 @@ import React from 'react';
 
 export default function Home() {
 
-    console.log(organizations)
-
     return (
         <>
             <div className='cardsContainer m-auto p-10 text-center'>
@@ -29,8 +27,10 @@ export default function Home() {
                 </div>
                 <div className='pt-5 grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4'>
                     {
-                        organizations.map((org) => {
-                            return <OrganizationCard org={org} />
+                        organizations.map((org, i) => {
+                            return <div key={i} className='orgCard'>
+                                <OrganizationCard key={i} org={org} />
+                            </div>
                         })
                     }
 

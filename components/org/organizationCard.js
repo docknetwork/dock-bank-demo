@@ -5,11 +5,10 @@ export default function OrganizationCard({ org }) {
     if (!org || org === undefined) return
 
     return (
-        <div className='orgCard'>
-
+        <>
             <div className="cardImg valign-middle">
                 <div>
-                    <Image src={org.logo} width={org.size[0]} height={org.size[1]} />
+                    <Image priority={true} src={org.logo} width={org.size[0]} height={org.size[1]} />
                 </div>
             </div>
 
@@ -25,7 +24,7 @@ export default function OrganizationCard({ org }) {
                     Visit Site
                 </button></Link>
             </div>
-        </div>
+        </>
     )
 }
 
