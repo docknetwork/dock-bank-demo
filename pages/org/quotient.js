@@ -115,16 +115,17 @@ const QuotientBankForm = () => {
             <Header />
             <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
             {isSuccess ? (
-                <d iv className='pt-10 pl-5'>
+                <div className='pt-10 pl-5'>
                     <h2 className='text-2xl font-semibold'>Your account has been opened!</h2>
-                </d>
+                </div>
             ) : (
                 <div className="p-4 min-h-screen mainContainer">
-                    <h2 className='font-semibold text-lg'>Open New Banking Account</h2 >
-
+                    <div className='mb-4 mt-2'>
+                        <h2 className='font-semibold text-2xl'>Open New Banking Account</h2 >
+                    </div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
-                            <div className='p-4 bg-neutral-50 rounded-lg space-y-8'>
+                            <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
                                 <FormFieldNameAndBirthday control={form.control} />
                                 <Separator />
                                 <FormFieldAddress control={form.control} />
@@ -138,7 +139,7 @@ const QuotientBankForm = () => {
                                 imageSrc={imageSrc}
                                 setImageSrc={setImageSrc}
                             />
-                            <Button className='col-span-2 w-fit md:place-self-end px-2 bg-emerald-700' type="submit">Submit Application</Button>
+                            <Button className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg' type="submit">Submit Application</Button>
                         </form>
 
                     </Form>
