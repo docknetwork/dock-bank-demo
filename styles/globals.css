@@ -59,6 +59,16 @@ a {
   margin: auto;
 }
 
+.mainContainer input {
+  border:solid 1px #D1D1D6 !important;
+}
+
+.mainContainer input::placeholder {
+  color: #A0A0AB !important;
+}
+
+
+
 .cardImg {
   min-height: 125px;
 }
