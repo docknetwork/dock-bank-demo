@@ -1,10 +1,10 @@
 const organizations = [
     {
         name: "Quotient",
-        logo: "/quotient.png",
+        logo: "/quotientdark.png",
         description: "Quotient is our credit union",
         url: "/org/quotient",
-        size: [168, 38]
+        size: [168, 40]
     },
     {
         name: "Identity Clarity",
