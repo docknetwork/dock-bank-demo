@@ -1,6 +1,6 @@
 import React from 'react';
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from './ui/sonner';
 import Sidebar from 'components/sidebar';
 import clsx from 'clsx';
 
@@ -30,7 +30,11 @@ export default function PageLayout({ title, withSidebar = true, children }) {
           </div>
         )}
         <div className="px-6 pt-6 2xl:container">
-          <ToastContainer />
+          <Toaster
+            richColors
+            position="bottom-center"
+            expand={true}
+          />
           {children}
         </div>
       </div>

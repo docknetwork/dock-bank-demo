@@ -10,7 +10,6 @@ export function createBankIdCredential({
 
   console.log("Creating Quotient Bank Identity Credential for:", receiverDid);
 
-
   return {
     url: `${dockUrl}/credentials`,
     body: {

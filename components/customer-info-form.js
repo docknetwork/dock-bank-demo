@@ -7,7 +7,7 @@ import {
   extractCredentialSubjectFromProofRequest,
 } from 'utils';
 import { validateEmail } from 'utils/validation';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 const CustomerInfoForm = ({
   handleFormSubmit,
