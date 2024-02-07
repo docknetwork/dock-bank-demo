@@ -2,10 +2,8 @@ import OrganizationCard from 'components/org/organizationCard';
 import organizations from 'data/organizations';
 import Image from 'next/image';
 import React from 'react';
-import {toast} from "sonner"
 
 export default function Home() {
-
 
     return (
         <>
