@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-
 import DockBankHelper from 'components/dock-bank-helper';
 import { BANK_NAME } from 'utils/constants';
 

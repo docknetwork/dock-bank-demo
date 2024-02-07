@@ -53,4 +53,4 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
     );
 };
 
-export default WebCamModal
+export default WebCamModal;

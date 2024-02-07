@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Header = () => <div className="p-4 bg-blue-900 flex justify-center items-center">
     <div className='absolute left-5 cursor-pointer'>
-        <Link href={"/"}>
+        <Link href={'/'}>
             <FontAwesomeIcon className='text-white text-2xl' icon={faChevronLeft} />
         </Link>
     </div>

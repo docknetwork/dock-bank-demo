@@ -17,7 +17,6 @@ const CustomerInfoForm = ({
   proofRequestData = null,
   children
 }) => {
-
   const holderDID = userStore((state) => state.Did);
   const holderEmail = userStore((state) => state.userEmail);
   const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
@@ -32,12 +31,12 @@ const CustomerInfoForm = ({
   );
 
   const onSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (holderDID.length < 5 || !validateEmail(holderEmail)) {
-      setIsHelperOpen(true)
-      toast.info("Please add your DID and email")
-      return
+      setIsHelperOpen(true);
+      toast.info('Please add your DID and email');
+      return;
     }
 
     try {
@@ -68,7 +67,7 @@ const CustomerInfoForm = ({
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, field.credentialType)?.[field.name] || "" : field.value}
+              value={proofRequestData ? extractCredentialSubjectFromProofRequest(proofRequestData, field.credentialType)?.[field.name] || '' : field.value}
               verified={verified}
               isValueSet={isInputValuesSet[field.id]}
               setIsValueSet={

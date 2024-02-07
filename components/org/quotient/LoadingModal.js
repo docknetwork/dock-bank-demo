@@ -17,4 +17,4 @@ const LoadingModal = ({ isLoading }) => (
     </Dialog>
 );
 
-export default LoadingModal
+export default LoadingModal;
