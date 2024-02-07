@@ -1,10 +1,9 @@
-import { apiPost } from "../action/api-post";
 import { v4 as uuidv4 } from "uuid";
-
 import { createBankIdCredential } from "../_credentials/quotient";
 import { createCreditScoreCredential } from "../_credentials/equinet";
 import { createBiometricsCredential } from "../_credentials/forsur";
 import { toast } from "sonner";
+import { postRequest } from "./request";
 
 const dockUrl = "https://api-testnet.dock.io";
 
@@ -24,16 +23,12 @@ async function encryptAndPrepareMessage(senderDID, receiverDID, credentialsSubje
 
   console.log("encryptionPayload:", encryptionPayload);
 
-  const didcommMessage = await apiPost({
-    url: `${dockUrl}/messaging/encrypt`,
-    body: encryptionPayload
-  });
+  const data = await postRequest(`${dockUrl}/messaging/encrypt`, encryptionPayload)
 
-  console.log("didComm Message:", didcommMessage);
+  console.log("didComm Message:", data);
 
-  return didcommMessage.jwe;
+  return data.data.jwe;
 }
-
 
 const signedCredential = async (receiverDid) => {
   const enrollmentId = `${uuidv4()}`;;
@@ -68,10 +63,8 @@ const signedCredential = async (receiverDid) => {
   ];
 
   const issuedCredentials = await Promise.all(credentials.map(async credential => {
-    return apiPost({
-      url: credential.url,
-      body: credential.body
-    });
+    const credentialData = await postRequest(credential.url, credential.body)
+    return credentialData.data
   }));
 
   return issuedCredentials;
@@ -80,13 +73,12 @@ const signedCredential = async (receiverDid) => {
 export const issueCredentials = async (
   receiverDID,
   setIsLoading,
+  setIsSuccess
 ) => {
 
   const responses = [];
 
   try {
-    setIsLoading(true);
-
     const issuedCredentials = await signedCredential(receiverDID);
 
     const senderDIDMapping = [
@@ -116,13 +108,9 @@ export const issueCredentials = async (
         message: encryptedMessage
       };
 
-      const data = await apiPost({
-        url: `${dockUrl}/messaging/send`,
-        body: sendMessagePayload
-      });
+      const data = await postRequest(`${dockUrl}/messaging/send`, sendMessagePayload)
 
-
-      console.log("apiPost data:", data);
+      console.log('Data messaging send :', data);
 
       responses.push({
         sent: true,
@@ -139,6 +127,7 @@ export const issueCredentials = async (
       error: 'Error',
     });
 
+    setIsSuccess(true)
 
   } catch (error) {
 
@@ -149,7 +138,6 @@ export const issueCredentials = async (
     responses.push({ sent: false, error: errorMessage });
 
   } finally {
-
     setIsLoading(false);
   }
 

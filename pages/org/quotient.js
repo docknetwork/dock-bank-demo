@@ -14,22 +14,25 @@ import FormFieldNameAndBirthday from 'components/forms/user/newAccount/form-fiel
 import FormFieldAddress from 'components/forms/user/newAccount/form-field-address';
 import FormFieldPersonalContact from 'components/forms/user/newAccount/form-field-personal-contact';
 import FormFieldGovId from 'components/forms/user/newAccount/form-field-govId';
+import { issueCredentials } from 'utils/credentialsUtils';
+import { toast } from 'sonner';
+import { userStore } from 'store/appStore';
 
 const DEFAULT_FORM_VALUES = {
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    suffix: '',
-    dob: undefined, // Date Of Birthday
-    streetAddress: '',
-    suite: '',
-    zipCode: '',
-    city: '',
-    state: '',
-    email: '',
-    phoneNumber: '',
-    isUsaCitizen: '',
-    ssn: '', // social security number,
+    firstName: 'ken',
+    middleName: 'zambrano',
+    lastName: 'de jesus',
+    suffix: 'asdasdads',
+    dob: '05/19/1992', // Date Of Birthday
+    streetAddress: 'asdasdasd',
+    suite: 'asdasd',
+    zipCode: '1233',
+    city: 'caracas',
+    state: 'caracas',
+    email: 'asdg@gmail.com',
+    phoneNumber: '12312312321',
+    isUsaCitizen: 'Yes',
+    ssn: 'qwdqwd', // social security number,
     govId: '',
     webcamPic: ''
 };
@@ -78,6 +81,8 @@ const QuotientBankForm = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
     const [imageSrc, setImageSrc] = useState(undefined);
+    const receiverDid = userStore((state) => state.Did);
+    const setIsHelperOpen = userStore((state) => state.setIsHelperOpen)
 
     const form = useForm({
         resolver: zodResolver(userSchema),
@@ -99,12 +104,25 @@ const QuotientBankForm = () => {
     // once form values are valid, do something
     async function onSubmit(values) {
         console.log("values", values);
-        setIsLoading(true);
         // eslint-disable-next-line no-promise-executor-return
-        setTimeout(() => {
+        if (!receiverDid || receiverDid.length < 3) {
+            toast.info('Please add your Did and email in the helper box');
+            setIsHelperOpen(true)
+            return
+        }
+
+        setIsLoading(true);
+
+        try {
+            const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);
+            console.log("results:", result)
+
+        } catch (error) {
             setIsLoading(false);
-            setIsSuccess(true);
-        }, 3000);
+            toast.error('Something went wrong, try again or contact support')
+            console.log('issuing error: ', error);
+        }
+
     }
 
     return (

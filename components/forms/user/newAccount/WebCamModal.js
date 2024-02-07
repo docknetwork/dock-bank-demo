@@ -14,7 +14,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
 
     const handleOnComplete = () => {
         setIsPicTaken(!isPicTaken);
-        setTimeout(() => setIsCaptureCompleted(!isCaptureCompleted), 3000);
+        setTimeout(() => setIsCaptureCompleted(!isCaptureCompleted), 1000);
     };
 
     const handleOnOpenChanged = () => {
