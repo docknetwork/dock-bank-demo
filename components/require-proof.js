@@ -32,7 +32,7 @@ export default function RequireProof({ onPresentedProof, type }) {
     if (!proofRequest) {
       getProofRequest();
     }
-  }, [proofRequest]);
+  }, [proofRequest]); // eslint-disable-line
 
   return proofRequest ? (
     <QRDisplay value={proofRequest.qr} />

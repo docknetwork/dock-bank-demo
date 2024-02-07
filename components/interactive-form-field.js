@@ -28,7 +28,7 @@ const InteractiveFormField = ({
           type={type}
           name={name}
           placeholder={placeholder}
-          value={verified || isValueSet ? value : ""}
+          value={verified || isValueSet ? value : ''}
           onClick={handleInputClick}
           readOnly
         />

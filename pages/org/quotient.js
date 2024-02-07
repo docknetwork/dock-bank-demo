@@ -17,6 +17,7 @@ import FormFieldGovId from 'components/forms/user/newAccount/form-field-govId';
 import { issueCredentials } from 'utils/credentialsUtils';
 import { toast } from 'sonner';
 import { userStore } from 'store/appStore';
+import PageLayout from 'components/page-layout';
 
 const DEFAULT_FORM_VALUES = {
     firstName: 'ken',
@@ -82,7 +83,7 @@ const QuotientBankForm = () => {
     const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
     const [imageSrc, setImageSrc] = useState(undefined);
     const receiverDid = userStore((state) => state.Did);
-    const setIsHelperOpen = userStore((state) => state.setIsHelperOpen)
+    const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
 
     const form = useForm({
         resolver: zodResolver(userSchema),
@@ -103,26 +104,24 @@ const QuotientBankForm = () => {
 
     // once form values are valid, do something
     async function onSubmit(values) {
-        console.log("values", values);
+        console.log('values', values);
         // eslint-disable-next-line no-promise-executor-return
         if (!receiverDid || receiverDid.length < 3) {
             toast.info('Please add your Did and email in the helper box');
-            setIsHelperOpen(true)
-            return
+            setIsHelperOpen(true);
+            return;
         }
 
         setIsLoading(true);
 
         try {
             const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);
-            console.log("results:", result)
-
+            console.log('results:', result);
         } catch (error) {
             setIsLoading(false);
-            toast.error('Something went wrong, try again or contact support')
+            toast.error('Something went wrong, try again or contact support');
             console.log('issuing error: ', error);
         }
-
     }
 
     return (
@@ -130,41 +129,43 @@ const QuotientBankForm = () => {
             <Head>
                 <title>Quotient - Open New Bank Account</title >
             </Head >
-            <Header />
-            <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
-            {isSuccess ? (
-                <div className='pt-10 pl-5'>
-                    <h2 className='text-2xl font-semibold'>Your account has been opened!</h2>
-                </div>
-            ) : (
-                <div className="p-4 min-h-screen mainContainer">
-                    <div className='mb-4 mt-2'>
-                        <h2 className='font-semibold text-2xl'>Open New Banking Account</h2 >
+            <PageLayout>
+                <Header />
+                <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
+                {isSuccess ? (
+                    <div className='pt-10 pl-5'>
+                        <h2 className='text-2xl font-semibold'>Your account has been opened!</h2>
                     </div>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
-                            <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
-                                <FormFieldNameAndBirthday control={form.control} />
-                                <Separator />
-                                <FormFieldAddress control={form.control} />
-                                <Separator />
-                                <FormFieldPersonalContact control={form.control} />
-                            </div>
-                            <FormFieldGovId
-                                control={form.control}
-                                isCaptureCompleted={isCaptureCompleted}
-                                setIsCaptureCompleted={setIsCaptureCompleted}
-                                imageSrc={imageSrc}
-                                setImageSrc={setImageSrc}
-                            />
-                            <Button className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg' type="submit">Submit Application</Button>
-                        </form>
+                ) : (
+                    <div className="p-4 min-h-screen mainContainer">
+                        <div className='mb-4 mt-2'>
+                            <h2 className='font-semibold text-2xl'>Open New Banking Account</h2 >
+                        </div>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
+                                <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
+                                    <FormFieldNameAndBirthday control={form.control} />
+                                    <Separator />
+                                    <FormFieldAddress control={form.control} />
+                                    <Separator />
+                                    <FormFieldPersonalContact control={form.control} />
+                                </div>
+                                <FormFieldGovId
+                                    control={form.control}
+                                    isCaptureCompleted={isCaptureCompleted}
+                                    setIsCaptureCompleted={setIsCaptureCompleted}
+                                    imageSrc={imageSrc}
+                                    setImageSrc={setImageSrc}
+                                />
+                                <Button className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg' type="submit">Submit Application</Button>
+                            </form>
 
-                    </Form>
+                        </Form>
 
-                </div >
-            )
-            }
+                    </div >
+                )
+                }
+            </PageLayout>
         </>
     );
 };

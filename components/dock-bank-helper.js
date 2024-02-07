@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'components/button';
-import QrReader from './qr-reader';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
 import { userStore } from 'store/appStore';
+import QrReader from './qr-reader';
 
 export default function Helper() {
   const [holderDID, setHolderDID] = useLocalStorage('holderDID', '');
@@ -18,10 +18,10 @@ export default function Helper() {
   const formRecipientEmail = userStore((state) => state.userEmail);
   const setFormRecipientEmail = userStore((state) => state.setUserEmail);
 
-
   useEffect(() => {
     setFormDID(holderDID);
-    setFormRecipientEmail(recipientEmail);
+    setFormRecipientEmail(recipientEmail);    
+    // eslint-disable-next-line
   }, [holderDID, recipientEmail]);
 
   const handleSubmit = () => {
@@ -39,7 +39,7 @@ export default function Helper() {
     setHolderDID(formDID);
     setRecipientEmail(formRecipientEmail);
     toast.success('Set DID success');
-    setIsHelperOpen(!isHelperOpen)
+    setIsHelperOpen(!isHelperOpen);
   };
 
   return (

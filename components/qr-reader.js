@@ -1,14 +1,13 @@
-import { Html5QrcodeScanner, Html5QrcodeScanType } from "html5-qrcode";
-import { Fingerprint, Webcam } from "lucide-react";
-import { toast } from "react-toastify";
+import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
+import { Fingerprint, Webcam } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function QrReader({ setDID }) {
-
     let scanner;
 
     function startCamera() {
         scanner = new Html5QrcodeScanner(
-            "reader",
+            'reader',
             {
                 fps: 8,
                 qrbox: {
@@ -33,15 +32,13 @@ export default function QrReader({ setDID }) {
         scanner.clear();
         const result = extractQRData(decodedResult);
 
-        console.log("scanned result: " + result);
-        setDID(result)
-        toast.success("QR Code Scanned Successfully");
+        console.log(`scanned result: ${result}`);
+        setDID(result);
+        toast.success('QR Code Scanned Successfully');
         return result;
     }
 
-    const extractQRData = (decodedResult) => {
-        return decodedResult;
-    };
+    const extractQRData = (decodedResult) => decodedResult;
 
     function onScanFailure(error) {
         console.warn(`Code scan error = ${error}`);

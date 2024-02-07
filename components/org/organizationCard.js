@@ -1,14 +1,12 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function OrganizationCard({ org }) {
-    if (!org || org === undefined) return
-
     return (
         <>
             <div className="cardImg valign-middle">
                 <div>
-                    <Image priority={true} src={org.logo} width={org.size[0]} height={org.size[1]} />
+                    <Image priority={true} src={org.logo} width={org.size[0]} height={org.size[1]} alt="orglogo" />
                 </div>
             </div>
 
@@ -25,6 +23,5 @@ export default function OrganizationCard({ org }) {
                 </button></Link>
             </div>
         </>
-    )
+    );
 }
-
