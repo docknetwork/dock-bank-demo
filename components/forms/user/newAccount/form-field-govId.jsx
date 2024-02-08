@@ -8,14 +8,22 @@ import {
     FormMessage,
 } from 'components/ui/form';
 import { Button } from 'components/ui/button';
-import WebCamPhoto from './WebCamPhoto';
+import WebCamPhoto from './webcam-photo';
 
-const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, imageSrc, setImageSrc }) => (
+/**
+ * @description Form Field for user passport | driver id, web cam photo
+ * @param {*} control  react hook form controller
+ * @param {*} isCaptureCompleted shows WebCamPhoto comp
+ * @param {*} setIsCaptureCompleted setter 'isCaptureCompleted'
+ * @param {*} setIsUploadPoDComplete setter 'isUploadPoDComplete' (passport or driver id)
+ * @memberof QuotientBankForm
+ * @returns React.FC Form Field
+ */
+const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, setIsUploadPoDComplete }) => (
     <div className='grid gap-2'>
         <PassportOrDriversId
             control={control}
-            imageSrc={imageSrc}
-            setImageSrc={setImageSrc} />
+            setIsUploadPoDComplete={setIsUploadPoDComplete} />
         <WebCamPhoto
             control={control}
             isCaptureCompleted={isCaptureCompleted}
@@ -23,11 +31,10 @@ const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, im
     </div>
 );
 
-const PassportOrDriversId = ({ control, imageSrc, setImageSrc }) => {
+const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
     const handleUploadClick = async (event) => {
         event.preventDefault();
-        // Set the field value to the file
-        setImageSrc('/example_passport.png');
+        setIsUploadPoDComplete(true);
     };
 
     return (
@@ -42,9 +49,9 @@ const PassportOrDriversId = ({ control, imageSrc, setImageSrc }) => {
                             <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
                         </div>
                         <FormControl>
-                            {imageSrc !== undefined ? (
+                            {field.value !== '' ? (
                                 <div className='grid p-4'>
-                                    <Image src={imageSrc} alt='example_passport' width={250} height={250} />
+                                    <Image src={field.value} alt='example_passport' width={250} height={250} />
                                 </div>
                             ) : (
                                 <div className='text-center'>

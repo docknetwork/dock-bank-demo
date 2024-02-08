@@ -6,8 +6,14 @@ import {
     FormMessage,
 } from 'components/ui/form';
 import Image from 'next/image';
-import WebCamModal from './WebCamModal';
+import WebCamModal from './webcam-modal';
 
+/**
+ * @description Form Field for user web cam photo
+ * @param {*} control  react hook form controller
+ * @memberof FormFieldGovId
+ * @returns React.FC Form Field
+ */
 const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => (
     <div className="p-4 bg-neutral-50 rounded-lg">
         <FormField

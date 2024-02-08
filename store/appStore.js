@@ -1,8 +1,8 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-export const userStore = create((set) => ({
-    Did: "",
-    userEmail: "",
+const userStore = create((set) => ({
+    Did: '',
+    userEmail: '',
     setDid: (did) => {
         set(() => ({ Did: did }));
     },
@@ -11,6 +11,8 @@ export const userStore = create((set) => ({
     },
     isHelperOpen: false,
     setIsHelperOpen: (open) => {
-        set(() => ({ isHelperOpen: open }))
+        set(() => ({ isHelperOpen: open }));
     }
 }));
+
+export default userStore;

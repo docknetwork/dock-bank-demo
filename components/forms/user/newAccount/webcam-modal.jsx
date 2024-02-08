@@ -9,18 +9,24 @@ import Image from 'next/image';
 import { Button } from 'components/ui/button';
 import { useState } from 'react';
 
+/**
+ * @description Modal for mocked web cam 
+ * @param {*} isCaptureCompleted  react hook form controller
+ * @param {*} isCaptureCompleted  react hook form controller
+ * @memberof WebCamPhoto
+ * @returns React.FC Dialog
+ */
 const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
     const [isPicTaken, setIsPicTaken] = useState(false);
 
+    //
     const handleOnComplete = () => {
         setIsPicTaken(!isPicTaken);
         setTimeout(() => setIsCaptureCompleted(!isCaptureCompleted), 1000);
     };
 
     const handleOnOpenChanged = () => {
-        if (isPicTaken) {
-            setIsPicTaken(!isPicTaken);
-        }
+        if (isPicTaken) setIsPicTaken(false);
     };
 
     return (
