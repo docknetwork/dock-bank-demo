@@ -4,7 +4,8 @@ export function createBankIdCredential({
   receiverDid,
   receiverName,
   receiverAddress,
-  enrollmentId
+  enrollmentId,
+  biometricData
 }) {
   const dockUrl = "https://api-testnet.dock.io";
 
@@ -17,13 +18,14 @@ export function createBankIdCredential({
       persist: true,
       password: "1234",
       distribute: true,
+      algorithm: "dockbbs+",
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
-        name: "Quotient - Bank Identity W/ Biometrics",
+        name: "Quotient - Bank Identity",
         description: "The \"Quotient - Bank Identity\" schema provides a secure and standardized format for representing key aspects of an individual's bank identity.",
         type: [
           "VerifiableCredential",
-          "QuotientBankIdentityWBiometrics"
+          "QuotientBankIdentity"
         ],
         issuer: {
           name: "Quotient Credit Union",
@@ -36,7 +38,11 @@ export function createBankIdCredential({
           name: receiverName,
           address: receiverAddress,
           account_number: `ABC${uuidv4()}`,
-          biometric_enrollment_id: enrollmentId,
+          biometric: {
+            id: enrollmentId,
+            created: new Date().toISOString(),
+            data: biometricData,
+          }
         }
       }
     }

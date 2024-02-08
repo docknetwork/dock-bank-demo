@@ -10,10 +10,10 @@ export function createCreditScoreCredential({ receiverDid }) {
   return {
     url: `${dockUrl}/credentials`,
     body: {
-      anchor: true,
+      anchor: false,
       persist: true,
       password: "1234",
-      distribute: true,
+      distribute: true,      
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "EquiNet - Credit Score",
@@ -30,7 +30,7 @@ export function createCreditScoreCredential({ receiverDid }) {
         },
         credentialSubject: {
           id: receiverDid,
-          credit_score: getRandomNumber(750, 850),
+          credit_score: getRandomNumber(700, 800),
         }
       }
     }
