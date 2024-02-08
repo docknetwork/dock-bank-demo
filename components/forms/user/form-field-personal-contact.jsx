@@ -15,7 +15,13 @@ import {
 } from 'components/ui/select';
 import { Input } from 'components/ui/input';
 
-const FormFieldPersonalContact = ({ control }) => (
+/**
+ * @description Form Field for email, phone number & UsaCitizen comp
+ * @param {*} control  react hook form controller
+ * @param {*} isUsaCitizen shows | !show UsaCitizen comp
+ * @returns React.FC Form Field
+ */
+const FormFieldPersonalContact = ({ control, isUsaCitizen }) => (
   <div className='grid gap-2'>
     <h2 className='text-lg font-semibold'>What is your contact info?</h2>
     <div className='grid grid-cols-2 gap-2'>
@@ -44,7 +50,20 @@ const FormFieldPersonalContact = ({ control }) => (
           </FormItem>
         )} />
     </div>
-    <div className='grid grid-cols-3 gap-2'>
+    <UsaCitizen control={control} usaCitizen={isUsaCitizen} />
+  </div>
+);
+
+/**
+ * @description Form Field for usa citizen & social security number
+ * @param {*} control  react hook form controller
+ * @param {*} usaCitizen shows | !show BirthdayPicker comp
+ * @returns React.FC Form Field 
+ */
+const UsaCitizen = ({ control, usaCitizen }) => {
+  if (!usaCitizen) return null;
+  return (
+    <div className='grid grid-cols-3 gap-2' >
       <FormField
         control={control}
         name="isUsaCitizen"
@@ -58,8 +77,8 @@ const FormFieldPersonalContact = ({ control }) => (
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem disabled={field.value === 'true' } value={'true'}>Yes</SelectItem>
-                <SelectItem disabled={field.value === 'false' } value={'false'}>No</SelectItem>
+                <SelectItem disabled={field.value === 'true'} value={'true'}>Yes</SelectItem>
+                <SelectItem disabled={field.value === 'false'} value={'false'}>No</SelectItem>
               </SelectContent>
             </Select>
             <FormMessage />
@@ -78,7 +97,7 @@ const FormFieldPersonalContact = ({ control }) => (
           </FormItem>
         )} />
     </div>
-  </div>
-);
+  );
+};
 
 export default FormFieldPersonalContact;

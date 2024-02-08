@@ -8,6 +8,12 @@ import {
 } from 'components/ui/form';
 import { Input } from 'components/ui/input';
 
+/**
+ * @description Form Field for user info such as complete address
+ * @param {*} control  react hook form controller
+ * @memberof QuotientBankForm, QuotientApplyLoanForm
+ * @returns React.FC Form Field
+ */
 const FormFieldAddress = ({ control }) => (
   <div className='grid gap-2'>
     <h2 className='text-lg font-semibold'>What is your home address?</h2>

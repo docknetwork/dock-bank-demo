@@ -3,7 +3,7 @@ import Button from 'components/button';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
-import { userStore } from 'store/appStore';
+import userStore from 'store/appStore';
 import QrReader from './qr-reader';
 
 export default function Helper() {

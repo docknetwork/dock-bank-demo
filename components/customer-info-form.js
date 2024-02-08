@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'components/button';
 import InteractiveFormField from 'components/interactive-form-field';
-import { userStore } from 'store/appStore';
+import userStore from 'store/appStore';
 import {
   textFields,
   extractCredentialSubjectFromProofRequest,

@@ -44,7 +44,8 @@
     "no-trailing-spaces": "off",
     "import/prefer-default-export": "off",
     "no-shadow": "off",
-    "react/react-in-jsx-scope": "off" // Disable react/react-in-jsx-scope rule
+    "react/react-in-jsx-scope": "off", // Disable react/react-in-jsx-scope rule
+    "linebreak-style": ["off"]
   },
   "settings": {
     "import/resolver": {
@@ -73,6 +74,10 @@
           [
             "store",
             "./store"
+          ],
+          [
+            "lib",
+            "./lib"
           ]
         ]
       }

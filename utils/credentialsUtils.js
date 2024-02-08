@@ -1,59 +1,58 @@
-import { v4 as uuidv4 } from "uuid";
-import { createBankIdCredential } from "../_credentials/quotient";
-import { createCreditScoreCredential } from "../_credentials/equinet";
-import { createBiometricsCredential } from "../_credentials/forsur";
-import { toast } from "sonner";
-import { postRequest } from "./request";
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'sonner';
+import { createBankIdCredential } from '../_credentials/quotient';
+import { createCreditScoreCredential } from '../_credentials/equinet';
+import { createBiometricsCredential } from '../_credentials/forsur';
+import { postRequest } from './request';
 
-const dockUrl = "https://api-testnet.dock.io";
+const dockUrl = 'https://api-testnet.dock.io';
 
 async function encryptAndPrepareMessage(senderDID, receiverDID, credentialsSubject) {
-
-  console.log("encryptAndPrepareMessage");
+  console.log('encryptAndPrepareMessage');
 
   const encryptionPayload = {
     senderDid: senderDID,
     recipientDids: [receiverDID],
-    type: "issue",
+    type: 'issue',
     payload: {
-      domain: "api.dock.io",
+      domain: 'api.dock.io',
       credentials: credentialsSubject
     }
   };
 
-  console.log("encryptionPayload:", encryptionPayload);
+  console.log('encryptionPayload:', encryptionPayload);
 
-  const data = await postRequest(`${dockUrl}/messaging/encrypt`, encryptionPayload)
+  const data = await postRequest(`${dockUrl}/messaging/encrypt`, encryptionPayload);
 
-  console.log("didComm Message:", data);
+  console.log('didComm Message:', data);
 
   return data.data.jwe;
 }
 
 const signedCredential = async (receiverDid) => {
-  const enrollmentId = `${uuidv4()}`;;
+  const enrollmentId = `${uuidv4()}`;
 
   const bankIdData = {
-    receiverDid: receiverDid,
-    receiverName: "John Smith", //Name input
-    receiverAddress: "123 Main St, Anytown, CA 90210",
-    enrollmentId: enrollmentId
+    receiverDid,
+    receiverName: 'John Smith', // Name input
+    receiverAddress: '123 Main St, Anytown, CA 90210',
+    enrollmentId
   };
 
   const biometricsData = {
-    receiverDid: receiverDid,
-    enrollmentId: enrollmentId,
-    biometricData: "some_biometrics_data",
-    enrollmentDate: "2024-02-05",
-    validTo: "2024-03-05",
+    receiverDid,
+    enrollmentId,
+    biometricData: 'some_biometrics_data',
+    enrollmentDate: '2024-02-05',
+    validTo: '2024-03-05',
   };
 
   const creditScoreData = {
-    receiverDid: receiverDid,
+    receiverDid,
   };
 
   const bankIdCredential = createBankIdCredential(bankIdData);
-  const creditScoreCredential = createCreditScoreCredential(creditScoreData)
+  const creditScoreCredential = createCreditScoreCredential(creditScoreData);
   const biometricsCredential = createBiometricsCredential(biometricsData);
 
   const credentials = [
@@ -62,9 +61,9 @@ const signedCredential = async (receiverDid) => {
     biometricsCredential
   ];
 
-  const issuedCredentials = await Promise.all(credentials.map(async credential => {
-    const credentialData = await postRequest(credential.url, credential.body)
-    return credentialData.data
+  const issuedCredentials = await Promise.all(credentials.map(async (credential) => {
+    const credentialData = await postRequest(credential.url, credential.body);
+    return credentialData.data;
   }));
 
   return issuedCredentials;
@@ -75,19 +74,18 @@ export const issueCredentials = async (
   setIsLoading,
   setIsSuccess
 ) => {
-
   const responses = [];
 
   try {
     const issuedCredentials = await signedCredential(receiverDID);
 
     const senderDIDMapping = [
-      "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w",
-      "did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb",
-      "did:dock:5CKsfvaE68mvRhdn3dDXG4KpWzuvaUNdBbiu6sFUuPK9rw66"
+      'did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w',
+      'did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb',
+      'did:dock:5CKsfvaE68mvRhdn3dDXG4KpWzuvaUNdBbiu6sFUuPK9rw66'
     ];
 
-    console.log("issuedCredentials: ", issuedCredentials);
+    console.log('issuedCredentials: ', issuedCredentials);
 
     for (let i = 0; i < issuedCredentials.length; i++) {
       const issuedCredential = issuedCredentials[i];
@@ -95,48 +93,42 @@ export const issueCredentials = async (
       // Get the senderDID from the mapping using the index
       const senderDID = senderDIDMapping[i];
 
-      console.log("Processing credential:", issuedCredential);
+      console.log('Processing credential:', issuedCredential);
 
-      console.log("Processing credential senderDID:", senderDID);
+      console.log('Processing credential senderDID:', senderDID);
 
       const encryptedMessage = await encryptAndPrepareMessage(senderDID, receiverDID, [issuedCredential.credentialSubject]);
 
-      console.log("encryptedMessage:", encryptedMessage);
+      console.log('encryptedMessage:', encryptedMessage);
 
       const sendMessagePayload = {
         to: receiverDID,
         message: encryptedMessage
       };
 
-      const data = await postRequest(`${dockUrl}/messaging/send`, sendMessagePayload)
+      const data = await postRequest(`${dockUrl}/messaging/send`, sendMessagePayload);
 
       console.log('Data messaging send :', data);
 
       responses.push({
         sent: true,
-        issuedCredential: issuedCredential
+        issuedCredential
       });
     }
     const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Credentials' }), 2000));
 
     toast.promise(promise, {
-      loading: 'Loading...',
-      success: (data) => {
-        return `${data.name} has been issued`;
-      },
+      success: (data) => `${data.name} has been issued`,
       error: 'Error',
     });
 
-    setIsSuccess(true)
-
+    setIsSuccess(true);
   } catch (error) {
-
-    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
 
     toast.error(`Error: ${errorMessage}`);
 
     responses.push({ sent: false, error: errorMessage });
-
   } finally {
     setIsLoading(false);
   }

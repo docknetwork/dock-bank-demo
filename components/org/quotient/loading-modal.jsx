@@ -5,6 +5,12 @@ import {
     DialogContent
 } from 'components/ui/dialog';
 
+/**
+ * @description Quotient modal for loading while issuing credentials
+ * @param {*} isLoading controls opening of dialog  
+ * @memberof QuotientBankForm 
+ * @returns React.FC Dialog
+ */
 const LoadingModal = ({ isLoading }) => (
     <Dialog open={isLoading}>
         <DialogContent>
