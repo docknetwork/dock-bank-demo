@@ -107,8 +107,8 @@ const QuotientBankForm = () => {
             <h2 className="font-semibold text-2xl">Open New Banking Account</h2>
           </div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
-              <div className="p-4 bg-neutral-50 rounded-lg space-y-5">
+            <form className="flex gap-3">
+              <div className="p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60">
                 <FormFieldNameAndBirthday control={form.control} dob={true} />
                 <Separator />
                 <FormFieldAddress control={form.control} />
@@ -121,12 +121,15 @@ const QuotientBankForm = () => {
                 setIsCaptureCompleted={setIsCaptureCompleted}
                 setIsUploadPoDComplete={setIsUploadPoDComplete}
               />
+            </form>
+            <div className='mt-3'>
               <Button
+                onClick={form.handleSubmit(onSubmit)}
                 className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
                 type="submit">
                 Submit Application
               </Button>
-            </form>
+            </div>
           </Form>
         </div>
       )}

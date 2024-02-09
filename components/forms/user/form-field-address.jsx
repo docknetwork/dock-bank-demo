@@ -43,12 +43,12 @@ const FormFieldAddress = ({ control }) => (
           </FormItem>
         )} />
     </div>
-    <div className='grid grid-cols-3 gap-2'>
+    <div className='flex gap-2'>
       <FormField
         control={control}
         name="zipCode"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className='w-10'>
             <FormLabel>Zip Code</FormLabel>
             <FormControl>
               <Input placeholder="Enter Zip Code" {...field} />
@@ -60,7 +60,7 @@ const FormFieldAddress = ({ control }) => (
         control={control}
         name="city"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className='w-60'>
             <FormLabel>City</FormLabel>
             <FormControl>
               <Input placeholder="Enter city" {...field} />
@@ -72,7 +72,7 @@ const FormFieldAddress = ({ control }) => (
         control={control}
         name="state"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className='w-30'>
             <FormLabel>State</FormLabel>
             <FormControl>
               <Input placeholder="Select one" {...field} />
