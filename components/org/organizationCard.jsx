@@ -9,7 +9,6 @@ export default function OrganizationCard({ org }) {
                     <Image priority={true} src={org.logo} width={org.size[0]} height={org.size[1]} alt="orglogo" />
                 </div>
             </div>
-
             <hr />
             <div className="pt-5 pb-5">
                 <p>
