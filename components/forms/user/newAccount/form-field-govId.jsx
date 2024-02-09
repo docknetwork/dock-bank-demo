@@ -20,7 +20,7 @@ import WebCamPhoto from './webcam-photo';
  * @returns React.FC Form Field
  */
 const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, setIsUploadPoDComplete }) => (
-    <div className='grid gap-2'>
+    <div className='grid gap-2 w-30'>
         <PassportOrDriversId
             control={control}
             setIsUploadPoDComplete={setIsUploadPoDComplete} />
@@ -43,7 +43,7 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
                 control={control}
                 name="govId"
                 render={({ field }) => (
-                    <FormItem className="relative">
+                    <FormItem className="h-full relative">
                         <div className='flex items-center justify-between '>
                             <FormLabel className="font-semibold">Upload Passport or Drivers License</FormLabel>
                             <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
@@ -51,18 +51,17 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
                         <FormControl>
                             {field.value !== '' ? (
                                 <div className='grid p-4'>
-                                    <Image src={field.value} alt='example_passport' width={250} height={250} />
+                                    <Image src={field.value} alt='example_passport' width={392} height={248} />
                                 </div>
                             ) : (
-                                <div className='text-center'>
-                                    <div className='valign-middle w-full'>
+                                <div className='text-center h-full'>
+                                    <div className='w-full pt-5 pb-5'>
                                         <div>
                                             <Image className='m-auto' src="/upload_file.png" alt='upload_file' width={149} height={186} />
                                         </div>
                                     </div>
-                                    <br />
-                                    <div>
-                                        <Button variant="outline" onClick={handleUploadClick}>Upload Government Issued ID</Button>
+                                    <div className='absolute bottom-0 left-0 right-0 m-auto '>
+                                        <Button className='uploadBtn' variant="outline" onClick={handleUploadClick}>Upload Government Issued ID</Button>
                                     </div>
                                 </div>
                             )}

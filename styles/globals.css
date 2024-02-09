@@ -55,12 +55,12 @@ a {
 }
 
 .mainContainer {
-  max-width: 1680px;
+  max-width: 1480px;
   margin: auto;
 }
 
 .mainContainer input {
-  border:solid 1px #D1D1D6 !important;
+  border: solid 1px #D1D1D6 !important;
 }
 
 .mainContainer input::placeholder {
@@ -103,8 +103,15 @@ a {
   margin-top: 25px;
 }
 
+.uploadBtn {
+  width: 100%;
+  border: solid 1px#0E387A;
+  background-color: #EFF5FF;
+  font-size: 14px;
+  font-weight: 600;
+  color: #51525C;
+}
 
-.cardBottom {}
 
 .valign-middle {
   display: table !important;

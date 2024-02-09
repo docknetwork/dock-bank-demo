@@ -32,7 +32,9 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
     return (
         <Dialog onOpenChange={handleOnOpenChanged}>
             <DialogTrigger asChild>
-                <Button variant="outline">Take Photo</Button>
+                <div className='absolute bottom-0 left-0 right-0 m-auto '>
+                    <Button className='uploadBtn' variant='outline'>Take Photo</Button>
+                </div>
             </DialogTrigger>
             <DialogContent>
                 {isPicTaken ? (

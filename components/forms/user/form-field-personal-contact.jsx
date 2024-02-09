@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from 'components/ui/select';
 import { Input } from 'components/ui/input';
+import { Separator } from 'components/ui/separator';
 
 /**
  * @description Form Field for email, phone number & UsaCitizen comp
@@ -61,42 +62,48 @@ const FormFieldPersonalContact = ({ control, isUsaCitizen }) => (
  * @returns React.FC Form Field 
  */
 const UsaCitizen = ({ control, usaCitizen }) => {
-  if (!usaCitizen) return null;
+
   return (
-    <div className='grid grid-cols-3 gap-2' >
-      <FormField
-        control={control}
-        name="isUsaCitizen"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>U.S Citizen?</FormLabel>
-            <Select onValueChange={field.onChange}>
+    <>
+      <div className='mt-4 mb-4'>
+        <Separator />
+      </div>
+      <h2 className='text-lg font-semibold'>Personal Information</h2>
+      <div className='flex gap-2' >
+        <FormField
+          control={control}
+          name="isUsaCitizen"
+          render={({ field }) => (
+            <FormItem  className='w-20'>
+              <FormLabel>U.S Citizen?</FormLabel>
+              <Select onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select one" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem disabled={field.value === 'true'} value={'true'}>Yes</SelectItem>
+                  <SelectItem disabled={field.value === 'false'} value={'false'}>No</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )} />
+        <FormField
+          control={control}
+          name="ssn"
+          render={({ field }) => (
+            <FormItem className='w-80'>
+              <FormLabel>Social Security Number</FormLabel>
               <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select one" />
-                </SelectTrigger>
+                <Input placeholder="Enter SSN" {...field} />
               </FormControl>
-              <SelectContent>
-                <SelectItem disabled={field.value === 'true'} value={'true'}>Yes</SelectItem>
-                <SelectItem disabled={field.value === 'false'} value={'false'}>No</SelectItem>
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )} />
-      <FormField
-        control={control}
-        name="ssn"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Social Security Number</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter SSN" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
-    </div>
+              <FormMessage />
+            </FormItem>
+          )} />
+      </div>
+    </>
   );
 };
 

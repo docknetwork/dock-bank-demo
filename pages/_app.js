@@ -5,6 +5,7 @@ import { BANK_NAME } from 'utils/constants';
 import { Toaster } from 'sonner';
 
 import '../styles/globals.css';
+import '../styles/custom.css';
 
 // Fonts
 import '../public/fonts/satoshi.css';
