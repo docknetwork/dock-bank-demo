@@ -67,26 +67,31 @@ const QuotientApplyLoanForm = () => {
       {isSuccess ? (
         <QuotientSuccess title="Your loan application has been approved!" />
       ) : (
-        <div className='pt-8 p-5'>
+        <div className='pt-8 p-5 mainContainer'>
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
-              <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
-                <FormFieldCarDetails control={form.control} />
-                <Separator />
-                <FormFieldNameAndBirthday control={form.control} />
-                <Separator />
-                <FormFieldAddress control={form.control} />
-                <Separator />
-                <FormFieldPersonalContact />
+            <form onSubmit={form.handleSubmit(onSubmit)} >
+              <div className='grid md:grid-cols-2 gap-2'>
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
+                  <FormFieldCarDetails control={form.control} />
+                  <Separator />
+                  <FormFieldNameAndBirthday control={form.control} />
+                  <Separator />
+                  <FormFieldAddress control={form.control} />
+                  <Separator />
+                  <FormFieldPersonalContact />
+                </div>
+                <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} />
               </div>
-              <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} />
-              <Button
-                className="col-span-2 w-fit md:place-self-end px-10 bg-blue-700 text-lg"
-                type="submit">
-                Submit Application
-              </Button>
+              <div className='mt-4'>
+                <Button
+                  className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
+                  type="submit">
+                  Submit Application
+                </Button>
+              </div>
             </form>
+
           </Form>
         </div>
       )}
