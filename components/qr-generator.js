@@ -2,10 +2,10 @@ import { useQRCode } from 'next-qrcode';
 
 export const QRCodeGenerator = ({ url }) => {
     const { Canvas } = useQRCode();
-    const qrCodeSize = 390;
+    const qrCodeSize = 195;
 
     return (
-        <div className="w-full rounded-lg overflow-hidden shadow-lg ">
+        <div className="m-auto rounded-lg overflow-hidden ">
             <Canvas
                 text={url}
                 options={{
@@ -14,7 +14,7 @@ export const QRCodeGenerator = ({ url }) => {
                     scale: 4,
                     width: qrCodeSize,
                     color: {
-                        dark: '#000000',
+                        dark: '#0E387A',
                         light: '#FFFFFF'
                     }
                 }}

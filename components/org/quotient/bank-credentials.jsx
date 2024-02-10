@@ -25,10 +25,10 @@ const credentials = {
 const BankCredentials = ({ checked = false }) => (
     <div className='grid gap-4 place-items-center'>
         {Object.entries(credentials).map(([key, value], index) => (
-            <div key={index} className='flex items-center justify-between p-2 border rounded-lg shadow-lg bg-white w-3/4 md:w-1/2'>
+            <div key={index} className='flex items-center justify-between p-4 border rounded-2xl shadow-lg bg-white w-full max-w-80'>
                 <div>
                     <h2 className='font-bold'>{value.title}</h2>
-                    <p className='text-sm'>{value.description}</p>
+                    <p className='text-sm font-medium'>{value.description}</p>
                 </div>
                 {checked ? (<Check className="text-green-600 h-6 w-6" />) : (undefined)}
             </div>
