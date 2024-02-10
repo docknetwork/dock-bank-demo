@@ -2,35 +2,35 @@ const organizations = [
     {
         name: "Quotient",
         logo: "/quotientdark.png",
-        description: "Quotient is our credit union",
+        description: "Empowering Your Financial Journey with Personalized Solutions and Community Focus.",
         url: "/org/quotient",
         size: [168, 40]
     },
     {
         name: "Identity Clarity",
         logo: "/clarity.png",
-        description: "IdentityClarity is the KYC provider",
+        description: "Streamlining Secure Identity Verification to Enhance Customer Trust and Compliance.",
         url: "/org/clarity",
         size: [198, 120]
     },
     {
         name: "FORSUR",
         logo: "/forsur.png",
-        description: "Forsur is the Biomitric provider",
+        description: "Revolutionizing Security with Cutting-Edge Fingerprint, Facial, and Voice Recognition Technologies.",
         url: "/org/forsur",
         size: [93, 82]
     },
     {
         name: "Equinet",
         logo: "/equinet.png",
-        description: "EquiNet is the credit bureau",
+        description: "Comprehensive Credit Reporting and Score Analysis for Individuals.",
         url: "/org/equinet",
         size: [124, 89]
     },
     {
         name: "Urbanscape",
         logo: "/urbanscape.png",
-        description: "Urbanscape is the fictions Apartment company offering upscale rentals",
+        description: "Simplifying Your Home Search with Personalized Leasing Solutions and Exceptional Living Spaces.",
         url: "/org/urbanscape",
         size: [124, 107]
     },

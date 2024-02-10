@@ -3,6 +3,7 @@ import { Button } from 'components/ui/button';
 import { CircleUserRound, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 
 /**
  * @description Equinet sidebar menu.
@@ -10,7 +11,7 @@ import { ChevronDown } from 'lucide-react';
  * @returns React.FC Sidebar
  */
 export function Sidebar({ className }) {
-    return (        
+    return (
         <div className={cn('pb-6 equinetBg w-full', className)}>
             <div className="h-full flex flex-col justify-between py-4 text-white">
                 <div>
@@ -53,11 +54,13 @@ export function Sidebar({ className }) {
                     <div className="flex justify-between items-center">
                         <div className='flex space-x-2 items-center'>
                             <CircleUserRound />
-                            <p>Sam Donaldson</p>
+                            <p>John Doe</p>
                         </div>
-                        <Button variant="ghost" className='rounded-full'>
-                            <LogOut />
-                        </Button>
+                        <Link href="/">
+                            <Button variant="ghost" className='rounded-full'>
+                                <LogOut />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

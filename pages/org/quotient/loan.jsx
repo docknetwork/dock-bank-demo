@@ -14,6 +14,7 @@ import FormFieldAddress from 'components/forms/user/form-field-address';
 import FormFieldPersonalContact from 'components/forms/user/form-field-personal-contact';
 import LoanQrAuthentication from 'components/org/quotient/loan-auth';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
+import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
   sellerName: 'Charleswood Toyota Partners',
@@ -52,6 +53,8 @@ const QuotientApplyLoanForm = () => {
     defaultValues: DEFAULT_FORM_VALUES,
   });
 
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.EQUINET;
+
   async function onSubmit(values) {
     toast.info('Form Submitted');
     console.log('onSubmit', { values });
@@ -65,7 +68,7 @@ const QuotientApplyLoanForm = () => {
       </Head>
       <Header />
       {isSuccess ? (
-        <QuotientSuccess title="Your loan application has been approved!" />
+        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateId} />
       ) : (
         <div className='pt-8 p-5 mainContainer'>
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
