@@ -42,3 +42,24 @@
 .line-h-50 {
     line-height: 50px;
 }
+
+
+.ta-c {
+    text-align: center;
+    text-align: -webkit-center;
+}
+
+.ta-r {
+    text-align: right;
+    text-align: -webkit-right;
+
+}
+
+.ta-l {
+    text-align: left;
+    text-align: -webkit-left;
+}
+
+.bg-transaparent {
+    background-color: transparent !important;
+}
