@@ -107,26 +107,31 @@ const QuotientBankForm = () => {
             <h2 className="font-semibold text-2xl">Open New Banking Account</h2>
           </div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-3">
-              <div className="p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60">
-                <FormFieldNameAndBirthday control={form.control} dob={true} />
-                <Separator />
-                <FormFieldAddress control={form.control} />
-                <Separator />
-                <FormFieldPersonalContact control={form.control} />
+            <form className="" onSubmit={form.handleSubmit(onSubmit)}>
+              <div className='flex '>
+                <div className="p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60">
+                  <FormFieldNameAndBirthday control={form.control} dob={true} />
+                  <Separator />
+                  <FormFieldAddress control={form.control} />
+                  <Separator />
+                  <FormFieldPersonalContact control={form.control} />
+                </div>
+                <FormFieldGovId
+                  control={form.control}
+                  isCaptureCompleted={isCaptureCompleted}
+                  setIsCaptureCompleted={setIsCaptureCompleted}
+                  setIsUploadPoDComplete={setIsUploadPoDComplete}
+                />
               </div>
-              <FormFieldGovId
-                control={form.control}
-                isCaptureCompleted={isCaptureCompleted}
-                setIsCaptureCompleted={setIsCaptureCompleted}
-                setIsUploadPoDComplete={setIsUploadPoDComplete}
-              />
-              <Button
-                className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
-                type="submit">
-                Submit Application
-              </Button>
+              <div className='mt-3'>
+                <Button
+                  className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
+                  type="submit">
+                  Submit Application
+                </Button>
+              </div>
             </form>
+
           </Form>
         </div>
       )}

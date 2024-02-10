@@ -4,25 +4,7 @@ import { Search } from 'lucide-react';
 import { columns } from './columns';
 import { DataTable } from './data-table';
 
-const data = [
-  {
-    action: '12 Months No Late Payments',
-    status: 'Good',
-    date: 'Jan 6, 2022'
-  },
-  {
-    action: 'Credit Score of 706',
-    status: 'Out of Date',
-    date: 'Jan 6, 2022'
-  },
-  {
-    action: '10+ Credit Accounts',
-    status: 'Good',
-    date: 'Jan 5, 2022'
-  }
-];
-
-function EquinetTable() {
+function EquinetTable({ data }) {
   return (
     <div className='space-y-4'>
       <div className='flex items-center justify-between'>
