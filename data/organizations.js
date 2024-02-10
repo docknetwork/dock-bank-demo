@@ -11,7 +11,7 @@ const organizations = [
         name: "Identity Clarity",
         logo: "/clarity.png",
         description: "Streamlining Secure Identity Verification to Enhance Customer Trust and Compliance.",
-        url: "/org/clarity",
+        url: "/partners",
         size: [198, 120],
         button: true
     },

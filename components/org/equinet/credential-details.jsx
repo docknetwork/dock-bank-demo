@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Loader2, Check, ShieldX } from 'lucide-react';
-import Button from 'components/button';
+import { Button } from 'components/ui/button';
 
 /**
  * @description Equinet Credentials comp

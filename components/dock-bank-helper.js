@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'components/button';
+import { Button } from './ui/button';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
@@ -20,7 +20,7 @@ export default function Helper() {
 
   useEffect(() => {
     setFormDID(holderDID);
-    setFormRecipientEmail(recipientEmail);    
+    setFormRecipientEmail(recipientEmail);
     // eslint-disable-next-line
   }, [holderDID, recipientEmail]);
 

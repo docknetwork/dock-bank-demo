@@ -21,7 +21,7 @@ export const demoFlow = [
         title: 'View Partners & Find Apartment',
         logo: '/claritysm.png',
         secondLogo: '/claritypsm.png',
-        url: "/claritypartners",
+        url: "/partners",
         background: '#483B4F'
     }
 ]
