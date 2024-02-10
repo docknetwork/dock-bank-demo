@@ -101,8 +101,10 @@ const QuotientBankForm = () => {
       </Head>
       <Header />
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
-      {isSuccess ? (
-        <QuotientSuccess title="Your account has been opened!" proofTemplateId={proofTemplateId} />
+      {!isSuccess ? (
+        <div className='mainContainer'>
+          <QuotientSuccess title="Your account has been opened!" proofTemplateId={proofTemplateId} />
+        </div>
       ) : (
         <div className="p-4 min-h-screen mainContainer">
           <div className="mb-4 mt-2">

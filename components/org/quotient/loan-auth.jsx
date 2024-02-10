@@ -12,9 +12,9 @@ import BankCredentials from './bank-credentials';
  * @memberof QuotientBankForm 
  * @returns React.FC 
  */
-const LoanQrAuthentication = ({ isAuth = false, setUserInfo }) => {
-    const proofTemplateID = 'b156507a-949f-4dff-ab2f-ba98ea840678';
-    const { qrCodeUrl } = useQrCode({ proofTemplateID });
+const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) => {
+
+    const { qrCodeUrl } = useQrCode({ proofTemplateId });
 
     return (
         <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>

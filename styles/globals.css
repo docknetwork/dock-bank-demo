@@ -44,8 +44,8 @@ a {
 }
 
 .partnerCard {
-  max-width: 220px;
-  width: 100%;
+  width: 220px;
+  height: 244px;  
   text-align: center;
   padding: 24px 8px 24px 8px;
 }
