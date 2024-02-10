@@ -84,7 +84,7 @@ const QuotientApplyLoanForm = () => {
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>
-                <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} />
+                <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} proofTemplateId={proofTemplateId} />
               </div>
               <div className='mt-4'>
                 <Button

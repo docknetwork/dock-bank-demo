@@ -6,34 +6,35 @@ import { Separator } from 'components/ui/separator';
 const PartnersHeader = () => (
 
     <>
-        <div className="p-4 partnersHeader justify-left items-left">
-
-            <div className='absolute left-5 top-5 cursor-pointer'>
-                <Link href={'/'}>
-                    <ChevronLeft className='text-white text-3xl' />
-                </Link>
-            </div>
-            <div>
-                <div className='mb-8 mt-5'>
-                    <Image
-                        src='/partnerswhite.png'
-                        alt='partners-logo'
-                        width={175}
-                        height={28}
-                    />
+        <div className="p-4 partnersHeader justify-left items-left ">
+            <div className='max-w-screen-xl m-auto'>
+                <div className='absolute left-5 top-5 cursor-pointer'>
+                    <Link href={'/'}>
+                        <ChevronLeft className='text-white text-3xl' />
+                    </Link>
                 </div>
-            </div>
-            <Separator className='bg-purple' />
-            <div className='mt-5'>
-                <h1 className='font-semibold text-2xl text-white'>
-                    Welcome to the Identity Clarity ecosystem clarity partners.
-                </h1>
-            </div>
-            <div className='mt-5 max-w-xl	'>
-                <p className='font-light text-lg text-white'>
-                    Join the privacy conscious ecosystem of partners providing valuable
-                    services to all of our members.
-                </p>
+                <div>
+                    <div className='mb-8 mt-5'>
+                        <Image
+                            src='/partnerswhite.png'
+                            alt='partners-logo'
+                            width={175}
+                            height={28}
+                        />
+                    </div>
+                </div>
+                <Separator className='bg-purple' />
+                <div className='mt-5'>
+                    <h1 className='font-semibold text-2xl text-white'>
+                        Welcome to the Identity Clarity ecosystem clarity partners.
+                    </h1>
+                </div>
+                <div className='mt-5 max-w-xl	'>
+                    <p className='font-light text-lg text-white'>
+                        Join the privacy conscious ecosystem of partners providing valuable
+                        services to all of our members.
+                    </p>
+                </div>
             </div>
         </div>
 
