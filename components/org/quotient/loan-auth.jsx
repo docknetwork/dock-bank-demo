@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Separator } from 'components/ui/separator';
+import { generateQR } from 'utils/generate-qr';
+import { QRCodeGenerator } from 'components/qr-generator';
 import BankCredentials from './bank-credentials';
-// import { generateQR } from 'utils/generate-qr';
-// import { QRCodeGenerator } from 'components/qr-generator';
 
 /**
  * @description Quotient apply to loan QR code authenticator.
@@ -13,17 +13,18 @@ import BankCredentials from './bank-credentials';
  * @returns React.FC 
  */
 const LoanQrAuthentication = ({ isAuth = false, setUserInfo }) => {
+    const [qrCodeUrl, setQrCodeUrl] = useState('');
+    const proofTemplateID = 'b156507a-949f-4dff-ab2f-ba98ea840678';
 
-    // const [qrCodeUrl, setQrCodeUrl] = useState('')
-    // const proofTemplateID = "b156507a-949f-4dff-ab2f-ba98ea840678"
+    const handleGenerateQR = async () => {
+        const response = await generateQR(proofTemplateID);
+        console.log('handleGenerateQR', { response });
+        setQrCodeUrl(response.qr);
+    };
 
-    // useEffect(async () => {
-    //     const handleGenerateQR = async () => {
-    //         const { response } = await generateQR(proofTemplateID);
-    //         setQrCodeUrl(response.qr);
-    //     };
-    //     await handleGenerateQR()
-    // }, [])
+    useEffect(() => {
+        if (qrCodeUrl === '') handleGenerateQR();
+    }, [qrCodeUrl]);
 
     return (
         <div className='grid gap-2 p-4 bg-neutral-50 rounded-lg space-y-5 h-fit'>
@@ -31,14 +32,14 @@ const LoanQrAuthentication = ({ isAuth = false, setUserInfo }) => {
             <Separator />
             <p className='text-start'>Scan the QR code below with your terive mobile banking app.</p>
 
-            {/* <QRCodeGenerator url={qrCodeUrl} /> */}
+            {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
             <Separator />
             <div>
                 <h3>Required credentials:</h3>
                 <BankCredentials checked={isAuth} />
             </div>
         </div>
-    )
+    );
 };
 
 export default LoanQrAuthentication;
