@@ -1,4 +1,4 @@
-import { useQRCode } from "next-qrcode";
+import { useQRCode } from 'next-qrcode';
 
 export const QRCodeGenerator = ({ url }) => {
     const { Canvas } = useQRCode();
@@ -9,13 +9,13 @@ export const QRCodeGenerator = ({ url }) => {
             <Canvas
                 text={url}
                 options={{
-                    errorCorrectionLevel: "M",
+                    errorCorrectionLevel: 'M',
                     margin: 3,
                     scale: 4,
                     width: qrCodeSize,
                     color: {
-                        dark: "#000000",
-                        light: "#FFFFFF"
+                        dark: '#000000',
+                        light: '#FFFFFF'
                     }
                 }}
             />
