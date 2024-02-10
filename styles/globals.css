@@ -43,6 +43,27 @@ a {
   margin: auto;
 }
 
+.partnerCard {
+  max-width: 220px;
+  width: 100%;
+  text-align: center;
+  padding: 24px 8px 24px 8px;
+}
+
+.bg-purple {
+  background-color: #635A66 !important;
+}
+
+.text-purple {
+  color: #483B4F !important;
+}
+
+.partnersHeader {
+  background-color: #483B4F;
+  padding: 48px 40px 48px 40px;
+  min-height: 296px;
+}
+
 .flowCard {
   border-radius: 12px;
   color: white;
