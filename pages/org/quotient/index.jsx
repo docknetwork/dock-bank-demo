@@ -42,6 +42,7 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC page
  */
 const QuotientBankForm = () => {
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
