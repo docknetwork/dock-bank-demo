@@ -59,6 +59,10 @@ a {
   margin: auto;
 }
 
+.equinetContainer {
+  max-width: 1038px;
+}
+
 .mainContainer input {
   border: solid 1px #D1D1D6 !important;
 }
@@ -67,7 +71,11 @@ a {
   color: #A0A0AB !important;
 }
 
-
+.activeItem {
+  background-color: transparent;
+  border: solid 1px white;
+  border-radius: 50px;
+}
 
 .cardImg {
   min-height: 125px;
@@ -112,6 +120,9 @@ a {
   color: #51525C;
 }
 
+.equinetBg {
+  background-color: #265170;
+}
 
 .valign-middle {
   display: table !important;

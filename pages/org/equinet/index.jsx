@@ -6,6 +6,7 @@ import { Button } from 'components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs';
 import EquinetTable from 'components/org/equinet/dataTable';
 import CredentialDetails from 'components/org/equinet/credential-details';
+import { Separator } from 'components/ui/separator';
 
 /**
  * @description Equinet dashboard.
@@ -47,7 +48,7 @@ const EquinetPage = () => {
             <div className="grid lg:grid-cols-6 min-h-screen">
                 <Sidebar className="hidden lg:block" />
                 <div className="col-span-4 lg:col-span-5 lg:border-l">
-                    <div className="h-full px-4 py-6 lg:px-8">
+                    <div className="h-full  py-6 lg:px-8 equinetContainer">
                         <div className='grid grid-cols-1 gap-8'>
                             <div className='flex space-x-4'>
                                 <Home />
@@ -64,14 +65,15 @@ const EquinetPage = () => {
                                 <Button variant='secondary' className='rounded-full'>Import</Button>
                             </div>
                             <Tabs defaultValue="credentials" className="w-full">
-                                <TabsList className="w-[400px]">
-                                    <TabsTrigger value="overview" disabled>Overview</TabsTrigger>
-                                    <TabsTrigger value="accounts" disabled>Accounts</TabsTrigger>
-                                    <TabsTrigger value="credentials">Credentials</TabsTrigger>
-                                    <TabsTrigger value="settings" disabled>Settings</TabsTrigger>
+                                <TabsList className="w-[400px] bg-transaparent">
+                                    <TabsTrigger className="text-slate-500 font-bold" value="overview" >Overview</TabsTrigger>
+                                    <TabsTrigger className="text-slate-500 font-bold" value="accounts" >Accounts</TabsTrigger>
+                                    <TabsTrigger className="text-blue-400 font-bold" value="credentials">Credentials</TabsTrigger>
+                                    <TabsTrigger className="text-slate-500 font-bold" value="settings">Settings</TabsTrigger>
                                 </TabsList>
+                                <Separator />
                                 <TabsContent value="credentials">
-                                    <div className='grid gap-6 grid-cols-2'>
+                                    <div className='grid gap-6 grid-cols-2 pt-6'>
                                         <EquinetTable data={data} />
                                         <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} setData={setData} />
                                     </div>
@@ -82,6 +84,7 @@ const EquinetPage = () => {
 
                     </div>
                 </div>
+
             </div>
         </>
     );

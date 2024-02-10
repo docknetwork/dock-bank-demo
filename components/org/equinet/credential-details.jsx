@@ -67,11 +67,11 @@ const CredentialDetails = ({ isLoading, setIsLoading, setData }) => {
     };
 
     return (
-        <div className='space-y-4'>
+        <div className='space-y-4 pt-2'>
             <h2 className='font-semibold text-lg'>Credential Details</h2>
             <div className='grid gap-2 justify-items-center'>
                 {credentials.map((value, index) => (
-                    <div key={index} className='h-fit flex items-center justify-between p-4 border rounded-lg shadow-lg bg-white w-full lg:w-3/4'>
+                    <div key={index} className='h-fit flex items-center justify-between p-4 border rounded-2xl mt-4 shadow-lg bg-white w-full'>
                         <div>
                             <h2 className='font-bold'>{value.title}</h2>
 
