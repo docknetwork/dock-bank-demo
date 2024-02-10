@@ -11,30 +11,40 @@ export default function OrganizationCard({ org }) {
             </div>
             <hr />
             <div className="pt-5 pb-5 min-h-32	">
-                <p>
+                <p className='text-sm'>
                     {org.description}
                 </p>
             </div>
 
             <div className="cardBottom">
-
                 {org.name === "Quotient" ? (
                     <>
-                        <Link href={org.url}><button className='visitBtn '>
-                            New Bank Account
-                        </button></Link>
-                        <br />
-                        <Link href={org.url}><button className='visitBtn mt-5'>
-                            Optain Auto Loan
-                        </button></Link>
+                        <div>
+                            <Link href={org.url}>
+                                <button className='visitBtn'>
+                                    New Bank Account
+                                </button>
+                            </Link>
+                        </div>
+                        <div className='mt-2'>
+                            <Link href={'/org/quotient/loan'}>
+                                <button className='visitBtn'>
+                                    Obtain Auto Loan
+                                </button>
+                            </Link>
+                        </div>
                     </>
-                )
-                    :
-                    <Link href={org.url}><button className='visitBtn'>
-                        Visit Site
-                    </button></Link>
-                }
+                ) : (
+                    org.button && org.button === true && (
+                        <Link href={org.url}>
+                            <button className='visitBtn'>
+                                Visit Site
+                            </button>
+                        </Link>
+                    )
+                )}
             </div>
+
         </>
     );
 }

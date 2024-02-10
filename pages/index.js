@@ -2,8 +2,9 @@ import OrganizationCard from 'components/org/organizationCard';
 import organizations from 'data/organizations';
 import Image from 'next/image';
 import React from 'react';
-import { toast } from 'react-toastify';
 import PageLayout from 'components/page-layout';
+import Link from 'next/link';
+import LandingDemo from 'components/landing-demo';
 
 export default function Home() {
   return (
@@ -19,10 +20,7 @@ export default function Home() {
                 <span className="mr-2">|</span> Sales Demo
               </h1>
             </div>
-          </div>
-          <div className="text-left mt-5">
-            <h1 className="title">Organizations</h1>
-          </div>
+          </div>      
           <div className="pt-5 grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4">
             {organizations.map((org, i) => (
               <div key={i} className="orgCard">
@@ -30,9 +28,14 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <button className="launchBtn" onClick={() => toast.info('hello')}>
-            Launch Demo
-          </button>
+          <LandingDemo />
+          <div className='mt-5'>
+            <Link href="/org/quotient">
+              <button className="launchBtn">
+                Launch Demo
+              </button>
+            </Link>
+          </div>
         </div>
       </PageLayout>
     </>

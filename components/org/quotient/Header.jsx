@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 
 /**
  * @description Quotient header comp
@@ -12,7 +11,7 @@ const Header = () => (
     <div className="p-4 bg-blue-900 flex justify-center items-center">
         <div className='absolute left-5 cursor-pointer'>
             <Link href={'/'}>
-                <FontAwesomeIcon className='text-white text-2xl' icon={faChevronLeft} />
+                <ChevronLeft className='text-white text-3xl' />
             </Link>
         </div>
         <Image
