@@ -71,8 +71,8 @@ const QuotientApplyLoanForm = () => {
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} >
-              <div className='grid md:grid-cols-2 gap-2'>
-                <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
+              <div className='flex gap-2'>
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 w-60'>
                   <FormFieldCarDetails control={form.control} />
                   <Separator />
                   <FormFieldNameAndBirthday control={form.control} />
