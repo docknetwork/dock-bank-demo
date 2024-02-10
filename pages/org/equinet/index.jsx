@@ -14,6 +14,30 @@ import CredentialDetails from 'components/org/equinet/credential-details';
  */
 const EquinetPage = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(
+        [
+            {
+                action: '12 Months No Late Payments',
+                status: 'Good',
+                date: 'Jan 6, 2022'
+            },
+            {
+                action: 'Credit Score of 706',
+                status: 'Out of Date',
+                date: 'Jan 6, 2022'
+            },
+            {
+                action: '10+ Credit Accounts',
+                status: 'Good',
+                date: 'Jan 5, 2022'
+            },
+            {
+                action: '12 Months Late Payments',
+                status: 'Out of Date',
+                date: 'Feb 13, 2022'
+            }
+        ]
+    );
 
     return (
         <>
@@ -48,8 +72,8 @@ const EquinetPage = () => {
                                 </TabsList>
                                 <TabsContent value="credentials">
                                     <div className='grid gap-6 grid-cols-2'>
-                                        <EquinetTable />
-                                        <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} />
+                                        <EquinetTable data={data} />
+                                        <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} setData={setData} />
                                     </div>
                                 </TabsContent>
 
