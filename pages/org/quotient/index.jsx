@@ -16,6 +16,7 @@ import FormFieldAddress from 'components/forms/user/form-field-address';
 import FormFieldPersonalContact from 'components/forms/user/form-field-personal-contact';
 import FormFieldGovId from 'components/forms/user/newAccount/form-field-govId';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
+import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
   firstName: 'ken',
@@ -48,6 +49,7 @@ const QuotientBankForm = () => {
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
   const receiverDid = userStore((state) => state.Did);
   const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.QUOTIENT;
 
   const form = useForm({
     resolver: zodResolver(UserSchema),
@@ -100,7 +102,7 @@ const QuotientBankForm = () => {
       <Header />
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
       {isSuccess ? (
-        <QuotientSuccess title="Your account has been opened!" />
+        <QuotientSuccess title="Your account has been opened!" proofTemplateId={proofTemplateId} />
       ) : (
         <div className="p-4 min-h-screen mainContainer">
           <div className="mb-4 mt-2">

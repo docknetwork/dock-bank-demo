@@ -12,3 +12,9 @@ export default {
   BANK_NAME,
   HOTEL_NAME,
 };
+
+export const PROOFT_TEMPLATES_IDS = {
+  QUOTIENT: "b156507a-949f-4dff-ab2f-ba98ea840678",
+  EQUINET: "d1c42f71-6108-4520-a09d-c8a19d720bd2",
+  URBANSCAPE: "78fbd2de-9686-4c70-96d4-bbb4630bfb49",
+}

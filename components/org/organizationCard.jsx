@@ -10,16 +10,30 @@ export default function OrganizationCard({ org }) {
                 </div>
             </div>
             <hr />
-            <div className="pt-5 pb-5">
+            <div className="pt-5 pb-5 min-h-32	">
                 <p>
                     {org.description}
                 </p>
             </div>
 
             <div className="cardBottom">
-                <Link href={org.url}><button className='visitBtn'>
-                    Visit Site
-                </button></Link>
+
+                {org.name === "Quotient" ? (
+                    <>
+                        <Link href={org.url}><button className='visitBtn '>
+                            New Bank Account
+                        </button></Link>
+                        <br />
+                        <Link href={org.url}><button className='visitBtn mt-5'>
+                            Optain Auto Loan
+                        </button></Link>
+                    </>
+                )
+                    :
+                    <Link href={org.url}><button className='visitBtn'>
+                        Visit Site
+                    </button></Link>
+                }
             </div>
         </>
     );
