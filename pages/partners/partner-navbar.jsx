@@ -13,7 +13,7 @@ const PartnerNavbar = () => (
                     </Link>
                 </div>
                 <div>
-                    <div className='mb-5 mt-5'>
+                    <div>
                         <Image
                             src='/partnerswhite.png'
                             alt='partners-logo'

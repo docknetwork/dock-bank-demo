@@ -64,9 +64,26 @@ a {
   min-height: 296px;
 }
 
-.partnersNavbar {
+.partnerNavbar {
   background-color: #483B4F;
-  padding: 48px 40px 48px 40px;
+  padding: 12px 0px 10px 0px;
+}
+
+.bgImg {  
+  background-image: url('/build.png');
+  background-size: contain;
+  width: 435px;
+  height: 290px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bgImg .overlay {
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.4;
 }
 
 .flowCard {
@@ -76,8 +93,6 @@ a {
   font-weight: 700;
   padding: 16px 24px 16px 24px;
 }
-
-.flowLogo {}
 
 .index-2 {
   z-index: 2;
