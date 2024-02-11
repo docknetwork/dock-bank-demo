@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { Button } from 'components/ui/button'
 import partners from 'data/partners'
 import PartnerNavbar from './partner-navbar'
 
@@ -28,21 +29,39 @@ export default function Page() {
     return (
         <div>
             <PartnerNavbar />
-            <div>
-                <h1>{currentPartner.name}</h1>
-                <p>{currentPartner.description}</p>
-                {currentPartner.links && currentPartner.links.length > 0 && (
+            <div className='max-w-screen-xl p-2 pt-10 m-auto'>
+                <h1 className='text-2xl font-semibold mb-8'>{currentPartner.name}</h1>
+                <div className='flex gap-8 '>
+
                     <div>
-                        {currentPartner.links.map(link => (
-                            <Link key={link.title} href={link.url}>
-                                <a>
-                                    <button>{link.title}</button>
-                                </a>
-                            </Link>
-                        ))}
+                        <div className='bgImg'>
+                            <div className='overlay'>
+                                <Image src={currentPartner.logo} width={currentPartner.sizes[0]} height={currentPartner.sizes[1]} alt="partnerlogo" />
+                            </div>
+                        </div>
                     </div>
-                )}
-                <Image src={currentPartner.logo} width={currentPartner.sizes[0]} height={currentPartner.sizes[1]} />
+
+                    <div>
+                        <p className='text-2xl font-semibold'>{currentPartner.description}</p>
+                        {currentPartner.links && currentPartner.links.length > 0 && (
+                            <div className='flex gap-2'>
+                                {currentPartner.links.map(link => (
+                                    <div key={link.title}>
+                                        {link.url ? (
+                                            <Link href={link.url}>
+                                                <a>
+                                                    <Button>{link.title}</Button>
+                                                </a>
+                                            </Link>
+                                        ) : (
+                                            <Button>{link.title}</Button>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     )
