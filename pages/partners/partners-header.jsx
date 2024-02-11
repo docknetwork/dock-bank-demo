@@ -6,15 +6,15 @@ import { Separator } from 'components/ui/separator';
 const PartnersHeader = () => (
 
     <>
-        <div className="p-4 partnersHeader justify-left items-left ">
-            <div className='max-w-screen-xl m-auto'>
+        <div className="partnersHeader justify-left items-left ">
+            <div className='max-w-screen-xl p-2 m-auto'>
                 <div className='absolute left-5 top-5 cursor-pointer'>
                     <Link href={'/'}>
                         <ChevronLeft className='text-white text-3xl' />
                     </Link>
                 </div>
                 <div>
-                    <div className='mb-8 mt-5'>
+                    <div className='mb-5 mt-5'>
                         <Image
                             src='/partnerswhite.png'
                             alt='partners-logo'
