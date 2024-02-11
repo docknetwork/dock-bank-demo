@@ -45,7 +45,7 @@ a {
 
 .partnerCard {
   width: 220px;
-  height: 244px;  
+  height: 244px;
   text-align: center;
   padding: 24px 8px 24px 8px;
 }
@@ -62,6 +62,11 @@ a {
   background-color: #483B4F;
   padding: 48px 40px 48px 40px;
   min-height: 296px;
+}
+
+.partnersNavbar {
+  background-color: #483B4F;
+  padding: 48px 40px 48px 40px;
 }
 
 .flowCard {
