@@ -4,8 +4,7 @@ import { createBankIdCredential } from '../_credentials/quotient';
 import { createCreditScoreCredential } from '../_credentials/equinet';
 import { createBiometricsCredential } from '../_credentials/forsur';
 import { postRequest } from './request';
-
-const dockUrl = 'https://api-testnet.dock.io';
+import { dockUrl } from './constants';
 
 async function encryptAndPrepareMessage(senderDID, receiverDID, credentialsSubject) {
   console.log('encryptAndPrepareMessage');

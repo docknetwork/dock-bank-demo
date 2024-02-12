@@ -14,7 +14,6 @@ export default async (req, res) => {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      Authorization: `Bearer ${process.env.DOCK_API_TOKEN}`,
       'DOCK-API-KEY': process.env.DOCK_API_TOKEN,
     },
     body: JSON.stringify(body),
