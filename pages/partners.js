@@ -1,7 +1,7 @@
 import React from 'react';
+import partners from 'data/partners';
 import PartnersHeader from './partners/partners-header';
 import PartnerCard from './partners/partner-card';
-import partners from 'data/partners';
 
 export default function Partners() {
     return (

@@ -1,8 +1,8 @@
 import { cn } from 'utils';
 import { Button } from 'components/ui/button';
-import { CircleUserRound, LogOut } from 'lucide-react';
+import { CircleUserRound, LogOut, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import { ChevronDown } from 'lucide-react';
+
 import Link from 'next/link';
 
 /**
