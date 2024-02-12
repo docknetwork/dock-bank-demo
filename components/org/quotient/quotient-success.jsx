@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import useQrCode from 'utils/useQrCode';
 import { QRCodeGenerator } from 'components/qr-generator';
 import { Separator } from '../../ui/separator';
@@ -34,9 +35,11 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
                 <div className='p-4 grid gap-4 bg-neutral-50 rounded-lg h-fit'>
                     <p className='font-medium'>{textFields.thanks}</p>
                     <p className='font-medium'>{textFields.description}</p>
-                    <div className='w-2/4'>
-                        <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
-                    </div>
+                    <Link href="/partners">
+                        <div className='w-2/4 cursor-pointer'>
+                            <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
+                        </div>
+                    </Link>
                     <Separator />
                     <p className='text-justify font-medium'>
                         {textFields.benefits}
