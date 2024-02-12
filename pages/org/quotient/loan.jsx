@@ -8,12 +8,13 @@ import { LoanSchema } from 'lib/zodSchemas';
 import { Form } from 'components/ui/form';
 import { Button } from 'components/ui/button';
 import { Separator } from 'components/ui/separator';
-import FormFieldCarDetails from 'components/forms/user/newLoan/form-field-car-details';
-import FormFieldNameAndBirthday from 'components/forms/user/form-field-id';
-import FormFieldAddress from 'components/forms/user/form-field-address';
-import FormFieldPersonalContact from 'components/forms/user/form-field-personal-contact';
+import FormFieldCarDetails from 'components/forms/newLoan/form-field-car-details';
+import FormFieldNameAndBirthday from 'components/forms/form-field-id';
+import FormFieldAddress from 'components/forms/form-field-address';
+import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
 import LoanQrAuthentication from 'components/org/quotient/loan-auth';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
+import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
   sellerName: 'Charleswood Toyota Partners',
@@ -52,6 +53,8 @@ const QuotientApplyLoanForm = () => {
     defaultValues: DEFAULT_FORM_VALUES,
   });
 
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.EQUINET;
+
   async function onSubmit(values) {
     toast.info('Form Submitted');
     console.log('onSubmit', { values });
@@ -65,28 +68,33 @@ const QuotientApplyLoanForm = () => {
       </Head>
       <Header />
       {isSuccess ? (
-        <QuotientSuccess title="Your loan application has been approved!" />
+        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateId} />
       ) : (
-        <div className='pt-8 p-5'>
+        <div className='pt-8 p-5 mainContainer'>
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-2">
-              <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
-                <FormFieldCarDetails control={form.control} />
-                <Separator />
-                <FormFieldNameAndBirthday control={form.control} />
-                <Separator />
-                <FormFieldAddress control={form.control} />
-                <Separator />
-                <FormFieldPersonalContact />
+            <form onSubmit={form.handleSubmit(onSubmit)} >
+              <div className='flex gap-2'>
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 w-60'>
+                  <FormFieldCarDetails control={form.control} />
+                  <Separator />
+                  <FormFieldNameAndBirthday control={form.control} />
+                  <Separator />
+                  <FormFieldAddress control={form.control} />
+                  <Separator />
+                  <FormFieldPersonalContact />
+                </div>
+                <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} proofTemplateId={proofTemplateId} />
               </div>
-              <LoanQrAuthentication isAuth={userInfo} setUserInfo={setUserInfo} />
-              <Button
-                className="col-span-2 w-fit md:place-self-end px-10 bg-blue-700 text-lg"
-                type="submit">
-                Submit Application
-              </Button>
+              <div className='mt-4'>
+                <Button
+                  className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
+                  type="submit">
+                  Submit Application
+                </Button>
+              </div>
             </form>
+
           </Form>
         </div>
       )}

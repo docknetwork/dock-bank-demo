@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'components/button';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
 import userStore from 'store/appStore';
+import { Button } from './ui/button';
 import QrReader from './qr-reader';
 
 export default function Helper() {
@@ -20,7 +20,7 @@ export default function Helper() {
 
   useEffect(() => {
     setFormDID(holderDID);
-    setFormRecipientEmail(recipientEmail);    
+    setFormRecipientEmail(recipientEmail);
     // eslint-disable-next-line
   }, [holderDID, recipientEmail]);
 
@@ -51,7 +51,7 @@ export default function Helper() {
       >
         Helper
         <div
-          className={`absolute inline-flex items-center justify-center w-3 h-3 bg-${formDID && formRecipientEmail ? 'green' : 'red'
+          className={`absolute inline-flex items-center justify-center w-3| bg-${formDID && formRecipientEmail ? 'green' : 'red'
             }-500 rounded-full -top-1 -left-1`}
         />
       </Button>
@@ -62,7 +62,7 @@ export default function Helper() {
             <div className="flex items-start justify-between p-4 border-b rounded-t">
               <h3 className="text-xl font-semibold text-gray-900">Helper</h3>
               <div
-                className={`absolute inline-flex items-center justify-center w-3 h-3 bg-${formDID && formRecipientEmail ? 'green' : 'red'
+                className={`absolute inline-flex items-center justify-center w-3 bg-${formDID && formRecipientEmail ? 'green' : 'red'
                   }-500 rounded-full top-2 left-2`}
               />
               <button
@@ -72,7 +72,7 @@ export default function Helper() {
               >
                 <svg
                   aria-hidden="true"
-                  className="w-5 h-5"
+                  className="w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"

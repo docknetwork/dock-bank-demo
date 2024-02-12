@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Separator } from 'components/ui/separator';
+import useQrCode from 'utils/useQrCode';
+import { QRCodeGenerator } from 'components/qr-generator';
 import BankCredentials from './bank-credentials';
 
 /**
@@ -10,18 +12,25 @@ import BankCredentials from './bank-credentials';
  * @memberof QuotientBankForm 
  * @returns React.FC 
  */
-const LoanQrAuthentication = ({ isAuth = false, setUserInfo }) => (
-    <div className='grid gap-2 p-4 bg-neutral-50 rounded-lg space-y-5 h-fit'>
-        <h2>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
-        <Separator />
-        <p className='text-start'>Scan the QR code below with your terive mobile banking app.</p>
-        <div className='justify-self-center'>QR CODE HERE</div>
-        <Separator />
-        <div>
-            <h3>Required credentials:</h3>
-            <BankCredentials checked={isAuth} />
+const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) => {
+    const { qrCodeUrl } = useQrCode({ proofTemplateId });
+
+    return (
+        <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>
+            <h2 className='font-semibold'>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
+            <Separator />
+            <p className='text-start font-semibold'>Scan the QR code below with your terive mobile banking app.</p>
+
+            {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
+            <Separator />
+            <div>
+                <div className='mb-5'>
+                    <h3 className='font-bold'>Required credentials:</h3>
+                </div>
+                <BankCredentials checked={isAuth} />
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default LoanQrAuthentication;

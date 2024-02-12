@@ -1,5 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import useQrCode from 'utils/useQrCode';
+import { QRCodeGenerator } from 'components/qr-generator';
 import { Separator } from '../../ui/separator';
 import BankCredentials from './bank-credentials';
 
@@ -22,33 +25,36 @@ const qrInstructions = {
  * @memberof QuotientBankForm, QuotientApplyLoanForm
  * @returns React.FC Form Field
  */
-const QuotientSuccess = ({ title }) => (
-    <>
+const QuotientSuccess = ({ title, proofTemplateId }) => {
+    const { qrCodeUrl } = useQrCode({ proofTemplateId });
+
+    return (<>
         <div className='pt-10 p-5'>
             <h2 className='text-2xl font-semibold mb-5'>{title}</h2>
             <div className='grid md:grid-cols-2 gap-2'>
                 <div className='p-4 grid gap-4 bg-neutral-50 rounded-lg h-fit'>
-                    <p>{textFields.thanks}</p>
-                    <p>{textFields.description}</p>
-                    <div className='w-2/4'>
-                        <Image src={'/clarity_partners.png'} alt='clarity_partners' width={200} height={30} />
-                    </div>
+                    <p className='font-medium'>{textFields.thanks}</p>
+                    <p className='font-medium'>{textFields.description}</p>
+                    <Link href="/partners">
+                        <div className='w-2/4 cursor-pointer'>
+                            <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
+                        </div>
+                    </Link>
                     <Separator />
-                    <p className='text-justify'>
+                    <p className='text-justify font-medium'>
                         {textFields.benefits}
                     </p>
-                    <p>{textFields.instructions}</p>
+                    <p className='font-medium'>{textFields.instructions}</p>
                 </div>
                 <div className='p-4 grid gap-4 bg-neutral-50 rounded-lg'>
-                    <p className='text-justify'>{qrInstructions.stepOne}</p>
-                    <div className='justify-self-center'>QR CODE HERE</div>
-                    <p className='text-justify'>{qrInstructions.stepTwo}</p>
+                    <p className='text-justify font-medium'>{qrInstructions.stepOne}</p>
+                    {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
+                    <p className='text-justify font-medium'>{qrInstructions.stepTwo}</p>
                     <BankCredentials />
                 </div>
             </div>
         </div>
-
-    </>
-);
+    </>);
+};
 
 export default QuotientSuccess;
