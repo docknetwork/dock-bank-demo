@@ -4,8 +4,7 @@ import { createBankIdCredential } from '../_credentials/quotient';
 import { createCreditScoreCredential } from '../_credentials/equinet';
 import { createBiometricsCredential } from '../_credentials/forsur';
 import { postRequest } from './request';
-
-const dockUrl = 'https://api-testnet.dock.io';
+import { dockUrl } from './constants';
 
 async function encryptAndPrepareMessage(senderDID, receiverDID, credentialsSubject) {
   console.log('encryptAndPrepareMessage');
@@ -80,10 +79,12 @@ export const issueCredentials = async (
     const issuedCredentials = await signedCredential(receiverDID);
 
     const senderDIDMapping = [
-      'did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w',
-      'did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb',
-      'did:dock:5CKsfvaE68mvRhdn3dDXG4KpWzuvaUNdBbiu6sFUuPK9rw66'
+      process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
+      process.env.NEXT_PUBLIC_FORSUR_ISSUER_ID,
+      process.env.NEXT_PUBLIC_EQUINET_ISSUER_ID
     ];
+
+    console.log('senderDIDMapping:', senderDIDMapping);
 
     console.log('issuedCredentials: ', issuedCredentials);
 

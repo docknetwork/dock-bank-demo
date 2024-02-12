@@ -3,7 +3,7 @@ export const SERVER_URL =
   process.env.NEXT_PUBLIC_VERCEL_URL ||
   'http://localhost:3000';
 
-export const dockUrl = "https://api-testnet.dock.io";
+export const dockUrl = process.env.NEXT_PUBLIC_DOCK_API_URL;
 export const BANK_NAME = 'Verifi Bank';
 export const HOTEL_NAME = 'Dockside Resorts';
 
