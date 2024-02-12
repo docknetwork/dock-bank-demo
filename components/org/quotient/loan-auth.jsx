@@ -13,7 +13,6 @@ import BankCredentials from './bank-credentials';
  * @returns React.FC 
  */
 const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) => {
-
     const { qrCodeUrl } = useQrCode({ proofTemplateId });
 
     return (

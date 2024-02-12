@@ -1,21 +1,22 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { Button } from 'components/ui/button'
-import partners from 'data/partners'
-import PartnerNavbar from './partner-navbar'
-import PartnerContent from './partnerContent'
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Button } from 'components/ui/button';
+import partners from 'data/partners';
+import PartnerNavbar from './partner-navbar';
+import PartnerContent from './partnerContent';
 
 function validPartner(partner, partners) {
-    if (!partner || partner.length < 2) return false
-    return partners.find(p => p.id === partner)
+    if (!partner || partner.length < 2) return false;
+    return partners.find((p) => p.id === partner);
 }
 
 export default function Page() {
-    const router = useRouter()
-    const partner = router.query.partner
+    const router = useRouter();
+    const partner = router.query.partner;
 
-    if (!validPartner(partner, partners)) return (
+    if (!validPartner(partner, partners)) {
+ return (
         <div className='p-10 ta-c'>
             <h1 className='text-3xl'>There is no page for this partner,
                 <span className='text-blue-700 font-bold cursor-pointer ml-2'>
@@ -23,9 +24,10 @@ export default function Page() {
                     </Link>
                 </span>
             </h1>
-        </div>)
+        </div>); 
+}
 
-    const currentPartner = partners.find(p => p.id === partner)
+    const currentPartner = partners.find((p) => p.id === partner);
 
     return (
         <div>
@@ -48,5 +50,5 @@ export default function Page() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

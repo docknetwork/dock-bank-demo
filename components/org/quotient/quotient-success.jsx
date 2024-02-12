@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { Separator } from '../../ui/separator';
-import BankCredentials from './bank-credentials';
 import useQrCode from 'utils/useQrCode';
 import { QRCodeGenerator } from 'components/qr-generator';
+import { Separator } from '../../ui/separator';
+import BankCredentials from './bank-credentials';
 
 const textFields = {
     thanks: 'Thank you for trusting Quotient with your auto loan needs. We are thankful for you.',
@@ -25,8 +25,7 @@ const qrInstructions = {
  * @returns React.FC Form Field
  */
 const QuotientSuccess = ({ title, proofTemplateId }) => {
-
-    const { qrCodeUrl } = useQrCode({ proofTemplateId: proofTemplateId });
+    const { qrCodeUrl } = useQrCode({ proofTemplateId });
 
     return (<>
         <div className='pt-10 p-5'>
@@ -52,7 +51,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
                 </div>
             </div>
         </div>
-    </>)
+    </>);
 };
 
 export default QuotientSuccess;

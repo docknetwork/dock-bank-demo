@@ -1,10 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-const PartnerCard = ({ partner }) => {
-
-    return (
-        <div className='partnerCard cursor-pointer rounded-sm' style={{ backgroundColor: `${partner.background}` }}>
+const PartnerCard = ({ partner }) => (
+        <div className='partnerCard cursor-pointer rounded-sm' style={{ backgroundColor: `${partner?.background}` }}>
             <Link href={partner.url}>
                 <div>
                     <Image src={partner.logo} width={partner.sizes[0]} height={partner.sizes[1]} alt="partnerLogo" />
@@ -19,6 +17,5 @@ const PartnerCard = ({ partner }) => {
             </Link>
         </div>
     );
-}
 
-export default PartnerCard
+export default PartnerCard;
