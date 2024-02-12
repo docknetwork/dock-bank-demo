@@ -30,15 +30,13 @@ export default function QrReader({ setDID }) {
 
     async function onScanSuccess(decodedResult) {
         scanner.clear();
-        const result = extractQRData(decodedResult);
+        const result = decodedResult;
 
         console.log(`scanned result: ${result}`);
         setDID(result);
         toast.success('QR Code Scanned Successfully');
         return result;
     }
-
-    const extractQRData = (decodedResult) => decodedResult;
 
     function onScanFailure(error) {
         console.warn(`Code scan error = ${error}`);
