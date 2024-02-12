@@ -81,9 +81,9 @@ const QuotientBankForm = () => {
 
     setTimeout(() => {
       console.log('setters true');
-      setIsSuccess(true)
-      setIsLoading(false)
-    }, 1000)
+      setIsSuccess(true);
+      setIsLoading(false);
+    }, 1000);
     // try {
     //   // const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);      
     // } catch (error) {
@@ -101,17 +101,17 @@ const QuotientBankForm = () => {
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
       {isSuccess ? (
         <div className='mainContainer'>
-          <QuotientSuccess title="Your account has been opened!" proofTemplateId={proofTemplateId} />
+          <QuotientSuccess title='Your account has been opened!' proofTemplateId={proofTemplateId} />
         </div>
       ) : (
-        <div className="p-4 min-h-screen mainContainer">
-          <div className="mb-4 mt-2">
-            <h2 className="font-semibold text-2xl">Open New Banking Account</h2>
+        <div className='p-4 min-h-screen mainContainer'>
+          <div className='mb-4 mt-2'>
+            <h2 className='font-semibold text-2xl'>Open New Banking Account</h2>
           </div>
           <Form {...form}>
-            <form className="" onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className='flex gap-4'>
-                <div className="p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60">
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60'>
                   <FormFieldNameAndBirthday control={form.control} dob={true} />
                   <Separator />
                   <FormFieldAddress control={form.control} />
@@ -127,8 +127,8 @@ const QuotientBankForm = () => {
               </div>
               <div className='mt-3'>
                 <Button
-                  className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
-                  type="submit">
+                  className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg'
+                  type='submit'>
                   Submit Application
                 </Button>
               </div>
