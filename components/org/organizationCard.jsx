@@ -10,7 +10,7 @@ export default function OrganizationCard({ org }) {
                 </div>
             </div>
             <hr />
-            <div className='pt-5 pb-5 min-h-32'>
+            <div className='pt-5 min-h-28'>
                 <p className='text-sm'>
                     {org.description}
                 </p>
