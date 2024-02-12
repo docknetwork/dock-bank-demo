@@ -77,18 +77,19 @@ const QuotientBankForm = () => {
 
     setIsLoading(true);
 
-    try {
-      toast.info('Form submitted, issuing credentials');
-      const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);
-      toast.promise(result, {
-        success: 'Credentials as been successfully created',
-        error: 'Something went wrong while issuing credentials, try again or contact support',
-      });
-      console.log('results:', result);
-    } catch (error) {
-      setIsLoading(false);
-      console.log('issuing error: ', error);
-    }
+    toast.success('Bank account created, please proceed to next step.');
+
+    setTimeout(() => {
+      console.log('setters true');
+      setIsSuccess(true)
+      setIsLoading(false)
+    }, 1000)
+    // try {
+    //   // const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);      
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.log('issuing error: ', error);
+    // }
   }
 
   return (
@@ -109,7 +110,7 @@ const QuotientBankForm = () => {
           </div>
           <Form {...form}>
             <form className="" onSubmit={form.handleSubmit(onSubmit)}>
-              <div className='flex '>
+              <div className='flex gap-4'>
                 <div className="p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60">
                   <FormFieldNameAndBirthday control={form.control} dob={true} />
                   <Separator />
