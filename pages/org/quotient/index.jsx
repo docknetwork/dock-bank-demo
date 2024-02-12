@@ -11,28 +11,28 @@ import Header from 'components/org/quotient/Header';
 import { Form } from 'components/ui/form';
 import { Button } from 'components/ui/button';
 import { Separator } from 'components/ui/separator';
-import FormFieldNameAndBirthday from 'components/forms/user/form-field-id';
-import FormFieldAddress from 'components/forms/user/form-field-address';
-import FormFieldPersonalContact from 'components/forms/user/form-field-personal-contact';
-import FormFieldGovId from 'components/forms/user/newAccount/form-field-govId';
+import FormFieldNameAndBirthday from 'components/forms/form-field-id';
+import FormFieldAddress from 'components/forms/form-field-address';
+import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
+import FormFieldGovId from 'components/forms/newAccount/form-field-govId';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
-  firstName: 'ken',
-  middleName: 'zambrano',
-  lastName: 'de jesus',
+  firstName: 'Euan',
+  middleName: '',
+  lastName: 'Miller',
   suffix: 'He',
-  dob: '05/19/1992', // Date Of Birthday
-  streetAddress: 'asdasdasd',
-  suite: 'asdasd',
-  zipCode: '1233',
-  city: 'caracas',
-  state: 'caracas',
-  email: 'asdg@gmail.com',
-  phoneNumber: '12312312321',
+  dob: '11/22/1987', // Date Of Birthday
+  streetAddress: '123 Sample Street',
+  suite: '',
+  zipCode: '01234',
+  city: 'Sacramento',
+  state: 'California',
+  email: 'euan@dock.io',
+  phoneNumber: '',
   isUsaCitizen: 'Yes',
-  ssn: 'qwdqwd', // social security number,
+  ssn: '547878978', // social security number,
   govId: '',
   webcamPic: '',
 };
@@ -116,7 +116,7 @@ const QuotientBankForm = () => {
                   <Separator />
                   <FormFieldAddress control={form.control} />
                   <Separator />
-                  <FormFieldPersonalContact control={form.control} />
+                  <FormFieldPersonalContact control={form.control} isUsaCitizen={true} />
                 </div>
                 <FormFieldGovId
                   control={form.control}

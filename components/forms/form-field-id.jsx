@@ -95,72 +95,72 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                     </FormItem>
                 )} />
         </div>
-        <BirthdayPicker control={control} dob={dob} />
+        {dob ? (<>
+            <Separator />
+            <BirthdayPicker control={control} description={true} />
+        </>) : (null)}
     </>
 );
 
 /**
  * @description Form Field for user date of birthday (dob)
  * @param {*} control  react hook form controller
- * @param {*} dob shows | !show BirthdayPicker comp
+ * @param {*} description shows default description
  * @returns React.FC Form Field Calendar
  */
-const BirthdayPicker = ({ control, dob }) => {
-    if (!dob) return null;
-    return (
-        <>
-            <Separator />
-            <FormField
-                control={control}
-                name="dob"
-                render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                        <div className="md:flex md:space-x-1">
-                            <h2 className='font-bold text-sm'>When is your birthday?</h2>
-                            <p className='text-sm'>(You must be at least 18 years old to open an account)</p>
-                        </div>
-                        <FormLabel>Date of birth</FormLabel>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                                <FormControl>
-                                    <Button
-                                        variant={'outline'}
-                                        className={cn(
-                                            'w-[240px] pl-3 text-left font-normal',
-                                            !field.value && 'text-muted-foreground'
-                                        )}
-                                    >
-                                        {field.value ? (
-                                            format(field.value, 'PP')
-                                        ) : (
-                                            <span>mm/dd/yyy</span>
-                                        )}
-                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                    </Button>
-                                </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
-                                <Calendar
-                                    mode="single"
-                                    selected={field.value}
-                                    onSelect={field.onChange}
-                                    disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
-                                    initialFocus
-                                    classNames={{
-                                        caption: '',
-                                        caption_label: 'hidden'
-                                    }}
-                                    captionLayout="dropdown"
-                                    fromYear={1980}
-                                    toYear={2030} />
-                            </PopoverContent>
-                        </Popover>
-
-                        <FormMessage />
-                    </FormItem>
-                )} />
-        </>
-    );
-};
+export const BirthdayPicker = ({ control, description = false }) => (
+    <FormField
+        control={control}
+        name="dob"
+        render={({ field }) => (
+            <FormItem className={description ? 'flex flex-col' : ''}>
+                {description ? (
+                    <div className="md:flex md:space-x-1">
+                        <h2 className='font-bold text-sm'>When is your birthday?</h2>
+                        <p className='text-sm'>(You must be at least 18 years old to open an account)</p>
+                    </div >
+                ) : (
+                    null
+                )}
+                <FormLabel>Date of birth</FormLabel>
+                <Popover>
+                    <PopoverTrigger asChild>
+                        <FormControl>
+                            <Button
+                                variant={'outline'}
+                                className={cn(
+                                    'w-[240px] pl-3 text-left font-normal',
+                                    !field.value && 'text-muted-foreground'
+                                )}
+                            >
+                                {field.value ? (
+                                    format(field.value, 'PP')
+                                ) : (
+                                    <span>mm/dd/yyy</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                        </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+                            initialFocus
+                            classNames={{
+                                caption: '',
+                                caption_label: 'hidden'
+                            }}
+                            captionLayout="dropdown"
+                            fromYear={1980}
+                            toYear={2030} />
+                    </PopoverContent>
+                </Popover>
+                <FormMessage />
+            </FormItem >
+        )} />
+);
 
 export default FormFieldNameAndBirthday;

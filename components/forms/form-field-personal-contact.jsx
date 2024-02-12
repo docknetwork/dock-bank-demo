@@ -22,7 +22,7 @@ import { Separator } from 'components/ui/separator';
  * @param {*} isUsaCitizen shows | !show UsaCitizen comp
  * @returns React.FC Form Field
  */
-const FormFieldPersonalContact = ({ control, isUsaCitizen }) => (
+const FormFieldPersonalContact = ({ control, isUsaCitizen = false }) => (
   <div className='grid gap-2'>
     <h2 className='text-lg font-semibold'>What is your contact info?</h2>
     <div className='grid grid-cols-2 gap-2'>
@@ -51,7 +51,7 @@ const FormFieldPersonalContact = ({ control, isUsaCitizen }) => (
           </FormItem>
         )} />
     </div>
-    <UsaCitizen control={control} usaCitizen={isUsaCitizen} />
+    {isUsaCitizen ? (<UsaCitizen control={control} />) : (null)}
   </div>
 );
 
@@ -61,7 +61,7 @@ const FormFieldPersonalContact = ({ control, isUsaCitizen }) => (
  * @param {*} usaCitizen shows | !show BirthdayPicker comp
  * @returns React.FC Form Field 
  */
-const UsaCitizen = ({ control, usaCitizen }) => (
+const UsaCitizen = ({ control }) => (
   <>
     <div className='mt-4 mb-4'>
       <Separator />
