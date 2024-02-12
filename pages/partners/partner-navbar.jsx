@@ -6,8 +6,8 @@ const PartnerNavbar = () => (
 
     <>
         <div className="partnerNavbar justify-left items-left ">
-            <div className='max-w-screen-xl p-2 m-auto'>
-                <div className='absolute left-5 top-5 cursor-pointer'>
+            <div className='flex max-w-screen-xl p-2 m-auto'>
+                <div className='cursor-pointer mr-4'>
                     <Link href={'/partners'}>
                         <ChevronLeft className='text-white text-3xl' />
                     </Link>

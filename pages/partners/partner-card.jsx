@@ -13,7 +13,7 @@ const PartnerCard = ({ partner }) => {
             <Link href={partner.url}>
                 <div className="mt-5">
                     <p className="text-white font-semibold">
-                        {partner.description}
+                        {partner.short ? partner.short : partner.description}
                     </p>
                 </div>
             </Link>

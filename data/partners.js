@@ -43,7 +43,10 @@ const partners = [
         id: "urbanscape",
         logo: "/urbanwhite.png",
         url: "/partners/urbanscape",
-        description: "Urbanscape offers upscale apartment homes for lease.",
+        subtitle: "Discover a life of urban elegance and unparalleled convenience at Urbanscape Apartment Living! ",
+        short: "Urbanscape offers upscale apartment homes for lease.",
+        description: "Nestled in the heart of the city, our luxurious apartments offer you a world of benefits that redefine modern living. Imagine waking up to breathtaking skyline views, enjoying a refreshing dip in our rooftop pool, or unwinding in our state-of-the-art fitness center. With meticulously designed interiors and top-notch amenities, Urbanscape will elevate your lifestyle to new heights. Say goodbye to long commutes, as our prime location puts you at the center of it all - from trendy dining and entertainment options to major business hubs.",
+        paragraph: "Plus, our dedicated staff is committed to providing exceptional service, ensuring your every need is met. Join us, where luxury meets convenience, and where your dream urban lifestyle becomes a reality. Welcome home!",
         background: "#35595B",
         sizes: [124, 107],
         links: [

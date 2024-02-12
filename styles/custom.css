@@ -15,6 +15,10 @@
     width: 40% !important;
 }
 
+.w-45 {
+    width: 45% !important;
+}
+
 .w-50 {
     width: 50% !important;
 }
@@ -39,10 +43,33 @@
     width: 100% !important;
 }
 
+.h-50 {
+    height: 50% !important;
+}
+
+.h-60 {
+    height: 60% !important;
+}
+
+.h-70 {
+    height: 70% !important;
+}
+
+.h-80 {
+    height: 80% !important;
+}
+
+.h-90 {
+    height: 90% !important;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
 .line-h-50 {
     line-height: 50px;
 }
-
 
 .ta-c {
     text-align: center;
@@ -52,7 +79,6 @@
 .ta-r {
     text-align: right;
     text-align: -webkit-right;
-
 }
 
 .ta-l {
@@ -62,4 +88,22 @@
 
 .bg-transaparent {
     background-color: transparent !important;
+}
+
+.valign-middle {
+    display: table !important;
+}
+
+.valign-middle div:first-child {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.valign-bottom {
+    display: table !important;
+}
+
+.valign-bottom div:first-child {
+    display: table-cell;
+    vertical-align: bottom;
 }
