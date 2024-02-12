@@ -29,7 +29,7 @@ const UrbanscapeSuccess = () => {
         <div>
             <div className='my-4'>
                 <h2 className='text-4xl text-urban font-semibold'>You have been approved!</h2>
-                <p className='text-base	font-semibold'>To reserve your new appartment home, please pay total amount due now.</p>
+                <p className='font-semibold text-base'>To reserve your new appartment home, please pay total amount due now.</p>
             </div>
             <div className='grid md:grid-cols-3 gap-2'>
                 <div className='col-span-2 space-y-4'>
@@ -64,7 +64,7 @@ const UrbanscapeSuccess = () => {
                     <div className='space-y-3'>
                         <p className='font-bold'>TOTAL DUE NOW:</p>
                         <p className='text-3xl font-semibold text-green'>$3,990</p>
-                        <Button className='bg-cyan-700 text-sm p-6	px-6 font-semibold'>Pay Now</Button>
+                        <Button className='bg-cyan-700 text-sm p-6 px-6 font-semibold'>Pay Now</Button>
                     </div>
                     <Separator />
                     <div className='space-y-4'>
