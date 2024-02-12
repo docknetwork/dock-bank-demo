@@ -59,13 +59,12 @@ const QuotientBankForm = () => {
   });
 
   useEffect(() => {
-    // fetch the form values for images (should be empty at start)
+
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];
-    // if interacted with web cam component, will set the mocked values
+
     if (isCaptureCompleted && webcamPic === '') form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
-    // if govId has been 'uploaded', set the mocked values
     if (isUploadPoDComplete && govId === '') form.resetField('govId', { defaultValue: '/example_passport.png' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
   // once form values are valid, do something

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Button } from 'components/ui/button'
 import partners from 'data/partners'
 import PartnerNavbar from './partner-navbar'
+import PartnerContent from './partnerContent'
 
 function validPartner(partner, partners) {
     if (!partner || partner.length < 2) return false
@@ -30,36 +31,19 @@ export default function Page() {
         <div>
             <PartnerNavbar />
             <div className='max-w-screen-xl p-2 pt-10 m-auto'>
-                <h1 className='text-2xl font-semibold mb-8'>{currentPartner.name}</h1>
-                <div className='flex gap-8 '>
+                <h1 className='text-2xl font-semibold mb-8 text-purple'>{currentPartner.name}</h1>
+                <div className='block lg:flex lg:p-0 md:block sm:block sm:p-5 gap-8 partnerContainer'>
 
-                    <div>
-                        <div className='bgImg'>
+                    <div className='lg:p-0 flex-2 md:p-5 ta-c'>
+                        <div className='bgImg ta-l'>
                             <div className='overlay'>
                                 <Image src={currentPartner.logo} width={currentPartner.sizes[0]} height={currentPartner.sizes[1]} alt="partnerlogo" />
                             </div>
                         </div>
                     </div>
 
-                    <div>
-                        <p className='text-2xl font-semibold'>{currentPartner.description}</p>
-                        {currentPartner.links && currentPartner.links.length > 0 && (
-                            <div className='flex gap-2'>
-                                {currentPartner.links.map(link => (
-                                    <div key={link.title}>
-                                        {link.url ? (
-                                            <Link href={link.url}>
-                                                <a>
-                                                    <Button>{link.title}</Button>
-                                                </a>
-                                            </Link>
-                                        ) : (
-                                            <Button>{link.title}</Button>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                    <div className='relative p-5 lg:p-0 flex-2 md:p-5 sm:p-5'>
+                        <PartnerContent currentPartner={currentPartner} />
                     </div>
                 </div>
             </div>

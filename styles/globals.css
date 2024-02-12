@@ -69,7 +69,7 @@ a {
   padding: 12px 0px 10px 0px;
 }
 
-.bgImg {  
+.bgImg {
   background-image: url('/build.png');
   background-size: contain;
   width: 435px;
@@ -171,14 +171,15 @@ a {
   background-color: #265170;
 }
 
-.valign-middle {
-  display: table !important;
+.partnerBtn {
+  background-color: #E2DCE5;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #51525C;
+  border-radius: 50px;
 }
 
-.valign-middle div:first-child {
-  display: table-cell;
-  vertical-align: middle;
-}
 
 @layer base {
   :root {
