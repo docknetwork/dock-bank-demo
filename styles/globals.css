@@ -60,6 +60,10 @@ a {
   padding: 24px 8px 24px 8px;
 }
 
+.bg-urban {
+  background-color: #35595B !important;
+}
+
 .bg-purple {
   background-color: #635A66 !important;
 }
@@ -67,6 +71,15 @@ a {
 .text-purple {
   color: #483B4F !important;
 }
+
+.text-urban {
+  color: #35595B !important;
+}
+
+.text-green {
+  color: #079455;
+}
+
 
 .partnersHeader {
   background-color: #483B4F;
@@ -144,6 +157,10 @@ a {
   font-size: 22px;
   color: #00359E;
   font-weight: 500;
+}
+
+.urbanHeader {
+  background-color: #35595B;
 }
 
 .visitBtn {
