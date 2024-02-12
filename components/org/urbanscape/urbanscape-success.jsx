@@ -21,9 +21,9 @@ const UrbanscapeSuccess = () => {
         setQrCodeUrl(response.qr);
     };
 
-    // useEffect(() => {
-    //     if (qrCodeUrl === '') handleGenerateQR();
-    // }, [qrCodeUrl]);
+    useEffect(() => {
+        if (qrCodeUrl === '') handleGenerateQR();
+    }, [qrCodeUrl]);
 
     return (
         <div>
@@ -76,7 +76,7 @@ const UrbanscapeSuccess = () => {
                 </div>
                 <div className='h-fit p-4 bg-neutral-50 rounded-lg space-y-5'>
                     <p className='font-bold text-xl'>Scan QR code with your mobile app to see if you qualify for a waived deposit.</p>
-                    {/* {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null} */}
+                    {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
                 </div>
             </div>
         </div>
