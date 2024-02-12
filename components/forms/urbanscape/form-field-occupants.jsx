@@ -1,5 +1,4 @@
 import React from 'react';
-import { Trash } from 'lucide-react';
 import {
     FormField,
     FormItem,
@@ -10,7 +9,7 @@ import {
 import { Input } from 'components/ui/input';
 import { Button } from 'components/ui/button';
 import { useFieldArray } from 'react-hook-form';
-import { Plus } from 'lucide-react';
+import { Plus, Trash } from 'lucide-react';
 
 const FormFieldOccupants = ({ control }) => {
     const { fields, remove, append } = useFieldArray({

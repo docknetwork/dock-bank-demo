@@ -67,17 +67,17 @@ const UrbanScapePage = () => {
                 <title>Urbanscape - Application for Apartment</title>
             </Head>
             <Header />
-            <div className="p-4 min-h-screen mainContainer">
+            <div className='p-4 min-h-screen mainContainer'>
                 {isSuccess ? (
                     <UrbanscapeSuccess />
                 ) : (
                     <>
-                        <div className="mb-4 mt-2">
-                            <h2 className="font-medium text-3xl">Application for Apartment</h2>
-                            <p className='text-base	font-medium '>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
+                        <div className='mb-4 mt-2'>
+                            <h2 className='font-medium text-3xl'>Application for Apartment</h2>
+                            <p className='font-medium text-base'>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
                         </div>
                         <Form {...form}>
-                            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+                            <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
                                 <div className='grid md:grid-cols-3 gap-4'>
                                     <div className='col-span-2 space-y-4'>
                                         <div className='space-y-2'>
@@ -104,8 +104,8 @@ const UrbanScapePage = () => {
 
                                 <div className='mt-3'>
                                     <Button
-                                        className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
-                                        type="submit">
+                                        className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg'
+                                        type='submit'>
                                         Submit Application
                                     </Button>
                                 </div>
