@@ -16,14 +16,14 @@ const BankQrAuthentication = ({ isAuth = false, proofTemplateId }) => {
 
     return (
         <div className='grid gap-2 p-4 bg-neutral-50 rounded-lg space-y-5 h-fit'>
-            <h2>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
+            <h2 className='font-semibold text-lg'>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
             <Separator />
-            <p className='text-start'>Scan the QR code below with your mobile banking app.</p>
+            <p className='text-start font-semibold text-lg'>Scan the QR code below with your mobile banking app.</p>
 
             {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
             <Separator />
             <div>
-                <h3>Required credentials:</h3>
+                <h3 className='font-semibold text-lg mb-5'>Required credentials:</h3>
                 <BankCredentials isAuth={isAuth} />
             </div>
         </div>

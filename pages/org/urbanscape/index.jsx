@@ -46,7 +46,7 @@ const DEFAULT_FORM_VALUES = {
  */
 const UrbanScapePage = () => {
     const [isSuccess, setIsSuccess] = useState(false);
-    const proofTemplateId = PROOFT_TEMPLATES_IDS;
+    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE;
 
     const form = useForm({
         resolver: zodResolver(AppartmentApplicationSchema),
@@ -73,15 +73,15 @@ const UrbanScapePage = () => {
                 ) : (
                     <>
                         <div className="mb-4 mt-2">
-                            <h2 className="font-semibold text-2xl">Application for Apartment</h2>
-                            <p>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
+                            <h2 className="font-medium text-3xl">Application for Apartment</h2>
+                            <p className='text-base	font-medium '>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
                         </div>
                         <Form {...form}>
                             <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-                                <div className='grid md:grid-cols-3 gap-2'>
+                                <div className='grid md:grid-cols-3 gap-4'>
                                     <div className='col-span-2 space-y-4'>
                                         <div className='space-y-2'>
-                                            <h2 className='font-semibold'>APPLICANT INFORMATION</h2>
+                                            <h2 className='text-urban font-bold'>APPLICANT INFORMATION</h2>
                                             <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
                                                 <FormFieldApplicantId control={form.control} />
                                                 <Separator />

@@ -10,6 +10,7 @@ import {
 import { Input } from 'components/ui/input';
 import { Button } from 'components/ui/button';
 import { useFieldArray } from 'react-hook-form';
+import { Plus } from 'lucide-react';
 
 const FormFieldOccupants = ({ control }) => {
     const { fields, remove, append } = useFieldArray({
@@ -101,9 +102,9 @@ const FormFieldOccupants = ({ control }) => {
                 className="w-full md:w-fit"
                 type="button"
                 onClick={() => append({ firstName: '', middleName: '', lastName: '' })}
-                variant="ghost"
+                variant="outline"
             >
-                Add Occupant
+                Add Occupant <Plus className='text-sm text-slate-400 ml-2' />
             </Button>
         </div>
     );

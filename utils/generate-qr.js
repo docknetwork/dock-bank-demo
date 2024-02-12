@@ -16,6 +16,6 @@ export const generateQR = async (
         if (response.status === 202) return response.data;
     } catch (err) {
         toast.error('Error generating proof request QR code:');
-        throw new Error('generateQR:Error in QR Code generation:', err);
+        // throw new Error('generateQR:Error in QR Code generation:', err);
     }
 };
