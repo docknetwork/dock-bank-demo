@@ -55,7 +55,7 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
                                 </div>
                             ) : (
                                 <div className='text-center h-full'>
-                                    <div className='w-full pt-5 pb-5'>
+                                    <div className='w-full pt-12 pb-5'>
                                         <div>
                                             <Image className='m-auto' src="/upload_file.png" alt='upload_file' width={149} height={186} />
                                         </div>

@@ -19,7 +19,6 @@ import { useState } from 'react';
 const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
     const [isPicTaken, setIsPicTaken] = useState(false);
 
-    //
     const handleOnComplete = () => {
         setIsPicTaken(!isPicTaken);
         setTimeout(() => setIsCaptureCompleted(!isCaptureCompleted), 1000);
@@ -42,12 +41,18 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
                 ) : (
                     <>
                         <DialogHeader>
-                            <DialogDescription className="text-center font-semibold">
-                                Position your head so that your whole face is visible in the oval. Move head left and right, up and down.
-                            </DialogDescription>
+
                         </DialogHeader>
-                        <div className='p-4 grid justify-items-center'>
-                            <Image src="/webcam_oval.png" alt='webcam_oval' width={200} height={200} />
+                        <div className='p-4 pt-5 grid justify-items-center relative'>
+                            <Image src="/webcam_oval.png" alt='webcam_oval' width={293} height={293} />
+                            <div className='absolute top-8'>
+                                <Image src="/example_webcam.png" alt='webcam_oval' width={225} height={260} />
+                            </div>
+                        </div>
+                        <div className='ta-c mt-5'>
+                            <p>
+                                Position your head so that your whole face is visible in the oval. Move head left and right, up and down.
+                            </p>
                         </div>
                         <Button variant="outline" onClick={handleOnComplete}>Start Capture</Button>
                     </>
