@@ -16,11 +16,15 @@ import { toast } from "sonner"
  */
 const LoanQrAuthentication = ({ proofTemplateId }) => {
 
-    const { qrCodeUrl, proofID } = useQrCode({ proofTemplateId });
-    const { verified } = useVerifyProof(qrCodeUrl, proofID);
+    const { qrCodeUrl, proofID, refetch, isLoading } = useQrCode({ proofTemplateId });
+    const { verified, verificationError } = useVerifyProof(qrCodeUrl, proofID);
 
     useEffect(() => {
         if (verified === true) { toast.success('Verification Success!') }
+        if (verificationError) {
+            console.log('refetching...');
+            refetch()
+        }
     }, [verified])
 
     return (
@@ -29,7 +33,18 @@ const LoanQrAuthentication = ({ proofTemplateId }) => {
             <Separator />
             <p className='text-start font-semibold'>Scan the QR code below with your terive mobile banking app.</p>
 
-            {qrCodeUrl !== '' && !verified ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
+            {isLoading ? (
+                <div className='valign-middle' style={{ height: '195px', width: '100%' }}>
+                    <div className='ta-c'>
+                        <h1 className='text-xl font-bold'>Loading Qr code..</h1>
+                    </div>
+                </div>
+            ) : (
+                qrCodeUrl !== '' && !verified ? (
+                    <QRCodeGenerator url={qrCodeUrl} />
+                ) : null
+            )}
+
 
             <Separator />
             <div>

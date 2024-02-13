@@ -7,6 +7,7 @@ export const useVerifyProof = (
     proofID
 ) => {
     const [verified, setVerified] = useState(false);
+    const [verificationError, setVerificationError] = useState(false);
 
     useEffect(() => {
         if (!qrCodeUrl || !proofID) return;
@@ -23,7 +24,8 @@ export const useVerifyProof = (
                 }
             } catch (err) {
                 console.error("Error checking proof request status:", err);
-                toast.error(`Error checking proof request status: ${err instanceof Error ? err.message : "Unknown error occurred"}`);
+                setVerificationError(true)
+                toast.error("Verification error. Please try again.");
                 clearInterval(intervalId);
             }
         }, 5000);
@@ -35,6 +37,7 @@ export const useVerifyProof = (
     }, [proofID, qrCodeUrl]);
 
     return {
-        verified
+        verified,
+        verificationError
     };
 };
