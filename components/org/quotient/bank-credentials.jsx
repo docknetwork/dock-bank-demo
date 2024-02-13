@@ -22,7 +22,7 @@ const credentials = {
  * @memberof LoanQrAuthentication, QuotientAccountOpened
  * @returns React.FC 
  */
-const BankCredentials = ({ isAuth = false }) => (
+const BankCredentials = ({ verified = false }) => (
     <div className='grid gap-4 place-items-center'>
         {Object.entries(credentials).map(([key, value], index) => (
             <div key={index} className='flex items-center justify-between p-4 border rounded-2xl shadow-lg bg-white w-full'>
@@ -30,7 +30,7 @@ const BankCredentials = ({ isAuth = false }) => (
                     <h2 className='font-bold'>{value.title}</h2>
                     <p className='text-sm font-medium'>{value.description}</p>
                 </div>
-                {isAuth && <Check className="text-green-600 h-6 w-6" />}
+                {verified && <Check className="text-green-600 h-6 w-6" />}
             </div>
         ))}
     </div>

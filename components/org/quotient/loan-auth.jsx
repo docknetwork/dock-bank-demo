@@ -4,6 +4,7 @@ import useQrCode from 'utils/useQrCode';
 import { QRCodeGenerator } from 'components/qr-generator';
 import { useVerifyProof } from 'utils/useVerifyProof';
 import BankCredentials from './bank-credentials';
+import { toast } from "sonner"
 
 /**
  * @description Quotient apply to loan QR code authenticator.
@@ -13,12 +14,13 @@ import BankCredentials from './bank-credentials';
  * @memberof QuotientBankForm 
  * @returns React.FC 
  */
-const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) => {
+const LoanQrAuthentication = ({ proofTemplateId }) => {
+
     const { qrCodeUrl, proofID } = useQrCode({ proofTemplateId });
     const { verified } = useVerifyProof(qrCodeUrl, proofID);
 
     useEffect(() => {
-        console.log('is verified: ', verified);
+        if (verified === true) { toast.success('Verification Success!') }
     }, [verified])
 
     return (
@@ -27,13 +29,14 @@ const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) 
             <Separator />
             <p className='text-start font-semibold'>Scan the QR code below with your terive mobile banking app.</p>
 
-            {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
+            {qrCodeUrl !== '' && !verified ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
+
             <Separator />
             <div>
                 <div className='mb-5'>
                     <h3 className='font-bold'>Required credentials:</h3>
                 </div>
-                <BankCredentials checked={isAuth} />
+                <BankCredentials verified={verified} />
             </div>
         </div>
     );

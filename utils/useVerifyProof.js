@@ -16,8 +16,8 @@ export const useVerifyProof = (
                 const statusResponse = await proofRequest(proofID);
                 console.log("statusResponse:", statusResponse.data)
 
-                if (statusResponse.verified) {
-                    setVerified(statusResponse.verified);
+                if (statusResponse.data.verified) {
+                    setVerified(statusResponse.data.verified);
                     clearInterval(intervalId);
                     toast.success("Proof request verified successfully!");
                 }
