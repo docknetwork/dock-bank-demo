@@ -73,7 +73,7 @@ const UrbanScapePage = () => {
                 ) : (
                     <>
                         <div className='mb-4 mt-2'>
-                            <h2 className='font-medium text-3xl'>Application for Apartment</h2>
+                            <h2 className='font-medium text-3xl text-slate-700'>Application for Apartment</h2>
                             <p className='font-medium text-base'>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
                         </div>
                         <Form {...form}>
