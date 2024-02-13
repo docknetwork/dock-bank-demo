@@ -35,7 +35,7 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
                                 <Image src="/example_webcam.png" alt='example_webcam' width={240} height={240} />
                             </div>
                         ) : (
-                            <div className='grid justify-items-center gap-4 '>
+                            <div className='grid justify-items-center gap-4'>
                                 <Image src="/background_replace.png" alt='background_replace' width={224} height={224} />
                                 <WebCamModal
                                     isCaptureCompleted={isCaptureCompleted}
