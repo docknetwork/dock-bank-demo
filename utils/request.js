@@ -13,3 +13,14 @@ export async function postRequest(url, body) {
         throw new Error('postRequest', { postRequest });
     }
 }
+
+export async function proofRequest(proofID) {
+    try {
+        return await axios.get(
+            `${SERVER_URL}/api/handle-proof?proofID=${proofID}`,
+        );
+    } catch (error) {
+        console.error(error);
+        throw new Error('getRequest', { postRequest });
+    }
+}

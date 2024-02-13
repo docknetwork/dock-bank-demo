@@ -12,9 +12,8 @@ export default async (req, res) => {
   const result = await fetch(body.url, {
     method: 'POST',
     headers: {
-      accept: 'application/json',
+      'DOCK-API-TOKEN': `${process.env.NEXT_PUBLIC_DOCK_API_TOKEN}`,
       'content-type': 'application/json',
-      'DOCK-API-KEY': process.env.DOCK_API_TOKEN,
     },
     body: JSON.stringify(body),
   });

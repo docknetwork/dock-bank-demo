@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Separator } from 'components/ui/separator';
 import useQrCode from 'utils/useQrCode';
 import { QRCodeGenerator } from 'components/qr-generator';
+import { useVerifyProof } from 'utils/useVerifyProof';
 import BankCredentials from './bank-credentials';
 
 /**
@@ -13,7 +14,12 @@ import BankCredentials from './bank-credentials';
  * @returns React.FC 
  */
 const LoanQrAuthentication = ({ isAuth = false, setUserInfo, proofTemplateId }) => {
-    const { qrCodeUrl } = useQrCode({ proofTemplateId });
+    const { qrCodeUrl, proofID } = useQrCode({ proofTemplateId });
+    const { verified } = useVerifyProof(qrCodeUrl, proofID);
+
+    useEffect(() => {
+        console.log('is verified: ', verified);
+    }, [verified])
 
     return (
         <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>

@@ -51,7 +51,7 @@ export default function Helper() {
       >
         Helper
         <div
-          className={`absolute inline-flex items-center justify-center w-3| bg-${formDID && formRecipientEmail ? 'green' : 'red'
+          className={`absolute inline-flex items-center justify-center w-3 bg-${formDID && formRecipientEmail ? 'green' : 'red'
             }-500 rounded-full -top-1 -left-1`}
         />
       </Button>

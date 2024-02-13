@@ -4,7 +4,7 @@ import { informations } from 'utils';
 
 const axiosHeaders = {
   headers: {
-    'DOCK-API-TOKEN': process.env.DOCK_API_TOKEN,
+    'DOCK-API-TOKEN': `${process.env.NEXT_PUBLIC_DOCK_API_TOKEN}`,
   },
 };
 
