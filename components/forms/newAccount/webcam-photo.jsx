@@ -35,8 +35,13 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
                                 <Image src="/example_webcam.png" alt='webcam_oval' width={225} height={260} />
                             </div>
                         ) : (
+<<<<<<< HEAD
                             <div className='grid justify-items-center gap-4 pt-2 xl:pt-16'>
                                 <Image src="/background_replace.png" alt='background_replace' width={168} height={168} />
+=======
+                            <div className='grid justify-items-center gap-4'>
+                                <Image src="/background_replace.png" alt='background_replace' width={224} height={224} />
+>>>>>>> Fixing PR commets
                                 <WebCamModal
                                     isCaptureCompleted={isCaptureCompleted}
                                     setIsCaptureCompleted={setIsCaptureCompleted}
