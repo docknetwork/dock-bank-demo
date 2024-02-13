@@ -43,9 +43,9 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC Form Field
  */
 const QuotientApplyLoanForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+
   const [isSuccess, setIsSuccess] = useState(false);
-  const [userInfo, setUserInfo] = useState(undefined);
+
   const form = useForm({
     resolver: zodResolver(LoanSchema),
     mode: 'onSubmit',
