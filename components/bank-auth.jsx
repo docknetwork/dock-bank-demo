@@ -2,7 +2,7 @@ import React from 'react';
 import { Separator } from 'components/ui/separator';
 import { QRCodeGenerator } from 'components/qr-generator';
 import useQrCode from 'hooks/useQrCode';
-import BankCredentials from './org/quotient/bank-credentials';
+import CredentialCards from './org/quotient/bank-credentials';
 /**
  * @description Bank QR code authenticator.
  * @todo setUserInfo param
@@ -23,7 +23,7 @@ const BankQrAuthentication = ({ proofTemplateId }) => {
             <Separator />
             <div>
                 <h3 className='font-semibold text-lg mb-5'>Required credentials:</h3>
-                <BankCredentials />
+                <CredentialCards />
             </div>
         </div>
     );

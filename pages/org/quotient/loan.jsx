@@ -15,6 +15,7 @@ import FormFieldPersonalContact from 'components/forms/form-field-personal-conta
 import QrCodeAuthentication from 'components/qr-auth';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import qrCodeVerificationData from 'data/qrcode-text-data';
 
 const DEFAULT_FORM_VALUES = {
   sellerName: 'Charleswood Toyota Partners',
@@ -53,7 +54,7 @@ const QuotientApplyLoanForm = () => {
     defaultValues: DEFAULT_FORM_VALUES,
   });
 
-  const proofTemplateId = PROOFT_TEMPLATES_IDS.EQUINET;
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.LOAN_PROOF;
 
   async function onSubmit(values) {
     toast.info('Form Submitted');
@@ -75,7 +76,7 @@ const QuotientApplyLoanForm = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} >
               <div className='flex gap-2'>
-                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 w-60'>
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60'>
                   <FormFieldCarDetails control={form.control} />
                   <Separator />
                   <FormFieldNameAndBirthday control={form.control} />
@@ -84,11 +85,14 @@ const QuotientApplyLoanForm = () => {
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>
-                <QrCodeAuthentication 
-                
-                proofTemplateId={proofTemplateId} 
-                
-                />
+                <div className='flex-2 w-30'>
+                  <QrCodeAuthentication
+                    proofTemplateId={proofTemplateId}
+                    title={qrCodeVerificationData.LOAN.title}
+                    qrText={qrCodeVerificationData.LOAN.qrText}
+                    qrTextAfter={qrCodeVerificationData.LOAN.qrTextAfter}
+                  />
+                </div>
               </div>
               <div className='mt-4'>
                 <Button

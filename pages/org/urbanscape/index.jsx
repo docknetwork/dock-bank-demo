@@ -46,7 +46,7 @@ const DEFAULT_FORM_VALUES = {
  */
 const UrbanScapePage = () => {
     const [isSuccess, setIsSuccess] = useState(false);
-    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE;
+    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_BANKBIO;
 
     const form = useForm({
         resolver: zodResolver(AppartmentApplicationSchema),
