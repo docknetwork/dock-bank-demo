@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { generateQR } from 'utils/generate-qr';
 import { CheckCircle2 } from 'lucide-react';
 import { Button } from 'components/ui/button';
-import { QRCodeGenerator } from 'components/qr-generator';
 import { Separator } from '../../ui/separator';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import QrCodeAuthentication from 'components/qr-auth';
+import qrCodeVerificationData from 'data/qrcode-text-data';
+import useQrCode from 'hooks/useQrCode';
+
 /**
  * @description Urbanscape Success for approved application for appartment.
  * @memberof UrbanScapePage
  * @returns React.FC 
  */
 const UrbanscapeSuccess = () => {
-    const [qrCodeUrl, setQrCodeUrl] = useState('');
-    const proofTemplateID = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
 
-    const handleGenerateQR = async () => {
-        const response = await generateQR(proofTemplateID);
-        console.log('handleGenerateQR', { response });
-        setQrCodeUrl(response.qr);
-    };
+    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE
+    const { refetch } = useQrCode({ proofTemplateId });
 
     useEffect(() => {
-        if (qrCodeUrl === '') handleGenerateQR();
-    }, [qrCodeUrl]);
+        refetch()
+    }, [proofTemplateId]) 
 
     return (
         <div>
@@ -74,10 +71,12 @@ const UrbanscapeSuccess = () => {
                         </div>
                     </div>
                 </div>
-                <div className='h-fit p-4 bg-neutral-50 rounded-lg space-y-5'>
-                    <p className='font-bold text-xl'>Scan QR code with your mobile app to see if you qualify for a waived deposit.</p>
-                    {qrCodeUrl !== '' ? (<QRCodeGenerator url={qrCodeUrl} />) : null}
-                </div>
+                <QrCodeAuthentication
+                    proofTemplateId={proofTemplateId}
+                    title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
+                    qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}
+                    qrTextAfter={qrCodeVerificationData.URBAN_CREDITSCORE.qrTextAfter}
+                />
             </div>
         </div>
     );
