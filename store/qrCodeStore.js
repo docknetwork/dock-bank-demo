@@ -1,10 +1,14 @@
 import { create } from 'zustand';
 
 const qrCodeStore = create((set) => ({
+    proofTemplateId: '',
     qrCodeUrl: '',
     proofID: '',
     isLoading: true,
     verified: false,
+    setProofTemplateId: (proofTemplateId) => {
+        set(() => ({ proofTemplateId: proofTemplateId }))
+    },
     setQrCodeUrl: (qrCodeUrl) => {
         set(() => ({ qrCodeUrl: qrCodeUrl }))
     },
