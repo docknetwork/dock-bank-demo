@@ -13,7 +13,8 @@ import FormFieldApplicantId from 'components/forms/urbanscape/form-field-applica
 import FormFieldAddress from 'components/forms/form-field-address';
 import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
 import FormFieldOccupants from 'components/forms/urbanscape/form-field-occupants';
-import BankQrAuthentication from 'components/bank-auth';
+import QrCodeAuthentication from 'components/qr-auth';
+import qrCodeVerificationData from 'data/qrcode-text-data';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
@@ -99,7 +100,12 @@ const UrbanScapePage = () => {
                                         </div>
 
                                     </div>
-                                    <BankQrAuthentication proofTemplateId={proofTemplateId} />
+                                    <QrCodeAuthentication
+                                        proofTemplateId={proofTemplateId}
+                                        title={qrCodeVerificationData.URBAN_BANKBIO.title}
+                                        qrText={qrCodeVerificationData.URBAN_BANKBIO.qrText}
+                                        qrTextAfter={qrCodeVerificationData.URBAN_BANKBIO.qrTextAfter}
+                                    />
                                 </div>
 
                                 <div className='mt-3'>
