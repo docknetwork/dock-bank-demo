@@ -27,11 +27,8 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="mt-10 mb-10">
-          <Separator />
-        </div>
-        <DemoFlow />
-        <div className="mt-5 m-auto">
+        <LandingDemo />
+        <div className="mt-5">
           <Link href="/org/quotient">
             <button className="launchBtn">Launch Demo</button>
           </Link>
