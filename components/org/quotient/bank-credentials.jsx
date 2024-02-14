@@ -17,12 +17,6 @@ const credentials = {
     },
 };
 
-/**
- * @description Quotient Credentials comp
- * @param checked show Checked icon on credentials
- * @memberof LoanQrAuthentication, QuotientAccountOpened
- * @returns React.FC 
- */
 const BankCredentials = () => {
 
     const verified = qrCodeStore((state) => state.verified)

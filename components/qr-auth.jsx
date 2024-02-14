@@ -1,6 +1,6 @@
 import React from 'react';
 import { Separator } from 'components/ui/separator';
-import BankCredentials from './bank-credentials';
+import BankCredentials from './org/quotient/bank-credentials';
 import VerifyQrCode from 'components/verify-qr-code';
 
 /**
@@ -11,17 +11,29 @@ import VerifyQrCode from 'components/verify-qr-code';
  * @memberof QuotientBankForm 
  * @returns React.FC 
  */
-const LoanQrAuthentication = ({ proofTemplateId }) => {
+const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {
 
     return (
         <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>
-            <h2 className='font-semibold'>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
-            <Separator />
-            <p className='text-start font-semibold'>Scan the QR code below with your terive mobile banking app.</p>
+            {title !== '' && <div>
+                <h2 className='font-semibold'>{title}</h2>
+                <Separator />
+            </div>
+            }
+
+            {qrText !== '' && <div>
+                <p className='text-start font-semibold'>{qrText}</p>
+            </div>
+            }
 
             <VerifyQrCode
                 proofTemplateId={proofTemplateId}
             />
+
+            {qrTextAfter !== '' && <div>
+                <p className='text-start font-semibold'>{qrTextAfter}</p>
+            </div>
+            }
             <Separator />
             <div>
                 <div className='mb-5'>
@@ -33,4 +45,4 @@ const LoanQrAuthentication = ({ proofTemplateId }) => {
     );
 };
 
-export default LoanQrAuthentication;
+export default QrCodeAuthentication;

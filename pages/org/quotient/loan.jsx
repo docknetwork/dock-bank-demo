@@ -12,7 +12,7 @@ import FormFieldCarDetails from 'components/forms/newLoan/form-field-car-details
 import FormFieldNameAndBirthday from 'components/forms/form-field-id';
 import FormFieldAddress from 'components/forms/form-field-address';
 import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
-import LoanQrAuthentication from 'components/org/quotient/loan-auth';
+import QrCodeAuthentication from 'components/qr-auth';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
@@ -84,7 +84,11 @@ const QuotientApplyLoanForm = () => {
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>
-                <LoanQrAuthentication proofTemplateId={proofTemplateId} />
+                <QrCodeAuthentication 
+                
+                proofTemplateId={proofTemplateId} 
+                
+                />
               </div>
               <div className='mt-4'>
                 <Button
