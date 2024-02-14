@@ -60,7 +60,6 @@ const QuotientBankForm = () => {
 
   useEffect(() => {
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];
-
     if (isCaptureCompleted && webcamPic === '') {
       form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
     }
