@@ -44,7 +44,6 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC Form Field
  */
 const QuotientApplyLoanForm = () => {
-
   const [isSuccess, setIsSuccess] = useState(false);
 
   const form = useForm({

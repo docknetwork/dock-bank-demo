@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import { Button } from 'components/ui/button';
-import { Separator } from '../../ui/separator';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
+import { Separator } from '../../ui/separator';
 
 /**
  * @description Urbanscape Success for approved application for appartment.
@@ -14,13 +14,12 @@ import useQrCode from 'hooks/useQrCode';
  * @returns React.FC 
  */
 const UrbanscapeSuccess = () => {
-
-    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE
+    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
     const { refetch } = useQrCode({ proofTemplateId });
 
     useEffect(() => {
-        refetch()
-    }, [proofTemplateId])
+        refetch();
+    }, [proofTemplateId, refetch]);
 
     return (
         <div>

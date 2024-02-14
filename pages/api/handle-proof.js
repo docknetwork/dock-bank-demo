@@ -1,4 +1,4 @@
-import { dockUrl } from "utils/constants";
+import { dockUrl } from 'utils/constants';
 
 export default async (req, res) => {
     if (req.method !== 'GET') {
@@ -7,7 +7,7 @@ export default async (req, res) => {
         return;
     }
 
-    const PROOF_ID = req.query.proofID
+    const PROOF_ID = req.query.proofID;
 
     const result = await fetch(`${dockUrl}/proof-requests/${PROOF_ID}`, {
         method: 'GET',

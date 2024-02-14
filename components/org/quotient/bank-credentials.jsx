@@ -18,8 +18,7 @@ const credentials = {
 };
 
 const CredentialCards = () => {
-
-    const verified = qrCodeStore((state) => state.verified)
+    const verified = qrCodeStore((state) => state.verified);
 
     return (
         <div className='grid gap-4 place-items-center'>
@@ -29,11 +28,11 @@ const CredentialCards = () => {
                         <h2 className='font-bold'>{value.title}</h2>
                         <p className='text-sm font-medium'>{value.description}</p>
                     </div>
-                    {verified && <Check className="text-green-600 h-6 w-6" />}
+                    {verified && <Check className='text-green-600 h-6 w-6' />}
                 </div>
             ))}
         </div>
-    )
+    );
 };
 
 export default CredentialCards;
