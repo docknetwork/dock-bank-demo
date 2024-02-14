@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import useQrCode from 'utils/useQrCode';
+import useQrCode from 'hooks/useQrCode';
 import { QRCodeGenerator } from 'components/qr-generator';
 import { Separator } from '../../ui/separator';
 import BankCredentials from './bank-credentials';

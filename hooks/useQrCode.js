@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
-import { generateQR } from "./generate-qr";
+import { useEffect } from "react";
+import { generateQR } from "../utils/generate-qr";
 import { toast } from "sonner";
+import qrCodeStore from "store/qrCodeStore";
 
 const useQrCode = ({ proofTemplateId }) => {
-    const [qrCodeUrl, setQrCodeUrl] = useState('');
-    const [proofID, setProofID] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
+
+    const setQrCodeUrl = qrCodeStore((state) => state.setQrCodeUrl)
+    const setProofID = qrCodeStore((state) => state.setProofID)
+    const setIsLoading = qrCodeStore((state) => state.setIsLoading)
+    const setVerified = qrCodeStore((state) => state.setVerified)
 
     const handleGenerateQR = async () => {
         setIsLoading(true)
+        setVerified(false)
         try {
             const response = await generateQR(proofTemplateId);
             console.log("QR Code generated:", response);
@@ -27,18 +31,14 @@ const useQrCode = ({ proofTemplateId }) => {
     };
 
     useEffect(() => {
-        if (proofTemplateId && qrCodeUrl === '') {
+        if (proofTemplateId) {
             setTimeout(() => {
                 handleGenerateQR();
             }, 1000)
-
         }
-    }, [proofTemplateId, qrCodeUrl]);
+    }, [proofTemplateId]);
 
     return {
-        isLoading,
-        qrCodeUrl,
-        proofID,
         refetch: handleGenerateQR
     };
 };
