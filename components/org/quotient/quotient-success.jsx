@@ -26,7 +26,6 @@ const qrInstructions = {
  * @returns React.FC Form Field
  */
 const QuotientSuccess = ({ title, proofTemplateId }) => {
-    const { qrCodeUrl } = useQrCode({ proofTemplateId });
 
     return (<>
         <div className='pt-10 p-5'>
