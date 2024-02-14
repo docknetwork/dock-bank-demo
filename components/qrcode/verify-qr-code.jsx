@@ -5,6 +5,8 @@ import { useVerifyProof } from 'hooks/useVerifyProof';
 import { toast } from "sonner"
 import { Button } from '../ui/button';
 import qrCodeStore from 'store/qrCodeStore';
+import { Loader2 } from 'lucide-react';
+
 
 const VerifyQrCode = ({ proofTemplateId }) => {
 
@@ -27,7 +29,8 @@ const VerifyQrCode = ({ proofTemplateId }) => {
             {isLoading ? (
                 <div className='valign-middle' style={{ height: '195px', width: '100%' }}>
                     <div className='ta-c'>
-                        <h1 className='text-xl font-bold'>Loading Qr code..</h1>
+                        <Loader2 className="h-10 w-10 animate-spin mb-4" />
+                        <h1 className='text-xl font-bold'>Generating Qr code..</h1>
                     </div>
                 </div>
             ) : (

@@ -20,7 +20,7 @@ const UrbanscapeSuccess = () => {
 
     useEffect(() => {
         refetch()
-    }, [proofTemplateId]) 
+    }, [proofTemplateId])
 
     return (
         <div>

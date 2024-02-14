@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Separator } from '../../ui/separator';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
+import useQrCode from 'hooks/useQrCode';
 
 const textFields = {
     thanks: 'Thank you for trusting Quotient with your auto loan needs. We are thankful for you.',
@@ -20,6 +21,13 @@ const textFields = {
  * @returns React.FC Form Field
  */
 const QuotientSuccess = ({ title, proofTemplateId }) => {
+
+    const { refetch } = useQrCode({ proofTemplateId });
+
+    useEffect(() => {
+        refetch()
+    }, [proofTemplateId])
+
 
     return (<>
         <div className='pt-10 p-5'>
