@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Separator } from '../../ui/separator';
-import QrCodeAuthentication from 'components/qr-auth';
+import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 
 const textFields = {

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import useQrCode from 'hooks/useQrCode';
-import { QRCodeGenerator } from 'components/qr-generator';
+import { QRCodeGenerator } from 'components/qrcode/qr-generator';
 import { useVerifyProof } from 'hooks/useVerifyProof';
 import { toast } from "sonner"
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import qrCodeStore from 'store/qrCodeStore';
 
 const VerifyQrCode = ({ proofTemplateId }) => {
