@@ -2,14 +2,12 @@ import { useEffect } from 'react';
 import useQrCode from 'hooks/useQrCode';
 import { QRCodeGenerator } from 'components/qrcode/qr-generator';
 import { useVerifyProof } from 'hooks/useVerifyProof';
-import { toast } from "sonner"
-import { Button } from '../ui/button';
+import { toast } from 'sonner';
 import qrCodeStore from 'store/qrCodeStore';
 import { Loader2 } from 'lucide-react';
-
+import { Button } from '../ui/button';
 
 const VerifyQrCode = ({ proofTemplateId }) => {
-
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl);
     const verified = qrCodeStore((state) => state.verified);
     const isLoading = qrCodeStore((state) => state.isLoading);
@@ -17,12 +15,12 @@ const VerifyQrCode = ({ proofTemplateId }) => {
     const { verificationError } = useVerifyProof();
 
     useEffect(() => {
-        if (verified === true) { toast.success('Verification Success!') }
+        if (verified === true) { toast.success('Verification Success!'); }
         if (verificationError) {
             console.log('refetching...');
-            refetch()
+            refetch();
         }
-    }, [verified])
+    }, [verified, refetch, verificationError]);
 
     return (
         <>
@@ -42,8 +40,7 @@ const VerifyQrCode = ({ proofTemplateId }) => {
                 ) : null
             )}
         </>
-    )
+    );
+};
 
-}
-
-export default VerifyQrCode
+export default VerifyQrCode;

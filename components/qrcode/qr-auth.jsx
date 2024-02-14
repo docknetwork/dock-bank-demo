@@ -1,11 +1,10 @@
 import React from 'react';
 import { Separator } from 'components/ui/separator';
-import CredentialCards from '../org/quotient/bank-credentials';
 import VerifyQrCode from 'components/qrcode/verify-qr-code';
 import qrCodeStore from 'store/qrCodeStore';
+import CredentialCards from '../org/quotient/bank-credentials';
 
 const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {
-
     const verified = qrCodeStore((state) => state.verified);
 
     return (
