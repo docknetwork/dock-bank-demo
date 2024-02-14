@@ -4,7 +4,7 @@ import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
 import userStore from 'store/appStore';
 import { Button } from './ui/button';
-import QrReader from './qr-reader';
+import QrReader from './qrcode/qr-reader';
 
 export default function Helper() {
   const [holderDID, setHolderDID] = useLocalStorage('holderDID', '');

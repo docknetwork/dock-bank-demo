@@ -1,7 +1,7 @@
 import React from 'react';
 import { Separator } from 'components/ui/separator';
-import CredentialCards from './org/quotient/bank-credentials';
-import VerifyQrCode from 'components/verify-qr-code';
+import CredentialCards from '../org/quotient/bank-credentials';
+import VerifyQrCode from 'components/qrcode/verify-qr-code';
 import qrCodeStore from 'store/qrCodeStore';
 
 const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {

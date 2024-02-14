@@ -4,7 +4,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { Separator } from '../../ui/separator';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
-import QrCodeAuthentication from 'components/qr-auth';
+import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
 

@@ -13,7 +13,7 @@ import FormFieldApplicantId from 'components/forms/urbanscape/form-field-applica
 import FormFieldAddress from 'components/forms/form-field-address';
 import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
 import FormFieldOccupants from 'components/forms/urbanscape/form-field-occupants';
-import QrCodeAuthentication from 'components/qr-auth';
+import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
