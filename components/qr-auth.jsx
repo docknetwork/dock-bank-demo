@@ -1,45 +1,44 @@
 import React from 'react';
 import { Separator } from 'components/ui/separator';
-import BankCredentials from './org/quotient/bank-credentials';
+import CredentialCards from './org/quotient/bank-credentials';
 import VerifyQrCode from 'components/verify-qr-code';
+import qrCodeStore from 'store/qrCodeStore';
 
-/**
- * @description Quotient apply to loan QR code authenticator.
- * @todo setUserInfo param
- * @param {*} setUserInfo setter once qr code triggered from mobile app and returns user info
- * @param {*} isAuth shows BankCredentials
- * @memberof QuotientBankForm 
- * @returns React.FC 
- */
 const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {
 
+    const verified = qrCodeStore((state) => state.verified);
+
     return (
-        <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>
-            {title !== '' && <div>
-                <h2 className='font-semibold'>{title}</h2>
+        <div className='bg-neutral-50 rounded-lg space-y-5 h-fit p-5'>
+            {(title !== null && title !== '') && <div>
+                <h2 className='font-semibold mb-5'>{title}</h2>
                 <Separator />
             </div>
             }
+            {!verified && (
+                <>
+                    {(qrText !== null && qrText !== '') && (
+                        <div>
+                            <p className='text-start font-semibold'>{qrText}</p>
+                        </div>
+                    )}
 
-            {qrText !== '' && <div>
-                <p className='text-start font-semibold'>{qrText}</p>
-            </div>
-            }
+                    <VerifyQrCode proofTemplateId={proofTemplateId} />
 
-            <VerifyQrCode
-                proofTemplateId={proofTemplateId}
-            />
+                    {(qrTextAfter !== null && qrTextAfter !== '') && (
+                        <div>
+                            <p className='text-start font-semibold mb-5'>{qrTextAfter}</p>
+                            <Separator />
+                        </div>
+                    )}
+                </>
+            )}
 
-            {qrTextAfter !== '' && <div>
-                <p className='text-start font-semibold'>{qrTextAfter}</p>
-            </div>
-            }
-            <Separator />
             <div>
                 <div className='mb-5'>
                     <h3 className='font-bold'>Required credentials:</h3>
                 </div>
-                <BankCredentials />
+                <CredentialCards />
             </div>
         </div>
     );

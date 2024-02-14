@@ -49,7 +49,8 @@ const QuotientBankForm = () => {
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
   const receiverDid = userStore((state) => state.Did);
   const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
-  const proofTemplateId = PROOFT_TEMPLATES_IDS.QUOTIENT;
+
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.FORSUR_BIOMETRICS;
 
   const form = useForm({
     resolver: zodResolver(UserSchema),
@@ -118,12 +119,14 @@ const QuotientBankForm = () => {
                   <Separator />
                   <FormFieldPersonalContact control={form.control} isUsaCitizen={true} />
                 </div>
-                <FormFieldGovId
-                  control={form.control}
-                  isCaptureCompleted={isCaptureCompleted}
-                  setIsCaptureCompleted={setIsCaptureCompleted}
-                  setIsUploadPoDComplete={setIsUploadPoDComplete}
-                />
+                <div className='flex-2 w-30'>
+                  <FormFieldGovId
+                    control={form.control}
+                    isCaptureCompleted={isCaptureCompleted}
+                    setIsCaptureCompleted={setIsCaptureCompleted}
+                    setIsUploadPoDComplete={setIsUploadPoDComplete}
+                  />
+                </div>
               </div>
               <div className='mt-3'>
                 <Button

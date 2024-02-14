@@ -17,7 +17,7 @@ const credentials = {
     },
 };
 
-const BankCredentials = () => {
+const CredentialCards = () => {
 
     const verified = qrCodeStore((state) => state.verified)
 
@@ -36,4 +36,4 @@ const BankCredentials = () => {
     )
 };
 
-export default BankCredentials;
+export default CredentialCards;

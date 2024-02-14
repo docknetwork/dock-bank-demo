@@ -5,7 +5,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { QRCodeGenerator } from 'components/qr-generator';
 import { Separator } from '../../ui/separator';
-
+import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 /**
  * @description Urbanscape Success for approved application for appartment.
  * @memberof UrbanScapePage
@@ -13,7 +13,7 @@ import { Separator } from '../../ui/separator';
  */
 const UrbanscapeSuccess = () => {
     const [qrCodeUrl, setQrCodeUrl] = useState('');
-    const proofTemplateID = 'b156507a-949f-4dff-ab2f-ba98ea840678';
+    const proofTemplateID = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
 
     const handleGenerateQR = async () => {
         const response = await generateQR(proofTemplateID);
