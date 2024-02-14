@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Separator } from 'components/ui/separator';
-import useQrCode from 'utils/useQrCode';
-import { QRCodeGenerator } from 'components/qr-generator';
-import { useVerifyProof } from 'utils/useVerifyProof';
 import BankCredentials from './bank-credentials';
-import { toast } from "sonner"
+import VerifyQrCode from 'components/verify-qr-code';
 
 /**
  * @description Quotient apply to loan QR code authenticator.
@@ -16,42 +13,21 @@ import { toast } from "sonner"
  */
 const LoanQrAuthentication = ({ proofTemplateId }) => {
 
-    const { qrCodeUrl, proofID, refetch, isLoading } = useQrCode({ proofTemplateId });
-    const { verified, verificationError } = useVerifyProof(qrCodeUrl, proofID);
-
-    useEffect(() => {
-        if (verified === true) { toast.success('Verification Success!') }
-        if (verificationError) {
-            console.log('refetching...');
-            refetch()
-        }
-    }, [verified])
-
     return (
         <div className='grid gap-2 p-5 bg-neutral-50 rounded-lg space-y-5 h-fit w-30'>
             <h2 className='font-semibold'>Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.</h2>
             <Separator />
             <p className='text-start font-semibold'>Scan the QR code below with your terive mobile banking app.</p>
 
-            {isLoading ? (
-                <div className='valign-middle' style={{ height: '195px', width: '100%' }}>
-                    <div className='ta-c'>
-                        <h1 className='text-xl font-bold'>Loading Qr code..</h1>
-                    </div>
-                </div>
-            ) : (
-                qrCodeUrl !== '' && !verified ? (
-                    <QRCodeGenerator url={qrCodeUrl} />
-                ) : null
-            )}
-
-
+            <VerifyQrCode
+                proofTemplateId={proofTemplateId}
+            />
             <Separator />
             <div>
                 <div className='mb-5'>
                     <h3 className='font-bold'>Required credentials:</h3>
                 </div>
-                <BankCredentials verified={verified} />
+                <BankCredentials />
             </div>
         </div>
     );
