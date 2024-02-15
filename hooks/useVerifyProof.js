@@ -9,7 +9,7 @@ export const useVerifyProof = (
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl)
     const proofID = qrCodeStore((state) => state.proofID)
     const setVerified = qrCodeStore((state) => state.setVerified)
-    const [verificationError, setVerificationError] = useState(false);
+    const setVerificationError = qrCodeStore((state) => state.setVerificationError)
 
     useEffect(() => {
         if (!qrCodeUrl || !proofID) return;
@@ -38,7 +38,4 @@ export const useVerifyProof = (
         };
     }, [proofID, qrCodeUrl]);
 
-    return {
-        verificationError
-    };
 };

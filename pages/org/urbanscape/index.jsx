@@ -20,7 +20,7 @@ import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 const DEFAULT_FORM_VALUES = {
     applicantFirstName: 'Euan',
     applicantLastName: 'Miller',
-    dob: '11/22/1987', // Date Of Birthday
+    dob: new Date('1985-02-15'),
     ssn: '248987821', // social security number,
     driversLicense: 'a0123456', // social security number,
     issueState: 'CA',

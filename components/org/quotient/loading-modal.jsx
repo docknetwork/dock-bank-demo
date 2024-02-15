@@ -15,9 +15,8 @@ const LoadingModal = ({ isLoading }) => (
     <Dialog open={isLoading}>
         <DialogContent>
             <div className='grid justify-items-center gap-2 p-5'>
-                <Image src="/docklogo.png" alt='id_clarity' width={168} height={64} />
-                <h2 className='text-center text-lg'>Issuing Credentials to your Dock Mobile Wallet App</h2>
                 <Loader2 className="h-24 w-24 animate-spin text-blue-400" />
+                <h2 className='text-center text-lg'>Creating Bank account...</h2>
             </div>
         </DialogContent>
     </Dialog>

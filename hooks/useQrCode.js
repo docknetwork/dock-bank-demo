@@ -11,13 +11,14 @@ const useQrCode = ({ proofTemplateId }) => {
     const setProofID = qrCodeStore((state) => state.setProofID)
     const setIsLoading = qrCodeStore((state) => state.setIsLoading)
     const setVerified = qrCodeStore((state) => state.setVerified)
+    const setVerificationError = qrCodeStore((state) => state.setVerificationError)
 
     const handleGenerateQR = async () => {
         setIsLoading(true)
         setVerified(false)
+        setVerificationError(false)
         try {
             const response = await generateQR(proofTemplateId);
-            console.log("QR Code generated:", response);
             if (!response.qr && !response.id) {
                 toast.warning('Error generating qr code, try again or contact support.')
                 setIsLoading(true)

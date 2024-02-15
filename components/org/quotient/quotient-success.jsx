@@ -28,7 +28,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
     }, [proofTemplateId, refetch]);
 
     return (
-        <>
+        <div className='mainContainer'>
             <div className='pt-10 p-5'>
                 <h2 className='text-3xl font-semibold mb-5'>{title}</h2>
                 <div className='flex gap-4'>
@@ -57,7 +57,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
                     </div>
                 </div>
             </div>
-        </>);
+        </div>);
 };
 
 export default QuotientSuccess;
