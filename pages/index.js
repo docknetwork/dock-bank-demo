@@ -27,11 +27,9 @@ export default function Home() {
           ))}
         </div>
         <DemoFlow />
-        <div className='mt-5'>
+        <div className="mt-5">
           <Link href="/org/quotient">
-            <button className="launchBtn">
-              Launch Demo
-            </button>
+            <button className="launchBtn">Launch Demo</button>
           </Link>
         </div>
       </div>
