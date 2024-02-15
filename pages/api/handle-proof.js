@@ -12,7 +12,7 @@ export default async (req, res) => {
   const result = await fetch(`${dockUrl}/proof-requests/${PROOF_ID}`, {
     method: 'GET',
     headers: {
-      'DOCK-API-TOKEN': `${process.env.NEXT_PUBLIC_DOCK_API_TOKEN}`,
+      'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
       'content-type': 'application/json',
     },
   });

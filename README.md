@@ -8,7 +8,7 @@ First, setup a .env file in the project's root folder
 
 ```bash
 DOCK_API_URL=https://api-testnet.dock.io
-NEXT_PUBLIC_DOCK_API_TOKEN=  # you can generate a key at https://certs.dock.io/keys
+DOCK_API_TOKEN=  # you can generate a key at https://certs.dock.io/keys
 DOCK_API_DID= # the DID to use for the issuer. You can generate one here: https://certs.dock.io/dids
 NEXT_PUBLIC_SERVER_URL= # the URL where this app is listening (e.g. http://192.168.0.100:3000 or http://localhost:3000)
 ```
