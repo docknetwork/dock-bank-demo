@@ -297,5 +297,5 @@ export default async (req, res) => {
     res.json(result.data);
   } catch (e) {
     res.status(400).json({ error: e.message });
-  } 
+  }
 };
