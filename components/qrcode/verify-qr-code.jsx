@@ -11,13 +11,16 @@ const VerifyQrCode = ({ proofTemplateId }) => {
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl);
     const verified = qrCodeStore((state) => state.verified);
     const isLoading = qrCodeStore((state) => state.isLoading);
+    const verificationError = qrCodeStore((state) => state.verificationError);
+    //Generating Qr code
     const { refetch } = useQrCode({ proofTemplateId });
-    const { verificationError } = useVerifyProof();
+    //Hook to verify the Qr proof after is generated
+    useVerifyProof();
 
     useEffect(() => {
         if (verified === true) { toast.success('Verification Success!'); }
         if (verificationError) {
-            console.log('refetching...');
+            console.log('refetching new Qr code...');
             refetch();
         }
     }, [verified, refetch, verificationError]);

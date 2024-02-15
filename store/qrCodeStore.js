@@ -6,6 +6,10 @@ const qrCodeStore = create((set) => ({
     proofID: '',
     isLoading: true,
     verified: false,
+    verificationError: false,
+    setVerificationError: (isError) => {
+        set(() => ({ verificationError: isError }))
+    },
     setProofTemplateId: (proofTemplateId) => {
         set(() => ({ proofTemplateId: proofTemplateId }))
     },
