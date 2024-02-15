@@ -3,7 +3,7 @@ import organizations from 'data/organizations';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
-import LandingDemo from 'components/landing-demo';
+import DemoFlow from 'components/demo-flow';
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <LandingDemo />
+        <DemoFlow />
         <div className='mt-5'>
           <Link href="/org/quotient">
             <button className="launchBtn">

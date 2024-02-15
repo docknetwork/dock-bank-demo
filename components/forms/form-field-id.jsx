@@ -118,7 +118,7 @@ export const BirthdayPicker = ({ control, description = false }) => (
                     <div className="md:flex md:space-x-1">
                         <h2 className='font-bold text-sm'>When is your birthday?</h2>
                         <p className='text-sm'>(You must be at least 18 years old to open an account)</p>
-                    </div >
+                    </div>
                 ) : (
                     null
                 )}
