@@ -23,14 +23,14 @@ const DEFAULT_FORM_VALUES = {
   middleName: '',
   lastName: 'Miller',
   suffix: 'He',
-  dob: '11/22/1987', // Date Of Birthday
+  dob: new Date('1985-02-15'), // Date Of Birthday
   streetAddress: '123 Sample Street',
   suite: '',
   zipCode: '01234',
   city: 'Sacramento',
   state: 'California',
-  email: 'euan@dock.io',
-  phoneNumber: '',
+  email: 'euan@example.com',
+  phoneNumber: '1-234-567-8900',
   isUsaCitizen: 'Yes',
   ssn: '547878978', // social security number,
   govId: '',
