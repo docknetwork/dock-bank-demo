@@ -25,12 +25,12 @@ export default function Helper() {
   }, [holderDID, recipientEmail]);
 
   const handleSubmit = () => {
-    if (!formDID || !formRecipientEmail) {
-      toast.warning('Please fill all fields');
+    if (!formDID && !formRecipientEmail) {
+      toast.warning('Please fill email or DID');
       return;
     }
 
-    if (!validateEmail(formRecipientEmail)) {
+    if (formRecipientEmail && !validateEmail(formRecipientEmail)) {
       setEmailError('Invalid email address');
       return;
     }
@@ -38,7 +38,7 @@ export default function Helper() {
     setEmailError('');
     setHolderDID(formDID);
     setRecipientEmail(formRecipientEmail);
-    toast.success('Set DID success');
+    toast.success('User data saved');
     setIsHelperOpen(!isHelperOpen);
   };
 
