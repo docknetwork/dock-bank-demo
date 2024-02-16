@@ -38,7 +38,7 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
     };
 
     return (
-        <div className="p-4 bg-neutral-50 rounded-lg h-50 mb-5">
+        <div className="p-4 bg-neutral-50 rounded-lg h-80 xl:h-3/6 mb-5">
             <FormField
                 control={control}
                 name="govId"
@@ -55,7 +55,7 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
                                 </div>
                             ) : (
                                 <div className='text-center h-full'>
-                                    <div className='w-full pt-16 pb-5'>
+                                    <div className='w-full pt-2 xl:pt-16 pb-5'>
                                         <div>
                                             <Image className='m-auto' src="/upload_file.png" alt='upload_file' width={149} height={186} />
                                         </div>

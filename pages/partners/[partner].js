@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Button } from 'components/ui/button';
 import partners from 'data/partners';
 import PartnerNavbar from '../../components/partners/partner-navbar';
 import PartnerContent from '../../components/partners/partnerContent';

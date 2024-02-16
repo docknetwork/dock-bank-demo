@@ -79,8 +79,8 @@ const UrbanScapePage = () => {
                         </div>
                         <Form {...form}>
                             <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                                <div className='grid md:grid-cols-3 gap-4'>
-                                    <div className='col-span-2 space-y-4'>
+                                <div className='flex gap-4 flex-wrap'>
+                                    <div className='flex-1 w-full xl:w-2/3 md:w-2/3 space-y-4'>
                                         <div className='space-y-2'>
                                             <h2 className='text-urban font-bold'>APPLICANT INFORMATION</h2>
                                             <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
@@ -100,12 +100,14 @@ const UrbanScapePage = () => {
                                         </div>
 
                                     </div>
-                                    <QrCodeAuthentication
-                                        proofTemplateId={proofTemplateId}
-                                        title={qrCodeVerificationData.URBAN_BANKBIO.title}
-                                        qrText={qrCodeVerificationData.URBAN_BANKBIO.qrText}
-                                        qrTextAfter={qrCodeVerificationData.URBAN_BANKBIO.qrTextAfter}
-                                    />
+                                    <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                                        <QrCodeAuthentication
+                                            proofTemplateId={proofTemplateId}
+                                            title={qrCodeVerificationData.URBAN_BANKBIO.title}
+                                            qrText={qrCodeVerificationData.URBAN_BANKBIO.qrText}
+                                            qrTextAfter={qrCodeVerificationData.URBAN_BANKBIO.qrTextAfter}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className='mt-3'>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { useLocalStorage } from 'utils/hooks';
 import { validateEmail } from 'utils/validation';
 import userStore from 'store/appStore';

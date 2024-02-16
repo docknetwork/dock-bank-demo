@@ -27,8 +27,8 @@ const UrbanscapeSuccess = () => {
                 <h2 className='text-4xl text-urban font-semibold'>You have been approved!</h2>
                 <p className='font-semibold text-base'>To reserve your new appartment home, please pay total amount due now.</p>
             </div>
-            <div className='grid md:grid-cols-3 gap-2'>
-                <div className='col-span-2 space-y-4'>
+            <div className='flex gap-4 flex-wrap'>
+                <div className='flex-1 w-full xl:w-2/3 md:w-2/3'>
                     <div className='border rounded-lg'>
                         <div className='border-b p-3 flex items-center justify-between'>
                             <p className='font-bold'>2 bedroom 2 bath with city view</p>
@@ -70,12 +70,14 @@ const UrbanscapeSuccess = () => {
                         </div>
                     </div>
                 </div>
-                <QrCodeAuthentication
-                    proofTemplateId={proofTemplateId}
-                    title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
-                    qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}
-                    qrTextAfter={qrCodeVerificationData.URBAN_CREDITSCORE.qrTextAfter}
-                />
+                <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                    <QrCodeAuthentication
+                        proofTemplateId={proofTemplateId}
+                        title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
+                        qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}
+                        qrTextAfter={qrCodeVerificationData.URBAN_CREDITSCORE.qrTextAfter}
+                    />
+                </div>
             </div>
         </div>
     );

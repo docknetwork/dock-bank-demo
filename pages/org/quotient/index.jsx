@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSchema } from 'lib/zodSchemas';
-import { issueCredentials } from 'utils/credentialsUtils';
+// import { issueCredentials } from 'utils/credentialsUtils';
 import { toast } from 'sonner';
-import userStore from 'store/appStore';
+// import userStore from 'store/appStore';
 import LoadingModal from 'components/org/quotient/loading-modal';
 import Header from 'components/org/quotient/Header';
 import { Form } from 'components/ui/form';
@@ -47,10 +47,8 @@ const QuotientBankForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
-  const receiverDid = userStore((state) => state.Did);
-  const setIsHelperOpen = userStore((state) => state.setIsHelperOpen);
-
   const proofTemplateId = PROOFT_TEMPLATES_IDS.FORSUR_BIOMETRICS;
+  // const receiverDid = userStore((state) => state.Did);
 
   const form = useForm({
     resolver: zodResolver(UserSchema),
@@ -69,15 +67,7 @@ const QuotientBankForm = () => {
   // once form values are valid, do something
   async function onSubmit(values) {
     console.log('values', values);
-    // eslint-disable-next-line no-promise-executor-return
-    if (!receiverDid || receiverDid.length < 3) {
-      toast.info('Please add your Did and email in the helper box');
-      setIsHelperOpen(true);
-      return;
-    }
-
     setIsLoading(true);
-
     toast.success('Bank account created, please proceed to next step.');
 
     setTimeout(() => {
@@ -85,12 +75,6 @@ const QuotientBankForm = () => {
       setIsSuccess(true);
       setIsLoading(false);
     }, 1000);
-    // try {
-    //   // const result = await issueCredentials(receiverDid, setIsLoading, setIsSuccess);      
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.log('issuing error: ', error);
-    // }
   }
 
   return (
@@ -100,7 +84,7 @@ const QuotientBankForm = () => {
       </Head>
       <Header />
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
-      {isSuccess ? (
+      {!isSuccess ? (
         <div className='mainContainer'>
           <QuotientSuccess title='Your account has been opened!' proofTemplateId={proofTemplateId} />
         </div>
@@ -111,15 +95,15 @@ const QuotientBankForm = () => {
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className='flex gap-4'>
-                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60'>
+              <div className='flex gap-4 flex-wrap'>
+                <div className='flex-1 w-full xl:w-2/3 md:w-2/3 p-4 bg-neutral-50 rounded-lg space-y-5'>
                   <FormFieldNameAndBirthday control={form.control} dob={true} />
                   <Separator />
                   <FormFieldAddress control={form.control} />
                   <Separator />
                   <FormFieldPersonalContact control={form.control} isUsaCitizen={true} />
                 </div>
-                <div className='flex-2 w-30'>
+                <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                   <FormFieldGovId
                     control={form.control}
                     isCaptureCompleted={isCaptureCompleted}

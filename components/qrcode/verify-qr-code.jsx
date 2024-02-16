@@ -4,15 +4,14 @@ import { QRCodeGenerator } from 'components/qrcode/qr-generator';
 import { useVerifyProof } from 'hooks/useVerifyProof';
 import { toast } from 'sonner';
 import qrCodeStore from 'store/qrCodeStore';
-import { Loader2 } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Loader2, RefreshCw } from 'lucide-react';
 
 const VerifyQrCode = ({ proofTemplateId }) => {
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl);
     const verified = qrCodeStore((state) => state.verified);
     const isLoading = qrCodeStore((state) => state.isLoading);
-    const verificationError = qrCodeStore((state) => state.verificationError);    
-    const { refetch } = useQrCode({ proofTemplateId });    
+    const verificationError = qrCodeStore((state) => state.verificationError);
+    const { refetch } = useQrCode({ proofTemplateId });
     useVerifyProof();
 
     useEffect(() => {
@@ -34,9 +33,9 @@ const VerifyQrCode = ({ proofTemplateId }) => {
                 </div>
             ) : (
                 qrCodeUrl !== '' && !verified ? (
-                    <div className='m-auto ta-c'>
+                    <div className='m-auto ta-c relative w-fit'>
                         <QRCodeGenerator url={qrCodeUrl} />
-                        <Button variant='outline' onClick={() => refetch()}>Create new</Button>
+                        <RefreshCw className='h-7 w-7 text-urban cursor-pointer absolute -top-5 -right-5' onClick={() => refetch()} />
                     </div>
                 ) : null
             )}
