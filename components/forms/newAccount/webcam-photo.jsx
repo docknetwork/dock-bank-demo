@@ -15,14 +15,14 @@ import WebCamModal from './webcam-modal';
  * @returns React.FC Form Field
  */
 const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => (
-    <div className="p-4 bg-neutral-50 rounded-lg h-50">
+    <div className="p-4 bg-neutral-50 rounded-lg h-80 xl:h-3/6">
         <FormField
             control={control}
             name="webcamPic"
             render={({ field }) => (
                 <FormItem className="relative h-full">
                     <div className='flex items-center justify-between'>
-                        <div className='line-h-50'>
+                        <div>
                             <FormLabel className="font-semibold">Take a webcam photo for KYC check</FormLabel>
                         </div>
                         <div>
@@ -35,7 +35,7 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
                                 <Image src="/example_webcam.png" alt='webcam_oval' width={225} height={260} />
                             </div>
                         ) : (
-                            <div className='grid justify-items-center gap-4 pt-16'>
+                            <div className='grid justify-items-center gap-4 pt-2 xl:pt-16'>
                                 <Image src="/background_replace.png" alt='background_replace' width={168} height={168} />
                                 <WebCamModal
                                     isCaptureCompleted={isCaptureCompleted}

@@ -74,8 +74,8 @@ const QuotientApplyLoanForm = () => {
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} >
-              <div className='flex gap-2'>
-                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 w-60'>
+              <div className='flex gap-2 flex-wrap'>
+                <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 flex-1 w-full xl:w-2/3 md:w-2/3'>
                   <FormFieldCarDetails control={form.control} />
                   <Separator />
                   <FormFieldNameAndBirthday control={form.control} />
@@ -84,7 +84,7 @@ const QuotientApplyLoanForm = () => {
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>
-                <div className='flex-2 w-30'>
+                <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                   <QrCodeAuthentication
                     proofTemplateId={proofTemplateId}
                     title={qrCodeVerificationData.LOAN.title}

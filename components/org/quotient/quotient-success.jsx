@@ -31,8 +31,8 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
         <div className='mainContainer'>
             <div className='pt-10 p-5'>
                 <h2 className='text-3xl font-semibold mb-5'>{title}</h2>
-                <div className='flex gap-4'>
-                    <div className='p-4 bg-neutral-50 rounded-lg h-fit flex-1 w-60'>
+                <div className='flex gap-4 flex-wrap'>
+                    <div className='flex-1 w-full xl:w-2/3 md:w-2/3 p-4 bg-neutral-50 rounded-lg h-fit'>
                         <p className='font-semibold leading-loose'>{textFields.thanks}</p>
                         <p className='font-semibold leading-loose'>{textFields.description}</p>
                         <Link href='/partners'>
@@ -46,7 +46,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
                         </p>
                         <p className='font-semibold leading-loose'>{textFields.instructions}</p>
                     </div>
-                    <div className='bg-neutral-50 rounded-lg flex-2 w-30'>
+                    <div className='flex-2 w-full md:w-1/3 xl:w-1/3 bg-neutral-50 rounded-lg'>
 
                         <QrCodeAuthentication
                             proofTemplateId={proofTemplateId}

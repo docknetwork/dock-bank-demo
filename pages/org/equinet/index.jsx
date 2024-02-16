@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs';
 import EquinetTable from 'components/org/equinet/dataTable';
 import CredentialDetails from 'components/org/equinet/credential-details';
 import { Separator } from 'components/ui/separator';
+import Link from 'next/link';
 
 /**
  * @description Equinet dashboard.
@@ -49,9 +50,11 @@ const EquinetPage = () => {
                 <Sidebar className="hidden lg:block" />
                 <div className="col-span-4 lg:col-span-5 lg:border-l">
                     <div className="h-full  py-6 lg:px-8 equinetContainer">
-                        <div className='grid grid-cols-1 gap-8'>
+                        <div className='grid grid-cols-1 gap-8 p-5'>
                             <div className='flex space-x-4'>
-                                <Home />
+                                <Link href="/">
+                                    <Home />
+                                </Link>
                                 <ChevronRight />
                                 <p>Dashboard</p>
                                 <ChevronRight />
@@ -65,17 +68,21 @@ const EquinetPage = () => {
                                 <Button variant='secondary' className='rounded-full'>Import</Button>
                             </div>
                             <Tabs defaultValue="credentials" className="w-full">
-                                <TabsList className="w-[400px] bg-transaparent">
-                                    <TabsTrigger className="text-slate-500 font-bold" value="overview" >Overview</TabsTrigger>
-                                    <TabsTrigger className="text-slate-500 font-bold" value="accounts" >Accounts</TabsTrigger>
-                                    <TabsTrigger className="text-blue-400 font-bold" value="credentials">Credentials</TabsTrigger>
-                                    <TabsTrigger className="text-slate-500 font-bold" value="settings">Settings</TabsTrigger>
+                                <TabsList className="xl:w-[400px] bg-transaparent flex flex-wrap">
+                                    <TabsTrigger className="flex-1 text-slate-500 font-bold" value="overview" >Overview</TabsTrigger>
+                                    <TabsTrigger className="flex-1 text-slate-500 font-bold" value="accounts" >Accounts</TabsTrigger>
+                                    <TabsTrigger className="flex-1 text-blue-400 font-bold" value="credentials">Credentials</TabsTrigger>
+                                    <TabsTrigger className="flex-1 text-slate-500 font-bold" value="settings">Settings</TabsTrigger>
                                 </TabsList>
                                 <Separator />
                                 <TabsContent value="credentials">
-                                    <div className='grid gap-6 grid-cols-2 pt-6'>
-                                        <EquinetTable data={data} />
-                                        <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} setData={setData} />
+                                    <div className='flex gap-4 flex-wrap pt-6'>
+                                        <div className='flex-1 w-full xl:w-1/2 md:w-1/2 p-4 space-y-5'>
+                                            <EquinetTable data={data} />
+                                        </div>
+                                        <div className='flex-2 w-full md:w-1/2 xl:w-1/2'>
+                                            <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} setData={setData} />
+                                        </div>
                                     </div>
                                 </TabsContent>
 

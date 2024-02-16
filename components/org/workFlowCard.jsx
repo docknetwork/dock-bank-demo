@@ -4,7 +4,7 @@ import { ChevronsRight } from 'lucide-react';
 
 export default function WorkFlowCard({ flow, arrow = false }) {
     return (
-        <div>
+        <div className='mt-5 w-full '>
             <Link href={flow.url}>
                 <div className='flowLogo flex justify-center cursor-pointer'>
                     <div><Image src={flow.logo} width={48} height={48} alt="orgLogo" /></div>
@@ -17,8 +17,8 @@ export default function WorkFlowCard({ flow, arrow = false }) {
                         <p>{flow.title}</p>
                     </div>
                     {arrow && (
-                        <div className='absolute -right-10 bottom-5'>
-                            <ChevronsRight className='text-urban' />
+                        <div className='absolute -right-8 bottom-4'>
+                            <ChevronsRight className='text-urban hidden xl:block' />
                         </div>
                     )}
                 </div>

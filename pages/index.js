@@ -3,6 +3,7 @@ import organizations from 'data/organizations';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
+import { Separator } from 'components/ui/separator';
 import DemoFlow from 'components/demo-flow';
 
 export default function Home() {
@@ -19,15 +20,18 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <div className="pt-5 grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4">
+        <div className="pt-5 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4">
           {organizations.map((org, i) => (
             <div key={i} className="orgCard">
               <OrganizationCard key={i} org={org} />
             </div>
           ))}
         </div>
+        <div className="mt-10 mb-10">
+          <Separator />
+        </div>
         <DemoFlow />
-        <div className="mt-5">
+        <div className="mt-5 m-auto">
           <Link href="/org/quotient">
             <button className="launchBtn">Launch Demo</button>
           </Link>

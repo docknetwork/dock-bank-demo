@@ -27,7 +27,7 @@ export function DataTable({
     return (
         <div className="rounded-lg border">
             <Table>
-                <TableHeader>
+                <TableHeader className='bg-slate-50'>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
@@ -51,7 +51,7 @@ export function DataTable({
                                 data-state={row.getIsSelected() && 'selected'}
                             >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell className='text-sm' key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}

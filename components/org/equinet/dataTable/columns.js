@@ -13,9 +13,9 @@ export const columns = [
             return (
                 <>
                     {value === 'Good' ? (
-                        <Badge variant='ghost' className='border-green-600 text-green-600'> {value}</Badge >
+                        <Badge variant='ghost' className='border-green-600 text-green-600 text-xs whitespace-nowrap'> {value}</Badge >
                     ) : (
-                        <Badge variant='ghost' className='border-red-600 text-red-600'> {value}</Badge >
+                        <Badge variant='ghost' className='border-red-700 text-red-700 text-xs whitespace-nowrap bg-red-100'> {value}</Badge>
                     )}
                 </>
 
