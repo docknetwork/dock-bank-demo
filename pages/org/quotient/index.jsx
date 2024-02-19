@@ -3,9 +3,10 @@ import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSchema } from 'lib/zodSchemas';
-// import { issueCredentials } from 'utils/credentialsUtils';
+import { issueCredentials } from 'utils/credentialsUtils';
 import { toast } from 'sonner';
-// import userStore from 'store/appStore';
+import userStore from 'store/appStore';
+import qrCodeStore from 'store/qrCodeStore';
 import LoadingModal from 'components/org/quotient/loading-modal';
 import Header from 'components/org/quotient/Header';
 import { Form } from 'components/ui/form';
@@ -48,7 +49,7 @@ const QuotientBankForm = () => {
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
   const proofTemplateId = PROOFT_TEMPLATES_IDS.FORSUR_BIOMETRICS;
-  // const receiverDid = userStore((state) => state.Did);
+  const verified = qrCodeStore((state) => state.verified);
 
   const form = useForm({
     resolver: zodResolver(UserSchema),
@@ -64,6 +65,14 @@ const QuotientBankForm = () => {
     if (isUploadPoDComplete && govId === '') form.resetField('govId', { defaultValue: '/example_passport.png' });
   }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
+  useEffect(() => {
+
+    if (verified === true) {
+      console.log('biometrics is verified');
+    }
+
+  }, [verified])
+
   // once form values are valid, do something
   async function onSubmit(values) {
     console.log('values', values);
@@ -76,6 +85,8 @@ const QuotientBankForm = () => {
       setIsLoading(false);
     }, 1000);
   }
+
+
 
   return (
     <>
