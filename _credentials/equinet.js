@@ -27,7 +27,7 @@ export function createCreditScoreCredential({ receiverDid }) {
           logo: "https://img.dock.io/9f327cafda3be5f0cff0da2df44c55da",
           id: process.env.NEXT_PUBLIC_EQUINET_ISSUER_ID
         },
-        credentialSubject: {
+        subject: {
           id: receiverDid,
           credit_score: getRandomNumber(700, 800),
         }

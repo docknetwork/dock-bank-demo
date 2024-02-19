@@ -33,7 +33,7 @@ export function createBankIdCredential({
           logo: "https://img.dock.io/06d78272268c606a172d5fd1cd559b46",
           id: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID
         },
-        credentialSubject: {
+        subject: {
           id: receiverDid,
           name: receiverName,
           address: receiverAddress,
