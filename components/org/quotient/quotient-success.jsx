@@ -4,6 +4,7 @@ import Link from 'next/link';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
+import { useVerifyProof } from 'hooks/useVerifyProof';
 import { Separator } from '../../ui/separator';
 
 const textFields = {
@@ -25,7 +26,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
 
     useEffect(() => {
         refetch();
-    }, [proofTemplateId, refetch]);
+    }, []);
 
     return (
         <div className='mainContainer'>

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import useQrCode from 'hooks/useQrCode';
 import { QRCodeGenerator } from 'components/qrcode/qr-generator';
-import { useVerifyProof } from 'hooks/useVerifyProof';
 import { toast } from 'sonner';
 import qrCodeStore from 'store/qrCodeStore';
 import { Loader2, RefreshCw } from 'lucide-react';
@@ -12,10 +11,13 @@ const VerifyQrCode = ({ proofTemplateId }) => {
     const isLoading = qrCodeStore((state) => state.isLoading);
     const verificationError = qrCodeStore((state) => state.verificationError);
     const { refetch } = useQrCode({ proofTemplateId });
-    useVerifyProof();
 
     useEffect(() => {
-        if (verified === true) { toast.success('Verification Success!'); }
+        if (verified === true) {
+            toast.success('Verification Success!');
+            return
+        }
+
         if (verificationError) {
             console.log('refetching new Qr code...');
             refetch();
@@ -37,7 +39,9 @@ const VerifyQrCode = ({ proofTemplateId }) => {
                         <QRCodeGenerator url={qrCodeUrl} />
                         <RefreshCw className='h-7 w-7 text-urban cursor-pointer absolute -top-5 -right-5' onClick={() => refetch()} />
                     </div>
-                ) : null
+                ) : <div className='m-auto ta-c relative w-fit'>
+                    <RefreshCw className='h-7 w-7 text-urban cursor-pointer' onClick={() => refetch()} />
+                </div>
             )}
         </>
     );

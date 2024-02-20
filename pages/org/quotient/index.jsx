@@ -40,12 +40,8 @@ const QuotientBankForm = () => {
   const verified = qrCodeStore((state) => state.verified);
   const receiverDid = userStore((state) => state.Did);
   const recipientEmail = userStore((state) => state.userEmail);
-  const [storageRegistryId, setStorageRegistryId] = useLocalStorage('registryId', '');
 
-  const createCredential = async (credential, payload) => {
-    const credentialObj = credential(payload);
-    await issueRevokableCredential(credentialObj.body, setStorageRegistryId);
-  };
+  const [revokableCredential, setRevokableCredential] = useLocalStorage('revokableCredential', '');
 
   const payload = {
     receiverDid,
@@ -59,13 +55,19 @@ const QuotientBankForm = () => {
     receiverAddress: "Central park 102"
   }
 
+  const createCredential = async (credential, payload) => {
+    const credentialObj = credential(payload);
+    await issueRevokableCredential(credentialObj.body, setRevokableCredential);
+  };
+
   async function issueCredentials() {
-    toast.info('Issuing Credentials')
+    toast.info('Issuing Credentials.')
     await Promise.all([
       createCredential(createBiometricsCredential, payload),
       createCredential(createBankIdCredential, quotientPayload),
       createCredential(createCreditScoreCredential, payload),
     ]);
+    toast.info('Credentials issued successfully.')
   }
 
   const form = useForm({
@@ -76,19 +78,19 @@ const QuotientBankForm = () => {
   });
 
   useEffect(() => {
+    if (verified === true) {
+      console.log('issuing credentials');
+      issueCredentials();
+    }
+  }, [verified]);
+
+  useEffect(() => {
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];
 
     if (isCaptureCompleted && webcamPic === '') form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
     if (isUploadPoDComplete && govId === '') form.resetField('govId', { defaultValue: '/example_passport.png' });
   }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
-  useEffect(() => {
-    if (verified === true) {
-      issueCredentials();
-    }
-  }, [verified]);
-
-  // once form values are valid, do something
   async function onSubmit(values) {
     console.log('values', values);
     setIsLoading(true);
