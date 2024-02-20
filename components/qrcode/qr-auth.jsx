@@ -9,7 +9,7 @@ import CredentialCards from '../org/quotient/bank-credentials';
 
 const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {
     const verified = qrCodeStore((state) => state.verified);
-    const { refetch } = useQrCode(proofTemplateId);
+    const { refetch } = useQrCode({ proofTemplateId });
     useVerifyProof();
 
     return (
