@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Header from 'components/org/quotient/Header';
 import { toast } from 'sonner';
@@ -16,6 +16,7 @@ import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import qrCodeVerificationData from 'data/qrcode-text-data';
+import useQrCode from 'hooks/useQrCode';
 
 const DEFAULT_FORM_VALUES = {
   sellerName: 'Charleswood Toyota Partners',
@@ -60,6 +61,12 @@ const QuotientApplyLoanForm = () => {
     console.log('onSubmit', { values });
     setIsSuccess(true);
   }
+
+  const { refetch } = useQrCode({ proofTemplateId });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <>

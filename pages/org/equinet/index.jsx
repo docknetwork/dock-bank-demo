@@ -15,7 +15,6 @@ import Link from 'next/link';
  * @returns React.FC page
  */
 const EquinetPage = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState(
         [
             {
@@ -81,7 +80,7 @@ const EquinetPage = () => {
                                             <EquinetTable data={data} />
                                         </div>
                                         <div className='flex-2 w-full md:w-1/2 xl:w-1/2'>
-                                            <CredentialDetails isLoading={isLoading} setIsLoading={setIsLoading} setData={setData} />
+                                            <CredentialDetails setData={setData} />
                                         </div>
                                     </div>
                                 </TabsContent>

@@ -10,8 +10,6 @@ export async function getJob(id) {
     const result = await apiGet(
         `${dockUrl}/jobs/${id}`
     );
-
-    console.log("result in getJob:", result);
     return result.data;
 }
 
@@ -29,8 +27,13 @@ export async function waitForJobCompletion(jobId) {
         throw new Error("Job is undefined");
     }
 
+    console.log('job.status', job.status);
+
     while (job.status !== "finalized") {
         console.log(`waitForJobCompletion:while`, { job });
+        if (job.status === "error") {
+            throw new Error("Error on job completion, try again.");
+        }
         await new Promise((resolve) => setTimeout(resolve, 4000));
         job = await getJob(jobId);
     }

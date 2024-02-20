@@ -1,5 +1,6 @@
-import { postRequest } from "./request";
+import { postRequest, apiGet } from "./request";
 import { dockUrl } from "./constants";
+import { toast } from 'sonner';
 /**
  * Creates a new registry by calling the Registries API endpoint.
  *
@@ -34,6 +35,14 @@ export async function createRegistry(policyDid, type) {
     return undefined;
 }
 
+export async function getRegistry(registryId) {
+    try {
+        return apiGet(`${dockUrl}/registries/${registryId}`)
+    } catch (error) {
+        toast.error('Invalid crendential registry.')
+    }
+}
+
 /**
  * Revokes a credential from the registry with the given ID.
  *
@@ -41,27 +50,26 @@ export async function createRegistry(policyDid, type) {
  * @param {Credential} credential - The credential object containing the ID to revoke.
  * @returns {Promise<any>} A promise that resolves to the API response if successful, or rejects with an error.
  */
-export async function revoke(registryId, credential) {
-    const url = `${dockUrl}/registries/${registryId}`;
 
-    const data = {
-        action: "revoke",
-        credentialIds: [credential.id],
-    };
+export const revokeCredential = async (registryId, credentialId) => {
 
-    try {
-        const response = await postRequest(
-            url,
-            data
-        );
-
-        return response;
-    } catch (error) {
-        console.error("revoke:error", error);
+    const payload = {
+        "action": "revoke",
+        "credentialIds": [
+            credentialId
+        ]
     }
 
-    return undefined;
-}
+    try {
+        return await postRequest(
+            `${dockUrl}/registries/${registryId}`,
+            payload,
+        );
+    } catch (error) {
+        toast.warning('Error revoking this credential')
+    }
+
+};
 
 /**
  * Un-revokes a previously revoked credential from the registry with the given ID.

@@ -1,46 +1,94 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'components/ui/button';
-import { issueRevokableCredential } from 'utils/issue-crendentials';
-import { createBiometricsCredential } from '_credentials/forsur';
-import { createBankIdCredential } from '_credentials/quotient';
-import { createCreditScoreCredential } from '_credentials/equinet';
 import { useLocalStorage } from 'utils/hooks';
+import { issueRevokableCredential } from 'utils/issue-crendentials';
+import { createCreditScoreCredential } from '_credentials/equinet';
+import { getRegistry, revokeCredential } from 'utils/dock-registries';
+import { toast } from 'sonner';
 import userStore from 'store/appStore';
 
 export default function Test() {
-    const receiverDid = userStore((state) => state.Did);
-    const recipientEmail = userStore((state) => state.userEmail);
-    const [storageRegistryId, setStorageRegistryId] = useLocalStorage('registryId', '');
+  const [revokableCredential, setRevokableCredential] = useLocalStorage('revokableCredential', '');
+  const recipientEmail = userStore((state) => state.userEmail);
+  const [loadingRevokation, setLoadingRevokation] = useState(false);
 
-    const createCredential = async (credential, payload) => {
-        const credentialObj = credential(payload);
-        await issueRevokableCredential(credentialObj.body, setStorageRegistryId);
-    };
+  const credentialPayload = {
+    receiverDid: revokableCredential.userDid,
+    recipientEmail,
+  };
 
-    const payload = {
-        receiverDid,
-        recipientEmail,
-    };
-
-    const quotientPayload = {
-        receiverDid,
-        recipientEmail,
-        receiverName: "Jhon Smith",
-        receiverAddress: "Central park 102"
+  async function handleRevoke() {
+    if (!revokableCredential.registryId || !revokableCredential.credentialId) {
+      toast.warning('There is not credential registry to revoke');
+      return;
     }
 
-    async function issueCredentials() {
-        await Promise.all([
-            createCredential(createBiometricsCredential, payload),
-            createCredential(createBankIdCredential, quotientPayload),
-            createCredential(createCreditScoreCredential, payload),
-        ]);
+    setLoadingRevokation(true);
+    try {
+      const revokation = await revokeCredential(
+        revokableCredential.registryId,
+        revokableCredential.credentialId
+      );
+      if (revokation.status === 202) {
+        toast.success('Credential revoked successfully', { duration: 10000 });
+        setTimeout(async () => {
+          await issueNewCredential();
+        }, 3000);
+      } else {
+        setLoadingRevokation(false);
+        throw new Error('Revocation error, try again');
+      }
+    } catch (error) {
+      setLoadingRevokation(false);
+      toast.error('Error revokating credential, try again.');
     }
-    return (
-        <div className="mainContainer ta-c pt-10">
-            <Button variant="outline" onClick={async () => await issueCredentials()}>
-                Issue
-            </Button>
-        </div>
-    );
+  }
+
+  const createCredential = async (credential, payload) => {
+    const credentialObj = credential(payload);
+    await issueRevokableCredential(credentialObj.body, setRevokableCredential);
+  };
+
+  async function issueNewCredential() {
+    toast.info('Issuing new credential', { duration: 10000 });
+    try {
+      await createCredential(createCreditScoreCredential, credentialPayload);
+      toast.success('Credentials issued successfully.');
+      setLoadingRevokation(false);
+    } catch (error) {
+      console.log('Issuing error:', error);
+      toast.warning('Error issuing credentials, try again.');
+      setLoadingRevokation(false);
+    }
+  }
+
+  async function handleGetRegistry() {
+    const registry = await getRegistry(revokableCredential.registryId);
+    console.log('registry', registry);
+  }
+
+  return (
+    <div className="mainContainer ta-c pt-10">
+      <div className="ta-c">
+        <h1 className="text-2xl font-bold">Helper functions</h1>
+      </div>
+      <div className="mt-5">
+        <Button
+          className="m-2"
+          variant="outline"
+          onClick={async () => handleRevoke()}
+          disabled={loadingRevokation}>
+          Revoke credit score credential
+        </Button>
+
+        <Button className="m-2" variant="outline" onClick={async () => issueNewCredential()}>
+          issue credit score credential
+        </Button>
+
+        <Button className="m-2" variant="outline" onClick={async () => handleGetRegistry()}>
+          Get Registry
+        </Button>
+      </div>
+    </div>
+  );
 }

@@ -15,7 +15,7 @@ const VerifyQrCode = ({ proofTemplateId }) => {
     useEffect(() => {
         if (verified === true) {
             toast.success('Verification Success!');
-            return
+            return;
         }
 
         if (verificationError) {

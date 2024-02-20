@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSchema } from 'lib/zodSchemas';
-// import { issueCredentials } from 'utils/credentialsUtils';
 import { toast } from 'sonner';
 import { Form } from 'components/ui/form';
 import { Button } from 'components/ui/button';
@@ -25,7 +24,6 @@ import FormFieldGovId from 'components/forms/newAccount/form-field-govId';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import DEFAULT_BANK_FORM_VALUES from 'data/bankFormValues';
 
-
 /**
  * @description Quotient Form to create new bank account.
  * @todo refactor this page by making code more modular
@@ -43,7 +41,7 @@ const QuotientBankForm = () => {
 
   const [revokableCredential, setRevokableCredential] = useLocalStorage('revokableCredential', '');
 
-  const payload = {
+  const credentialPayload = {
     receiverDid,
     recipientEmail,
   };
@@ -51,9 +49,9 @@ const QuotientBankForm = () => {
   const quotientPayload = {
     receiverDid,
     recipientEmail,
-    receiverName: "Jhon Smith",
-    receiverAddress: "Central park 102"
-  }
+    receiverName: 'Jhon Smith',
+    receiverAddress: 'Central park 102'
+  };
 
   const createCredential = async (credential, payload) => {
     const credentialObj = credential(payload);
@@ -61,13 +59,13 @@ const QuotientBankForm = () => {
   };
 
   async function issueCredentials() {
-    toast.info('Issuing Credentials.')
+    toast.info('Issuing Credentials.');
     await Promise.all([
-      createCredential(createBiometricsCredential, payload),
+      createCredential(createBiometricsCredential, credentialPayload),
       createCredential(createBankIdCredential, quotientPayload),
-      createCredential(createCreditScoreCredential, payload),
+      createCredential(createCreditScoreCredential, credentialPayload),
     ]);
-    toast.info('Credentials issued successfully.')
+    toast.info('Credentials issued successfully.');
   }
 
   const form = useForm({
@@ -82,6 +80,7 @@ const QuotientBankForm = () => {
       console.log('issuing credentials');
       issueCredentials();
     }
+    // eslint-disable-next-line
   }, [verified]);
 
   useEffect(() => {
