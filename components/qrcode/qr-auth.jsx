@@ -3,9 +3,14 @@ import { Separator } from 'components/ui/separator';
 import VerifyQrCode from 'components/qrcode/verify-qr-code';
 import qrCodeStore from 'store/qrCodeStore';
 import CredentialCards from '../org/quotient/bank-credentials';
+import useQrCode from 'hooks/useQrCode';
+import { RefreshCw } from 'lucide-react';
+import { useVerifyProof } from 'hooks/useVerifyProof';
 
 const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '' }) => {
     const verified = qrCodeStore((state) => state.verified);
+    const { refetch } = useQrCode(proofTemplateId)
+    useVerifyProof()
 
     return (
         <div className='bg-neutral-50 rounded-lg space-y-5 h-fit p-5'>
@@ -14,7 +19,7 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
                 <Separator />
             </div>
             }
-            {!verified && (
+            {!verified ? (
                 <>
                     {(qrText !== null && qrText !== '') && (
                         <div>
@@ -31,7 +36,11 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
                         </div>
                     )}
                 </>
-            )}
+            ) :
+                <div className='m-auto ta-c relative w-fit'>
+                    <RefreshCw className='h-7 w-7 text-urban cursor-pointer' onClick={() => refetch()} />
+                </div>
+            }
 
             <div>
                 <div className='mb-5'>
