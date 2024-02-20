@@ -20,31 +20,12 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
     if (_credential.name === "EquiNet - Credit Score") {
         setRevokableCredential({
             registryId: registry.data.id,
-            credentialId: _credential.id
+            credentialId: _credential.id,
+            userDid: _credential.subject.id
         });
         console.log('setting Revokable credential set in localStorage');
     }
 
     toast.success(`Issued ${_credential.name} crendential`, { duration: 10000 })
     return issuedCredential;
-};
-
-export const revokeCredential = async (registryId, credentialId) => {
-
-    const payload = {
-        "action": "revoke",
-        "credentialIds": [
-            credentialId
-        ]
-    }
-
-    return await postRequest(
-        `${dockUrl}/registries/${registryId}`,
-        payload,
-    );
-};
-
-export const unRevokeCredential = async (registryId, credential) => {
-    // TODO UnRevoke Credential
-    // TODO return Success!
 };

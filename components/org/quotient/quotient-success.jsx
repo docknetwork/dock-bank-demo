@@ -26,7 +26,7 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
 
     useEffect(() => {
         refetch();
-    }, []);
+    }, [refetch]);
 
     return (
         <div className='mainContainer'>

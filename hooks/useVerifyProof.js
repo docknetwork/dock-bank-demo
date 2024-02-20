@@ -3,9 +3,7 @@ import { proofRequest } from '../utils/request';
 import { toast } from "sonner";
 import qrCodeStore from "store/qrCodeStore";
 
-export const useVerifyProof = (
-
-) => {
+export const useVerifyProof = () => {
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl)
     const proofID = qrCodeStore((state) => state.proofID)
     const setVerified = qrCodeStore((state) => state.setVerified)

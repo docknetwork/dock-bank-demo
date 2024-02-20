@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { toast } from 'sonner';
 import Header from 'components/org/urbanscape/header';
@@ -15,6 +15,7 @@ import FormFieldPersonalContact from 'components/forms/form-field-personal-conta
 import FormFieldOccupants from 'components/forms/urbanscape/form-field-occupants';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
+import useQrCode from 'hooks/useQrCode';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 
 const DEFAULT_FORM_VALUES = {
@@ -62,6 +63,13 @@ const UrbanScapePage = () => {
         toast.info('Form submitted, should approve application');
         setIsSuccess(true);
     }
+
+    const { refetch } = useQrCode({ proofTemplateId });
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
     return (
         <>
             <Head>

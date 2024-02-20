@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { toast } from 'sonner';
+import { useRevoke } from 'hooks/useRevoke';
 import { Loader2, Check, ShieldX } from 'lucide-react';
 import { Button } from 'components/ui/button';
 
 /**
  * @description Equinet Credentials comp
- * @param {*} isLoading revoke/issuing credential loading status
- * @param {*} setIsLoading trigger loading modal when revoke/issuing credential
+ * @param {*} loadingRevokation revoke/issuing credential loading status
+ * @param {*} setloadingRevokation trigger loading modal when revoke/issuing credential
  * @param {*} setData push a new object to data
  * @memberof EquinetPage
  * @returns React.FC 
  */
-const CredentialDetails = ({ isLoading, setIsLoading, setData }) => {
+const CredentialDetails = ({ setData }) => {
     const [credentials, setCredentials] = useState([
         {
             title: 'Credit Score of 706',
@@ -24,14 +24,18 @@ const CredentialDetails = ({ isLoading, setIsLoading, setData }) => {
             status: 'Good'
         },
     ]);
+
+    const {
+        loadingRevokation,
+        handleRevoke
+    } = useRevoke();
+
     function formatDate() {
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         return new Date().toLocaleDateString('en-US', options);
     }
 
-    const onRevokeCredential = () => {
-        toast.info('Issuing new credential');
-        setIsLoading(true);
+    async function handleAnim() {
         setTimeout(() => {
             setData((oldData) => [...oldData,
             {
@@ -61,9 +65,12 @@ const CredentialDetails = ({ isLoading, setIsLoading, setData }) => {
                     status: 'Good'
                 },
             ]);
-            setIsLoading(false);
-            toast.success('New credential issued successfully');
         }, 1000);
+    }
+
+    const onRevokeCredential = async () => {
+        await handleRevoke();
+        await handleAnim();
     };
 
     return (
@@ -81,11 +88,11 @@ const CredentialDetails = ({ isLoading, setIsLoading, setData }) => {
                     </div>
                 ))}
             </div>
-            <Button disabled={isLoading} onClick={onRevokeCredential} className={`rounded-full ${isLoading ? 'bg-purple-400' : 'bg-purple-600'}`}>
+            <Button disabled={loadingRevokation} onClick={onRevokeCredential} className={`rounded-full ${loadingRevokation ? 'bg-purple-400' : 'bg-purple-600'}`}>
 
                 <>
 
-                    {isLoading ? (
+                    {loadingRevokation ? (
                         <div className='flex items-center'>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             Please wait
