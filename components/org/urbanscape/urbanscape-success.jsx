@@ -19,7 +19,8 @@ const UrbanscapeSuccess = () => {
 
     useEffect(() => {
         refetch();
-    }, [proofTemplateId, refetch]);
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <div>
@@ -28,7 +29,7 @@ const UrbanscapeSuccess = () => {
                 <p className='font-semibold text-base'>To reserve your new appartment home, please pay total amount due now.</p>
             </div>
             <div className='flex gap-4 flex-wrap'>
-                <div className='flex-1 w-full xl:w-2/3 md:w-2/3'>
+                <div className='flex-1 w-full xl:w-2/3 md:w-2/3 space-y-5'>
                     <div className='border rounded-lg'>
                         <div className='border-b p-3 flex items-center justify-between'>
                             <p className='font-bold'>2 bedroom 2 bath with city view</p>

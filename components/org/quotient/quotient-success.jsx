@@ -26,7 +26,8 @@ const QuotientSuccess = ({ title, proofTemplateId }) => {
 
     useEffect(() => {
         refetch();
-    }, [refetch]);
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <div className='mainContainer'>

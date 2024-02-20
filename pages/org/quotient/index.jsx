@@ -78,7 +78,9 @@ const QuotientBankForm = () => {
   useEffect(() => {
     if (verified === true) {
       console.log('issuing credentials');
-      issueCredentials();
+      setTimeout(() => {
+        issueCredentials();
+      }, 1000);
     }
     // eslint-disable-next-line
   }, [verified]);

@@ -66,7 +66,8 @@ const QuotientApplyLoanForm = () => {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>

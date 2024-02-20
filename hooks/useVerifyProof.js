@@ -1,16 +1,25 @@
 import { useEffect } from 'react';
 import { proofRequest } from '../utils/request';
 import { toast } from "sonner";
+import userStore from 'store/appStore';
 import qrCodeStore from "store/qrCodeStore";
 
 export const useVerifyProof = () => {
+    const setUserDid = userStore((state) => state.setDid)
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl)
     const proofID = qrCodeStore((state) => state.proofID)
     const setVerified = qrCodeStore((state) => state.setVerified)
     const setVerificationError = qrCodeStore((state) => state.setVerificationError)
 
     async function handleProofRequest(statusResponse, intervalId) {
+        console.log("statusResponse:", statusResponse)
         if (statusResponse.data.verified === true) {
+            const holder = statusResponse.data.presentation.credentials[0].credentialSubject.id
+            console.log('holder:', holder);
+            if (!holder) {
+                throw new Error('No holder present in the verification request')
+            }
+            setUserDid(holder)
             setVerified(statusResponse.data.verified);
             clearInterval(intervalId);
             toast.success("Proof request verified successfully!");
@@ -25,7 +34,6 @@ export const useVerifyProof = () => {
         let intervalId = setInterval(async () => {
             try {
                 const statusResponse = await proofRequest(proofID);
-                console.log("statusResponse:", statusResponse)
                 await handleProofRequest(statusResponse, intervalId)
             } catch (err) {
                 setTimeout(async () => {
