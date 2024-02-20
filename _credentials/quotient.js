@@ -3,15 +3,14 @@ import { dockUrl } from "utils/constants";
 
 export function createBankIdCredential({
   receiverDid,
+  recipientEmail,
   receiverName,
-  receiverAddress,
-  enrollmentId,
-  biometricData
+  receiverAddress
 }) {
 
   console.log("Creating Quotient Bank Identity Credential for:", receiverDid);
 
-  return {
+  const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
@@ -37,12 +36,18 @@ export function createBankIdCredential({
           address: receiverAddress,
           account_number: `ABC${uuidv4()}`,
           biometric: {
-            id: enrollmentId,
+            id: uuidv4(),
             created: new Date().toISOString(),
-            data: biometricData,
+            data: "any data",
           }
         }
       }
     }
   };
+
+  if (recipientEmail && recipientEmail.length > 2 && validateEmail(recipientEmail)) {
+    credentialPayload.recipientEmail = recipientEmail
+  }
+
+  return credentialPayload;
 }

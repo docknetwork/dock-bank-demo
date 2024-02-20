@@ -1,42 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSchema } from 'lib/zodSchemas';
-import { issueCredentials } from 'utils/credentialsUtils';
+// import { issueCredentials } from 'utils/credentialsUtils';
 import { toast } from 'sonner';
+import { Form } from 'components/ui/form';
+import { Button } from 'components/ui/button';
+import { Separator } from 'components/ui/separator';
+import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import { createBiometricsCredential } from '_credentials/forsur';
+import { createBankIdCredential } from '_credentials/quotient';
+import { createCreditScoreCredential } from '_credentials/equinet';
+import { useLocalStorage } from 'utils/hooks';
+import { issueRevokableCredential } from 'utils/issue-crendentials';
+import Head from 'next/head';
 import userStore from 'store/appStore';
 import qrCodeStore from 'store/qrCodeStore';
 import LoadingModal from 'components/org/quotient/loading-modal';
 import Header from 'components/org/quotient/Header';
-import { Form } from 'components/ui/form';
-import { Button } from 'components/ui/button';
-import { Separator } from 'components/ui/separator';
 import FormFieldNameAndBirthday from 'components/forms/form-field-id';
 import FormFieldAddress from 'components/forms/form-field-address';
 import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
 import FormFieldGovId from 'components/forms/newAccount/form-field-govId';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
-import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import DEFAULT_BANK_FORM_VALUES from 'data/bankFormValues';
 
-const DEFAULT_FORM_VALUES = {
-  firstName: 'Euan',
-  middleName: '',
-  lastName: 'Miller',
-  suffix: 'He',
-  dob: new Date('1985-02-15'), // Date Of Birthday
-  streetAddress: '123 Sample Street',
-  suite: '',
-  zipCode: '01234',
-  city: 'Sacramento',
-  state: 'California',
-  email: 'euan@example.com',
-  phoneNumber: '1-234-567-8900',
-  isUsaCitizen: 'Yes',
-  ssn: '547878978', // social security number,
-  govId: '',
-  webcamPic: '',
-};
 
 /**
  * @description Quotient Form to create new bank account.
@@ -50,12 +38,41 @@ const QuotientBankForm = () => {
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
   const proofTemplateId = PROOFT_TEMPLATES_IDS.FORSUR_BIOMETRICS;
   const verified = qrCodeStore((state) => state.verified);
+  const receiverDid = userStore((state) => state.Did);
+  const recipientEmail = userStore((state) => state.userEmail);
+  const [storageRegistryId, setStorageRegistryId] = useLocalStorage('registryId', '');
+
+  const createCredential = async (credential, payload) => {
+    const credentialObj = credential(payload);
+    await issueRevokableCredential(credentialObj.body, setStorageRegistryId);
+  };
+
+  const payload = {
+    receiverDid,
+    recipientEmail,
+  };
+
+  const quotientPayload = {
+    receiverDid,
+    recipientEmail,
+    receiverName: "Jhon Smith",
+    receiverAddress: "Central park 102"
+  }
+
+  async function issueCredentials() {
+    toast.info('Issuing Credentials')
+    await Promise.all([
+      createCredential(createBiometricsCredential, payload),
+      createCredential(createBankIdCredential, quotientPayload),
+      createCredential(createCreditScoreCredential, payload),
+    ]);
+  }
 
   const form = useForm({
     resolver: zodResolver(UserSchema),
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: DEFAULT_FORM_VALUES,
+    defaultValues: DEFAULT_BANK_FORM_VALUES,
   });
 
   useEffect(() => {
@@ -66,12 +83,10 @@ const QuotientBankForm = () => {
   }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
   useEffect(() => {
-
     if (verified === true) {
-      console.log('biometrics is verified');
+      issueCredentials();
     }
-
-  }, [verified])
+  }, [verified]);
 
   // once form values are valid, do something
   async function onSubmit(values) {
@@ -86,8 +101,6 @@ const QuotientBankForm = () => {
     }, 1000);
   }
 
-
-
   return (
     <>
       <Head>
@@ -95,7 +108,7 @@ const QuotientBankForm = () => {
       </Head>
       <Header />
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
-      {!isSuccess ? (
+      {isSuccess ? (
         <div className='mainContainer'>
           <QuotientSuccess title='Your account has been opened!' proofTemplateId={proofTemplateId} />
         </div>
