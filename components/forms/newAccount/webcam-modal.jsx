@@ -46,7 +46,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
                         <div className='p-4 pt-5 grid justify-items-center relative'>
                             <Image src="/webcam_oval.png" alt='webcam_oval' width={293} height={293} />
                             <div className='absolute top-8'>
-                                <Image src="/example_webcam.png" alt='webcam_oval' width={225} height={260} />
+                                <Image className='rounded-full' src="/euanFaceScan.gif" alt='webcam_oval' width={225} height={260} />
                             </div>
                         </div>
                         <div className='ta-c mt-5'>

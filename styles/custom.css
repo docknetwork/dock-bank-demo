@@ -87,3 +87,7 @@
     display: table-cell;
     vertical-align: bottom;
 }
+
+.text-center {
+    text-align: -webkit-center !important;
+}

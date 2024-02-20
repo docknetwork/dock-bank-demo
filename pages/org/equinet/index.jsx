@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { Sidebar } from 'components/org/equinet/sidebar';
-import { Home, ChevronRight, Info } from 'lucide-react';
+import { Home, ChevronRight, Info, ChevronLeft } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs';
 import EquinetTable from 'components/org/equinet/dataTable';
 import CredentialDetails from 'components/org/equinet/credential-details';
 import { Separator } from 'components/ui/separator';
+
 import Link from 'next/link';
 
 /**
@@ -49,11 +50,18 @@ const EquinetPage = () => {
                 <Sidebar className="hidden lg:block" />
                 <div className="col-span-4 lg:col-span-5 lg:border-l">
                     <div className="h-full  py-6 lg:px-8 equinetContainer">
+                        <div className='mb-5 cursor-pointer'>
+                            <Link href={'/'}>
+                                <ChevronLeft className='text-black text-3xl' />
+                            </Link>
+                        </div>
                         <div className='grid grid-cols-1 gap-8 p-5'>
                             <div className='flex space-x-4'>
-                                <Link href="/">
-                                    <Home />
-                                </Link>
+                                <span className='cursor-pointer'>
+                                    <Link href="/">
+                                        <Home />
+                                    </Link>
+                                </span>
                                 <ChevronRight />
                                 <p>Dashboard</p>
                                 <ChevronRight />

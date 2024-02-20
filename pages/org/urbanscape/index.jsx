@@ -68,7 +68,8 @@ const UrbanScapePage = () => {
 
     useEffect(() => {
         refetch();
-    }, [refetch]);
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
