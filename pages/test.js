@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'components/ui/button';
-import { useLocalStorage } from 'utils/hooks';
+import { useLocalStorage } from 'hooks/hooks';
 import { issueRevokableCredential } from 'utils/issue-crendentials';
 import { createCreditScoreCredential } from '_credentials/equinet';
 import { getRegistry, revokeCredential } from 'utils/dock-registries';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocalStorage } from 'utils/hooks';
+import { useLocalStorage } from 'hooks/hooks';
 import { issueRevokableCredential } from 'utils/issue-crendentials';
 import { createCreditScoreCredential } from '_credentials/equinet';
 import { getRegistry, revokeCredential } from 'utils/dock-registries';
@@ -9,8 +9,8 @@ import userStore from 'store/appStore';
 export const useRevoke = () => {
 
     const [revokableCredential, setRevokableCredential] = useLocalStorage('revokableCredential', '');
-    const recipientEmail = userStore((state) => state.userEmail);
     const [loadingRevokation, setLoadingRevokation] = useState(false)
+    const recipientEmail = userStore((state) => state.userEmail);
 
     const credentialPayload = {
         receiverDid: revokableCredential.userDid,

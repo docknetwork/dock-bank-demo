@@ -4,6 +4,12 @@ import { toast } from "sonner";
 import userStore from 'store/appStore';
 import qrCodeStore from "store/qrCodeStore";
 
+/**
+ * @description Custom React hook for verifying proof requests. Each 5 seconds will make a request to check if qr code is verified
+ * @param it uses qrCodeStore proofID attribute to set the current request state.
+ * @returns React.FC Form Field
+ */
+
 export const useVerifyProof = () => {
     const setUserDid = userStore((state) => state.setDid)
     const qrCodeUrl = qrCodeStore((state) => state.qrCodeUrl)
