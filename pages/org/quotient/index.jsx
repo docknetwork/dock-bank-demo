@@ -10,7 +10,7 @@ import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import { createBiometricsCredential } from '_credentials/forsur';
 import { createBankIdCredential } from '_credentials/quotient';
 import { createCreditScoreCredential } from '_credentials/equinet';
-import { useLocalStorage } from 'utils/hooks';
+import { useLocalStorage } from 'hooks/hooks';
 import { issueRevokableCredential } from 'utils/issue-crendentials';
 import Head from 'next/head';
 import userStore from 'store/appStore';

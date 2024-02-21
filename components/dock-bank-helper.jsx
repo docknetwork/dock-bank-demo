@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { useLocalStorage } from 'utils/hooks';
+import { useLocalStorage } from 'hooks/hooks';
 import { validateEmail } from 'utils/validation';
 import userStore from 'store/appStore';
 import { Button } from './ui/button';
