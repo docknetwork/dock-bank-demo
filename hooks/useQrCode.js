@@ -4,37 +4,35 @@ import qrCodeStore from "store/qrCodeStore";
 
 const useQrCode = ({ proofTemplateId }) => {
 
-    const setTemplateId = qrCodeStore((state) => state.setProofTemplateId)
-    const setQrCodeUrl = qrCodeStore((state) => state.setQrCodeUrl)
-    const setProofID = qrCodeStore((state) => state.setProofID)
-    const setIsLoading = qrCodeStore((state) => state.setIsLoading)
-    const setVerified = qrCodeStore((state) => state.setVerified)
-    const setVerificationError = qrCodeStore((state) => state.setVerificationError)
+    const qrCodeStates = qrCodeStore((state) => state);
 
     async function handleCreateQr() {
         const response = await generateQR(proofTemplateId);
-        if (!response && !response.qr && !response.id) {
+
+        if (response === undefined || response === null) return;
+
+        if (!response.qr && !response.id) {
             toast.warning('Error generating qr code, try again or contact support.')
-            setIsLoading(true)
+            qrCodeStates.setIsLoading(true)
             throw new Error('Error generating qr code')
         }
-        setIsLoading(false)
-        setProofID(response.id)
-        setQrCodeUrl(response.qr);
+        qrCodeStates.setIsLoading(false)
+        qrCodeStates.setProofID(response.id)
+        qrCodeStates.setQrCodeUrl(response.qr);
     }
 
     const handleGenerateQR = async () => {
         console.log('generating QR code');
-        setIsLoading(true)
-        setVerified(false)
-        setVerificationError(false)
-        setTemplateId(proofTemplateId);
+        qrCodeStates.setIsLoading(true)
+        qrCodeStates.setVerified(false)
+        qrCodeStates.setVerificationError(false)
+        qrCodeStates.setProofTemplateId(proofTemplateId);
         try {
             await handleCreateQr()
         } catch (error) {
-            setQrCodeUrl('');
-            setVerified(false)
-            setIsLoading(false)
+            qrCodeStates.setQrCodeUrl('');
+            qrCodeStates.setVerified(false)
+            qrCodeStates.setIsLoading(false)
             console.error("Error generating QR code:", error);
         }
     };

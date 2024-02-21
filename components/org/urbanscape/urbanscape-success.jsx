@@ -18,7 +18,9 @@ const UrbanscapeSuccess = () => {
     const { refetch } = useQrCode({ proofTemplateId });
 
     useEffect(() => {
-        refetch();
+        setTimeout(() => {
+            refetch();
+        }, 1000);
         // eslint-disable-next-line
     }, []);
 
