@@ -22,11 +22,11 @@ const useQrCode = ({ proofTemplateId }) => {
     }
 
     const handleGenerateQR = async () => {
-        console.log('generating QR code');
         qrCodeStates.setIsLoading(true)
         qrCodeStates.setVerified(false)
         qrCodeStates.setVerificationError(false)
         qrCodeStates.setProofTemplateId(proofTemplateId);
+        qrCodeStates.setRetrievedData(null)
         try {
             await handleCreateQr()
         } catch (error) {
