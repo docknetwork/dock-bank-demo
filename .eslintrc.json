@@ -7,9 +7,21 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["next", "eslint:recommended", "plugin:react/recommended", "airbnb-base"],
+  "extends": [
+    "next",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb-base"
+  ],
   "rules": {
-    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": false
+      }
+    ],
     "class-methods-use-this": "off",
     "no-console": "off",
     "no-nested-ternary": "off",
@@ -27,14 +39,46 @@
     "indent": "off",
     "implicit-arrow-linebreak": "off",
     "function-paren-newline": "off",
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "no-unused-vars": "off",
+    "no-trailing-spaces": "off",
+    "import/prefer-default-export": "off",
+    "no-shadow": "off",
+    "react/react-in-jsx-scope": "off", // Disable react/react-in-jsx-scope rule
+    "linebreak-style": ["off"]
   },
   "settings": {
     "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          "ts",
+          "tsx"
+        ],
+        "moduleDirectory": [
+          ".",
+          "node_modules"
+        ]
+      },
       "alias": {
         "map": [
-          ["components", "./components"],
-          ["utils", "./utils"]
+          [
+            "components",
+            "./components"
+          ],
+          [
+            "utils",
+            "./utils"
+          ],
+          [
+            "store",
+            "./store"
+          ],
+          [
+            "lib",
+            "./lib"
+          ]
         ]
       }
     }
