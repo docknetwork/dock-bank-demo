@@ -7,7 +7,6 @@ import { Form } from 'components/ui/form';
 import { Button } from 'components/ui/button';
 import { Separator } from 'components/ui/separator';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
-import { createBiometricsCredential } from '_credentials/forsur';
 import { createBankIdCredential } from '_credentials/quotient';
 import { createCreditScoreCredential } from '_credentials/equinet';
 import { useLocalStorage } from 'hooks/hooks';
@@ -66,7 +65,6 @@ const QuotientBankForm = () => {
   function getBiometricalData() {
     if (retrievedData !== null) {
       const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'biometric'));
-      console.log('CREDENTIAL: ', credential);
       if (credential) return credential.credentialSubject.biometric;
     }
     return null;
