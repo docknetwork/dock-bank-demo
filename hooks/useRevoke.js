@@ -19,7 +19,7 @@ export const useRevoke = () => {
 
     async function handleRevoke() {
         if (!revokableCredential.registryId || !revokableCredential.credentialId) {
-            toast.warning('There is not credential registry to revoke')
+            toast.warning('There is no credential to revoke.')
             return
         }
 

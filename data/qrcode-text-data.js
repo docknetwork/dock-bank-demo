@@ -11,7 +11,7 @@ const qrCodeVerificationData = {
     },
     URBAN_BANKBIO: {
         title: null,
-        qrText: "Authenticate with your mobile banking app and providing the needed credentials including a validated credit score over 600.",
+        qrText: "Automate approval by using your mobile banking app to complete this form with verified information. Approval guaranteed with a credit score over 600.",
         qrTextAfter: null
     },
     URBAN_CREDITSCORE: {

@@ -37,22 +37,40 @@ const QuotientBankForm = () => {
   const proofTemplateId = PROOFT_TEMPLATES_IDS.BIOMETRIC_VERIFICATION;
   const verified = qrCodeStore((state) => state.verified);
   const setVerified = qrCodeStore((state) => state.setVerified);
+  const retrievedData = qrCodeStore((state) => state.retrievedData);
   const receiverDid = userStore((state) => state.Did);
   const recipientEmail = userStore((state) => state.userEmail);
 
   const [revokableCredential, setRevokableCredential] = useLocalStorage('revokableCredential', '');
+
+  const form = useForm({
+    resolver: zodResolver(UserSchema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: DEFAULT_BANK_FORM_VALUES,
+  });
 
   const credentialPayload = {
     receiverDid,
     recipientEmail,
   };
 
-  const quotientPayload = {
+  const quotientPayload = () => ({
     receiverDid,
     recipientEmail,
-    receiverName: 'Jhon Smith',
-    receiverAddress: 'Central park 102'
-  };
+    receiverName: `${form.getValues('firstName')} ${form.getValues('lastName')}`,
+    receiverAddress: form.getValues('streetAddress'),
+    biometricData: getBiometricalData()
+  });
+
+  function getBiometricalData() {
+    if (retrievedData !== null) {
+      const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'biometric'));
+      console.log('CREDENTIAL: ', credential);
+      if (credential) return credential.credentialSubject.biometric;
+    }
+    return null;
+  }
 
   const createCredential = async (credential, payload) => {
     const credentialObj = credential(payload);
@@ -61,20 +79,24 @@ const QuotientBankForm = () => {
 
   async function issueCredentials() {
     toast.info('Issuing Credentials.');
+    const quotient_Payload = quotientPayload();
+
+    console.log('quotient_Payload:', quotient_Payload);
+    if (quotient_Payload.biometricData === null) {
+      toast.error('Biometrical proof missing property biometrical data. Biometrical data is required to create new credentials.');
+      return;
+    }
     await Promise.all([
-      createCredential(createBiometricsCredential, credentialPayload),
-      createCredential(createBankIdCredential, quotientPayload),
+      createCredential(createBankIdCredential, quotient_Payload),
       createCredential(createCreditScoreCredential, credentialPayload),
     ]);
     toast.info('Credentials issued successfully.');
   }
 
-  const form = useForm({
-    resolver: zodResolver(UserSchema),
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    defaultValues: DEFAULT_BANK_FORM_VALUES,
-  });
+  useEffect(() => () => {
+    setVerified(false);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (verified === true) {
@@ -85,11 +107,6 @@ const QuotientBankForm = () => {
     }
     // eslint-disable-next-line
   }, [verified]);
-
-  useEffect(() => () => {
-      setVerified(false);
-      // eslint-disable-next-line
-    }, []);
 
   useEffect(() => {
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];

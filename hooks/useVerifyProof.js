@@ -16,10 +16,12 @@ export const useVerifyProof = () => {
     const proofID = qrCodeStore((state) => state.proofID)
     const setVerified = qrCodeStore((state) => state.setVerified)
     const setVerificationError = qrCodeStore((state) => state.setVerificationError)
+    const setRetrievedData = qrCodeStore((state) => state.setRetrievedData)
 
     async function handleProofRequest(statusResponse, intervalId) {
         console.log("statusResponse:", statusResponse)
         if (statusResponse.data.verified === true) {
+            setRetrievedData(statusResponse.data.presentation)
             const holder = statusResponse.data.presentation.holder
             console.log('holder:', holder);
             if (!holder) {

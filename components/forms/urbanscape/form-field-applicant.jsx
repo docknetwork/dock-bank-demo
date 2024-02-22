@@ -29,7 +29,7 @@ const FormFieldApplicantId = ({ control }) => (
                 name="applicantLastName"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Middle Name</FormLabel>
+                        <FormLabel>Last Name</FormLabel>
                         <FormControl>
                             <Input placeholder="Enter last Name" {...field} />
                         </FormControl>

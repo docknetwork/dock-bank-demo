@@ -17,6 +17,7 @@ import QuotientSuccess from 'components/org/quotient/quotient-success';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
+import qrCodeStore from 'store/qrCodeStore';
 
 const DEFAULT_FORM_VALUES = {
   sellerName: 'Charleswood Toyota Partners',
@@ -26,16 +27,15 @@ const DEFAULT_FORM_VALUES = {
   make: 'Toyota',
   model: 'Celica',
   price: '28999',
-  firstName: 'ken',
-  middleName: 'zambrano',
-  lastName: 'de jesus',
+  firstName: '',
+  lastName: '',
   suffix: 'He',
-  streetAddress: 'asdasdasd',
-  suite: 'asdasd',
+  streetAddress: '',
+  suite: '15',
   zipCode: '1233',
-  city: 'caracas',
-  state: 'caracas',
-  email: 'asdg@gmail.com',
+  city: 'Newyork',
+  state: 'Newyork',
+  email: 'euan@gmail.com',
   phoneNumber: '12312312321',
 };
 
@@ -46,6 +46,8 @@ const DEFAULT_FORM_VALUES = {
  */
 const QuotientApplyLoanForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
+  const verified = qrCodeStore((state) => state.verified);
+  const retrievedData = qrCodeStore((state) => state.retrievedData);
 
   const form = useForm({
     resolver: zodResolver(LoanSchema),
@@ -58,7 +60,6 @@ const QuotientApplyLoanForm = () => {
 
   async function onSubmit(values) {
     toast.info('Form Submitted');
-    console.log('onSubmit', { values });
     setIsSuccess(true);
   }
 
@@ -68,6 +69,23 @@ const QuotientApplyLoanForm = () => {
     refetch();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (verified === true) {
+      setTimeout(() => {
+        if (retrievedData !== null) {
+          const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
+          if (credential) {
+            const username = credential.credentialSubject.name.split(' ');
+            form.setValue('firstName', username[0]);
+            form.setValue('lastName', username[1]);
+            form.setValue('streetAddress', credential.credentialSubject.address);
+          }
+        }
+      }, 1000);
+    }
+    // eslint-disable-next-line
+  }, [verified, retrievedData]);
 
   return (
     <>
