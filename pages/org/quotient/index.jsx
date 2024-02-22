@@ -34,8 +34,9 @@ const QuotientBankForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
   const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
-  const proofTemplateId = PROOFT_TEMPLATES_IDS.FORSUR_BIOMETRICS;
+  const proofTemplateId = PROOFT_TEMPLATES_IDS.BIOMETRIC_VERIFICATION;
   const verified = qrCodeStore((state) => state.verified);
+  const setVerified = qrCodeStore((state) => state.setVerified);
   const receiverDid = userStore((state) => state.Did);
   const recipientEmail = userStore((state) => state.userEmail);
 
@@ -77,13 +78,18 @@ const QuotientBankForm = () => {
 
   useEffect(() => {
     if (verified === true) {
-      console.log('issuing credentials');
+      console.log('issuing credentials...');
       setTimeout(() => {
         issueCredentials();
       }, 1000);
     }
     // eslint-disable-next-line
   }, [verified]);
+
+  useEffect(() => () => {
+      setVerified(false);
+      // eslint-disable-next-line
+    }, []);
 
   useEffect(() => {
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];

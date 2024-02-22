@@ -50,7 +50,7 @@ const EquinetPage = () => {
                 <Sidebar className="hidden lg:block" />
                 <div className="col-span-4 lg:col-span-5 lg:border-l">
                     <div className="h-full  py-6 lg:px-8 equinetContainer">
-                        <div className='mb-5 cursor-pointer'>
+                        <div className='mb-5 cursor-pointer block lg:hidden'>
                             <Link href={'/'}>
                                 <ChevronLeft className='text-black text-3xl' />
                             </Link>

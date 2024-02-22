@@ -20,10 +20,10 @@ export const useVerifyProof = () => {
     async function handleProofRequest(statusResponse, intervalId) {
         console.log("statusResponse:", statusResponse)
         if (statusResponse.data.verified === true) {
-            const holder = statusResponse.data.presentation.credentials[0].credentialSubject.id
+            const holder = statusResponse.data.presentation.holder
             console.log('holder:', holder);
             if (!holder) {
-                throw new Error('No holder present in the verification request')
+                throw new Error('No holder present in the presentation.')
             }
             setUserDid(holder)
             setVerified(statusResponse.data.verified);
