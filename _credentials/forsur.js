@@ -15,6 +15,8 @@ export function createBiometricsCredential({
       anchor: false,
       distribute: true,
       algorithm: "dockbbs+",
+      persist: true,
+      password: "1234",
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "ForSur - Biometric",

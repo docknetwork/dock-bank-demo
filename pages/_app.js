@@ -17,9 +17,15 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>{BANK_NAME}</title>
       </Head>
-      <Toaster position="top-right" richColors closeButton visibleToasts={9} toastOptions={{
-        duration: 10000
-      }} />
+      <Toaster
+        position="top-right"
+        richColors
+        closeButton
+        visibleToasts={9}
+        toastOptions={{
+          duration: 10000,
+        }}
+      />
       <PageLayout>
         <DockBankHelper />
 
