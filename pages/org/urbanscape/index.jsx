@@ -17,10 +17,11 @@ import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import qrCodeStore from 'store/qrCodeStore';
 
 const DEFAULT_FORM_VALUES = {
-    applicantFirstName: 'Euan',
-    applicantLastName: 'Miller',
+    applicantFirstName: '',
+    applicantLastName: '',
     dob: new Date('1985-02-15'),
     ssn: '248987821', // social security number,
     driversLicense: 'a0123456', // social security number,
@@ -47,8 +48,12 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC page
  */
 const UrbanScapePage = () => {
-    const [isSuccess, setIsSuccess] = useState(false);
     const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_BANKBIO;
+
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const retrievedData = qrCodeStore((state) => state.retrievedData);
+    const verified = qrCodeStore((state) => state.verified);
 
     const form = useForm({
         resolver: zodResolver(AppartmentApplicationSchema),
@@ -70,6 +75,29 @@ const UrbanScapePage = () => {
         refetch();
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        if (verified === true) {
+            setTimeout(() => {
+                if (retrievedData !== null) {
+                    const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
+                    if (credential) {
+                        console.log('CREDENTIAL: ', credential);
+                        const username = credential.credentialSubject.name.split(' ');
+                        form.setValue('applicantFirstName', username[0]);
+                        form.setValue('applicantLastName', username[1]);
+                        form.setValue('occupants', [{
+                            firstName: username[0],
+                            middleName: '',
+                            lastName: username[1]
+                        }]);
+                        form.setValue('streetAddress', credential.credentialSubject.address);
+                    }
+                }
+            }, 1000);
+        }
+        // eslint-disable-next-line
+    }, [verified, retrievedData]);
 
     return (
         <>

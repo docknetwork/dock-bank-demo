@@ -4,7 +4,7 @@ const DEFAULT_BANK_FORM_VALUES = {
     lastName: 'Miller',
     suffix: 'He',
     dob: new Date('1985-02-15'), // Date Of Birthday
-    streetAddress: '123 Sample Street',
+    streetAddress: 'Wallstreet 10',
     suite: '',
     zipCode: '01234',
     city: 'Sacramento',

@@ -5,7 +5,8 @@ export function createBankIdCredential({
   receiverDid,
   recipientEmail,
   receiverName,
-  receiverAddress
+  receiverAddress,
+  biometricData
 }) {
 
   console.log("Creating Quotient Bank Identity Credential for:", receiverDid);
@@ -37,11 +38,7 @@ export function createBankIdCredential({
           name: receiverName,
           address: receiverAddress,
           account_number: `ABC${uuidv4()}`,
-          biometric: {
-            id: uuidv4(),
-            created: new Date().toISOString(),
-            data: "any data",
-          }
+          biometric: biometricData
         }
       }
     }

@@ -7,6 +7,10 @@ const qrCodeStore = create((set) => ({
     isLoading: true,
     verified: false,
     verificationError: false,
+    retrievedData: null,
+    setRetrievedData: (data) => {
+        set(() => ({ retrievedData: data }))
+    },
     setVerificationError: (isError) => {
         set(() => ({ verificationError: isError }))
     },
