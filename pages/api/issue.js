@@ -52,7 +52,7 @@ const credentialTypes = {
   },
   rewardsProgram({ holderDID }) {
     return {
-      name: 'Rewards Program',
+      name: 'Rewards Elegibility',
       type: ['VerifiableCredential', 'RewardsProgram'],
       issuer: issuerDID,
       subject: {

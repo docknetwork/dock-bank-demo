@@ -108,9 +108,12 @@ const QuotientBankForm = () => {
 
   useEffect(() => {
     const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];
-
-    if (isCaptureCompleted && webcamPic === '') form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
-    if (isUploadPoDComplete && govId === '') form.resetField('govId', { defaultValue: '/example_passport.png' });
+    if (isCaptureCompleted && webcamPic === '') {
+      form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
+    }
+    if (isUploadPoDComplete && govId === '') {
+      form.resetField('govId', { defaultValue: '/example_passport.png' });
+    }
   }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
   async function onSubmit(values) {

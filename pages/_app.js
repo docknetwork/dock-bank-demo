@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import DockBankHelper from 'components/dock-bank-helper';
-import { BANK_NAME } from 'utils/constants';
-import { Toaster } from 'sonner';
 import PageLayout from 'components/page-layout';
+import { BANK_NAME } from 'utils/constants';
+import { Toaster } from 'components/ui/sonner';
 
 import '../styles/globals.css';
 import '../styles/custom.css';
