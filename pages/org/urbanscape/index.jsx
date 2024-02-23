@@ -26,7 +26,7 @@ const DEFAULT_FORM_VALUES = {
     ssn: '248987821', // social security number,
     driversLicense: 'a0123456', // social security number,
     issueState: 'CA',
-    streetAddress: '123 Sample Street',
+    streetAddress: '',
     suite: '',
     zipCode: '01234',
     city: 'Sacramento',
