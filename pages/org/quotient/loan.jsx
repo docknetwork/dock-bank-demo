@@ -57,6 +57,7 @@ const QuotientApplyLoanForm = () => {
   });
 
   const proofTemplateId = PROOFT_TEMPLATES_IDS.LOAN_PROOF;
+  const proofTemplateCreditScore = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
 
   async function onSubmit(values) {
     toast.info('Form Submitted');
@@ -94,7 +95,7 @@ const QuotientApplyLoanForm = () => {
       </Head>
       <Header />
       {isSuccess ? (
-        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateId} />
+        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateCreditScore} />
       ) : (
         <div className='pt-8 p-5 mainContainer'>
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>
