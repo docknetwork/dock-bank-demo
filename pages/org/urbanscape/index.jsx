@@ -92,6 +92,9 @@ const UrbanScapePage = () => {
                             lastName: username[1]
                         }]);
                         form.setValue('streetAddress', credential.credentialSubject.address);
+                        form.setValue('city', credential.credentialSubject.city);
+                        form.setValue('zipCode', credential.credentialSubject.zip);
+                        form.setValue('state', credential.credentialSubject.state);
                     }
                 }
             }, 1000);

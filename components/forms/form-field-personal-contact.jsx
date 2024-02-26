@@ -74,15 +74,15 @@ const UsaCitizen = ({ control }) => (
         render={({ field }) => (
           <FormItem className='w-20'>
             <FormLabel>U.S Citizen?</FormLabel>
-            <Select onValueChange={field.onChange}>
+            <Select onValueChange={field.onChange} value={field.value}>
               <FormControl>
                 <SelectTrigger>
                   <SelectValue placeholder="Select one" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem disabled={field.value === 'true'} value={'true'}>Yes</SelectItem>
-                <SelectItem disabled={field.value === 'false'} value={'false'}>No</SelectItem>
+                <SelectItem disabled={field.value === 'Yes'} value={'Yes'}>Yes</SelectItem>
+                <SelectItem disabled={field.value === 'No'} value={'No'}>No</SelectItem>
               </SelectContent>
             </Select>
             <FormMessage />

@@ -58,7 +58,12 @@ const QuotientBankForm = () => {
     receiverDid,
     recipientEmail,
     receiverName: `${form.getValues('firstName')} ${form.getValues('lastName')}`,
-    receiverAddress: form.getValues('streetAddress'),
+    receiverAddress: {
+      address: form.getValues('streetAddress'),
+      city: form.getValues('city'),
+      zip: form.getValues('zipCode'),
+      state: form.getValues('state'),
+    },
     biometricData: getBiometricalData()
   });
 
@@ -137,7 +142,9 @@ const QuotientBankForm = () => {
       <LoadingModal isLoading={isLoading} setIsLoading={setIsLoading} />
       {isSuccess ? (
         <div className='mainContainer'>
-          <QuotientSuccess title='Your account has been opened!' proofTemplateId={proofTemplateId} />
+          <QuotientSuccess
+            title={'Thank you for trusting Quotient with your financial needs. We are thankful for you. Quotient is a part of IdentityClarity\'s partner ecosystem called Clarity Partners.'}
+            proofTemplateId={proofTemplateId} />
         </div>
       ) : (
         <div className='p-4 min-h-screen mainContainer'>
