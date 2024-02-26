@@ -50,6 +50,61 @@ Each library and dependency has been carefully selected for its performance, rel
 
 Note: Most of the functions are documented inside of each file.
 
+## Main Functions & Methods
+
+### State management 
+
+The Qr code state is handle by `/store/qrCodeStore.js` folder, using the Zustand library, for updating the proof template Id and verification state.
+Qr code track this states: 
+
+    proofTemplateId -> Dock Cert Verification template id
+
+    qrCodeUrl -> Generated url from generateQR() function
+
+    proofID -> Unique Id for each Qr code generated
+
+    isLoading -> Boolean for loading code generation 
+
+    verified -> Is verified by user, default to false
+
+    verificationError -> Boolean state for error handling
+
+    retrievedData -> Credential data retrieved when is verified
+
+Each value also contain setter function.
+
+### Main Functions
+
+Under folder `/utils` are the files that handle all the communication with Dock API service.
+
+`createRegistry(policyDid, type)` -> Creates Registry for a new credential.
+
+`createCredential(registryId, credential)` -> Create new credential from registryId & credential schema.
+
+`distributeCredential(credential)` -> Send a signed credential to a Did or email.        
+
+`issueRevokableCredential = async (credential, setRevokableCredential)` -> Entire process that carrie all previews functions.
+revokeCredential = async (registryId, credentialId) -> Revoke credit score credential with a given registry and credential ids.
+    
+
+### Methods
+
+There is 3 important methods under `/hooks` folder wich make the application workflow:
+
+`useQrCode = ({ proofTemplateId })` -> 
+The useQrCode hook orchestrates the generation of QR codes associated with proof requests. It leverages state management through qrCodeStore, handling loading states, verification flags, and potential errors. Upon calling handleGenerateQR, it sets up the necessary parameters, initiates QR code creation via handleCreateQr, and updates relevant states accordingly.
+
+`useVerifyProof = ()` -> 
+This React hook, useVerifyProof, facilitates verifying proof requests tied to a QR code. It utilizes intervals to periodically check the verification status. Upon successful verification, it updates relevant states, such as user DID, verification status, and retrieved data. In case of errors, it handles retries and sets a verification error flag.
+
+### Main Component
+
+`QrCodeAuthentication`
+
+Hooks methods are use in single component `components/qrcode/qr-auth.jsx` with two responsabilities, generate and verify a Qr code using the previews hooks `useQrCode` & `useVerifyProof`.
+
+The `QrCodeAuthentication` component manages QR code authentication flow. It renders UI elements conditionally based on whether the QR code is verified or not. If not verified, it displays QR code verification UI provided by VerifyQrCode component along with optional descriptive texts before and after. Upon verification, it shows a refresh icon to allow users to retry the authentication process. Additionally, it lists required credentials using CredentialCards component.
+
 ## 🎮 Running the Project
 
 ### 📓Prerequisites

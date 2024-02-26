@@ -32,9 +32,9 @@ const DEFAULT_FORM_VALUES = {
   suffix: 'He',
   streetAddress: '',
   suite: '15',
-  zipCode: '1233',
-  city: 'Newyork',
-  state: 'Newyork',
+  zipCode: '',
+  city: '',
+  state: '',
   email: 'euan@gmail.com',
   phoneNumber: '12312312321',
 };
@@ -81,6 +81,9 @@ const QuotientApplyLoanForm = () => {
             form.setValue('firstName', username[0]);
             form.setValue('lastName', username[1]);
             form.setValue('streetAddress', credential.credentialSubject.address);
+            form.setValue('city', credential.credentialSubject.city);
+            form.setValue('zipCode', credential.credentialSubject.zip);
+            form.setValue('state', credential.credentialSubject.state);
           }
         }
       }, 1000);
@@ -95,7 +98,7 @@ const QuotientApplyLoanForm = () => {
       </Head>
       <Header />
       {isSuccess ? (
-        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateCreditScore} />
+        <QuotientSuccess title="Your loan application has been approved!" proofTemplateId={proofTemplateCreditScore} showQrcode={false} />
       ) : (
         <div className='pt-8 p-5 mainContainer'>
           <h2 className='text-2xl font-semibold mb-5'>Apply for Auto Loan</h2>

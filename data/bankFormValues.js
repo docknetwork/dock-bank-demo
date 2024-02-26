@@ -2,7 +2,7 @@ const DEFAULT_BANK_FORM_VALUES = {
     firstName: 'Euan',
     middleName: '',
     lastName: 'Miller',
-    suffix: 'He',
+    suffix: 'Senior',
     dob: new Date('1985-02-15'), // Date Of Birthday
     streetAddress: 'Wallstreet 10',
     suite: '',

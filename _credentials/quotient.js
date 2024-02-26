@@ -36,7 +36,10 @@ export function createBankIdCredential({
         subject: {
           id: receiverDid,
           name: receiverName,
-          address: receiverAddress,
+          address: receiverAddress.address,
+          city: receiverAddress.city,
+          zip: receiverAddress.zip,
+          city: receiverAddress.state,
           account_number: `ABC${uuidv4()}`,
           biometric: biometricData
         }

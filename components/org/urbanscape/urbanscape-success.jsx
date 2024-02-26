@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
@@ -21,6 +22,7 @@ const UrbanscapeSuccess = () => {
         setTimeout(() => {
             refetch();
         }, 1000);
+        window.scrollTo(0, 0);
         // eslint-disable-next-line
     }, []);
 
@@ -68,13 +70,18 @@ const UrbanscapeSuccess = () => {
                     <Separator />
                     <div className='space-y-4'>
                         <p>{'Urbanscape is a part of the IdentityClarity\'s ecosystem called clarity partners.'}</p>
-                        <div>
-                            <Image src={'/partners.png'} alt='clarity_partners' width={230} height={36} />
-                        </div>
+                        <Link href='/partners' target='_blank'>
+                            <a target='_blank' rel='noopener noreferrer'>
+                                <div className='w-2/4 cursor-pointer mt-5 mb-5'>
+                                    <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
+                                </div>
+                            </a>
+                        </Link>
                     </div>
                 </div>
                 <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                     <QrCodeAuthentication
+                        onlyCreditScore={true}
                         proofTemplateId={proofTemplateId}
                         title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
                         qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}

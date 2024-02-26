@@ -1,6 +1,7 @@
 const organizations = [
     {
         name: "Quotient",
+        label: "Financial Institution",
         logo: "/quotientdark.png",
         description: "Empowering Your Financial Journey with Personalized Solutions and Community Focus.",
         url: "/org/quotient",
@@ -9,6 +10,7 @@ const organizations = [
     },
     {
         name: "Identity Clarity",
+        label: "KYC Identity Verifier",
         logo: "/clarity.png",
         description: "Streamlining Secure Identity Verification to Enhance Customer Trust and Compliance.",
         url: "/partners",
@@ -17,6 +19,7 @@ const organizations = [
     },
     {
         name: "FORSUR",
+        label: "Biometric Provider",
         logo: "/forsur.png",
         description: "Revolutionizing Security with Cutting-Edge Fingerprint, Facial, and Voice Recognition Technologies.",
         url: "/org/forsur",
@@ -25,6 +28,7 @@ const organizations = [
     },
     {
         name: "Equinet",
+        label: "Credit Bureau",
         logo: "/equinet.png",
         description: "Comprehensive Credit Reporting and Score Analysis for Individuals.",
         url: "/org/equinet",
@@ -33,6 +37,7 @@ const organizations = [
     },
     {
         name: "Urbanscape",
+        label: "Rental Agent",
         logo: "/urbanscape.png",
         description: "Simplifying Your Home Search with Personalized Leasing Solutions and Exceptional Living Spaces.",
         url: "/org/urbanscape",
