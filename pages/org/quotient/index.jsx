@@ -53,7 +53,7 @@ const QuotientBankForm = () => {
   const credentialPayload = {
     receiverDid,
     recipientEmail,
-    creditScore: getRandomNumber(700, 702)
+    creditScore: getRandomNumber(700, 800)
   };
 
   const quotientPayload = () => ({
