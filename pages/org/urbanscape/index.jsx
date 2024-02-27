@@ -77,25 +77,23 @@ const UrbanScapePage = () => {
     }, []);
 
     useEffect(() => {
-        if (verified === true) {
+        if (verified === true && retrievedData !== null) {
             setTimeout(() => {
-                if (retrievedData !== null) {
-                    const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
-                    if (credential) {
-                        console.log('CREDENTIAL: ', credential);
-                        const username = credential.credentialSubject.name.split(' ');
-                        form.setValue('applicantFirstName', username[0]);
-                        form.setValue('applicantLastName', username[1]);
-                        form.setValue('occupants', [{
-                            firstName: username[0],
-                            middleName: '',
-                            lastName: username[1]
-                        }]);
-                        form.setValue('streetAddress', credential.credentialSubject.address);
-                        form.setValue('city', credential.credentialSubject.city);
-                        form.setValue('zipCode', credential.credentialSubject.zip);
-                        form.setValue('state', credential.credentialSubject.state);
-                    }
+                const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
+                if (credential) {
+                    console.log('CREDENTIAL: ', credential);
+                    const username = credential.credentialSubject.name.split(' ');
+                    form.setValue('applicantFirstName', username[0]);
+                    form.setValue('applicantLastName', username[1]);
+                    form.setValue('occupants', [{
+                        firstName: username[0],
+                        middleName: '',
+                        lastName: username[1]
+                    }]);
+                    form.setValue('streetAddress', credential.credentialSubject.address);
+                    form.setValue('city', credential.credentialSubject.city);
+                    form.setValue('zipCode', credential.credentialSubject.zip);
+                    form.setValue('state', credential.credentialSubject.state);
                 }
             }, 1000);
         }
