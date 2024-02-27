@@ -143,7 +143,7 @@ const QuotientBankForm = () => {
       {isSuccess ? (
         <div className='mainContainer'>
           <QuotientSuccess
-            title={'Thank you for trusting Quotient with your financial needs. We are thankful for you. Quotient is a part of IdentityClarity\'s partner ecosystem called Clarity Partners.'}
+            title={'Your account has been opened!'}
             proofTemplateId={proofTemplateId} />
         </div>
       ) : (

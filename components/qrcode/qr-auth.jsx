@@ -7,7 +7,7 @@ import { RefreshCw } from 'lucide-react';
 import { useVerifyProof } from 'hooks/useVerifyProof';
 import CredentialCards from '../org/quotient/bank-credentials';
 
-const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '', onlyCreditScore = false }) => {
+const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrTextAfter = '', onlyCreditScore = false, required = true }) => {
     const verified = qrCodeStore((state) => state.verified);
     const { refetch } = useQrCode({ proofTemplateId });
     useVerifyProof();
@@ -43,10 +43,7 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
             }
 
             <div>
-                <div className='mb-5'>
-                    <h3 className='font-bold'>Offered credentials:</h3>
-                </div>
-                <CredentialCards onlyCreditScore={onlyCreditScore} />
+                <CredentialCards onlyCreditScore={onlyCreditScore} required={required} />
             </div>
         </div>
     );

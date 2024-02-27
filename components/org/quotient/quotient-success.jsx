@@ -7,8 +7,7 @@ import useQrCode from 'hooks/useQrCode';
 import { Separator } from '../../ui/separator';
 
 const textFields = {
-    thanks: 'Thank you for trusting Quotient with your auto loan needs. We are thankful for you.',
-    description: 'Quotient is a part of the IdentityClarity\'s ecosystem called clarity partners.',
+    thanks: 'Thank you for trusting Quotient with your financial needs. We are thankful for you. Quotient is a part of IdentityClarity\'s partner ecosystem called Clarity Partners.',
     benefits: 'As a customer of Quotient Credit Union, you are able to receive valuable benefits from other Clarity Partners by using verified information stored in Quotient\'s mobile banking app. Using your mobile banking app to share data with a Clarity Partner is quick, secure, and private.',
     instructions: 'Scan the QR code on the right to get started.'
 };
@@ -35,7 +34,6 @@ const QuotientSuccess = ({ title, proofTemplateId, showQrcode = true }) => {
                 <div className='flex gap-4 flex-wrap'>
                     <div className='flex-1 w-full xl:w-2/3 md:w-2/3 p-4 bg-neutral-50 rounded-lg h-fit'>
                         <p className='font-semibold leading-loose'>{textFields.thanks}</p>
-                        <p className='font-semibold leading-loose'>{textFields.description}</p>
                         <Link href='/partners' target='_blank'>
                             <a target='_blank' rel='noopener noreferrer'>
                                 <div className='w-2/4 cursor-pointer mt-5 mb-5'>
@@ -60,6 +58,7 @@ const QuotientSuccess = ({ title, proofTemplateId, showQrcode = true }) => {
                         <div className='flex-2 w-full md:w-1/3 xl:w-1/3 bg-neutral-50 rounded-lg'>
 
                             <QrCodeAuthentication
+                                required={false}
                                 proofTemplateId={proofTemplateId}
                                 title={qrCodeVerificationData.BANK.title}
                                 qrText={qrCodeVerificationData.BANK.qrText}
