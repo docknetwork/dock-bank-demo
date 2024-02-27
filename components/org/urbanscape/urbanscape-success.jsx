@@ -81,6 +81,7 @@ const UrbanscapeSuccess = () => {
                 </div>
                 <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                     <QrCodeAuthentication
+                        required={true}
                         onlyCreditScore={true}
                         proofTemplateId={proofTemplateId}
                         title={qrCodeVerificationData.URBAN_CREDITSCORE.title}

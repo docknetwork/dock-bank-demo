@@ -5,8 +5,6 @@ import { Button } from 'components/ui/button';
 
 /**
  * @description Equinet Credentials comp
- * @param {*} loadingRevokation revoke/issuing credential loading status
- * @param {*} setloadingRevokation trigger loading modal when revoke/issuing credential
  * @param {*} setData push a new object to data
  * @memberof EquinetPage
  * @returns React.FC 

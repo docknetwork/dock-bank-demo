@@ -32,8 +32,9 @@ export default function Home() {
                   <Link href="https://play.google.com/store/apps/details?id=com.dockapp&hl=en_US">
                     <Button className="w-full pt-6 pb-6 rounded-full font-bold" variant="outline">
                       <a className="text-blue-600" target="_blank" rel="noopener noreferrer">
-                        Download the Dock
-                        <br /> Mobile App
+                        Download the
+                        <br />
+                        Quotient Mobile App
                       </a>
                     </Button>
                   </Link>
