@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocalStorage } from 'hooks/hooks';
 import { issueRevokableCredential } from 'utils/issue-crendentials';
 import { createCreditScoreCredential } from '_credentials/equinet';
+import { getRandomNumber } from 'utils';
 import { getRegistry, revokeCredential } from 'utils/dock-registries';
 import { toast } from 'sonner';
 import userStore from 'store/appStore';
@@ -15,6 +16,7 @@ export const useRevoke = () => {
     const credentialPayload = {
         receiverDid: revokableCredential.userDid,
         recipientEmail,
+        creditScore: getRandomNumber(600, 699)
     };
 
     async function handleRevoke() {

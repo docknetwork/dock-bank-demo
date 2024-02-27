@@ -22,6 +22,7 @@ import FormFieldPersonalContact from 'components/forms/form-field-personal-conta
 import FormFieldGovId from 'components/forms/newAccount/form-field-govId';
 import QuotientSuccess from 'components/org/quotient/quotient-success';
 import DEFAULT_BANK_FORM_VALUES from 'data/bankFormValues';
+import { getRandomNumber } from 'utils';
 
 /**
  * @description Quotient Form to create new bank account.
@@ -52,6 +53,7 @@ const QuotientBankForm = () => {
   const credentialPayload = {
     receiverDid,
     recipientEmail,
+    creditScore: getRandomNumber(700, 702)
   };
 
   const quotientPayload = () => ({
@@ -89,10 +91,10 @@ const QuotientBankForm = () => {
       toast.error('Biometrical proof missing property biometrical data. Biometrical data is required to create new credentials.');
       return;
     }
-    await Promise.all([
-      createCredential(createBankIdCredential, quotient_Payload),
-      createCredential(createCreditScoreCredential, credentialPayload),
-    ]);
+
+    await createCredential(createBankIdCredential, quotient_Payload);
+    await createCredential(createCreditScoreCredential, credentialPayload);
+
     toast.info('Credentials issued successfully.');
   }
 
