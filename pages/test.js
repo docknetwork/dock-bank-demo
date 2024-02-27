@@ -16,7 +16,7 @@ export default function Test() {
   const credentialPayload = {
     receiverDid: revokableCredential.userDid,
     recipientEmail,
-    creditScore: getRandomNumber(700, 702),
+    creditScore: getRandomNumber(700, 800),
   };
 
   async function handleRevoke() {

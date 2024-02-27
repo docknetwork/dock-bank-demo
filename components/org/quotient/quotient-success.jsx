@@ -30,7 +30,7 @@ const QuotientSuccess = ({ title, proofTemplateId, showQrcode = true }) => {
     return (
         <div className='mainContainer'>
             <div className='pt-10 p-5'>
-                <h2 className='w-full lg:w-2/4 text-3xl font-semibold mb-5'>{title}</h2>
+                <h2 className='w-full text-3xl font-semibold mb-5'>{title}</h2>
                 <div className='flex gap-4 flex-wrap'>
                     <div className='flex-1 w-full xl:w-2/3 md:w-2/3 p-4 bg-neutral-50 rounded-lg h-fit'>
                         <p className='font-semibold leading-loose'>{textFields.thanks}</p>
