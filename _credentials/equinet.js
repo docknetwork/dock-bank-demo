@@ -1,16 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
-import { getRandomNumber } from "utils";
 import { dockUrl } from "utils/constants";
 import { validateEmail } from "utils/validation";
 
-export function createCreditScoreCredential({ receiverDid, recipientEmail }) {
+export function createCreditScoreCredential({ receiverDid, recipientEmail, creditScore }) {
 
   console.log("Creating EquiNet - Credit Score Credential for:", receiverDid);
 
   const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
-      anchor: false,      
+      anchor: false,
       algorithm: "dockbbs+",
       persist: true,
       password: "1234",
@@ -30,7 +29,7 @@ export function createCreditScoreCredential({ receiverDid, recipientEmail }) {
         },
         subject: {
           id: receiverDid,
-          credit_score: getRandomNumber(700, 800),
+          credit_score: creditScore,
         }
       }
     }
