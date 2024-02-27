@@ -14,8 +14,7 @@ export function createBankIdCredential({
   const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
-      anchor: false,
-      distribute: true,
+      anchor: false,      
       algorithm: "dockbbs+",
       persist: true,
       password: "1234",
