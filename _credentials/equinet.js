@@ -13,6 +13,7 @@ export function createCreditScoreCredential({ receiverDid, recipientEmail, credi
       algorithm: "dockbbs+",
       persist: true,
       password: "1234",
+      distribute:true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "EquiNet - Credit Score",

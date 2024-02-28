@@ -18,6 +18,7 @@ export function createBankIdCredential({
       algorithm: "dockbbs+",
       persist: true,
       password: "1234",
+      distribute:true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "Quotient - Bank Identity",
