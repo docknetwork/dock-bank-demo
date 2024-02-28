@@ -3,22 +3,22 @@ import { dockUrl } from "utils/constants";
 
 export function createBankIdCredential({
   receiverDid,
+  recipientEmail,
   receiverName,
   receiverAddress,
-  enrollmentId,
   biometricData
 }) {
 
   console.log("Creating Quotient Bank Identity Credential for:", receiverDid);
 
-  return {
+  const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
-      anchor: true,
+      anchor: false,      
+      algorithm: "dockbbs+",
       persist: true,
       password: "1234",
-      distribute: true,
-      algorithm: "dockbbs+",
+      distribute:true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "Quotient - Bank Identity",
@@ -36,15 +36,20 @@ export function createBankIdCredential({
         subject: {
           id: receiverDid,
           name: receiverName,
-          address: receiverAddress,
+          address: receiverAddress.address,
+          city: receiverAddress.city,
+          zip: receiverAddress.zip,
+          city: receiverAddress.state,
           account_number: `ABC${uuidv4()}`,
-          biometric: {
-            id: enrollmentId,
-            created: new Date().toISOString(),
-            data: biometricData,
-          }
+          biometric: biometricData
         }
       }
     }
   };
+
+  if (recipientEmail && recipientEmail.length > 2 && validateEmail(recipientEmail)) {
+    credentialPayload.recipientEmail = recipientEmail
+  }
+
+  return credentialPayload;
 }

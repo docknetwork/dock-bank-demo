@@ -3,20 +3,20 @@ import { dockUrl } from "utils/constants";
 
 export function createBiometricsCredential({
   receiverDid,
-  enrollmentId,
-  biometricData,
+  recipientEmail
 }
 ) {
 
   console.log("Creating ForSur - Biometric Enrollment Credential for:", receiverDid);
 
-  return {
+  const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
-      anchor: true,
-      persist: true,
+      anchor: false,      
+      algorithm: "dockbbs+",
+      persist: true,      
       password: "1234",
-      distribute: true,
+      distribute:true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "ForSur - Biometric",
@@ -34,12 +34,19 @@ export function createBiometricsCredential({
         subject: {
           id: receiverDid,
           biometric: {
-            id: enrollmentId,
+            id: uuidv4(),
             created: new Date().toISOString(),
-            data: biometricData,
+            data: "some biometric data",
           }
         }
       }
     }
   };
+
+  if (recipientEmail && recipientEmail.length > 2 && validateEmail(recipientEmail)) {
+    credentialPayload.recipientEmail = recipientEmail
+  }
+
+  return credentialPayload
+
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useLocalStorage } from 'utils/hooks';
+import { toast } from 'sonner';
+import { useLocalStorage } from 'hooks/hooks';
 import { validateEmail } from 'utils/validation';
 import userStore from 'store/appStore';
 import { Button } from './ui/button';
-import QrReader from './qr-reader';
+import QrReader from './qrcode/qr-reader';
 
 export default function Helper() {
   const [holderDID, setHolderDID] = useLocalStorage('holderDID', '');
@@ -25,12 +25,12 @@ export default function Helper() {
   }, [holderDID, recipientEmail]);
 
   const handleSubmit = () => {
-    if (!formDID || !formRecipientEmail) {
-      toast.warning('Please fill all fields');
+    if (!formDID && !formRecipientEmail) {
+      toast.warning('Please fill email or DID');
       return;
     }
 
-    if (!validateEmail(formRecipientEmail)) {
+    if (formRecipientEmail && !validateEmail(formRecipientEmail)) {
       setEmailError('Invalid email address');
       return;
     }
@@ -38,7 +38,7 @@ export default function Helper() {
     setEmailError('');
     setHolderDID(formDID);
     setRecipientEmail(formRecipientEmail);
-    toast.success('Set DID success');
+    toast.success('User data saved');
     setIsHelperOpen(!isHelperOpen);
   };
 

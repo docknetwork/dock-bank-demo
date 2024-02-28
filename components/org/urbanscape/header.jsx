@@ -8,7 +8,7 @@ import Link from 'next/link';
  * @returns React.FC 
  */
 const Header = () => (
-    <div className="p-4 bg-green-900 flex justify-between items-center">
+    <div className="p-4 urbanHeader flex justify-between items-center relative">
         <div className='flex items-center'>
             <div className='mr-4 cursor-pointer'>
                 <Link href={'/'}>
@@ -16,19 +16,21 @@ const Header = () => (
                 </Link>
             </div>
             <Image
-                src='/urbanscape.png'
+                src='/urbanwhite.png'
                 alt='urbanscape-logo'
-                width={100}
-                height={120}
+                width={162}
+                height={140}
             />
 
         </div>
-        <Image
-            src='/clarity.png'
-            alt='clarity-logo'
-            width={69}
-            height={40}
-        />
+        <div className='absolute right-10 bottom-5'>
+            <Image
+                src='/partnersgrey.png'
+                alt='partnersgrey'
+                width={176}
+                height={28}
+            />
+        </div>
     </div>
 );
 

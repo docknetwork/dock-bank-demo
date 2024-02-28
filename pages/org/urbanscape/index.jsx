@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { toast } from 'sonner';
 import Header from 'components/org/urbanscape/header';
@@ -13,17 +13,20 @@ import FormFieldApplicantId from 'components/forms/urbanscape/form-field-applica
 import FormFieldAddress from 'components/forms/form-field-address';
 import FormFieldPersonalContact from 'components/forms/form-field-personal-contact';
 import FormFieldOccupants from 'components/forms/urbanscape/form-field-occupants';
-import BankQrAuthentication from 'components/bank-auth';
+import QrCodeAuthentication from 'components/qrcode/qr-auth';
+import qrCodeVerificationData from 'data/qrcode-text-data';
+import useQrCode from 'hooks/useQrCode';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
+import qrCodeStore from 'store/qrCodeStore';
 
 const DEFAULT_FORM_VALUES = {
-    applicantFirstName: 'Euan',
-    applicantLastName: 'Miller',
-    dob: '11/22/1987', // Date Of Birthday
+    applicantFirstName: '',
+    applicantLastName: '',
+    dob: new Date('1985-02-15'),
     ssn: '248987821', // social security number,
     driversLicense: 'a0123456', // social security number,
     issueState: 'CA',
-    streetAddress: '123 Sample Street',
+    streetAddress: '',
     suite: '',
     zipCode: '01234',
     city: 'Sacramento',
@@ -45,8 +48,12 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC page
  */
 const UrbanScapePage = () => {
+    const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_BANKBIO;
+
     const [isSuccess, setIsSuccess] = useState(false);
-    const proofTemplateId = PROOFT_TEMPLATES_IDS;
+
+    const retrievedData = qrCodeStore((state) => state.retrievedData);
+    const verified = qrCodeStore((state) => state.verified);
 
     const form = useForm({
         resolver: zodResolver(AppartmentApplicationSchema),
@@ -61,27 +68,59 @@ const UrbanScapePage = () => {
         toast.info('Form submitted, should approve application');
         setIsSuccess(true);
     }
+
+    const { refetch } = useQrCode({ proofTemplateId });
+
+    useEffect(() => {
+        refetch();
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        if (verified === true && retrievedData !== null) {
+            setTimeout(() => {
+                const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
+                if (credential) {
+                    console.log('CREDENTIAL: ', credential);
+                    const username = credential.credentialSubject.name.split(' ');
+                    form.setValue('applicantFirstName', username[0]);
+                    form.setValue('applicantLastName', username[1]);
+                    form.setValue('occupants', [{
+                        firstName: username[0],
+                        middleName: '',
+                        lastName: username[1]
+                    }]);
+                    form.setValue('streetAddress', credential.credentialSubject.address);
+                    form.setValue('city', credential.credentialSubject.city);
+                    form.setValue('zipCode', credential.credentialSubject.zip);
+                    form.setValue('state', credential.credentialSubject.state);
+                }
+            }, 1000);
+        }
+        // eslint-disable-next-line
+    }, [verified, retrievedData]);
+
     return (
         <>
             <Head>
                 <title>Urbanscape - Application for Apartment</title>
             </Head>
             <Header />
-            <div className="p-4 min-h-screen mainContainer">
+            <div className='p-4 min-h-screen mainContainer'>
                 {isSuccess ? (
                     <UrbanscapeSuccess />
                 ) : (
                     <>
-                        <div className="mb-4 mt-2">
-                            <h2 className="font-semibold text-2xl">Application for Apartment</h2>
-                            <p>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
+                        <div className='mb-4 mt-2'>
+                            <h2 className='font-medium text-3xl text-slate-700'>Application for Apartment</h2>
+                            <p className='font-medium text-base'>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
                         </div>
                         <Form {...form}>
-                            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-                                <div className='grid md:grid-cols-3 gap-2'>
-                                    <div className='col-span-2 space-y-4'>
+                            <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
+                                <div className='flex gap-4 flex-wrap'>
+                                    <div className='flex-1 w-full xl:w-2/3 md:w-2/3 space-y-4'>
                                         <div className='space-y-2'>
-                                            <h2 className='font-semibold'>APPLICANT INFORMATION</h2>
+                                            <h2 className='text-urban font-bold'>APPLICANT INFORMATION</h2>
                                             <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
                                                 <FormFieldApplicantId control={form.control} />
                                                 <Separator />
@@ -99,13 +138,21 @@ const UrbanScapePage = () => {
                                         </div>
 
                                     </div>
-                                    <BankQrAuthentication proofTemplateId={proofTemplateId} />
+                                    <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                                        <QrCodeAuthentication
+                                            required={true}
+                                            proofTemplateId={proofTemplateId}
+                                            title={qrCodeVerificationData.URBAN_BANKBIO.title}
+                                            qrText={qrCodeVerificationData.URBAN_BANKBIO.qrText}
+                                            qrTextAfter={qrCodeVerificationData.URBAN_BANKBIO.qrTextAfter}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className='mt-3'>
                                     <Button
-                                        className="col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg"
-                                        type="submit">
+                                        className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg'
+                                        type='submit'>
                                         Submit Application
                                     </Button>
                                 </div>

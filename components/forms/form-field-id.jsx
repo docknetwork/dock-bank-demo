@@ -86,9 +86,8 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem disabled={field.value === 'He'} value={'He'}>He</SelectItem>
-                                <SelectItem disabled={field.value === 'She'} value={'She'}>She</SelectItem>
-                                <SelectItem disabled={field.value === 'Other'} value={'Other'}>Other</SelectItem>
+                                <SelectItem disabled={field.value === 'Junior'} value={'Junior'}>Junior</SelectItem>
+                                <SelectItem disabled={field.value === 'Senior'} value={'Senior'}>Senior</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
@@ -118,7 +117,7 @@ export const BirthdayPicker = ({ control, description = false }) => (
                     <div className="md:flex md:space-x-1">
                         <h2 className='font-bold text-sm'>When is your birthday?</h2>
                         <p className='text-sm'>(You must be at least 18 years old to open an account)</p>
-                    </div >
+                    </div>
                 ) : (
                     null
                 )}
@@ -129,7 +128,7 @@ export const BirthdayPicker = ({ control, description = false }) => (
                             <Button
                                 variant={'outline'}
                                 className={cn(
-                                    'w-[240px] pl-3 text-left font-normal',
+                                    'w-[240px] w-full pl-3 text-left font-normal',
                                     !field.value && 'text-muted-foreground'
                                 )}
                             >

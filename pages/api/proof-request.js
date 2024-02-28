@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosHeaders = {
   headers: {
-    'DOCK-API-TOKEN': process.env.DOCK_API_TOKEN,
+    'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
   },
 };
 

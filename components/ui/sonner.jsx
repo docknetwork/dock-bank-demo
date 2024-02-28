@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line
 import { useTheme } from 'next-themes';
 // eslint-disable-next-line import/no-self-import
 import { Toaster as Sonner } from 'sonner';
@@ -6,7 +6,7 @@ import { Toaster as Sonner } from 'sonner';
 const Toaster = ({
   ...props
 }) => {
-  const { theme = 'system' } = useTheme();
+  const { theme = 'light' } = useTheme();
 
   return (
     (<Sonner

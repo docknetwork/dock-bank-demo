@@ -1,6 +1,6 @@
 import { cn } from 'utils';
 import { Button } from 'components/ui/button';
-import { CircleUserRound, LogOut, ChevronDown } from 'lucide-react';
+import { CircleUserRound, LogOut, ChevronDown, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 
 import Link from 'next/link';
@@ -16,6 +16,11 @@ export function Sidebar({ className }) {
             <div className="h-full flex flex-col justify-between py-4 text-white">
                 <div>
                     <div className='p-2'>
+                        <div className='mb-5'>
+                            <Link href={'/'}>
+                                <ChevronLeft className='text-white text-3xl' />
+                            </Link>
+                        </div>
                         <Image src="/equinetlogo.png" width={256} height={40} alt='equinetlogo' />
                     </div>
                     <div className="px-3 py-2">

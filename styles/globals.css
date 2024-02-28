@@ -54,10 +54,15 @@ a {
 }
 
 .partnerCard {
+  margin: auto;
   width: 220px;
   height: 244px;
   text-align: center;
   padding: 24px 8px 24px 8px;
+}
+
+.bg-urban {
+  background-color: #35595B !important;
 }
 
 .bg-purple {
@@ -67,6 +72,15 @@ a {
 .text-purple {
   color: #483B4F !important;
 }
+
+.text-urban {
+  color: #35595B !important;
+}
+
+.text-green {
+  color: #079455;
+}
+
 
 .partnersHeader {
   background-color: #483B4F;
@@ -81,8 +95,10 @@ a {
 
 .bgImg {
   background-image: url('/build.png');
-  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 435px;
+  max-width: 100%;
   height: 290px;
   border-radius: 12px;
   overflow: hidden;
@@ -98,6 +114,8 @@ a {
 
 .flowCard {
   border-radius: 12px;
+  width: fit-content;
+  margin: auto;
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -146,6 +164,10 @@ a {
   font-weight: 500;
 }
 
+.urbanHeader {
+  background-color: #35595B;
+}
+
 .visitBtn {
   width: 100%;
   border: solid 1px #84ADFF;
@@ -159,6 +181,7 @@ a {
 
 .launchBtn {
   width: 223px;
+  max-width: 100%;
   color: white;
   background-color: #0063F7;
   border-radius: 50px;
@@ -188,6 +211,10 @@ a {
   font-weight: 600;
   color: #51525C;
   border-radius: 50px;
+}
+
+p .text-destructive {
+  line-height: 60px !important;
 }
 
 @layer base {

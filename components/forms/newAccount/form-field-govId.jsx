@@ -20,7 +20,7 @@ import WebCamPhoto from './webcam-photo';
  * @returns React.FC Form Field
  */
 const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, setIsUploadPoDComplete }) => (
-    <div className='grid gap-2 w-30'>
+    <>
         <PassportOrDriversId
             control={control}
             setIsUploadPoDComplete={setIsUploadPoDComplete} />
@@ -28,7 +28,7 @@ const FormFieldGovId = ({ control, isCaptureCompleted, setIsCaptureCompleted, se
             control={control}
             isCaptureCompleted={isCaptureCompleted}
             setIsCaptureCompleted={setIsCaptureCompleted} />
-    </div>
+    </>
 );
 
 const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
@@ -38,7 +38,7 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
     };
 
     return (
-        <div className="p-4 bg-neutral-50 rounded-lg ">
+        <div className="p-4 bg-neutral-50 rounded-lg h-80 xl:h-3/6 mb-5">
             <FormField
                 control={control}
                 name="govId"
@@ -50,12 +50,12 @@ const PassportOrDriversId = ({ control, setIsUploadPoDComplete }) => {
                         </div>
                         <FormControl>
                             {field.value !== '' ? (
-                                <div className='grid p-4'>
+                                <div className='grid p-4 pt-16'>
                                     <Image src={field.value} alt='example_passport' width={392} height={248} />
                                 </div>
                             ) : (
                                 <div className='text-center h-full'>
-                                    <div className='w-full pt-5 pb-5'>
+                                    <div className='w-full pt-2 xl:pt-16 pb-5'>
                                         <div>
                                             <Image className='m-auto' src="/upload_file.png" alt='upload_file' width={149} height={186} />
                                         </div>

@@ -7,7 +7,7 @@ const partners = [
         description: "IdentityClarity is the KYC provider to the clarity partners ecosystem",
         background: "#D19C3C",
         sizes: [179, 49],
-        links: null
+        links: []
     },
     {
         name: "Forsur",
@@ -17,7 +17,7 @@ const partners = [
         description: "Forsur offers biometric credentials for such and such.",
         background: "#3D4C41",
         sizes: [93, 82],
-        links: null
+        links: []
     },
     {
         name: "Quotient",
@@ -52,7 +52,7 @@ const partners = [
         links: [
             {
                 title: "Browse Inventory",
-                url: null
+                url: '#'
             },
             {
                 title: "Apply Now!",

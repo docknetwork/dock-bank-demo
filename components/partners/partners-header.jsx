@@ -29,7 +29,7 @@ const PartnersHeader = () => (
                         Welcome to the Identity Clarity ecosystem clarity partners.
                     </h1>
                 </div>
-                <div className='mt-5 max-w-xl'>
+                <div className='mt-5'>
                     <p className='font-light text-lg text-white'>
                         Join the privacy conscious ecosystem of partners providing valuable
                         services to all of our members.

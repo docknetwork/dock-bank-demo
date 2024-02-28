@@ -1,21 +1,20 @@
+import { dockUrl } from 'utils/constants';
+
 export default async (req, res) => {
-  if (req.method !== 'POST') {
-    console.log('Only post request allowed');
+  if (req.method !== 'GET') {
+    console.log('Only GET request allowed');
     res.status(400).json({});
     return;
   }
 
-  const body = req.body;
+  const PROOF_ID = req.query.proofID;
 
-  console.log('body::', body);
-
-  const result = await fetch(body.url, {
-    method: 'POST',
+  const result = await fetch(`${dockUrl}/proof-requests/${PROOF_ID}`, {
+    method: 'GET',
     headers: {
       'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify(body),
   });
 
   const response = await result.json();

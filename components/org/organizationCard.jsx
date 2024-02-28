@@ -4,7 +4,10 @@ import Link from 'next/link';
 export default function OrganizationCard({ org }) {
     return (
         <>
-            <div className='cardImg valign-middle'>
+            <div className='cardImg valign-middle m-auto'>
+                <p className='font-bold mb-5'>
+                    {org.label}
+                </p>
                 <div>
                     <Image priority={true} src={org.logo} width={org.size[0]} height={org.size[1]} alt='orglogo' />
                 </div>

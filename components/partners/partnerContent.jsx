@@ -15,8 +15,8 @@ const PartnerContent = ({ currentPartner }) => (
         </div>}
 
         {currentPartner.links && currentPartner.links.length > 0 && (
-            <div className='flex mt-5 gap-4 ' >
-                {currentPartner.links?.map((link) => (
+            <div className='flex mt-5 gap-4'>
+                {currentPartner.links && currentPartner.links.map((link) => (
                     <div key={link.title}>
                         {link.url !== undefined ? (
                             <div>

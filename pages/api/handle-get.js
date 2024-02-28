@@ -1,21 +1,18 @@
 export default async (req, res) => {
-  if (req.method !== 'POST') {
-    console.log('Only post request allowed');
+  if (req.method !== 'GET') {
+    console.log('Only GET request allowed');
     res.status(400).json({});
     return;
   }
 
-  const body = req.body;
+  const url = req.query.url;
 
-  console.log('body::', body);
-
-  const result = await fetch(body.url, {
-    method: 'POST',
+  const result = await fetch(url, {
+    method: 'GET',
     headers: {
       'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify(body),
   });
 
   const response = await result.json();
@@ -23,7 +20,7 @@ export default async (req, res) => {
 
   if (!result.ok) {
     const errorText = await result.text();
-    throw new Error(`API Error: ${result.status} - ${errorText}`);
+    throw new Error(`API get Error: ${result.status} - ${errorText}`);
   }
 
   res.status(202).send(response);
