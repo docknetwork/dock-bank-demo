@@ -8,7 +8,9 @@ import { dockUrl } from "./constants";
  */
 export async function createCredential(registryId, credential) {
     // Set the credential status to the registry ID.
-    credential.credential.status = registryId;
+    if (registryId) {
+        credential.credential.status = registryId;
+    }
 
     return await postRequest(
         `${dockUrl}/credentials/`,
