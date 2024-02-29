@@ -12,6 +12,7 @@ export async function createCredential(registryId, credential) {
         credential.credential.status = registryId;
     }
 
+    console.log("issuing credential", credential);
     return await postRequest(
         `${dockUrl}/credentials/`,
         credential,
