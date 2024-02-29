@@ -16,7 +16,7 @@ export default async (req, res) => {
       'content-type': 'application/json',
     },
   });
-
+  console.log('handle-proof-1');
   const response = await result.json();
   console.log('response:', result);
 

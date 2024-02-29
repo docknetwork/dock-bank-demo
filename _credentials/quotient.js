@@ -15,7 +15,7 @@ export function createBankIdCredential({
     url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
-      //      algorithm: "dockbbs+",
+      algorithm: "dockbbs+",
       persist: true,
       password: "1234",
       distribute: true,
