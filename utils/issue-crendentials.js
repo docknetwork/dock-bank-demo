@@ -7,13 +7,18 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
 
     const credentialPayload = credential;
     const _credential = credentialPayload.credential;
-    const type = 'DockVBAccumulator2022';
-    //CREATING REGISTRY
-    const registry = await createRegistry(_credential.issuer.id, type);
-    //WAITING FOR REGISTRY JOB CONFIRMATION
-    await waitForJobCompletion(registry.id);
+
+    let registry = null;
+    if (_credential.name === "EquiNet - Credit Score") {
+        const type = 'DockVBAccumulator2022';
+        //CREATING REGISTRY
+        registry = await createRegistry(_credential.issuer.id, type);
+        //WAITING FOR REGISTRY JOB CONFIRMATION
+        await waitForJobCompletion(registry.id);
+    }
+
     //SIGNING CREDENTIAL
-    const signed = await createCredential(registry.data.id, credentialPayload);
+    const signed = await createCredential(registry?.data?.id, credentialPayload);
 
     const issuedCredential = await distributeCredential(signed.data);
 
