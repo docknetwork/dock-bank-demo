@@ -22,12 +22,12 @@ export const useVerifyProof = () => {
         console.log("statusResponse:", statusResponse)
         if (statusResponse.data.verified === true) {
             setRetrievedData(statusResponse.data.presentation)
-            const holder = statusResponse.data.presentation.holder
+            const holder = statusResponse.data.presentation.credentials[0]?.credentialSubject?.id
             console.log('holder:', holder);
-            // if (!holder) {
-            //     throw new Error('No holder present in the presentation.')
-            // }
-            // setUserDid(holder)
+            if (!holder) {
+                throw new Error('No holder present in the presentation.')
+            }
+            setUserDid(holder)
             setVerified(statusResponse.data.verified);
             clearInterval(intervalId);
             toast.success("Proof request verified successfully!");
