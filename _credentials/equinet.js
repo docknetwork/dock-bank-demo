@@ -10,11 +10,8 @@ export function createCreditScoreCredential({ receiverDid, recipientEmail, credi
     url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
-      persist: true,
-      password: "1234",
       distribute: true,
       credential: {
-        id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: "EquiNet - Credit Score",
         description: "This schema represents a Verified Credit Score Credential, issued by EquiNet. It standardizes the presentation of credit scores for reliable and efficient verification processes.",
         type: [
