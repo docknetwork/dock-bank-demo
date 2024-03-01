@@ -10,7 +10,7 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
 
     let registry = null;
     if (_credential.name === "EquiNet - Credit Score") {
-        const type = 'DockVBAccumulator2022';
+        const type = 'StatusList2021Entry';
         //CREATING REGISTRY
         registry = await createRegistry(_credential.issuer.id, type);
         //WAITING FOR REGISTRY JOB CONFIRMATION
