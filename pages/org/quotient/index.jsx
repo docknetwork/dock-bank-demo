@@ -77,9 +77,9 @@ const QuotientBankForm = () => {
     return null;
   }
 
-  const createCredential = async (credential, payload) => {
+  const createCredential = async (credential, payload, isRevocable) => {
     const credentialObj = credential(payload);
-    await issueRevokableCredential(credentialObj.body, setRevokableCredential);
+    await issueRevokableCredential(credentialObj.body, setRevokableCredential, isRevocable);
   };
 
   async function issueCredentials() {
@@ -92,8 +92,8 @@ const QuotientBankForm = () => {
       return;
     }
 
-    await createCredential(createBankIdCredential, quotient_Payload);
-    await createCredential(createCreditScoreCredential, credentialPayload);
+    await createCredential(createBankIdCredential, quotient_Payload, false);
+    await createCredential(createCreditScoreCredential, credentialPayload, true);
 
     toast.info('Credentials issued successfully.');
   }

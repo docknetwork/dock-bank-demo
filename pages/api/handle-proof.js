@@ -16,7 +16,6 @@ export default async (req, res) => {
       'content-type': 'application/json',
     },
   });
-
   const response = await result.json();
   console.log('response:', result);
 

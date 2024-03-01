@@ -22,7 +22,7 @@ export const useVerifyProof = () => {
         console.log("statusResponse:", statusResponse)
         if (statusResponse.data.verified === true) {
             setRetrievedData(statusResponse.data.presentation)
-            const holder = statusResponse.data.presentation.holder
+            const holder = statusResponse.data.presentation.credentials[0]?.credentialSubject?.id
             console.log('holder:', holder);
             if (!holder) {
                 throw new Error('No holder present in the presentation.')
