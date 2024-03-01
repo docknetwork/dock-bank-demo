@@ -1,5 +1,5 @@
 import { createRegistry } from './dock-registries';
-import { createCredential, distributeCredential } from './dock-credentials';
+import { createCredential } from './dock-credentials';
 import { waitForJobCompletion } from './dock-jobs';
 import { toast } from 'sonner';
 
@@ -19,8 +19,6 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
 
     //SIGNING CREDENTIAL
     const signed = await createCredential(registry?.data?.id, credentialPayload);
-
-    // const issuedCredential = await distributeCredential(signed.data);
 
     if (isRevocable) {
         setRevokableCredential({
