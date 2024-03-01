@@ -3,14 +3,14 @@ import { createCredential, distributeCredential } from './dock-credentials';
 import { waitForJobCompletion } from './dock-jobs';
 import { toast } from 'sonner';
 
-export const issueRevokableCredential = async (credential, setRevokableCredential) => {
+export const issueRevokableCredential = async (credential, setRevokableCredential, isRevocable) => {
 
     const credentialPayload = credential;
     const _credential = credentialPayload.credential;
 
     let registry = null;
-    if (_credential.name === "EquiNet - Credit Score") {
-        const type = 'StatusList2021Entry';
+    if (isRevocable) {
+        const type = credentialPayload.algorithm === 'dockbbs+' ? 'DockVBAccumulator2022' : 'StatusList2021Entry';
         //CREATING REGISTRY
         registry = await createRegistry(_credential.issuer.id, type);
         //WAITING FOR REGISTRY JOB CONFIRMATION
@@ -20,9 +20,9 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
     //SIGNING CREDENTIAL
     const signed = await createCredential(registry?.data?.id, credentialPayload);
 
-    const issuedCredential = await distributeCredential(signed.data);
+    // const issuedCredential = await distributeCredential(signed.data);
 
-    if (_credential.name === "EquiNet - Credit Score") {
+    if (isRevocable) {
         setRevokableCredential({
             registryId: registry.data.id,
             credentialId: _credential.id,
@@ -31,6 +31,6 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
         console.log('setting Revokable credential set in localStorage');
     }
 
-    toast.success(`Issued ${_credential.name} crendential`, { duration: 10000 })
+    toast.success(`Issued ${_credential.name} credential`, { duration: 10000 })
     return issuedCredential;
 };
