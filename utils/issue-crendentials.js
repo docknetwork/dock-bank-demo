@@ -23,12 +23,12 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
         console.log(signed);
         setRevokableCredential({
             registryId: registry.data.id,
-            credentialId: signed.id,
+            credentialId: signed.data.id,
             userDid: _credential.subject.id
         });
         console.log('setting Revokable credential set in localStorage');
     }
 
     toast.success(`Issued ${_credential.name} credential`, { duration: 10000 });
-    return signed;
+    return signed.data;
 };
