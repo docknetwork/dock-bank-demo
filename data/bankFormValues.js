@@ -4,10 +4,10 @@ const DEFAULT_BANK_FORM_VALUES = {
     lastName: 'Miller',
     suffix: 'Senior',
     dob: new Date('1985-02-15'), // Date Of Birthday
-    streetAddress: 'Wallstreet 10',
+    streetAddress: '10 Riverfront Street',
     suite: '',
-    zipCode: '01234',
-    city: 'Sacramento',
+    zipCode: '95691',
+    city: 'West Sacramento',
     state: 'California',
     email: 'euan@example.com',
     phoneNumber: '1-234-567-8900',
@@ -17,4 +17,4 @@ const DEFAULT_BANK_FORM_VALUES = {
     webcamPic: '',
 };
 
-export default DEFAULT_BANK_FORM_VALUES
+export default DEFAULT_BANK_FORM_VALUES;
