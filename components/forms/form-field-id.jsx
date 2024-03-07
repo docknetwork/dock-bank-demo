@@ -82,7 +82,7 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                         <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                                 <SelectTrigger>
-                                    <SelectValue/>
+                                    <SelectValue placeholder="Select one" />
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
