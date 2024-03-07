@@ -79,8 +79,14 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Suffix (optional)</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value} placeholder='Select one'>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select one" />
+                                </SelectTrigger>
+                            </FormControl>
                             <SelectContent>
+                                <SelectItem value={' '}> </SelectItem>
                                 <SelectItem value={'Junior'}>Junior</SelectItem>
                                 <SelectItem value={'Senior'}>Senior</SelectItem>
                             </SelectContent>
