@@ -29,7 +29,7 @@ const DEFAULT_FORM_VALUES = {
   price: '28999',
   firstName: '',
   lastName: '',
-  suffix: 'He',
+  suffix: '',
   streetAddress: '',
   suite: '15',
   zipCode: '',
