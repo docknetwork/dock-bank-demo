@@ -1,7 +1,7 @@
 const qrCodeVerificationData = {
     LOAN: {
         title: 'Instant approval by authenticating with your mobile banking app and providing the needed credentials including a validated credit score over 700.',
-        qrText: 'Scan the QR code below with your terive mobile banking app.',
+        qrText: 'Scan the QR code below with your Quotient mobile banking app.',
         qrTextAfter: null
     },
     BANK: {
