@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { dockUrl } from "utils/constants";
+import { v4 as uuidv4 } from 'uuid';
+import { dockUrl } from 'utils/constants';
 
 export function createBankIdCredential({
   receiverDid,
@@ -8,27 +8,26 @@ export function createBankIdCredential({
   receiverAddress,
   biometricData
 }) {
-
-  console.log("Creating Quotient Bank Identity Credential for:", receiverDid);
+  console.log('Creating Quotient Bank Identity Credential for:', receiverDid);
 
   const credentialPayload = {
     url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
-      algorithm: "dockbbs+",
+      algorithm: 'dockbbs+',
       distribute: true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
-        name: "Quotient - Bank Identity",
+        name: 'Quotient - Bank Identity',
         description: "The \"Quotient - Bank Identity\" schema provides a secure and standardized format for representing key aspects of an individual's bank identity.",
         type: [
-          "VerifiableCredential",
-          "QuotientBankIdentity"
+          'VerifiableCredential',
+          'QuotientBankIdentity'
         ],
         issuer: {
-          name: "Quotient Credit Union",
-          description: "Quotient is our credit union",
-          logo: "https://img.dock.io/06d78272268c606a172d5fd1cd559b46",
+          name: 'Quotient Credit Union',
+          description: 'Quotient is our credit union',
+          logo: 'https://img.dock.io/06d78272268c606a172d5fd1cd559b46',
           id: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID
         },
         subject: {
@@ -37,7 +36,7 @@ export function createBankIdCredential({
           address: receiverAddress.address,
           city: receiverAddress.city,
           zip: receiverAddress.zip,
-          city: receiverAddress.state,
+          state: receiverAddress.state,
           account_number: `ABC${uuidv4()}`,
           biometric: biometricData
         }
@@ -46,7 +45,7 @@ export function createBankIdCredential({
   };
 
   if (recipientEmail && recipientEmail.length > 2 && validateEmail(recipientEmail)) {
-    credentialPayload.recipientEmail = recipientEmail
+    credentialPayload.recipientEmail = recipientEmail;
   }
 
   return credentialPayload;

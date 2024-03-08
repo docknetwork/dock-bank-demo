@@ -2,9 +2,9 @@ const DEFAULT_BANK_FORM_VALUES = {
     firstName: 'Euan',
     middleName: '',
     lastName: 'Miller',
-    suffix: 'Senior',
-    dob: new Date('1985-02-15'), // Date Of Birthday
-    streetAddress: 'Wallstreet 10',
+    suffix: '',
+    dob: new Date('1987-11-22'), // Date Of Birthday
+    streetAddress: '123 Sample Street',
     suite: '',
     zipCode: '01234',
     city: 'Sacramento',
@@ -17,4 +17,4 @@ const DEFAULT_BANK_FORM_VALUES = {
     webcamPic: '',
 };
 
-export default DEFAULT_BANK_FORM_VALUES
+export default DEFAULT_BANK_FORM_VALUES;

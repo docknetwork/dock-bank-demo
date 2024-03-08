@@ -86,8 +86,9 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem disabled={field.value === 'Junior'} value={'Junior'}>Junior</SelectItem>
-                                <SelectItem disabled={field.value === 'Senior'} value={'Senior'}>Senior</SelectItem>
+                                <SelectItem value={' '}>Select one</SelectItem>
+                                <SelectItem value={'Junior'}>Junior</SelectItem>
+                                <SelectItem value={'Senior'}>Senior</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
