@@ -15,7 +15,7 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
     return (
         <div className='bg-neutral-50 rounded-lg space-y-5 h-fit p-5'>
             {(title !== null && title !== '') && <div>
-                <h2 className='text-2xl font-semibold mb-5'>{title}</h2>
+                <h2 className='font-semibold mb-5'>{title}</h2>
                 <Separator />
             </div>
             }
@@ -23,7 +23,7 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
                 <>
                     {(qrText !== null && qrText !== '') && (
                         <div>
-                            <p className='text-start font-semibold'>{qrText}</p>
+                            <h2 className='text-2xl font-semibold mb-5'>{qrText}</h2>
                         </div>
                     )}
 
