@@ -43,8 +43,11 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <LandingDemo />
-        <div className="mt-5">
+        <div className="mt-10 mb-10">
+          <Separator />
+        </div>
+        <DemoFlow />
+        <div className="mt-5 m-auto">
           <Link href="/org/quotient">
             <button className="launchBtn">Launch Demo</button>
           </Link>
