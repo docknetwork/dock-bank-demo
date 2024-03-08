@@ -21,3 +21,272 @@ a {
 .text-base {
   font-size: 14px;
 }
+
+#reader img {
+  margin: auto;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.orgCard {
+  position: relative;
+  background-color: #F9F9F9;
+  border-radius: 32px;
+  height: 365px;
+  padding: 20px;
+  max-width: 245px;
+  text-align: center;
+  text-align: -webkit-center;
+  position: relative;
+  margin: auto;
+}
+
+.orgCard .cardBottom {
+  position: absolute;
+  width: 90%;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: auto;
+}
+
+.partnerCard {
+  margin: auto;
+  width: 220px;
+  height: 244px;
+  text-align: center;
+  padding: 24px 8px 24px 8px;
+}
+
+.bg-urban {
+  background-color: #35595B !important;
+}
+
+.bg-purple {
+  background-color: #635A66 !important;
+}
+
+.text-purple {
+  color: #483B4F !important;
+}
+
+.text-urban {
+  color: #35595B !important;
+}
+
+.text-green {
+  color: #079455;
+}
+
+
+.partnersHeader {
+  background-color: #483B4F;
+  padding: 48px 40px 48px 40px;
+  min-height: 296px;
+}
+
+.partnerNavbar {
+  background-color: #483B4F;
+  padding: 12px 0px 10px 0px;
+}
+
+.bgImg {
+  background-image: url('/build.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 435px;
+  max-width: 100%;
+  height: 290px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bgImg .overlay {
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.4;
+}
+
+.flowCard {
+  border-radius: 12px;
+  width: fit-content;
+  margin: auto;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px 16px 24px;
+}
+
+.index-2 {
+  z-index: 2;
+}
+
+.cardsContainer {
+  max-width: 1266px;
+  margin: auto;
+}
+
+.mainContainer {
+  max-width: 1480px;
+  margin: auto;
+}
+
+.equinetContainer {
+  max-width: 1038px;
+}
+
+.mainContainer input {
+  border: solid 1px #D1D1D6 !important;
+}
+
+.mainContainer input::placeholder {
+  color: #A0A0AB !important;
+}
+
+.activeItem {
+  background-color: transparent;
+  border: solid 1px white;
+  border-radius: 50px;
+}
+
+.cardImg {
+  min-height: 125px;
+}
+
+.Header {
+  font-size: 22px;
+  color: #00359E;
+  font-weight: 500;
+}
+
+.urbanHeader {
+  background-color: #35595B;
+}
+
+.visitBtn {
+  width: 100%;
+  border: solid 1px #84ADFF;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  margin: auto;
+}
+
+.launchBtn {
+  width: 223px;
+  max-width: 100%;
+  color: white;
+  background-color: #0063F7;
+  border-radius: 50px;
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.uploadBtn {
+  width: 100%;
+  border: solid 1px#0E387A;
+  background-color: #EFF5FF;
+  font-size: 14px;
+  font-weight: 600;
+  color: #51525C;
+}
+
+.equinetBg {
+  background-color: #265170;
+}
+
+.partnerBtn {
+  background-color: #E2DCE5;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #51525C;
+  border-radius: 50px;
+}
+
+p .text-destructive {
+  line-height: 60px !important;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
