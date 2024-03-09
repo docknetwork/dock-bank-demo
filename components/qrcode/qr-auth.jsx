@@ -23,7 +23,7 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
                 <>
                     {(qrText !== null && qrText !== '') && (
                         <div>
-                            <p className='text-start font-semibold'>{qrText}</p>
+                            <h2 className='text-2xl font-semibold mb-5'>{qrText}</h2>
                         </div>
                     )}
 

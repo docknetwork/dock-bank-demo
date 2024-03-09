@@ -10,8 +10,8 @@ const qrCodeVerificationData = {
         qrTextAfter: 'You will be required to provide a biometric on your mobile device in order to receive these credentials.'
     },
     URBAN_BANKBIO: {
-        title: null,
-        qrText: 'Automate approval by using your mobile banking app to complete this form with verified information. Approval guaranteed with a credit score over 600.',
+        title: 'Automate approval by using your mobile banking app to complete this form with verified information. Approval guaranteed with a credit score over 600.',
+        qrText: 'Scan the QR code below with your Quotient mobile banking app.',
         qrTextAfter: null
     },
     URBAN_CREDITSCORE: {
