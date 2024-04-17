@@ -1,5 +1,6 @@
 import { toast } from 'sonner';
-import { createRegistry } from './dock-registries';
+import { data } from 'autoprefixer';
+import { createRegistry, getExistingRegistry } from './dock-registries';
 import { createCredential } from './dock-credentials';
 import { waitForJobCompletion } from './dock-jobs';
 
@@ -10,19 +11,24 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
     let registry = null;
     if (isRevocable) {
         const type = credentialPayload.algorithm === 'dockbbs+' ? 'DockVBAccumulator2022' : 'StatusList2021Entry';
-        // CREATING REGISTRY
-        registry = await createRegistry(_credential.issuer.id, type);
-        // WAITING FOR REGISTRY JOB CONFIRMATION
-        await waitForJobCompletion(registry.id);
+        registry = await getExistingRegistry(_credential.issuer.id, type);
+
+        if (!registry) {
+            // CREATING REGISTRY
+            const newRegistry = await createRegistry(_credential.issuer.id, type);
+            // WAITING FOR REGISTRY JOB CONFIRMATION
+            await waitForJobCompletion(newRegistry.id);
+            registry = newRegistry.data;
+        }
     }
 
     // SIGNING CREDENTIAL
-    const signed = await createCredential(registry?.data?.id, credentialPayload);
+    const signed = await createCredential(registry?.id, credentialPayload);
 
     if (isRevocable) {
         console.log(signed);
         setRevokableCredential({
-            registryId: registry.data.id,
+            registryId: registry.id,
             credentialId: signed.data.id,
             userDid: _credential.subject.id
         });
