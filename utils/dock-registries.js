@@ -99,7 +99,7 @@ export async function unrevoke(registryId, credential) {
 }
 
 export async function getExistingRegistry(did, searchType) {
-    const registriesResponse = await apiGet(encodeURIComponent(`${dockUrl}/registries?did=${encodeURIComponent(did)}&type=${searchType}`));
+    const registriesResponse = await apiGet(encodeURIComponent(`${dockUrl}/registries?did=${encodeURIComponent(did)}&type=${searchType}&limit=1`));
 
     if (!registriesResponse || !registriesResponse.data || registriesResponse.data.length === 0) {
         return null;
