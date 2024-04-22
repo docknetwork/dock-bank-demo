@@ -1,6 +1,6 @@
-import { postRequest, apiGet } from "./request";
-import { dockUrl } from "./constants";
 import { toast } from 'sonner';
+import { postRequest, apiGet } from './request';
+import { dockUrl } from './constants';
 /**
  * Creates a new registry by calling the Registries API endpoint.
  *
@@ -12,7 +12,7 @@ export async function createRegistry(policyDid, type) {
     const data = {
         addOnly: false,
         policy: [policyDid],
-        type: type,
+        type,
     };
 
     try {
@@ -21,13 +21,11 @@ export async function createRegistry(policyDid, type) {
             data,
         );
 
-        console.log("Registries :", response);
+        console.log('Registries :', response);
         if (response.data) {
-            return response.data
-        } else {
-            throw new Error('Data is not present on registries response')
-        }
-
+            return response.data;
+        } 
+            throw new Error('Data is not present on registries response');
     } catch (error) {
         console.error(error);
     }
@@ -37,9 +35,9 @@ export async function createRegistry(policyDid, type) {
 
 export async function getRegistry(registryId) {
     try {
-        return apiGet(`${dockUrl}/registries/${registryId}`)
+        return apiGet(`${dockUrl}/registries/${registryId}`);
     } catch (error) {
-        toast.error('Invalid crendential registry.')
+        toast.error('Invalid crendential registry.');
     }
 }
 
@@ -52,13 +50,12 @@ export async function getRegistry(registryId) {
  */
 
 export const revokeCredential = async (registryId, credentialId) => {
-
     const payload = {
-        "action": "revoke",
-        "credentialIds": [
+        action: 'revoke',
+        credentialIds: [
             credentialId
         ]
-    }
+    };
 
     try {
         return await postRequest(
@@ -66,9 +63,8 @@ export const revokeCredential = async (registryId, credentialId) => {
             payload,
         );
     } catch (error) {
-        toast.warning('Error revoking this credential')
+        toast.warning('Error revoking this credential');
     }
-
 };
 
 /**
@@ -79,25 +75,35 @@ export const revokeCredential = async (registryId, credentialId) => {
  * @returns {Promise<any>} A promise that resolves to the API response if successful, or rejects with an error.
  */
 export async function unrevoke(registryId, credential) {
-    console.log("unrevoke:start:", { registryId, credential });
+    console.log('unrevoke:start:', { registryId, credential });
 
     const url = `registries/${registryId}`;
 
     const data = {
-        action: "unrevoke",
+        action: 'unrevoke',
         credentialIds: [credential.id],
     };
 
     try {
         const response = await postRequest({
-            url: url,
+            url,
             body: data,
         });
 
         return response;
     } catch (error) {
-        console.error("unrevoke:error", error);
+        console.error('unrevoke:error', error);
     }
 
     return undefined;
+}
+
+export async function getExistingRegistry(did, searchType) {
+    const registriesResponse = await apiGet(encodeURIComponent(`${dockUrl}/registries?did=${encodeURIComponent(did)}&type=${searchType}&limit=1`));
+
+    if (!registriesResponse || !registriesResponse.data || registriesResponse.data.length === 0) {
+        return null;
+    }
+
+    return registriesResponse.data[0];
 }

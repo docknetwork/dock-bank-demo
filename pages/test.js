@@ -46,15 +46,15 @@ export default function Test() {
     }
   }
 
-  const createCredential = async (credential, payload) => {
+  const createCredential = async (credential, payload, isRevocable) => {
     const credentialObj = credential(payload);
-    await issueRevokableCredential(credentialObj.body, setRevokableCredential);
+    await issueRevokableCredential(credentialObj.body, setRevokableCredential, isRevocable);
   };
 
   async function issueNewCredential() {
     toast.info('Issuing new credential', { duration: 10000 });
     try {
-      await createCredential(createCreditScoreCredential, credentialPayload);
+      await createCredential(createCreditScoreCredential, credentialPayload, true);
       toast.success('Credentials issued successfully.');
       setLoadingRevokation(false);
     } catch (error) {
@@ -70,7 +70,7 @@ export default function Test() {
   }
 
   return (
-    <div className="mainContainer ta-c pt-10">
+    <div className="pt-10 mainContainer ta-c">
       <div className="ta-c">
         <h1 className="text-2xl font-bold">Helper functions</h1>
       </div>
