@@ -1,4 +1,5 @@
 import { useQRCode } from 'next-qrcode';
+import Image from 'next/image';
 
 export const QRCodeGenerator = ({ url }) => {
     const { Canvas } = useQRCode();
@@ -19,6 +20,7 @@ export const QRCodeGenerator = ({ url }) => {
                     }
                 }}
             />
+            <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
         </div>
     );
 };

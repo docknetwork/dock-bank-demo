@@ -28,9 +28,9 @@ const DEFAULT_FORM_VALUES = {
     issueState: 'CA',
     streetAddress: '',
     suite: '',
-    zipCode: '01234',
-    city: 'Sacramento',
-    state: 'California',
+    zipCode: '',
+    city: '',
+    state: '',
     email: 'euanmiller@email.com',
     phoneNumber: '12312312321',
     occupants: [
