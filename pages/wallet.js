@@ -14,9 +14,11 @@ export default function Wallet() {
         <title>Quotient Wallet</title>
       </Head>
       <Header />
-      <div className='mb-4 mt-2 '>
-        <h2 className='font-medium text-3xl text-slate-700'>Get the Quotient Wallet</h2>
-        <p className='text-xl'>Scan the QR code to download the Quotient Wallet for Android or iOS.</p>
+      <div className="mb-4 mt-2">
+        <h2 className="font-medium text-3xl text-slate-700">Get the Quotient Wallet</h2>
+        <p className="text-xl">
+          Scan the QR code to download the Quotient Wallet for Android or iOS.
+        </p>
 
         <div className="m-auto rounded-lg overflow-hidden flex justify-center">
           <Canvas
@@ -28,8 +30,8 @@ export default function Wallet() {
               width: qrCodeSize,
               color: {
                 dark: '#0E387A',
-                light: '#FFFFFF'
-              }
+                light: '#FFFFFF',
+              },
             }}
           />
         </div>

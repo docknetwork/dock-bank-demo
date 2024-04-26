@@ -53,7 +53,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "dprint": "^0.27.0",
+    "dprint": "^0.45.1",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-next": "12.2.3"

@@ -19,6 +19,41 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@dprint/darwin-arm64@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/darwin-arm64/-/darwin-arm64-0.45.1.tgz#3c989b5fd7122a61f20ec95db1a3e6f020634a90"
+  integrity sha512-pH0/uKLJ5SJPoHhOwLWFMhCmL0BY3FzWQbull8OGMK/FRkIPgOl2adZSovtUZpUMGWyDOzIWH1fW9X2DuMhnEg==
+
+"@dprint/darwin-x64@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/darwin-x64/-/darwin-x64-0.45.1.tgz#f024fa56804ecdb7b52e31e698b95c5f8fc9e8d1"
+  integrity sha512-YUj421LmBLDlxpIER3pORKfQmpmXD50n5mClHjpZrnl17WTiHtQ+jHvDJdJoxH2eS66W0mQyxLoGo5SfFfiM7A==
+
+"@dprint/linux-arm64-glibc@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/linux-arm64-glibc/-/linux-arm64-glibc-0.45.1.tgz#e31be90fd8483f8b79c0a7081c7befb167c5865e"
+  integrity sha512-lJ7s/pOQWRJ0mstjZQnVyX2/3QRXZ9cpFHJDZ7e81Y8QSn/iqxTrnK0DPgxUrDG8hYKQmWQdQLU4sP5DKBz0Jg==
+
+"@dprint/linux-arm64-musl@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/linux-arm64-musl/-/linux-arm64-musl-0.45.1.tgz#ff5ad5ce0d55d8ff35139992f283765326a0bc2b"
+  integrity sha512-un2awe1L1sAJLsCPSEUrE0/cgupdzbYFoyBOutyU1zHR9KQn47AtIDw+chvuinU4xleHDuEGyXGuJ6NE+Ky6vw==
+
+"@dprint/linux-x64-glibc@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/linux-x64-glibc/-/linux-x64-glibc-0.45.1.tgz#890a1c42507746d2082778ec67d6e2873b6c7f71"
+  integrity sha512-5Civht90S/g8zlyYB7n4oH78p+sLbNqeFCFuImJRK7uRxZwCRya7lji6RwlB6DQ7qngVqovTHj9RLOYfZzfVlg==
+
+"@dprint/linux-x64-musl@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/linux-x64-musl/-/linux-x64-musl-0.45.1.tgz#53508925c105c8392335f0b6e15c49334e631c96"
+  integrity sha512-p2/gjnHDd8GRCvtey5HZO4o/He6pSmY/zpcCuIXprFW9P0vNlEj3DFhz4FPpOKXM+csrsVWWs2E0T/xr5QZtVg==
+
+"@dprint/win32-x64@0.45.1":
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/@dprint/win32-x64/-/win32-x64-0.45.1.tgz#6d08308cf08e4b751efb0692ded28b57d42a365d"
+  integrity sha512-2l78XM7KsW46P2Yv6uPB3fE+y92EsBlrCxi+RVQ0pbznPFdMdkLyGgaCuh683zdld14jHlaADpIQ7YchGAEMAg==
+
 "@eslint/eslintrc@^1.3.0":
   version "1.4.1"
   resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-1.4.1.tgz"
@@ -181,7 +216,7 @@
 
 "@next/swc-darwin-arm64@12.2.3":
   version "12.2.3"
-  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-12.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/@next/swc-darwin-arm64/-/swc-darwin-arm64-12.2.3.tgz#ce1a5a7320936b2644b765ace3283e5d1676b6a0"
   integrity sha512-eutDO/RH6pf7+8zHo3i2GKLhF0qaMtxWpY8k3Oa1k+CyrcJ0IxwkfH/x3f75jTMeCrThn6Uu8j3WeZOxvhto1Q==
 
 "@next/swc-darwin-x64@12.2.3":
@@ -211,12 +246,12 @@
 
 "@next/swc-linux-x64-gnu@12.2.3":
   version "12.2.3"
-  resolved "https://registry.yarnpkg.com/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-12.2.3.tgz#84a3d99f9d656fbc139f3a19f9b1baf73877d18f"
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-12.2.3.tgz"
   integrity sha512-MbFI6413VSXiREzHwYD8YAJLTknBaC+bmjXgdHEEdloeOuBFQGE3NWn3izOCTy8kV+s98VDQO8au7EKKs+bW0g==
 
 "@next/swc-linux-x64-musl@12.2.3":
   version "12.2.3"
-  resolved "https://registry.yarnpkg.com/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-12.2.3.tgz#a283431f8c6c830b4bd61147094f150ea7deeb6e"
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-12.2.3.tgz"
   integrity sha512-jMBD0Va6fInbPih/dNySlNY2RpjkK6MXS+UGVEvuTswl1MZr+iahvurmshwGKpjaRwVU4DSFMD8+gfWxsTFs1Q==
 
 "@next/swc-win32-arm64-msvc@12.2.3":
@@ -945,11 +980,6 @@ browserslist@^4.22.2:
     node-releases "^2.0.14"
     update-browserslist-db "^1.0.13"
 
-buffer-crc32@~0.2.3:
-  version "0.2.13"
-  resolved "https://registry.npmjs.org/buffer-crc32/-/buffer-crc32-0.2.13.tgz"
-  integrity sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==
-
 call-bind@^1.0.0, call-bind@^1.0.2, call-bind@^1.0.4, call-bind@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/call-bind/-/call-bind-1.0.5.tgz"
@@ -1179,12 +1209,18 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-dprint@^0.27.0:
-  version "0.27.1"
-  resolved "https://registry.npmjs.org/dprint/-/dprint-0.27.1.tgz"
-  integrity sha512-V0kUvnbA2qXkUEgSFLl0HgOta461nUB2UkuUwOEHhERhoVTML+suajA7UFYPHprCuiEFdfJTSJlCFSmlAD17MA==
-  dependencies:
-    yauzl "=2.10.0"
+dprint@^0.45.1:
+  version "0.45.1"
+  resolved "https://registry.yarnpkg.com/dprint/-/dprint-0.45.1.tgz#3cab696fb0eb0f95d975eb534832f2d998aa8819"
+  integrity sha512-OYefcDgxd6jSdig/Cfkw1vdvyiOIRruCPnqGBbXpc95buDt9kvwL+Lic1OHc+SaQSsQub0BUZMd5+TNgy8Sh3A==
+  optionalDependencies:
+    "@dprint/darwin-arm64" "0.45.1"
+    "@dprint/darwin-x64" "0.45.1"
+    "@dprint/linux-arm64-glibc" "0.45.1"
+    "@dprint/linux-arm64-musl" "0.45.1"
+    "@dprint/linux-x64-glibc" "0.45.1"
+    "@dprint/linux-x64-musl" "0.45.1"
+    "@dprint/win32-x64" "0.45.1"
 
 eastasianwidth@^0.2.0:
   version "0.2.0"
@@ -1571,13 +1607,6 @@ fastq@^1.6.0:
   integrity sha512-zGygtijUMT7jnk3h26kUms3BkSDp4IfIKjmnqI2tvx6nuBfiF1UqOxbnLfzdv+apBy+53oaImsKtMw/xYbW+1w==
   dependencies:
     reusify "^1.0.4"
-
-fd-slicer@~1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/fd-slicer/-/fd-slicer-1.1.0.tgz"
-  integrity sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==
-  dependencies:
-    pend "~1.2.0"
 
 file-entry-cache@^6.0.1:
   version "6.0.1"
@@ -2499,11 +2528,6 @@ path-type@^4.0.0:
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-pend@~1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/pend/-/pend-1.2.0.tgz"
-  integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
-
 picocolors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz"
@@ -3360,14 +3384,6 @@ yargs@^15.3.1:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
-
-yauzl@=2.10.0:
-  version "2.10.0"
-  resolved "https://registry.npmjs.org/yauzl/-/yauzl-2.10.0.tgz"
-  integrity sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==
-  dependencies:
-    buffer-crc32 "~0.2.3"
-    fd-slicer "~1.1.0"
 
 zod@^3.22.4:
   version "3.22.4"
