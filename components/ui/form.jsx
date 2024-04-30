@@ -29,12 +29,14 @@ const useFormField = () => {
   if (!fieldContext) {
     throw new Error('useFormField should be used within <FormField>');
   }
+  console.log(`fieldContext: ${JSON.stringify(fieldContext)}`);
 
   const { id } = itemContext;
 
   return {
     id,
     name: fieldContext.name,
+    isVerified: fieldContext.isVerified,
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
@@ -69,12 +71,13 @@ const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
 FormLabel.displayName = 'FormLabel';
 
 const FormControl = React.forwardRef(({ ...props }, ref) => {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+  const { error, formItemId, formDescriptionId, formMessageId, isVerified } = useFormField();
 
   return (
     (<Slot
       ref={ref}
       id={formItemId}
+      isVerified={isVerified}
       aria-describedby={
         !error
           ? `${formDescriptionId}`

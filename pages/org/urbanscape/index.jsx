@@ -49,6 +49,16 @@ const DEFAULT_FORM_VALUES = {
  */
 const UrbanScapePage = () => {
     const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_BANKBIO;
+    const [applicant, setApplicant] = useState({
+        firstName: {
+            text: '',
+            isVerified: false
+        },
+        lastName: {
+            text: '',
+            isVerified: false
+        },
+    });
 
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -83,6 +93,16 @@ const UrbanScapePage = () => {
                 if (credential) {
                     console.log('CREDENTIAL: ', credential);
                     const username = credential.credentialSubject.name.split(' ');
+                    setApplicant({
+                        firstName: {
+                            text: username[0],
+                            isVerified: true
+                        },
+                        lastName: {
+                            text: username[1],
+                            isVerified: true
+                        },
+                    });
                     form.setValue('applicantFirstName', username[0]);
                     form.setValue('applicantLastName', username[1]);
                     form.setValue('occupants', [{
@@ -122,7 +142,7 @@ const UrbanScapePage = () => {
                                         <div className='space-y-2'>
                                             <h2 className='text-urban font-bold'>APPLICANT INFORMATION</h2>
                                             <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
-                                                <FormFieldApplicantId control={form.control} />
+                                                <FormFieldApplicantId control={form.control} applicant={applicant} />
                                                 <Separator />
                                                 <FormFieldAddress control={form.control} />
                                                 <Separator />
