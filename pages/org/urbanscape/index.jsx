@@ -58,6 +58,22 @@ const UrbanScapePage = () => {
             text: '',
             isVerified: false
         },
+        streetAddress: {
+            text: '',
+            isVerified: false
+        },
+        city: {
+            text: '',
+            isVerified: false
+        },
+        zipCode: {
+            text: '',
+            isVerified: false
+        },
+        state: {
+            text: '',
+            isVerified: false
+        },
     });
 
     const [isSuccess, setIsSuccess] = useState(false);
@@ -102,6 +118,22 @@ const UrbanScapePage = () => {
                             text: username[1],
                             isVerified: true
                         },
+                        streetAddress: {
+                            text: credential.credentialSubject.address,
+                            isVerified: true
+                        },
+                        city: {
+                            text: credential.credentialSubject.city,
+                            isVerified: true
+                        },
+                        zipCode: {
+                            text: credential.credentialSubject.zip,
+                            isVerified: true
+                        },
+                        state: {
+                            text: credential.credentialSubject.state,
+                            isVerified: true
+                        },
                     });
                     form.setValue('applicantFirstName', username[0]);
                     form.setValue('applicantLastName', username[1]);
@@ -144,7 +176,7 @@ const UrbanScapePage = () => {
                                             <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
                                                 <FormFieldApplicantId control={form.control} applicant={applicant} />
                                                 <Separator />
-                                                <FormFieldAddress control={form.control} />
+                                                <FormFieldAddress control={form.control} applicant={applicant} />
                                                 <Separator />
                                                 <FormFieldPersonalContact control={form.control} />
                                             </div>
