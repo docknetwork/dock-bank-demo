@@ -25,7 +25,7 @@ const FormFieldAddress = ({ control, applicant }) => (
           <FormItem>
             <FormLabel>Street Address</FormLabel>
             <FormControl>
-              <Input placeholder="Enter street address" {...field} data={applicant.streetAddress}
+              <Input placeholder="Enter street address" {...field} data={applicant?.streetAddress}
 />
             </FormControl>
             <FormMessage />
@@ -52,7 +52,7 @@ const FormFieldAddress = ({ control, applicant }) => (
           <FormItem className='w-15'>
             <FormLabel>Zip Code</FormLabel>
             <FormControl>
-              <Input placeholder="Enter Zip Code" {...field} data={applicant.zipCode} />
+              <Input placeholder="Enter Zip Code" {...field} data={applicant?.zipCode} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -64,7 +64,7 @@ const FormFieldAddress = ({ control, applicant }) => (
           <FormItem className='w-60'>
             <FormLabel>City</FormLabel>
             <FormControl>
-              <Input placeholder="Enter city" {...field} data={applicant.city} className='flex h-10'/>
+              <Input placeholder="Enter city" {...field} data={applicant?.city} className='flex h-10'/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -76,7 +76,7 @@ const FormFieldAddress = ({ control, applicant }) => (
           <FormItem className='w-30'>
             <FormLabel>State</FormLabel>
             <FormControl>
-              <Input placeholder="Select one" {...field} data={applicant.state} />
+              <Input placeholder="Select one" {...field} data={applicant?.state} />
             </FormControl>
             <FormMessage />
           </FormItem>
