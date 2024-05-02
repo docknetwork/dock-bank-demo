@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { cn } from 'utils';
-import { CheckedBadge } from './check-badge';
+import { Check } from 'lucide-react';
 
-const verifiedBadge = <CheckedBadge className='flex align-middle' />;
+const verifiedBadge = <Check className='text-green-600 h-6 w-6' />;
 
 const Input = React.forwardRef(({ className, type, data, ...props }, ref) => (
   <div className = {
