@@ -29,7 +29,6 @@ const useFormField = () => {
   if (!fieldContext) {
     throw new Error('useFormField should be used within <FormField>');
   }
-  console.log(`fieldContext: ${JSON.stringify(fieldContext)}`);
 
   const { id } = itemContext;
 

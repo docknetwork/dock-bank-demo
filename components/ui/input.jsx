@@ -18,7 +18,6 @@ const Input = React.forwardRef(({ className, type, data, ...props }, ref) => (
       {...props} />
         
       {data?.isVerified && verifiedBadge}
-      {console.log(`${JSON.stringify(props)} - data: ${JSON.stringify(data)} - ref: ${JSON.stringify(ref)}`)}
     </div>
     ));
 
