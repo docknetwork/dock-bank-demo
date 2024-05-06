@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "dprint fmt && next lint --fix",
-    "format-check": "dprint check && next lint"
+    "format-check": "dprint check && next lint",
+    "download": "node --env-file=.env scripts/download-ecosystem.mjs",
+    "setup-certs": "node --env-file=.env scripts/setup-certs.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
