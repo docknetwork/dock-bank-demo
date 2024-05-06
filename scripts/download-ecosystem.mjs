@@ -33,6 +33,28 @@ const templatesToDownload = [{
   },
 ];
 
+function scrubForFilename(original) {
+  const match = /[\W,\\]/g;
+  return original.replace(match, '_');
+}
+export async function downloadEcosystems() {
+  console.log('--- Downloading ecosystems from Certs ---');
+
+  const ecosystemsUrl = `${process.env.DOCK_API_URL}/trust-registries/`;
+      const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
+
+  ecosystemsResponse.data.map(async (ecosystem) => {
+    try {
+      console.log(`\tDownloading ecosystem: ${ecosystem.name}`);
+      const filename = scrubForFilename(ecosystem.slug);
+      await fs.mkdir(`scripts/ecosystem-requests/${filename}`);
+      await fs.writeFile(`scripts/ecosystem-requests/${filename}/${filename}.json`, JSON.stringify(ecosystem, null, '\t'));
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
 export function downloadProofRequests() {
   console.log('--- Downloading proof request templates from Certs ---');
 
@@ -54,4 +76,5 @@ if (!process.env.DOCK_API_TOKEN) {
   throw new Error("Please configure the DOCK_API_TOKEN setting in the project's .env file.");
 }
 
+downloadEcosystems();
 downloadProofRequests();
