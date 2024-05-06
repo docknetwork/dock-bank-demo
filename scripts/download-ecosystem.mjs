@@ -37,6 +37,7 @@ function scrubForFilename(original) {
   const match = /[\W,\\]/g;
   return original.replace(match, '_');
 }
+
 export async function downloadEcosystems() {
   console.log('--- Downloading ecosystems from Certs ---');
 
@@ -47,8 +48,51 @@ export async function downloadEcosystems() {
     try {
       console.log(`\tDownloading ecosystem: ${ecosystem.name}`);
       const filename = scrubForFilename(ecosystem.slug);
-      await fs.mkdir(`scripts/ecosystem-requests/${filename}`);
-      await fs.writeFile(`scripts/ecosystem-requests/${filename}/${filename}.json`, JSON.stringify(ecosystem, null, '\t'));
+      const folder = `scripts/ecosystem-requests/${filename}`;
+      await fs.mkdir(folder);
+      await fs.writeFile(`${folder}/${filename}.json`, JSON.stringify(ecosystem, null, '\t'));
+
+      const participantsFolder = `${folder}/participants`;
+      await fs.mkdir(participantsFolder);
+      await downloadParticipants(ecosystem.id, participantsFolder);
+
+      const schemasFolder = `${folder}/schemas`;
+      await fs.mkdir(schemasFolder);
+      await downloadSchemas(ecosystem.id, schemasFolder);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+async function downloadParticipants(ecosystemId, folder) {
+  console.log('\t--- Downloading participants ---');
+
+  const ecosystemsUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystemId}/participants`;
+  const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
+
+  ecosystemsResponse.data.list.map(async (participant) => {
+    try {
+      console.log(`\t\tDownloading participant: ${participant.name}`);
+      const filename = scrubForFilename(participant.name);
+      await fs.writeFile(`${folder}/${filename}.json`, JSON.stringify(participant, null, '\t'));
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+async function downloadSchemas(ecosystemId, folder) {
+  console.log('\t--- Downloading schemas ---');
+
+  const ecosystemsUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystemId}/schemas`;
+  const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
+
+  ecosystemsResponse.data.list.map(async (schema) => {
+    try {
+      console.log(`\t\tDownloading schema: ${schema.name}`);
+      const filename = scrubForFilename(schema.name);
+      await fs.writeFile(`${folder}/${filename}.json`, JSON.stringify(schema, null, '\t'));
     } catch (error) {
       console.log(error);
     }
