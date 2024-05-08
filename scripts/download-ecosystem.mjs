@@ -59,6 +59,10 @@ export async function downloadEcosystems() {
       const schemasFolder = `${folder}/schemas`;
       await fs.mkdir(schemasFolder);
       await downloadSchemas(ecosystem.id, schemasFolder);
+
+      const proofTemplatesFolder = `${folder}/proof-templates`;
+      await fs.mkdir(proofTemplatesFolder);
+      await downloadProofRequestTemplates(ecosystem.id, proofTemplatesFolder);
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +103,23 @@ async function downloadSchemas(ecosystemId, folder) {
   });
 }
 
+async function downloadProofRequestTemplates(ecosystemId, folder) {
+  console.log('\t--- Downloading proof request templates ---');
+
+  const ecosystemsUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystemId}/proof-templates`;
+  const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
+
+  ecosystemsResponse.data.list.map(async (proofTemplate) => {
+    try {
+      console.log(`\t\tDownloading proof request template: ${proofTemplate.name}`);
+      const filename = scrubForFilename(proofTemplate.name);
+      await fs.writeFile(`${folder}/${filename}.json`, JSON.stringify(proofTemplate, null, '\t'));
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
 export function downloadProofRequests() {
   console.log('--- Downloading proof request templates from Certs ---');
 
@@ -121,4 +142,4 @@ if (!process.env.DOCK_API_TOKEN) {
 }
 
 downloadEcosystems();
-downloadProofRequests();
+// downloadProofRequests();
