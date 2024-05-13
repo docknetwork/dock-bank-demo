@@ -1,5 +1,6 @@
 import axios from 'axios';
 import fs from 'node:fs/promises';
+import { scrubForFilename } from './helpers.mjs';
 
 const axiosHeaders = {
   headers: {
@@ -32,11 +33,6 @@ const templatesToDownload = [{
   name: 'URBANSCAPE_CREDITSCORE_TEMPLATE_ID'
   },
 ];
-
-function scrubForFilename(original) {
-  const match = /[\W,\\]/g;
-  return original.replace(match, '_');
-}
 
 export async function downloadEcosystems() {
   console.log('--- Downloading ecosystems from Certs ---');
