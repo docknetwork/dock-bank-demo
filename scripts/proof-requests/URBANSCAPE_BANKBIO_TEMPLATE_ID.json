@@ -1,9 +1,5 @@
 {
-	"id": "78fbd2de-9686-4c70-96d4-bbb4630bfb49",
-	"did": "did:dock:5FCe8GacpjqyVYoUR6zQpydiS1hSpqhdJfLknnLYhjzrUYCH",
 	"name": "UrbanScape Verification- Bank Identity, Biometrics",
-	"created": "2024-02-03T20:23:21.548Z",
-	"updated": "2024-04-16T18:19:19.823Z",
 	"request": {
 		"input_descriptors": [
 			{
@@ -80,6 +76,5 @@
 				"count": 1
 			}
 		]
-	},
-	"totalRequests": 0
+	}
 }

@@ -1,9 +1,5 @@
 {
-	"id": "3afb9aab-b8ac-473b-a98d-78e12e96a5b1",
-	"did": "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w",
 	"name": "Quotient - Bank Identity Verification ",
-	"created": "2024-02-03T20:38:07.951Z",
-	"updated": "2024-02-07T21:05:50.271Z",
 	"request": {
 		"input_descriptors": [
 			{
@@ -88,6 +84,5 @@
 				"count": 1
 			}
 		]
-	},
-	"totalRequests": 0
+	}
 }

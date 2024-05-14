@@ -1,9 +1,5 @@
 {
-	"id": "d1c42f71-6108-4520-a09d-c8a19d720bd2",
-	"did": "did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb",
 	"name": "Forsur Verification - Biometrics Enrollment",
-	"created": "2024-02-03T20:32:53.721Z",
-	"updated": "2024-02-22T08:43:56.551Z",
 	"request": {
 		"input_descriptors": [
 			{
@@ -57,6 +53,5 @@
 				}
 			}
 		]
-	},
-	"totalRequests": 0
+	}
 }

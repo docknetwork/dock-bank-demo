@@ -1,9 +1,5 @@
 {
-	"id": "d96eb60f-d1b2-4903-8c1c-da04121ae2ad",
-	"did": "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w",
 	"name": "ForSur - Biometric Verification",
-	"created": "2024-02-22T08:46:10.973Z",
-	"updated": "2024-02-29T19:46:17.073Z",
 	"request": {
 		"input_descriptors": [
 			{
@@ -36,6 +32,5 @@
 				}
 			}
 		]
-	},
-	"totalRequests": 0
+	}
 }

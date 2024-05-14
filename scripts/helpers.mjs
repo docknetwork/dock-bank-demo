@@ -6,11 +6,8 @@ export function scrubForFilename(original) {
 }
 
 export async function readJSON(filename) {
-    let partDetails;
-    await fs.readFile(filename, 'utf8', (err, data) => {
-      if (err) throw err;
-      partDetails = JSON.parse(data);
-    });
+    const contents = await fs.readFile(filename, 'utf8');
+    const partDetails = JSON.parse(contents);
 
     return partDetails;
 }

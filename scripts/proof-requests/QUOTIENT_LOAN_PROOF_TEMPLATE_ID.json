@@ -1,9 +1,5 @@
 {
-	"id": "b156507a-949f-4dff-ab2f-ba98ea840678",
-	"did": "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w",
 	"name": "Quotient Loan Verification - Bank Identity, Biometrics, and Credit Score",
-	"created": "2024-02-03T20:27:58.230Z",
-	"updated": "2024-04-15T17:06:36.052Z",
 	"request": {
 		"input_descriptors": [
 			{
@@ -123,6 +119,5 @@
 				"count": 1
 			}
 		]
-	},
-	"totalRequests": 0
+	}
 }

@@ -91,7 +91,7 @@ async function populateEcosystemParticipants(ecosystemId, participants) {
       const participant = participants[key];
       console.log(`\t${participant.name}`);
       // get participant details from file
-      const details = await readJSON(`./ecosystem-requests/clarity_partners_16/participants/${key}.json`);
+      const details = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/participants/${key}.json`);
       details.did = participant.did;
 
       // create invite
@@ -123,6 +123,26 @@ async function populateEcosystemParticipants(ecosystemId, participants) {
   await Promise.all(participantRequests);
 }
 
+async function populateProofTemplates(ecosystem) {
+  const proofTemplates = await fs.readdir('./scripts/ecosystem-requests/clarity_partners_16/proof-templates');
+
+  console.log('--- Adding proof request templates ---');
+  const proofTemplateUrl = `${process.env.DOCK_API_URL}/proof-templates`;
+  const ecoProofTemplateUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystem.id}/proof-templates`;
+  const templateRequests = await proofTemplates.map(async (proofTemplate) => {
+    const proofJson = await readJSON(proofTemplate);
+    console.log(`\t${proofJson.name}`);
+    proofJson.did = ecosystem.convener;
+    const { data: createdTemplate } = await axios.post(proofTemplateUrl, proofJson, axiosHeaders);
+
+    newEnvironment[proofTemplate] = createdTemplate.id;
+
+    await axios.post(ecoProofTemplateUrl, { id: createdTemplate.id }, axiosHeaders);
+  });
+
+  await Promise.all(templateRequests);
+}
+
 export async function setupCerts() {
   const populatedProfiles = await createProfiles();
   newEnvironment.DOCK_API_DID = populatedProfiles.Quotient_Credit_Union.did;
@@ -130,6 +150,8 @@ export async function setupCerts() {
   const createdEcosystem = await createEcosystem(populatedProfiles.Quotient_Credit_Union.did);
 
   await populateEcosystemParticipants(createdEcosystem.id, populatedProfiles);
+
+  await populateProofTemplates(createdEcosystem);
 
   await writeEnvFile();
 }
