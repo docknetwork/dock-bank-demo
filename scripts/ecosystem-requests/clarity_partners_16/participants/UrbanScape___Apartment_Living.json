@@ -1,0 +1,19 @@
+{
+	"id": "ddec925c-5436-4751-8f47-3c0a43827dde",
+	"userId": 14988,
+	"name": "UrbanScape - Apartment Living",
+	"description": "UrbanScape is the apartment company offering upscale rentals.",
+	"did": "did:dock:5FCe8GacpjqyVYoUR6zQpydiS1hSpqhdJfLknnLYhjzrUYCH",
+	"logoUrl": "https://img.dock.io/425dbd0968a99b01edc33055a845d692",
+	"infoUrl": "https://bank-demo.dock.io/partners/urbanscape",
+	"status": "active",
+	"role": "verifier",
+	"issuerSchemas": [],
+	"verifierSchemas": [
+		"https://schema.dock.io/EquiNetCreditScore-V2-1706975901761.json",
+		"https://schema.dock.io/ForSurBiometricCheck-V4-1709846734949.json",
+		"https://schema.dock.io/QuotientBankIdentityWBiometrics-V2-1706990529964.json"
+	],
+	"created": "2024-02-28T05:04:28.691Z",
+	"suspendedAt": ""
+}

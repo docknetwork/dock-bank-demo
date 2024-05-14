@@ -1,0 +1,21 @@
+{
+	"id": "68f985cb-e21d-4631-9fe0-e1e21d897540",
+	"userId": 14988,
+	"name": "Forsur",
+	"description": "Forsur is the biometric provider.",
+	"did": "did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb",
+	"logoUrl": "https://img.dock.io/80f154126a78bba321b413c3ffb8d4a7",
+	"infoUrl": "https://bank-demo.dock.io/partners/forsur",
+	"status": "active",
+	"role": "verifier+issuer",
+	"issuerSchemas": [
+		"https://schema.dock.io/ForSurBiometricCheck-V4-1709846734949.json",
+		"https://schema.dock.io/ForSurBiometricEnrollment-V4-1709846932138.json"
+	],
+	"verifierSchemas": [
+		"https://schema.dock.io/ForSurBiometricCheck-V4-1709846734949.json",
+		"https://schema.dock.io/ForSurBiometricEnrollment-V4-1709846932138.json"
+	],
+	"created": "2024-02-28T05:09:06.660Z",
+	"suspendedAt": ""
+}

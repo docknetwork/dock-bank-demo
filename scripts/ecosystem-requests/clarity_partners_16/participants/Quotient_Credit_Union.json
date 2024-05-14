@@ -1,0 +1,20 @@
+{
+	"id": "63fd622d-15e5-4567-a6e3-bb70c16fe411",
+	"userId": 14988,
+	"name": "Quotient Credit Union",
+	"description": "Quotient is our credit union",
+	"did": "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w",
+	"logoUrl": "https://img.dock.io/06d78272268c606a172d5fd1cd559b46",
+	"infoUrl": "https://bank-demo.dock.io/partners/quotient",
+	"status": "active",
+	"role": "verifier+issuer",
+	"issuerSchemas": [
+		"https://schema.dock.io/QuotientBankIdentityWBiometrics-V2-1706990529964.json"
+	],
+	"verifierSchemas": [
+		"https://schema.dock.io/ForSurBiometricCheck-V4-1709846734949.json",
+		"https://schema.dock.io/QuotientBankIdentityWBiometrics-V2-1706990529964.json"
+	],
+	"created": "2024-02-28T05:08:10.130Z",
+	"suspendedAt": ""
+}

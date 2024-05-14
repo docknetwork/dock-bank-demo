@@ -1,0 +1,17 @@
+{
+	"id": "168784d8-daa2-469d-9884-995326be65dc",
+	"userId": 14988,
+	"name": "EquiNET",
+	"description": "EquiNet is the credit bureau.",
+	"did": "did:dock:5CKsfvaE68mvRhdn3dDXG4KpWzuvaUNdBbiu6sFUuPK9rw66",
+	"logoUrl": "https://img.dock.io/9f327cafda3be5f0cff0da2df44c55da",
+	"infoUrl": "https://bank-demo.dock.io/partners/equinet",
+	"status": "active",
+	"role": "issuer",
+	"issuerSchemas": [
+		"https://schema.dock.io/EquiNetCreditScore-V2-1706975901761.json"
+	],
+	"verifierSchemas": [],
+	"created": "2024-02-28T05:06:18.573Z",
+	"suspendedAt": ""
+}
