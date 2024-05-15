@@ -2,7 +2,7 @@ import axios from 'axios';
 import fs from 'node:fs/promises';
 import { EOL } from 'os';
 import { createRequire } from 'module';
-import { readJSON, scrubForFilename } from './helpers.mjs';
+import { readJSON, scrubForFilename, waitForJob } from './helpers.mjs';
 
 const require = createRequire(import.meta.url);
 const profiles = require('./ecosystem-requests/clarity_partners_16/profiles/profiles.json');
@@ -38,11 +38,12 @@ async function writeEnvFile() {
 }
 
 async function createProfiles() {
-    const didsUrl = `${process.env.DOCK_API_URL}/dids`;
-    const profilesUrl = `${process.env.DOCK_API_URL}/profiles`;
+  const didsUrl = `${process.env.DOCK_API_URL}/dids`;
+  const profilesUrl = `${process.env.DOCK_API_URL}/profiles`;
 
-    const populatedProfiles = {};
+  const participantProfiles = {};
 
+  let convenerDID;
   console.log('--- Creating profiles ---');
 
   const requests = await profiles.map(async (profile) => {
@@ -51,16 +52,28 @@ async function createProfiles() {
     try {
       const didResponse = await axios.post(didsUrl, {}, axiosHeaders);
 
+      await waitForJob(didResponse.data.id, axiosHeaders);
       profile.did = didResponse.data.did;
       const profileResponse = await axios.post(profilesUrl, profile, axiosHeaders);
-      populatedProfiles[scrubForFilename(profile.name)] = profileResponse.data;
+      if (profile.isParticipant) {
+        participantProfiles[scrubForFilename(profile.name)] = profileResponse.data;
+      }
+
+      if (profile.isConvener) {
+          newEnvironment.DOCK_API_DID = profileResponse.data.did;
+          convenerDID = profileResponse.data.did;
+      }
     } catch (error) {
       console.error(error);
     }
   });
 
-  await Promise.all(requests);
-  return populatedProfiles;
+  try {
+    await Promise.all(requests);
+  } catch (error) {
+    console.error(error);
+  }
+  return { participantProfiles, convenerDID };
 }
 
 async function createEcosystem(adminDID) {
@@ -124,32 +137,37 @@ async function populateEcosystemParticipants(ecosystemId, participants) {
 }
 
 async function populateProofTemplates(ecosystem) {
-  const proofTemplates = await fs.readdir('./scripts/ecosystem-requests/clarity_partners_16/proof-templates');
+  const proofTemplates = await fs.readdir('./scripts/ecosystem-requests/clarity_partners_16/proof-requests');
 
   console.log('--- Adding proof request templates ---');
   const proofTemplateUrl = `${process.env.DOCK_API_URL}/proof-templates`;
   const ecoProofTemplateUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystem.id}/proof-templates`;
   const templateRequests = await proofTemplates.map(async (proofTemplate) => {
-    const proofJson = await readJSON(proofTemplate);
+  try {
+    const proofJson = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/proof-requests/${proofTemplate}`);
     console.log(`\t${proofJson.name}`);
     proofJson.did = ecosystem.convener;
     const { data: createdTemplate } = await axios.post(proofTemplateUrl, proofJson, axiosHeaders);
 
-    newEnvironment[proofTemplate] = createdTemplate.id;
+    const parts = proofTemplate.split('.');
+    const envVar = `NEXT_PUBLIC_${parts[0]}`;
+    newEnvironment[envVar] = createdTemplate.id;
 
     await axios.post(ecoProofTemplateUrl, { id: createdTemplate.id }, axiosHeaders);
+   } catch (error) {
+      console.log(error);
+   }
   });
 
   await Promise.all(templateRequests);
 }
 
 export async function setupCerts() {
-  const populatedProfiles = await createProfiles();
-  newEnvironment.DOCK_API_DID = populatedProfiles.Quotient_Credit_Union.did;
+  const { participantProfiles, convenerDID } = await createProfiles();
 
-  const createdEcosystem = await createEcosystem(populatedProfiles.Quotient_Credit_Union.did);
+  const createdEcosystem = await createEcosystem(convenerDID);
 
-  await populateEcosystemParticipants(createdEcosystem.id, populatedProfiles);
+  await populateEcosystemParticipants(createdEcosystem.id, participantProfiles);
 
   await populateProofTemplates(createdEcosystem);
 
