@@ -114,24 +114,21 @@ The `QrCodeAuthentication` component manages QR code authentication flow. It ren
 
 ### 🔑 Configuration
 
-To configure the project, set up environment variables. Copy the `.env.example` file to a new file named `.env` and fill in the variables:
-
-- `NEXT_PUBLIC_DOCK_API_URL`: URL to the Dock API, set to the testnet endpoint.
-- `DOCK_API_TOKEN`: Your API token for authenticating with the Dock API.
-- `DOCK_API_DID`: The DID to use for the issuer. You can generate a DID [here](https://certs.dock.io/dids).
-- `NEXT_PUBLIC_SERVER_URL`: The URL of your server, defaulting to `http://localhost:3000` for local development.
-
-### Proof-Request Template IDs and Organization Profiles
-
-Create these IDs from [Certs Dock](https://certs.dock.io/). Fill in the template IDs and issuer IDs for your proof requests and organization profiles. These are crucial for the functioning of your verifiable credentials within the demo.
-
-Ensure all these configurations are set properly in your `.env` file before running the project to ensure smooth operation and connectivity to the necessary services.
-
-### 🛠️ Installation and Deployment
+### 🛠️ Installation
 
 1. Clone the repo: `git clone <repo_url>`
 2. Install dependencies: `npm install` or `yarn`
-3. Start the project: `npm start` or `yarn dev`
+
+### Configuring Certs Dependencies
+
+Running this project depends on having an ecosystem, organizational profiles, and proof request templates configured properly in Certs. You can set these up automatically by using the [setup-certs](./scripts/setup-certs.mjs) command. 
+
+1. Configure the `.env` file by setting the following variables
+    * DOCK_API_KEY - sign into [Certs](https://certs.dock.io/) and generate a test environment key from `Developer -> API Keys`
+    * DOCK_API_URL=DOCK_API_URL="https://api-testnet.dock.io"
+2. Run `yarn setup-certs`
+3. This will generate a `.env.new` file populated with the environment variables you need to run the project. Copy this over the `.env` file
+
 
 ## 🧪 Testing the Project Workflow
 
@@ -139,11 +136,11 @@ Before starting, remember to get the Dock Wallet mobile app, with the biometric 
 
 The demo workflow consists of going through the KYC process filling the formularies and scanning each QR code to get authenticated and test the organizations ecosystems.
 
-It's based on 3 ecosystems:
+It's based on an ecosystem called, "Clarity Partners". The ecosystem contains the following organizations:
 
-**Quotient:** Get BankId and Credit Score credentials and Apply for an auto loan.
+**Quotient Credit Union:** Create BankId and Credit Score credentials and Apply for an auto loan.
 
-**Equinet:** Revoke Credit Score credential and issue a new one.
+**Equinet:** Create and revoke Credit Score credential and issue a new one.
 
 **Urbanscape:** Apply for an apartment providing your BankId and Credit Score credentials.
 
