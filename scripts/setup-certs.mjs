@@ -42,6 +42,7 @@ async function createProfiles() {
   const profilesUrl = `${process.env.DOCK_API_URL}/profiles`;
 
   const participantProfiles = {};
+  const proofRequestTemplates = [];
 
   let convenerDID;
   console.log('--- Creating profiles ---');
@@ -67,6 +68,15 @@ async function createProfiles() {
             newEnvironment[profile.envVar] = profileResponse.data.did;
           }
       }
+
+      if (profile.proofRequests) {
+        const allRequests = await profile.proofRequests.map(async (proofRequest) => {
+          const createdTemplate = await populateProofTemplate(proofRequest, profileResponse.data.did);
+          proofRequestTemplates.push(createdTemplate);
+        });
+
+        await Promise.all(allRequests);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +87,7 @@ async function createProfiles() {
   } catch (error) {
     console.error(error);
   }
-  return { participantProfiles, convenerDID };
+  return { participantProfiles, convenerDID, proofRequestTemplates };
 }
 
 async function createEcosystem(adminDID) {
@@ -140,40 +150,45 @@ async function populateEcosystemParticipants(ecosystemId, participants) {
   await Promise.all(participantRequests);
 }
 
-async function populateProofTemplates(ecosystem) {
-  const proofTemplates = await fs.readdir('./scripts/ecosystem-requests/clarity_partners_16/proof-requests');
-
-  console.log('--- Adding proof request templates ---');
+async function populateProofTemplate(proofTemplate, verifierDID) {
   const proofTemplateUrl = `${process.env.DOCK_API_URL}/proof-templates`;
-  const ecoProofTemplateUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystem.id}/proof-templates`;
-  const templateRequests = await proofTemplates.map(async (proofTemplate) => {
+
   try {
-    const proofJson = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/proof-requests/${proofTemplate}`);
-    console.log(`\t${proofJson.name}`);
-    proofJson.did = ecosystem.convener;
+    const proofJson = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/proof-requests/${proofTemplate}.json`);
+    console.log(`\tAdding proof template: ${proofJson.name}`);
+    proofJson.did = verifierDID;
     const { data: createdTemplate } = await axios.post(proofTemplateUrl, proofJson, axiosHeaders);
 
     const parts = proofTemplate.split('.');
     const envVar = `NEXT_PUBLIC_${parts[0]}`;
     newEnvironment[envVar] = createdTemplate.id;
 
-    await axios.post(ecoProofTemplateUrl, { id: createdTemplate.id }, axiosHeaders);
+    return createdTemplate;
    } catch (error) {
       console.log(error);
    }
-  });
 
-  await Promise.all(templateRequests);
+   return null;
+}
+
+async function associateEcosystemProofRequests(ecosystem, proofTemplates) {
+    const ecoProofTemplateUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystem.id}/proof-templates`;
+
+    const proofRequests = await proofTemplates.map(async (proofTemplate) => {
+      await axios.post(ecoProofTemplateUrl, { id: proofTemplate.id }, axiosHeaders);
+    });
+
+    await Promise.all(proofRequests);
 }
 
 export async function setupCerts() {
-  const { participantProfiles, convenerDID } = await createProfiles();
+  const { participantProfiles, convenerDID, proofRequestTemplates } = await createProfiles();
 
   const createdEcosystem = await createEcosystem(convenerDID);
 
   await populateEcosystemParticipants(createdEcosystem.id, participantProfiles);
 
-  await populateProofTemplates(createdEcosystem);
+  await associateEcosystemProofRequests(createdEcosystem, proofRequestTemplates);
 
   await writeEnvFile();
 }

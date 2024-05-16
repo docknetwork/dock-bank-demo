@@ -4,7 +4,11 @@
     "description": "UrbanScape is the apartment company offering upscale rentals.",
     "logo": "https://img.dock.io/425dbd0968a99b01edc33055a845d692",
     "type": "dock",
-    "isParticipant": true
+    "isParticipant": true,
+    "proofRequests": [
+      "URBANSCAPE_BANKBIO_TEMPLATE_ID",
+      "URBANSCAPE_CREDITSCORE_TEMPLATE_ID"
+    ]
   },
   {
     "name": "EquiNET",
@@ -13,7 +17,8 @@
     "type": "dock",
     "isParticipant": true,
     "isIssuer": true,
-    "envVar": "NEXT_PUBLIC_EQUINET_ISSUER_ID"
+    "envVar": "NEXT_PUBLIC_EQUINET_ISSUER_ID",
+    "proofRequests": []
   },
   {
     "name": "Forsur",
@@ -22,7 +27,11 @@
     "type": "dock",
     "isParticipant": true,
     "isIssuer": true,
-    "envVar": "NEXT_PUBLIC_FORSUR_ISSUER_ID"
+    "envVar": "NEXT_PUBLIC_FORSUR_ISSUER_ID",
+    "proofRequests": [
+      "FORSUR_PROOF_TEMPLATE_ID",
+      "FORSUR_VERIFICATION_PROOF_TEMPLATE_ID"
+    ]
   },
   {
     "name": "IdentityClarity",
@@ -38,6 +47,10 @@
     "type": "dock",
     "isParticipant": true,
     "isIssuer": true,
-    "envVar": "NEXT_PUBLIC_QUOTIENT_ISSUER_ID"
+    "envVar": "NEXT_PUBLIC_QUOTIENT_ISSUER_ID",
+    "proofRequests": [
+      "QUOTIENT_LOAN_PROOF_TEMPLATE_ID",
+      "BANK_IDENDITY_TEMPLATE_ID"
+    ]
   }
 ]
