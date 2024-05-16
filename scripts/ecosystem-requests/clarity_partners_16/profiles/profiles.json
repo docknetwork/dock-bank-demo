@@ -4,34 +4,40 @@
     "description": "UrbanScape is the apartment company offering upscale rentals.",
     "logo": "https://img.dock.io/425dbd0968a99b01edc33055a845d692",
     "type": "dock",
-    "isParticipant": "true"
+    "isParticipant": true
   },
   {
     "name": "EquiNET",
     "description": "EquiNet is the credit bureau.",
     "logo": "https://img.dock.io/9f327cafda3be5f0cff0da2df44c55da",
     "type": "dock",
-    "isParticipant": "true"
+    "isParticipant": true,
+    "isIssuer": true,
+    "envVar": "NEXT_PUBLIC_EQUINET_ISSUER_ID"
   },
   {
     "name": "Forsur",
     "description": "Forsur is the biometric provider.",
     "logo": "https://img.dock.io/80f154126a78bba321b413c3ffb8d4a7",
     "type": "dock",
-    "isParticipant": "true"
+    "isParticipant": true,
+    "isIssuer": true,
+    "envVar": "NEXT_PUBLIC_FORSUR_ISSUER_ID"
   },
   {
     "name": "IdentityClarity",
     "description": "IdentityClarity is the KYC provider.",
     "logo": "https://img.dock.io/cd7a8a1ff8dd97b0c816cb152107eb9d",
     "type": "dock",
-    "isConvener": "true"
+    "isConvener": true
   },
   {
     "name": "Quotient Credit Union",
     "description": "Quotient is our credit union",
     "logo": "https://img.dock.io/06d78272268c606a172d5fd1cd559b46",
     "type": "dock",
-    "isParticipant": "true"
+    "isParticipant": true,
+    "isIssuer": true,
+    "envVar": "NEXT_PUBLIC_QUOTIENT_ISSUER_ID"
   }
 ]

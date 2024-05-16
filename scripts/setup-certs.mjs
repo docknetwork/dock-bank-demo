@@ -59,9 +59,13 @@ async function createProfiles() {
         participantProfiles[scrubForFilename(profile.name)] = profileResponse.data;
       }
 
-      if (profile.isConvener) {
+      if (profile.isIssuer) {
           newEnvironment.DOCK_API_DID = profileResponse.data.did;
           convenerDID = profileResponse.data.did;
+
+          if (profile.envVar) {
+            newEnvironment[profile.envVar] = profileResponse.data.did;
+          }
       }
     } catch (error) {
       console.error(error);
