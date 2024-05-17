@@ -30,6 +30,33 @@ import { getRandomNumber } from 'utils';
  * @returns React.FC page
  */
 const QuotientBankForm = () => {
+  const [applicant, setApplicant] = useState({
+    firstName: {
+      text: '',
+      isVerified: false
+    },
+    lastName: {
+      text: '',
+      isVerified: false
+    },
+    streetAddress: {
+      text: '',
+      isVerified: false
+    },
+    city: {
+      text: '',
+      isVerified: false
+    },
+    zipCode: {
+      text: '',
+      isVerified: false
+    },
+    state: {
+      text: '',
+      isVerified: false
+    },
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
@@ -157,9 +184,9 @@ const QuotientBankForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className='flex gap-4 flex-wrap'>
                 <div className='flex-1 w-full xl:w-2/3 md:w-2/3 p-4 bg-neutral-50 rounded-lg space-y-5'>
-                  <FormFieldNameAndBirthday control={form.control} dob={true} />
+                  <FormFieldNameAndBirthday control={form.control} dob={true} applicant={applicant} />
                   <Separator />
-                  <FormFieldAddress control={form.control} />
+                  <FormFieldAddress control={form.control} applicant={applicant} />
                   <Separator />
                   <FormFieldPersonalContact control={form.control} isUsaCitizen={true} />
                 </div>
