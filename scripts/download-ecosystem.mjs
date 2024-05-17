@@ -8,29 +8,30 @@ const axiosHeaders = {
   },
 };
 
-const templatesToDownload = [{
-  templateId: process.env.NEXT_PUBLIC_BANK_IDENDITY_TEMPLATE_ID,
-  name: 'BANK_IDENDITY_TEMPLATE_ID'
-},
+const templatesToDownload = [
+  {
+    templateId: process.env.NEXT_PUBLIC_BANK_IDENDITY_TEMPLATE_ID,
+    name: 'BANK_IDENDITY_TEMPLATE_ID'
+  },
   {
     templateId: process.env.NEXT_PUBLIC_FORSUR_PROOF_TEMPLATE_ID,
     name: 'FORSUR_PROOF_TEMPLATE_ID'
   },
-{
-  templateId: process.env.NEXT_PUBLIC_FORSUR_VERIFICATION_PROOF_TEMPLATE_ID,
-  name: 'FORSUR_VERIFICATION_PROOF_TEMPLATE_ID'
+  {
+    templateId: process.env.NEXT_PUBLIC_FORSUR_VERIFICATION_PROOF_TEMPLATE_ID,
+    name: 'FORSUR_VERIFICATION_PROOF_TEMPLATE_ID'
   },
-{
-  templateId: process.env.NEXT_PUBLIC_QUOTIENT_LOAN_PROOF_TEMPLATE_ID,
-  name: 'QUOTIENT_LOAN_PROOF_TEMPLATE_ID'
+  {
+    templateId: process.env.NEXT_PUBLIC_QUOTIENT_LOAN_PROOF_TEMPLATE_ID,
+    name: 'QUOTIENT_LOAN_PROOF_TEMPLATE_ID'
   },
-{
-  templateId: process.env.NEXT_PUBLIC_URBANSCAPE_BANKBIO_TEMPLATE_ID,
-  name: 'URBANSCAPE_BANKBIO_TEMPLATE_ID'
-  },
-{
-  templateId: process.env.NEXT_PUBLIC_URBANSCAPE_CREDITSCORE_TEMPLATE_ID,
-  name: 'URBANSCAPE_CREDITSCORE_TEMPLATE_ID'
+  {
+    templateId: process.env.NEXT_PUBLIC_URBANSCAPE_BANKBIO_TEMPLATE_ID,
+    name: 'URBANSCAPE_BANKBIO_TEMPLATE_ID'
+    },
+  {
+    templateId: process.env.NEXT_PUBLIC_URBANSCAPE_CREDITSCORE_TEMPLATE_ID,
+    name: 'URBANSCAPE_CREDITSCORE_TEMPLATE_ID'
   },
 ];
 
@@ -38,7 +39,7 @@ export async function downloadEcosystems() {
   console.log('--- Downloading ecosystems from Certs ---');
 
   const ecosystemsUrl = `${process.env.DOCK_API_URL}/trust-registries/`;
-      const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
+  const ecosystemsResponse = await axios.get(ecosystemsUrl, axiosHeaders);
 
   ecosystemsResponse.data.map(async (ecosystem) => {
     try {
