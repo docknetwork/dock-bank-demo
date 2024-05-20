@@ -162,9 +162,9 @@ const QuotientApplyLoanForm = () => {
                 <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 flex-1 w-full xl:w-2/3 md:w-2/3'>
                   <FormFieldCarDetails control={form.control} />
                   <Separator />
-                    <FormFieldNameAndBirthday control={form.control} applicant={applicant} />
+                  <FormFieldNameAndBirthday control={form.control} applicant={applicant} />
                   <Separator />
-                    <FormFieldAddress control={form.control} applicant={applicant} />
+                  <FormFieldAddress control={form.control} applicant={applicant} />
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>
