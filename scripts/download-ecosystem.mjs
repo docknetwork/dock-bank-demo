@@ -45,7 +45,7 @@ export async function downloadEcosystems() {
     try {
       console.log(`\tDownloading ecosystem: ${ecosystem.name}`);
       const filename = scrubForFilename(ecosystem.slug);
-      const folder = `scripts/ecosystem-requests/${filename}`;
+      const folder = `data/ecosystem-requests/${filename}`;
       await fs.mkdir(folder);
       await fs.writeFile(`${folder}/${filename}.json`, JSON.stringify(ecosystem, null, '\t'));
 
@@ -127,7 +127,7 @@ export function downloadProofRequests() {
       console.log(`Downloading proof request template: ${template.name}`);
       const templateUrl = `${proofTemplateUrl}${template.templateId}`;
       const templateResponse = await axios.get(templateUrl, axiosHeaders);
-      await fs.writeFile(`scripts/proof-requests/${template.name}.json`, JSON.stringify(templateResponse.data, null, '\t'));
+      await fs.writeFile(`data/proof-requests/${template.name}.json`, JSON.stringify(templateResponse.data, null, '\t'));
     } catch (error) {
       console.log(error);
     }

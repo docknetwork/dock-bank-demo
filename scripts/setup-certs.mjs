@@ -5,8 +5,8 @@ import { createRequire } from 'module';
 import { readJSON, scrubForFilename, waitForJob } from './helpers.mjs';
 
 const require = createRequire(import.meta.url);
-const profiles = require('./ecosystem-requests/clarity_partners_16/profiles/profiles.json');
-const ecosystem = require('./ecosystem-requests/clarity_partners_16/clarity_partners_16.json');
+const profiles = require('../data/ecosystem-requests/clarity_partners/profiles/profiles.json');
+const ecosystem = require('../data/ecosystem-requests/clarity_partners/clarity_partners.json');
 
 const axiosHeaders = {
   headers: {
@@ -70,7 +70,7 @@ async function createProfiles() {
       }
 
       if (profile.proofRequests) {
-        const allRequests = await profile.proofRequests.map(async (proofRequest) => {
+        const allRequests = profile.proofRequests.map(async (proofRequest) => {
           const createdTemplate = await populateProofTemplate(proofRequest, profileResponse.data.did);
           proofRequestTemplates.push(createdTemplate);
         });
@@ -118,7 +118,7 @@ async function populateEcosystemParticipants(ecosystemId, participants) {
       const participant = participants[key];
       console.log(`\t${participant.name}`);
       // get participant details from file
-      const details = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/participants/${key}.json`);
+      const details = await readJSON(`./data/ecosystem-requests/clarity_partners/participants/${key}.json`);
       details.did = participant.did;
 
       // create invite
@@ -154,7 +154,7 @@ async function populateProofTemplate(proofTemplate, verifierDID) {
   const proofTemplateUrl = `${process.env.DOCK_API_URL}/proof-templates`;
 
   try {
-    const proofJson = await readJSON(`./scripts/ecosystem-requests/clarity_partners_16/proof-requests/${proofTemplate}.json`);
+    const proofJson = await readJSON(`./data/ecosystem-requests/clarity_partners/proof-requests/${proofTemplate}.json`);
     console.log(`\tAdding proof template: ${proofJson.name}`);
     proofJson.did = verifierDID;
     const { data: createdTemplate } = await axios.post(proofTemplateUrl, proofJson, axiosHeaders);
@@ -173,8 +173,10 @@ async function populateProofTemplate(proofTemplate, verifierDID) {
 
 async function associateEcosystemProofRequests(ecosystem, proofTemplates) {
     const ecoProofTemplateUrl = `${process.env.DOCK_API_URL}/trust-registries/${ecosystem.id}/proof-templates`;
+    console.log('--- Associating proof templates ---');
 
     const proofRequests = await proofTemplates.map(async (proofTemplate) => {
+      console.log(`\tAssociating proof template ${proofTemplate.name}`);
       await axios.post(ecoProofTemplateUrl, { id: proofTemplate.id }, axiosHeaders);
     });
 
