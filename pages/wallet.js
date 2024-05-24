@@ -7,7 +7,7 @@ import { SERVER_URL } from 'utils/constants';
 export default function Wallet() {
   const { Canvas } = useQRCode();
   const qrCodeSize = 400;
-  const walletUrl = `${SERVER_URL}/api/getwallet`;
+  const walletUrl = `https://${SERVER_URL}/api/getwallet`;
   return (
     <>
       <Head>
