@@ -45,6 +45,33 @@ const DEFAULT_FORM_VALUES = {
  * @returns React.FC Form Field
  */
 const QuotientApplyLoanForm = () => {
+  const [applicant, setApplicant] = useState({
+    firstName: {
+      text: '',
+      isVerified: false
+    },
+    lastName: {
+      text: '',
+      isVerified: false
+    },
+    streetAddress: {
+      text: '',
+      isVerified: false
+    },
+    city: {
+      text: '',
+      isVerified: false
+    },
+    zipCode: {
+      text: '',
+      isVerified: false
+    },
+    state: {
+      text: '',
+      isVerified: false
+    },
+  });
+
   const [isSuccess, setIsSuccess] = useState(false);
   const verified = qrCodeStore((state) => state.verified);
   const retrievedData = qrCodeStore((state) => state.retrievedData);
@@ -78,6 +105,33 @@ const QuotientApplyLoanForm = () => {
           const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'address'));
           if (credential) {
             const username = credential.credentialSubject.name.split(' ');
+            setApplicant({
+              firstName: {
+                text: username[0],
+                isVerified: true
+              },
+              lastName: {
+                text: username[1],
+                isVerified: true
+              },
+              streetAddress: {
+                text: credential.credentialSubject.address,
+                isVerified: true
+              },
+              city: {
+                text: credential.credentialSubject.city,
+                isVerified: true
+              },
+              zipCode: {
+                text: credential.credentialSubject.zip,
+                isVerified: true
+              },
+              state: {
+                text: credential.credentialSubject.state,
+                isVerified: true
+              },
+            });
+
             form.setValue('firstName', username[0]);
             form.setValue('lastName', username[1]);
             form.setValue('streetAddress', credential.credentialSubject.address);
@@ -108,9 +162,9 @@ const QuotientApplyLoanForm = () => {
                 <div className='p-4 bg-neutral-50 rounded-lg space-y-5 flex-1 flex-1 w-full xl:w-2/3 md:w-2/3'>
                   <FormFieldCarDetails control={form.control} />
                   <Separator />
-                  <FormFieldNameAndBirthday control={form.control} />
+                  <FormFieldNameAndBirthday control={form.control} applicant={applicant} />
                   <Separator />
-                  <FormFieldAddress control={form.control} />
+                  <FormFieldAddress control={form.control} applicant={applicant} />
                   <Separator />
                   <FormFieldPersonalContact />
                 </div>

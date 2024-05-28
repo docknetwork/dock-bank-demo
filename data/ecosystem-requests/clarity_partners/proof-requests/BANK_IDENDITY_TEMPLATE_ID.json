@@ -1,0 +1,88 @@
+{
+	"name": "Quotient - Bank Identity Verification ",
+	"request": {
+		"input_descriptors": [
+			{
+				"id": "Credential 1",
+				"name": "Quotient - Bank Identity Verification ",
+				"group": [
+					"A"
+				],
+				"purpose": "A request to verify the ownership of - Bank Identity Credentials has been initiated. Verify name, address, account_number, and biometric_enrollment_id. ",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "QuotientBankIdentity"
+							}
+						},
+						{
+							"path": [
+								"$.credentialSubject.name"
+							]
+						},
+						{
+							"path": [
+								"$.credentialSubject.account_number"
+							]
+						},
+						{
+							"path": [
+								"$.issuer.id",
+								"$.issuer",
+								"$.vc.issuer.id",
+								"$.vc.issuer",
+								"$.iss"
+							],
+							"filter": {
+								"const": "did:dock:5HKkVpaciu1RArV13E7ig3i84JtiMTcwoXoHPZ8VMrBUYJ4w"
+							},
+							"predicate": "required"
+						}
+					]
+				}
+			},
+			{
+				"id": "Credential 2",
+				"name": "Quotient - Bank Identity Verification ",
+				"group": [
+					"A"
+				],
+				"purpose": "A request to verify the ownership of - Bank Identity Credentials has been initiated. Verify name, address, account_number, and biometric_enrollment_id. ",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "ForSurBiometric"
+							}
+						}
+					]
+				}
+			}
+		],
+		"submission_requirements": [
+			{
+				"from": "A",
+				"name": "Multi Credential Request",
+				"rule": "pick",
+				"count": 1
+			}
+		]
+	}
+}

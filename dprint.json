@@ -1,10 +1,15 @@
 {
-  "includes": ["src/**/*.js", "pages/**/*.js", "cypress/**/*.js", "tests/**/*.js"],
+  "includes": [
+    "src/**/*.js",
+    "pages/**/*.js",
+    "cypress/**/*.js",
+    "tests/**/*.js"
+  ],
   "excludes": [
     "src/temp-templates/**/*.js"
   ],
   "plugins": [
-    "https://plugins.dprint.dev/prettier-0.7.0.json@4e846f43b32981258cef5095b3d732522947592e090ef52333801f9d6e8adb33"
+    "https://plugins.dprint.dev/prettier-0.40.0.json@68c668863ec834d4be0f6f5ccaab415df75336a992aceb7eeeb14fdf096a9e9c"
   ],
   "prettier": {
     "bracketSpacing": true,

@@ -140,12 +140,17 @@ a {
   max-width: 1038px;
 }
 
-.mainContainer input {
+.mainContainer .inputDiv {
   border: solid 1px #D1D1D6 !important;
 }
 
 .mainContainer input::placeholder {
   color: #A0A0AB !important;
+}
+
+.mainContainer .inputDiv svg {
+  vertical-align: middle;
+  margin-top: 8px;
 }
 
 .activeItem {

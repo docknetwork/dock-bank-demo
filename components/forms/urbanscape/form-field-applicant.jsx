@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     FormControl,
     FormField,
@@ -9,7 +9,7 @@ import {
 import { Input } from 'components/ui/input';
 import { BirthdayPicker } from '../form-field-id';
 
-const FormFieldApplicantId = ({ control }) => (
+const FormFieldApplicantId = ({ control, applicant }) => (
     <>
         <div className='grid grid-cols-3 gap-2'>
             <FormField
@@ -19,7 +19,10 @@ const FormFieldApplicantId = ({ control }) => (
                     <FormItem>
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="Enter first Name" {...field} />
+                            <Input 
+                                placeholder="Enter first Name" 
+                                data={applicant.firstName}
+                                {...field}/>
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -31,7 +34,10 @@ const FormFieldApplicantId = ({ control }) => (
                     <FormItem>
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="Enter last Name" {...field} />
+                            <Input 
+                                placeholder="Enter last Name" 
+                                data={applicant.lastName}
+                                {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "dprint fmt && next lint --fix",
-    "format-check": "dprint check && next lint"
+    "format-check": "dprint check && next lint",
+    "download": "node --env-file=.env scripts/download-ecosystem.mjs",
+    "setup-certs": "node --env-file=.env scripts/setup-certs.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -53,7 +55,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "dprint": "^0.27.0",
+    "dprint": "^0.45.1",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-next": "12.2.3"

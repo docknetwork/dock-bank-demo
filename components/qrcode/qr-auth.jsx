@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Separator } from 'components/ui/separator';
 import VerifyQrCode from 'components/qrcode/verify-qr-code';
 import qrCodeStore from 'store/qrCodeStore';
@@ -28,7 +29,14 @@ const QrCodeAuthentication = ({ proofTemplateId, title = '', qrText = '', qrText
                     )}
 
                     <VerifyQrCode proofTemplateId={proofTemplateId} />
-
+                    <div className='m-auto ta-c relative w-fit'>
+                        <Image 
+                            src={'/clarity_partners.png'} 
+                            alt='clarity_partners' 
+                            width={230} 
+                            height={36} 
+                            />
+                    </div>
                     {(qrTextAfter !== null && qrTextAfter !== '') && (
                         <div>
                             <p className='text-start font-semibold mb-5'>{qrTextAfter}</p>

@@ -1,0 +1,12 @@
+{
+	"convener": "",
+	"convenerName": "",
+	"convenerLogoUrl": "",
+	"isOwner": true,
+	"name": "clarity partners",
+	"description": "The privacy conscious ecosystem of partners using Identity Clarity KYC products.",
+	"logoUrl": "https://img.dock.io/fc8f5f86299f5bebceb45caf32ea77b2",
+	"ecosystemUrl": "https://bank-demo.dock.io/partners",
+	"governanceFramework": "Issuers in the clarity partners ecosystem commit to following the processes defined by Identity Clarity in order to ensure that the proper level of assurance is met for each credential type.\n\nVerifiers in the clarity partners ecosystem commit to only rely upon participating credentials for their intended purpose. They are solely responsible for their use of the credentials and have no claims upon the issuer or Identity Clarity except under the terms of a separate agreement, if any.\n\nAll participants in the clarity partners ecosystem commit to following the Identity Clarity privacy policy governing consumer data.\n\nFailure to follow these policies will result in removal from the ecosystem.",
+	"governanceFrameworkVersion": "1.0.0"
+}

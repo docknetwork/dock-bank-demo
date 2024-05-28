@@ -4,6 +4,10 @@
 
 The Dock Sales Demo showcases the integration of KYC, biometric services, and verifiable credentials to demonstrate the capabilities of Dock's API and wallet. It simulates a customer journey through KYC verification, credential issuance, and verification across various scenarios, emphasizing integration ease and user experience.
 
+## Quotient Wallet
+
+This demo is designed to work with the demo Quotient Credit Union wallet app. Please install it for [iOS](https://apps.apple.com/ca/app/quotient-wallet/id6473549219) or [Android](https://play.google.com/store/apps/details?id=labs.dock.quotient).
+
 ### Workflow Steps
 
 1. 🚀 User initiates the KYC process.
@@ -11,7 +15,78 @@ The Dock Sales Demo showcases the integration of KYC, biometric services, and ve
 3. ✅ Upon successful verification, the user is issued verifiable credentials.
 4. 🔍 The user presents the credentials for verification.
 
-*Note: The Dock wallet app, with the biometric service plugin enabled, is required.*
+
+## 🎮 Running the Project
+
+### 📓Prerequisites
+
+- Node.js and npm installed.
+- Dock account with API access.
+
+### 🔑 Configuration
+
+### 🛠️ Installation
+
+1. Clone the repo: `git clone <repo_url>`
+2. Install dependencies: `npm install` or `yarn`
+
+### Configuring Certs Dependencies
+
+Running this project depends on having an ecosystem, organizational profiles, and proof request templates configured properly in Certs. You can set these up automatically by using the [setup-certs](./scripts/setup-certs.mjs) command. To run it, follow these steps:
+
+1. Configure the `.env` file by setting the following variables
+    * DOCK_API_KEY - sign into [Certs](https://certs.dock.io/) and generate a test environment key from `Developer -> API Keys`
+    * DOCK_API_URL=DOCK_API_URL="https://api-testnet.dock.io"
+2. Run `yarn setup-certs`
+3. This will generate a `.env.new` file populated with the environment variables you need to run the project. Copy this over the `.env` file
+
+For reference the details about the ecosystem and some sample JSON request bodies can be found in the [data/ecosystem-requests](./data/ecosystem-requests/) folder.
+
+## 🧪 Testing the Project Workflow
+
+Before starting, remember to get the Dock Wallet mobile app, with the biometric service plugin enabled, is required. The Dock Wallet app is available on PlayStore or AppStore.
+
+The demo workflow consists of going through the KYC process filling the formularies and scanning each QR code to get authenticated and test the organizations ecosystems.
+
+It's based on an ecosystem called, "Clarity Partners". The ecosystem contains the following organizations:
+
+**Quotient Credit Union:** Create BankId and Credit Score credentials and Apply for an auto loan.
+
+**Equinet:** Create and revoke Credit Score credential and issue a new one.
+
+**Urbanscape:** Apply for an apartment providing your BankId and Credit Score credentials.
+
+**1. Create a Bank account:** On the main page organizations click on “New Bank Account” from Quotient.
+
+Fill the formulary required data and click on “Submit Application”. This will take you to the first QR code we need to scan with the Dock Wallet app using the option “Scan”. This QR code will trigger the biometric verification process on the mobile to get the Biometric credential.
+
+Once QR code verification is successful, you will receive 2 credentials in your Dock Wallet, “Credit Score credential” and “BankId credential”.
+
+**2. Obtain Auto Loan:** On the main page click on “Obtain Auto Loan” from Quotient.
+
+Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score.
+
+On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
+
+On the success page, you will find a second QR code to scan with the Dock Wallet to proof your Credit Score from your credential.
+
+**3. Revoke & Reissue Credit Score:** On the main page click on “Visit Site” from Equinet. This page is the representation of a Credit Score credential history. You can revoke the actual Credit Score credential and issue another with one action. Click on “Revoke and Issue New credential” to test the functionality. Note: you need to complete previous steps to own this credential and revoke it.
+
+**4. Apply for an apartment:** On the main page click on “Visit Site” from Urbanscape. Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score. 
+
+On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
+
+On the success page, you will find a second QR code to scan and proof your Credit Score from your credential.
+
+With this, we finish the workflow from the application where we can have an overview of some usage of the decentralized identity and credentials management.
+
+## Resources
+
+- [Dock](https://www.dock.io/)
+- [Dock API Documentation](https://docs.api.dock.io/)
+- [Next.js](https://nextjs.org/)
+
+# Developer Documentation
 
 ## Technologies Used 
 
@@ -105,74 +180,4 @@ Hooks methods are use in single component `components/qrcode/qr-auth.jsx` with t
 
 The `QrCodeAuthentication` component manages QR code authentication flow. It renders UI elements conditionally based on whether the QR code is verified or not. If not verified, it displays QR code verification UI provided by VerifyQrCode component along with optional descriptive texts before and after. Upon verification, it shows a refresh icon to allow users to retry the authentication process. Additionally, it lists required credentials using CredentialCards component.
 
-## 🎮 Running the Project
 
-### 📓Prerequisites
-
-- Node.js and npm installed.
-- Dock account with API access.
-
-### 🔑 Configuration
-
-To configure the project, set up environment variables. Copy the `.env.example` file to a new file named `.env` and fill in the variables:
-
-- `NEXT_PUBLIC_DOCK_API_URL`: URL to the Dock API, set to the testnet endpoint.
-- `DOCK_API_TOKEN`: Your API token for authenticating with the Dock API.
-- `DOCK_API_DID`: The DID to use for the issuer. You can generate a DID [here](https://certs.dock.io/dids).
-- `NEXT_PUBLIC_SERVER_URL`: The URL of your server, defaulting to `http://localhost:3000` for local development.
-
-### Proof-Request Template IDs and Organization Profiles
-
-Create these IDs from [Certs Dock](https://certs.dock.io/). Fill in the template IDs and issuer IDs for your proof requests and organization profiles. These are crucial for the functioning of your verifiable credentials within the demo.
-
-Ensure all these configurations are set properly in your `.env` file before running the project to ensure smooth operation and connectivity to the necessary services.
-
-### 🛠️ Installation and Deployment
-
-1. Clone the repo: `git clone <repo_url>`
-2. Install dependencies: `npm install` or `yarn`
-3. Start the project: `npm start` or `yarn dev`
-
-## 🧪 Testing the Project Workflow
-
-Before starting, remember to get the Dock Wallet mobile app, with the biometric service plugin enabled, is required. The Dock Wallet app is available on PlayStore or AppStore.
-
-The demo workflow consists of going through the KYC process filling the formularies and scanning each QR code to get authenticated and test the organizations ecosystems.
-
-It's based on 3 ecosystems:
-
-**Quotient:** Get BankId and Credit Score credentials and Apply for an auto loan.
-
-**Equinet:** Revoke Credit Score credential and issue a new one.
-
-**Urbanscape:** Apply for an apartment providing your BankId and Credit Score credentials.
-
-**1. Create a Bank account:** On the main page organizations click on “New Bank Account” from Quotient.
-
-Fill the formulary required data and click on “Submit Application”. This will take you to the first QR code we need to scan with the Dock Wallet app using the option “Scan”. This QR code will trigger the biometric verification process on the mobile to get the Biometric credential.
-
-Once QR code verification is successful, you will receive 2 credentials in your Dock Wallet, “Credit Score credential” and “BankId credential”.
-
-**2. Obtain Auto Loan:** On the main page click on “Obtain Auto Loan” from Quotient.
-
-Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score.
-
-On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
-
-On the success page, you will find a second QR code to scan with the Dock Wallet to proof your Credit Score from your credential.
-
-**3. Revoke & Reissue Credit Score:** On the main page click on “Visit Site” from Equinet. This page is the representation of a Credit Score credential history. You can revoke the actual Credit Score credential and issue another with one action. Click on “Revoke and Issue New credential” to test the functionality. Note: you need to complete previous steps to own this credential and revoke it.
-
-**4. Apply for an apartment:** On the main page click on “Visit Site” from Urbanscape. Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score. 
-
-On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
-
-On the success page, you will find a second QR code to scan and proof your Credit Score from your credential.
-
-With this, we finish the workflow from the application where we can have an overview of some usage of the decentralized identity and credentials management.
-
-## Resources
-
-- [Dock](https://www.dock.io/)
-- [Dock API Documentation](https://docs.api.dock.io/)
-- [Next.js](https://nextjs.org/)

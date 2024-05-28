@@ -46,7 +46,7 @@ const QuotientSuccess = ({ title, proofTemplateId, showQrcode = true }) => {
                             {textFields.benefits}
                         </p>
                         <p className='text-justify font-semibold leading-loose mt-5'>
-                            Download the Quotient Mobile App by clicking <Link href='https://play.google.com/store/apps/details?id=com.dockapp&hl=en_US'>
+                            Download the Quotient Mobile App by clicking <Link href='/wallet'>
                                 <a className='text-blue-600' target='_blank' rel='noopener noreferrer'>
                                     this link
                                 </a>

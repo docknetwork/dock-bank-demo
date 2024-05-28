@@ -1,0 +1,57 @@
+{
+	"name": "Forsur Verification - Biometrics Enrollment",
+	"request": {
+		"input_descriptors": [
+			{
+				"id": "Credential 1",
+				"name": "Forsur Verification - Biometrics Enrollment",
+				"purpose": "Forsur wants to verify the ownership of - Biometrics Enrollment and the validity of the Biometrics Credentials.",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "ForSurBiometric"
+							}
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.id"
+							]
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.created"
+							]
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.data"
+							]
+						},
+						{
+							"path": [
+								"$.issuer.id",
+								"$.issuer",
+								"$.vc.issuer.id",
+								"$.vc.issuer",
+								"$.iss"
+							],
+							"filter": {
+								"const": "did:dock:5HLbQLSmirNuZVRsdWKbsgdajw9QTGzSFJABSVzMT5EBj5sb"
+							},
+							"predicate": "required"
+						}
+					]
+				}
+			}
+		]
+	}
+}

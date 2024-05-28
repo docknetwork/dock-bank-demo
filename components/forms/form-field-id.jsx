@@ -33,7 +33,7 @@ import { Separator } from 'components/ui/separator';
  * @memberof QuotientBankForm, QuotientApplyLoanForm
  * @returns React.FC Form Field
  */
-const FormFieldNameAndBirthday = ({ control, dob = false }) => (
+const FormFieldNameAndBirthday = ({ control, applicant, dob = false }) => (
     <>
         <h2 className='font-semibold'>Tell us your full name as it appears on your government issue ID</h2>
         <div className='grid grid-cols-2 gap-2'>
@@ -44,7 +44,9 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                     <FormItem>
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="Enter first Name" {...field} />
+                            <Input placeholder="Enter first Name" 
+                                data={applicant.firstName}
+                                {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -68,7 +70,9 @@ const FormFieldNameAndBirthday = ({ control, dob = false }) => (
                     <FormItem>
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="Enter last Name" {...field} />
+                            <Input placeholder="Enter last Name" 
+                                data={applicant.lastName}
+                                {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

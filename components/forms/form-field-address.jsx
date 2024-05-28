@@ -14,7 +14,7 @@ import { Input } from 'components/ui/input';
  * @memberof QuotientBankForm, QuotientApplyLoanForm
  * @returns React.FC Form Field
  */
-const FormFieldAddress = ({ control }) => (
+const FormFieldAddress = ({ control, applicant }) => (
   <div className='grid gap-2'>
     <h2 className='text-lg font-semibold'>What is your home address?</h2>
     <div className='grid grid-cols-2 gap-2'>
@@ -25,7 +25,8 @@ const FormFieldAddress = ({ control }) => (
           <FormItem>
             <FormLabel>Street Address</FormLabel>
             <FormControl>
-              <Input placeholder="Enter street address" {...field} />
+              <Input placeholder="Enter street address" {...field} data={applicant?.streetAddress}
+/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -48,10 +49,10 @@ const FormFieldAddress = ({ control }) => (
         control={control}
         name="zipCode"
         render={({ field }) => (
-          <FormItem className='w-10'>
+          <FormItem className='w-15'>
             <FormLabel>Zip Code</FormLabel>
             <FormControl>
-              <Input placeholder="Enter Zip Code" {...field} />
+              <Input placeholder="Enter Zip Code" {...field} data={applicant?.zipCode} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -63,7 +64,7 @@ const FormFieldAddress = ({ control }) => (
           <FormItem className='w-60'>
             <FormLabel>City</FormLabel>
             <FormControl>
-              <Input placeholder="Enter city" {...field} />
+              <Input placeholder="Enter city" {...field} data={applicant?.city} className='flex h-10'/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -75,7 +76,7 @@ const FormFieldAddress = ({ control }) => (
           <FormItem className='w-30'>
             <FormLabel>State</FormLabel>
             <FormControl>
-              <Input placeholder="Select one" {...field} />
+              <Input placeholder="Select one" {...field} data={applicant?.state} />
             </FormControl>
             <FormMessage />
           </FormItem>

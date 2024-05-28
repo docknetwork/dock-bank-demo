@@ -1,0 +1,39 @@
+{
+	"name": "UrbanScape Credit Score Verification- Credit Score",
+	"request": {
+		"input_descriptors": [
+			{
+				"id": "Credential 1",
+				"name": "UrbanScape Credit Score Verification- Credit Score",
+				"purpose": "Checks that the score is above 700",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "EquiNetCreditScore"
+							}
+						},
+						{
+							"path": [
+								"$.credentialSubject.credit_score"
+							],
+							"filter": {
+								"type": "number",
+								"minimum": 700
+							},
+							"predicate": "required"
+						}
+					]
+				}
+			}
+		]
+	}
+}

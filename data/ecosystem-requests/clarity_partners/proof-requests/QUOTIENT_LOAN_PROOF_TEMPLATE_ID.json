@@ -1,0 +1,123 @@
+{
+	"name": "Quotient Loan Verification - Bank Identity, Biometrics, and Credit Score",
+	"request": {
+		"input_descriptors": [
+			{
+				"id": "Credential 1",
+				"name": "Quotient Loan Verification - Bank Identity, Biometrics, and Credit Score",
+				"group": [
+					"A"
+				],
+				"purpose": "Quotient wants to verify the ownership of - Bank Identity, Biometrics and Credit Score Credentials.",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "QuotientBankIdentity"
+							},
+							"predicate": "required"
+						}
+					]
+				}
+			},
+			{
+				"id": "Credential 2",
+				"name": "Quotient Loan Verification - Bank Identity, Biometrics, and Credit Score",
+				"group": [
+					"A"
+				],
+				"purpose": "Quotient wants to verify the ownership of - Bank Identity, Biometrics and Credit Score Credentials.",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "ForSurBiometric"
+							},
+							"predicate": "required"
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.id"
+							]
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.created"
+							]
+						},
+						{
+							"path": [
+								"$.credentialSubject.biometric.data"
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "Credential 3",
+				"name": "Quotient Loan Verification - Bank Identity, Biometrics, and Credit Score",
+				"group": [
+					"A"
+				],
+				"purpose": "Quotient wants to verify the ownership of - Bank Identity, Biometrics and Credit Score Credentials.",
+				"constraints": {
+					"fields": [
+						{
+							"path": [
+								"$.credentialSubject.id"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							]
+						},
+						{
+							"path": [
+								"$.type[*]"
+							],
+							"filter": {
+								"const": "EquiNetCreditScore"
+							},
+							"predicate": "required"
+						}
+					]
+				}
+			}
+		],
+		"submission_requirements": [
+			{
+				"from": "A",
+				"name": "Multi Credential Request",
+				"rule": "pick",
+				"count": 1
+			}
+		]
+	}
+}
