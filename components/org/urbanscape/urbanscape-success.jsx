@@ -7,6 +7,7 @@ import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
+import qrCodeStore from 'store/qrCodeStore';
 import { Separator } from '../../ui/separator';
 
 /**
@@ -17,6 +18,8 @@ import { Separator } from '../../ui/separator';
 const UrbanscapeSuccess = () => {
     const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
     const { refetch } = useQrCode({ proofTemplateId });
+    const retrievedData = qrCodeStore((state) => state.retrievedData);
+    const verified = qrCodeStore((state) => state.verified);
 
     useEffect(() => {
         setTimeout(() => {
@@ -25,6 +28,18 @@ const UrbanscapeSuccess = () => {
         window.scrollTo(0, 0);
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        if (verified === true && retrievedData !== null) {
+            setTimeout(() => {
+                const credential = retrievedData.credentials[0];
+                if (credential) {
+                    console.log('CREDIT SCORE CREDENTIAL: ', credential);
+                }
+            }, 1000);
+        }
+        // eslint-disable-next-line
+    }, [verified, retrievedData]);
 
     return (
         <div>
