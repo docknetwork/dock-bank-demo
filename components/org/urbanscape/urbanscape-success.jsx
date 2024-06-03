@@ -32,12 +32,10 @@ const UrbanscapeSuccess = () => {
 
     useEffect(() => {
         if (verified === true && retrievedData !== null) {
-            setTimeout(() => {
-                const credential = retrievedData.credentials[0];
-                if (credential && credential.type.includes('EquiNetCreditScore')) {
-                    setIsWaived(true);
-                }
-            }, 1000);
+            const credential = retrievedData?.credentials[0];
+            if (verified === true && credential?.type.includes('EquiNetCreditScore')) {
+                setIsWaived(true);
+            }
         }
         // eslint-disable-next-line
     }, [verified, retrievedData]);
