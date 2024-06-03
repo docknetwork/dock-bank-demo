@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
@@ -7,6 +7,7 @@ import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import QrCodeAuthentication from 'components/qrcode/qr-auth';
 import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
+import qrCodeStore from 'store/qrCodeStore';
 import { Separator } from '../../ui/separator';
 
 /**
@@ -17,6 +18,9 @@ import { Separator } from '../../ui/separator';
 const UrbanscapeSuccess = () => {
     const proofTemplateId = PROOFT_TEMPLATES_IDS.URBANSCAPE_CREDITSCORE;
     const { refetch } = useQrCode({ proofTemplateId });
+    const retrievedData = qrCodeStore((state) => state.retrievedData);
+    const verified = qrCodeStore((state) => state.verified);
+    const [isWaived, setIsWaived] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
@@ -25,6 +29,16 @@ const UrbanscapeSuccess = () => {
         window.scrollTo(0, 0);
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        if (verified === true && retrievedData !== null) {
+            const credential = retrievedData?.credentials[0];
+            if (verified === true && credential?.type.includes('EquiNetCreditScore')) {
+                setIsWaived(true);
+            }
+        }
+        // eslint-disable-next-line
+    }, [verified, retrievedData]);
 
     return (
         <div>
@@ -54,17 +68,26 @@ const UrbanscapeSuccess = () => {
                         </div>
                         <div className='p-3 space-y-2'>
                             <div className='flex space-x-1 items-center'>
-                                <h2 className='text-2xl font-bold'>$1,440</h2>
+                                <h2 className='text-2xl font-bold'>{isWaived ? '$0' : '$1,440' }</h2>
                                 <p className='text-sm'>one time</p>
                             </div>
-                            <p className='text-sm'>We have a special offer for our applicants that have good credit. Provide to us a verified credential with a credit score over 700 and get your deposit waived!</p>
-                            <p className='text-sm'>This is a $1,440.00 value.</p>
-                            <p className='font-bold text-green'>Scan the QR code on the right with your mobile app to see if you qualify.</p>
+                            { isWaived ? 
+                            (
+                                <p className='font-bold text-green'>Congratulations! You have qualified to have the deposit waived!</p>
+                            )
+                            : (
+                                <div>
+                                    <p className='text-sm'>We have a special offer for our applicants that have good credit. Provide to us a verified credential with a credit score over 700 and get your deposit waived!</p>
+                                    <p className='text-sm'>This is a $1,440.00 value.</p>
+                                    <p className='font-bold text-green'>Scan the QR code on the right with your mobile app to see if you qualify.</p>
+                                </div>
+                             )
+                            }
                         </div>
                     </div>
                     <div className='space-y-3'>
                         <p className='font-bold'>TOTAL DUE NOW:</p>
-                        <p className='text-3xl font-semibold text-green'>$3,990</p>
+                        <p className='text-3xl font-semibold text-green'>{isWaived ? ('$2,550') : ('$3,990')}</p>
                         <Button className='bg-cyan-700 text-sm p-6 px-6 font-semibold'>Pay Now</Button>
                     </div>
                     <Separator />
@@ -79,16 +102,20 @@ const UrbanscapeSuccess = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
-                    <QrCodeAuthentication
-                        required={true}
-                        onlyCreditScore={true}
-                        proofTemplateId={proofTemplateId}
-                        title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
-                        qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}
-                        qrTextAfter={qrCodeVerificationData.URBAN_CREDITSCORE.qrTextAfter}
-                    />
-                </div>
+                { !isWaived ?
+                    (
+                        <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                            <QrCodeAuthentication
+                                required={true}
+                                onlyCreditScore={true}
+                                proofTemplateId={proofTemplateId}
+                                title={qrCodeVerificationData.URBAN_CREDITSCORE.title}
+                                qrText={qrCodeVerificationData.URBAN_CREDITSCORE.qrText}
+                                qrTextAfter={qrCodeVerificationData.URBAN_CREDITSCORE.qrTextAfter}
+                            />
+                        </div>
+                    ) : ''
+                }
             </div>
         </div>
     );

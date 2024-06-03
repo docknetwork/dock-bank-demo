@@ -47,7 +47,7 @@ async function createProfiles() {
   let convenerDID;
   console.log('--- Creating profiles ---');
 
-  const requests = await profiles.map(async (profile) => {
+  const requests = profiles.map(async (profile) => {
     console.log(`\t ${profile.name}`);
 
     try {
