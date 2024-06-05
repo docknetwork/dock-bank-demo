@@ -55,7 +55,13 @@ async function createProfiles() {
 
       await waitForJob(didResponse.data.id, axiosHeaders);
       profile.did = didResponse.data.did;
-      const profileResponse = await axios.post(profilesUrl, profile, axiosHeaders);
+      const profileBody = {
+        name: profile.name,
+        did: didResponse.data.did,
+        logo: profile.logo,
+        description: profile.description
+      };
+      const profileResponse = await axios.post(profilesUrl, profileBody, axiosHeaders);
       if (profile.isParticipant) {
         participantProfiles[scrubForFilename(profile.name)] = profileResponse.data;
       }

@@ -117,7 +117,8 @@ async function downloadProofRequestTemplates(ecosystemId, folder) {
   });
 }
 
-export function downloadProofRequests() {
+export async function downloadProofRequests() {
+   await fs.mkdir('data/proof-requests');
   console.log('--- Downloading proof request templates from Certs ---');
 
   const proofTemplateUrl = `${process.env.DOCK_API_URL}/proof-templates/`;
@@ -138,5 +139,5 @@ if (!process.env.DOCK_API_TOKEN) {
   throw new Error("Please configure the DOCK_API_TOKEN setting in the project's .env file.");
 }
 
-downloadEcosystems();
-// downloadProofRequests();
+await downloadEcosystems();
+await downloadProofRequests();

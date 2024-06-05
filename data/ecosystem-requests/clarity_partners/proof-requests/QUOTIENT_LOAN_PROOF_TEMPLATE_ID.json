@@ -106,6 +106,16 @@
 								"const": "EquiNetCreditScore"
 							},
 							"predicate": "required"
+						},
+						{
+							"path": [
+								"$.credentialSubject.credit_score"
+							],
+							"filter": {
+								"type": "number",
+								"exclusiveMinimum": 700
+							},
+							"predicate": "required"
 						}
 					]
 				}
