@@ -99,7 +99,14 @@ const QuotientBankForm = () => {
   function getBiometricalData() {
     if (retrievedData !== null) {
       const credential = retrievedData.credentials.find((obj) => Object.prototype.hasOwnProperty.call(obj.credentialSubject, 'biometric'));
-      if (credential) return credential.credentialSubject.biometric;
+
+      // TODO: get wallet to return a string rather than a boolean so we don't have to do this hack
+      const biometric = credential?.credentialSubject?.biometric;
+
+      if (biometric) {
+        biometric.data = biometric.data?.toString();
+        return biometric;
+      }
     }
     return null;
   }
