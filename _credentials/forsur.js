@@ -16,6 +16,7 @@ export function createBiometricsCredential({
       algorithm: 'bbdt16',
       distribute: true,
       credential: {
+        schema: 'https://schema.dock.io/ForSurBiometricCheck-V4-1709846734949.json',
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
         name: 'ForSur - Biometric',
         description: 'The "ForSur - Biometric" schema is specifically developed for the secure registration and storage of biometric data.',
