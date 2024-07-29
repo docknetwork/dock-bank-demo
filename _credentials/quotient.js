@@ -15,7 +15,7 @@ export function createBankIdCredential({
     url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
-      algorithm: 'dockbbs',
+      algorithm: 'bbdt16',
       distribute: true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
