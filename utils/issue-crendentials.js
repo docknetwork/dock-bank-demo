@@ -12,7 +12,7 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
         const type = credentialPayload.algorithm === ('dockbbs' || 'bbdt16') ? 'DockVBAccumulator2022' : 'StatusList2021Entry';
         registry = await getExistingRegistry(_credential.issuer.id, type);
 
-        console.log(`credential type: ${type} registry: ${registry?.id}`);
+        console.log(`credential algo ${credentialPayload.algorithm} reg type: ${type} registry: ${registry?.id}`);
         if (!registry) {
             // CREATING REGISTRY
             const newRegistry = await createRegistry(_credential.issuer.id, type);
