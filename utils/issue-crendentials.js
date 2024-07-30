@@ -9,7 +9,7 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
 
     let registry = null;
     if (isRevocable) {
-        const type = credentialPayload.algorithm === ('dockbbs' || 'bbdt16') ? 'DockVBAccumulator2022' : 'StatusList2021Entry';
+        const type = (credentialPayload.algorithm === 'dockbbs' || credentialPayload.algorithm === 'bbdt16') ? 'DockVBAccumulator2022' : 'StatusList2021Entry';
         registry = await getExistingRegistry(_credential.issuer.id, type);
 
         console.log(`credential algo ${credentialPayload.algorithm} reg type: ${type} registry: ${registry?.id}`);
