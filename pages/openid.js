@@ -163,7 +163,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject }) {
         withRequestURI: true,
       }
     );
-    console.log('qrUrlData', qrUrlData);
+
     setProofRequest({
       ...proofRequest,
       qrUrlData,
