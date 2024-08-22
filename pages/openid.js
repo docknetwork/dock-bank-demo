@@ -147,6 +147,36 @@ const ebsiConformanceProofRequest = {
   },
 };
 
+const mdlProofRequest = {
+  name: 'Proof request',
+  nonce: '1234567890',
+  request: {
+    name: 'MDL age over 18 test',
+    purpose: 'To check if over 18 years old',
+    input_descriptors: [
+      {
+        name: 'MDL age over 18 test',
+        purpose: 'To check if over 18 years old',
+        id: 'org.iso.18013.5.1.mDL',
+        format: {
+          mso_mdoc: {
+            alg: ['EdDSA', 'ES256'],
+          },
+        },
+        constraints: {
+          limit_disclosure: 'required',
+          fields: [
+            {
+              path: ["$['org.iso.18013.5.1']['age_over_18']", 'age_over_18'],
+              intent_to_retain: false,
+            },
+          ],
+        },
+      },
+    ],
+  },
+};
+
 function OID4VPProofRequest({ title, desc, proofRequestSetupObject }) {
   const [proofRequest, setProofRequest] = useState();
   const [isVerified, setIsVerified] = useState(false);
@@ -325,6 +355,12 @@ export default function Home() {
             proofRequestSetupObject={sphereonProofRequest}
             title="SIOP V2 (Sphereon)"
             desc="Scan this QR code with your Sphereon Wallet to present a JWT SIOP identity credential to the Dock API."
+          />
+
+          <OID4VPProofRequest
+            proofRequestSetupObject={mdlProofRequest}
+            title="Mobile Drivers License"
+            desc="Scan this QR code with your OpenID compatible MDL Wallet to present an age over 18 check to the Dock API."
           />
         </div>
         <div className="mt-10 mb-10">
