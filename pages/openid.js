@@ -78,10 +78,12 @@ const dockProofRequest = {
               path: ['$.credentialSubject.name'],
             },
             {
-              path: ['$.name'],
+              path: ['$.type', '$.vc.type'],
               filter: {
-                type: 'string',
-                pattern: 'Dock Credential',
+                type: 'array',
+                contains: {
+                  const: 'DockCredential',
+                },
               },
             },
           ],
