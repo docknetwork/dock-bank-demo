@@ -28,7 +28,28 @@ export default function GoogleCredsAPI({ title, desc, proofRequestSetupObject })
           ],
         },
       });
-      setRes(credentialResponse);
+
+      if (credentialResponse.constructor.name === 'DigitalCredential') {
+        const data = credentialResponse.data;
+        const protocol = credentialResponse.protocol;
+        const responseForServer = {
+          protocol,
+          data,
+          state: credsApiRequest.state,
+        };
+        setRes(responseForServer);
+      } else if (credentialResponse.constructor.name === 'IdentityCredential') {
+        const data = credentialResponse.token;
+        const protocol = 'oid4vp';
+        const responseForServer = {
+          protocol,
+          data,
+          state: credsApiRequest.state,
+        };
+        setRes(responseForServer);
+      } else {
+        throw new Error('Unknown response type');
+      }
     } catch (e) {
       console.error(e);
       setError(e.message || 'unknown');
