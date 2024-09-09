@@ -11,12 +11,12 @@ import { apiGet, postRequest } from 'utils/request';
 import { dockUrl } from 'utils/constants';
 
 const credential = {
-  type: ['DockCredential'],
+  type: ['UniversityDegreeCredential'],
+  context: ['https://www.w3.org/2018/credentials/examples/v1'],
   subject: {
-    nested: {
-      field: true,
-    },
-    inheritedField: 'test',
+    alumniOf: 'Dock University',
+    degree: 'Credential Science',
+    // name will be added by claims flow!
   },
   expirationDate: '2099-08-24T14:15:22Z',
 };
