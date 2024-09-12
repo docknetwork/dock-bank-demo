@@ -1,11 +1,15 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import { Separator } from 'components/ui/separator';
 import { Button } from 'components/ui/button';
 import { QRCodeGenerator } from 'components/qrcode/qr-generator';
 import { apiGet, postRequest } from 'utils/request';
 import { dockUrl } from 'utils/constants';
+
+const baseUrl = process.env.NEXT_PUBLIC_DOCK_API_URL;
 
 const mdlProofRequest = {
   name: 'Proof request',
@@ -137,8 +141,6 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       },
     };
 
-    console.log('credsApiRequest', credsApiRequest);
-
     try {
       const credentialResponse = await navigator.identity.get({
         digital: {
@@ -172,10 +174,13 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
         throw new Error('Unknown response type');
       }
 
-      console.log('responseForServer', responseForServer);
-
       const dataObj = JSON.parse(responseForServer.data);
-      onPres(dataObj); // TEMP
+      if (dataObj.vp_token) {
+        // we must act as the client submitting the presentation now
+        await axios.post(`${baseUrl}/openid/vp/${proofRequest.id}/callback`, dataObj);
+      } else {
+        throw new Error('Cannot find vp_token in creds api response');
+      }
     } catch (e) {
       console.error(e);
       setError(e.message || 'unknown');
@@ -228,13 +233,14 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
 
 export default function Home() {
   const [res, setRes] = useState();
+  const [error, setError] = useState();
 
   function handlePres(res) {
     setRes(res);
   }
 
   function handleError(err) {
-    console.error(err);
+    setError(err);
   }
 
   return (
@@ -269,7 +275,8 @@ export default function Home() {
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="mt-5 m-auto">
+        <div className="mt-5 m-auto" style={{ textAlign: 'left' }}>
+          {error && <pre>Error: {error}</pre>}
           {res ? (
             <pre>
               Verified: {res.verified ? 'true' : 'false'}
