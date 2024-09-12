@@ -182,7 +182,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
         } catch (e) {
           console.error(e);
           throw new Error(
-            `Likely failed to verify or invalid data: ${JSON.stringify(dataObj, null, 2)}`
+            `Likely failed to verify or invalid data: ${JSON.stringify(dataObj, null, 2)} resp: ${JSON.stringify((e.response && e.response.data) || {}, null, 2)}`
           );
         }
       } else {
