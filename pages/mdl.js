@@ -178,7 +178,9 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       if (dataObj.vp_token) {
         // we must act as the client submitting the presentation now
         try {
-          await axios.post(`${baseUrl}/openid/vp/${proofRequest.id}/callback`, dataObj);
+          await axios.post(`${baseUrl}/openid/vp/${proofRequest.id}/callback`, {
+            vp_token: dataObj.vp_token,
+          });
         } catch (e) {
           console.error(e);
           throw new Error(
