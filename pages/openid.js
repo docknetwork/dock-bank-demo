@@ -243,6 +243,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject }) {
 export default function Home() {
   const [ebsiURLS, setEBSIUrls] = useState();
   const [credentialOffer, setCredentialOffer] = useState();
+  const [credentialOfferNoAuth, setCredentialOfferNoAuth] = useState();
 
   async function createCredentialOffer() {
     const { data: oidcIssuer } = await postRequest(`${dockUrl}/openid/issuers`, {
@@ -264,6 +265,24 @@ export default function Home() {
     setCredentialOffer(credentialOffer);
   }
 
+  async function createCredentialOfferNoAuth() {
+    const { data: oidcIssuer } = await postRequest(`${dockUrl}/openid/issuers`, {
+      credentialOptions: {
+        credential: {
+          ...credential,
+          issuer: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
+        },
+      },
+      singleUse: true,
+    });
+
+    const { data: credentialOffer } = await postRequest(`${dockUrl}/openid/credential-offers`, {
+      id: oidcIssuer.id,
+    });
+
+    setCredentialOfferNoAuth(credentialOffer);
+  }
+
   async function generateEBSIUrls() {
     const { data: proofRequest } = await postRequest(`${dockUrl}/proof-requests`, {
       did: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
@@ -276,8 +295,9 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (!credentialOffer) {
+    if (!credentialOffer && !credentialOfferNoAuth) {
       createCredentialOffer();
+      createCredentialOfferNoAuth();
     }
   }, []);
 
@@ -295,7 +315,7 @@ export default function Home() {
           </div>
         </div>
         <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
-          <div>
+        <div>
             <div className="orgCard">
               <div className="cardImg valign-middle m-auto">
                 <p className="font-bold mb-5">OID4VCI</p>
@@ -312,6 +332,27 @@ export default function Home() {
                 <p className="text-sm">
                   Scan this QR code to initiate an OID4VCI import flow, it will ask you to enter
                   your name which will be put in the credential.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="orgCard">
+              <div className="cardImg valign-middle m-auto">
+                <p className="font-bold mb-5">OID4VCI (no auth)</p>
+                <div>
+                  {credentialOfferNoAuth ? (
+                    <QRCodeGenerator url={credentialOfferNoAuth.url} />
+                  ) : (
+                    <>Loading...</>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <div className="pt-5 min-h-28">
+                <p className="text-sm">
+                  Scan this QR code to initiate an OID4VCI import flow and instantly get a credential.
                 </p>
               </div>
             </div>
