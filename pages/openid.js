@@ -82,7 +82,7 @@ const dockProofRequest = {
               filter: {
                 type: 'array',
                 contains: {
-                  const: 'DockCredential',
+                  const: 'UniversityDegreeCredential',
                 },
               },
             },
