@@ -1,3 +1,5 @@
+import { dockUrl } from '../../utils/constants';
+
 export default async (req, res) => {
   if (req.method !== 'GET') {
     console.log('Only GET request allowed');
@@ -5,18 +7,18 @@ export default async (req, res) => {
     return;
   }
 
-  const url = req.query.url;
-
-  const result = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
-      'content-type': 'application/json',
-    },
-  });
+  const result = await fetch(
+    `${dockUrl}/registries?did=${encodeURIComponent(req.query.did)}&type=${encodeURIComponent(req.query.searchType)}`,
+    {
+      method: 'GET',
+      headers: {
+        'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
+        'content-type': 'application/json',
+      },
+    }
+  );
 
   const response = await result.json();
-  console.log('response:', result);
 
   if (!result.ok) {
     const errorText = await result.text();

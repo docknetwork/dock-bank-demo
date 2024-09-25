@@ -156,8 +156,6 @@ Under folder `/utils` are the files that handle all the communication with Dock 
 
 `createCredential(registryId, credential)` -> Create new credential from registryId & credential schema.
 
-`distributeCredential(credential)` -> Send a signed credential to a Did or email.        
-
 `issueRevokableCredential = async (credential, setRevokableCredential)` -> Entire process that carrie all previews functions.
 revokeCredential = async (registryId, credentialId) -> Revoke credit score credential with a given registry and credential ids.
     
