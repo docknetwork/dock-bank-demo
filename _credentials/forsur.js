@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { dockUrl } from 'utils/constants';
 import { validateEmail } from 'utils/validation';
 
 export function createBiometricsCredential({
@@ -10,7 +9,6 @@ export function createBiometricsCredential({
   console.log('Creating ForSur - Biometric Enrollment Credential for:', receiverDid);
 
   const credentialPayload = {
-    url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
       algorithm: 'bbdt16',

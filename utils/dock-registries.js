@@ -1,6 +1,6 @@
 import { toast } from 'sonner';
-import { postRequest, apiGet } from './request';
-import { dockUrl } from './constants';
+import { apiGetLocal, postRequestLocal } from './request';
+
 /**
  * Creates a new registry by calling the Registries API endpoint.
  *
@@ -16,8 +16,8 @@ export async function createRegistry(policyDid, type) {
     };
 
     try {
-        const response = await postRequest(
-            `${dockUrl}/registries`,
+        const response = await postRequestLocal(
+            'create-registry',
             data,
         );
 
@@ -31,14 +31,6 @@ export async function createRegistry(policyDid, type) {
     }
 
     return undefined;
-}
-
-export async function getRegistry(registryId) {
-    try {
-        return apiGet(`${dockUrl}/registries/${registryId}`);
-    } catch (error) {
-        toast.error('Invalid crendential registry.');
-    }
 }
 
 /**
@@ -58,9 +50,12 @@ export const revokeCredential = async (registryId, credentialId) => {
     };
 
     try {
-        return await postRequest(
-            `${dockUrl}/registries/${registryId}`,
-            payload,
+        return await postRequestLocal(
+            'revoke-action',
+            {
+                ...payload,
+                registryId,
+            },
         );
     } catch (error) {
         toast.warning('Error revoking this credential');
@@ -85,10 +80,13 @@ export async function unrevoke(registryId, credential) {
     };
 
     try {
-        const response = await postRequest({
-            url,
-            body: data,
-        });
+        const response = await postRequestLocal(
+            'revoke-action',
+            {
+                ...data,
+                registryId,
+            },
+        );
 
         return response;
     } catch (error) {
@@ -99,7 +97,7 @@ export async function unrevoke(registryId, credential) {
 }
 
 export async function getExistingRegistry(did, searchType) {
-    const registriesResponse = await apiGet(encodeURIComponent(`${dockUrl}/registries?did=${encodeURIComponent(did)}&type=${searchType}&limit=1`));
+    const registriesResponse = await apiGetLocal(`find-registry?did=${encodeURIComponent(did)}&type=${searchType}`);
 
     if (!registriesResponse || !registriesResponse.data || registriesResponse.data.length === 0) {
         return null;
