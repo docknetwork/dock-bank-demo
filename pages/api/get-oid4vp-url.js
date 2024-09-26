@@ -1,3 +1,5 @@
+import { dockUrl } from '../../utils/constants';
+
 export default async (req, res) => {
   if (req.method !== 'POST') {
     console.log('Only post request allowed');
@@ -5,22 +7,19 @@ export default async (req, res) => {
     return;
   }
 
-  const body = req.body;
-
-  console.log('body::', body);
-
-  const result = await fetch(body.url, {
+  const result = await fetch(`${dockUrl}/openid/vp/${req.body.proofRequestId}/request-url`, {
     method: 'POST',
     headers: {
       'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({
+      ...req.body,
+      proofRequestId: undefined,
+    }),
   });
 
   const response = await result.json();
-  console.log('response:', result);
-
   if (!result.ok) {
     const errorText = await result.text();
     throw new Error(`API Error: ${result.status} - ${errorText}`);

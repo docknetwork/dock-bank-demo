@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Separator } from 'components/ui/separator';
 import { Button } from 'components/ui/button';
 import { QRCodeGenerator } from 'components/qrcode/qr-generator';
-import { apiGet, postRequest } from 'utils/request';
+import { apiGetLocal, postRequestLocal } from 'utils/request';
 import { dockUrl } from 'utils/constants';
 
 const baseUrl = process.env.NEXT_PUBLIC_DOCK_API_URL;
@@ -80,17 +80,15 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
   const [isVerified, setIsVerified] = useState(false);
 
   async function createProofRequest() {
-    const { data: proofRequest } = await postRequest(`${dockUrl}/proof-requests`, {
+    const { data: proofRequest } = await postRequestLocal('create-proof-request-object', {
       did: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
       ...proofRequestSetupObject,
     });
 
-    const { data: qrUrlData } = await postRequest(
-      `${dockUrl}/openid/vp/${proofRequest.id}/request-url`,
-      {
-        withRequestURI: true,
-      }
-    );
+    const { data: qrUrlData } = await postRequestLocal('get-oid4vp-url', {
+      withRequestURI: true,
+      proofRequestId: proofRequest.id,
+    });
 
     setProofRequest({
       ...proofRequest,
@@ -99,7 +97,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
 
     const int = setInterval(async () => {
       try {
-        const { data: res } = await apiGet(`${dockUrl}/proof-requests/${proofRequest.id}`);
+        const { data: res } = await apiGetLocal(`handle-proof?proofID=${proofRequest.id}`);
         if (res.verified) {
           setProofRequest(res);
           setIsVerified(true);

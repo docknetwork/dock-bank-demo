@@ -1,12 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
-import { dockUrl } from 'utils/constants';
 import { validateEmail } from 'utils/validation';
 
 export function createCreditScoreCredential({ receiverDid, recipientEmail, creditScore }) {
   console.log('Creating EquiNet - Credit Score Credential for:', receiverDid);
 
   const credentialPayload = {
-    url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
       distribute: true,

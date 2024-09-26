@@ -61,14 +61,8 @@ export const useRevoke = () => {
         }
     }
 
-    async function handleGetRegistry() {
-        const registry = await getRegistry(revokableCredential.registryId);
-        console.log('registry', registry);
-    }
-
     return {
         loadingRevokation,
-        handleGetRegistry,
         handleRevoke,
         issueNewCredential
     }
