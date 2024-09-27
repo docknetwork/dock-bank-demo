@@ -83,7 +83,7 @@ With this, we finish the workflow from the application where we can have an over
 ## Resources
 
 - [Dock](https://www.dock.io/)
-- [Dock API Documentation](https://docs.api.dock.io/)
+- [Dock API Documentation](https://docs.dock.io/developer-documentation/dock-api)
 - [Next.js](https://nextjs.org/)
 
 # Developer Documentation
