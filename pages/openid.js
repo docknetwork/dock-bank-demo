@@ -255,7 +255,7 @@ export default function Home() {
   }
 
   async function createCredentialOfferNoAuth() {
-    const { data: oidcIssuer } = await postRequest(`${dockUrl}/openid/issuers`, {
+    const { data: credentialOffer } = await postRequestLocal('create-credential-offer', {
       credentialOptions: {
         credential: {
           ...credential,
@@ -263,10 +263,6 @@ export default function Home() {
         },
       },
       singleUse: true,
-    });
-
-    const { data: credentialOffer } = await postRequest(`${dockUrl}/openid/credential-offers`, {
-      id: oidcIssuer.id,
     });
 
     setCredentialOfferNoAuth(credentialOffer);
@@ -304,7 +300,7 @@ export default function Home() {
           </div>
         </div>
         <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
-        <div>
+          <div>
             <div className="orgCard">
               <div className="cardImg valign-middle m-auto">
                 <p className="font-bold mb-5">OID4VCI</p>
@@ -341,7 +337,8 @@ export default function Home() {
               <hr />
               <div className="pt-5 min-h-28">
                 <p className="text-sm">
-                  Scan this QR code to initiate an OID4VCI import flow and instantly get a credential.
+                  Scan this QR code to initiate an OID4VCI import flow and instantly get a
+                  credential.
                 </p>
               </div>
             </div>
