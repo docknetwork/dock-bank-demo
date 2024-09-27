@@ -1,5 +1,4 @@
-import { postRequest } from "./request";
-import { dockUrl } from "./constants";
+import { postRequestLocal } from "./request";
 /**
  * Creates a credential with the provided credential data and issuer.
  * Sets the credential issuer ID to the provided issuer DID.
@@ -13,10 +12,7 @@ export async function createCredential(registryId, credential) {
     }
 
     console.log("issuing credential", credential);
-    return await postRequest(
-        `${dockUrl}/credentials/`,
-        credential,
-    );
+    return postRequestLocal('issue-credential', credential);
 }
 
 /**
@@ -27,37 +23,9 @@ export async function createCredential(registryId, credential) {
  * @returns A Promise that resolves to the verification result.
  */
 export async function verifyCredential({ credential }) {
-
-    return await postRequest(
-        `${dockUrl}/verify/`,
-        credential,
-    );
+    console.log("verifying credential", credential);
+    return postRequestLocal('verify-credential', credential);
 }
-
-/**
- * Distributes a credential by encrypting it and sending it via API.
- * 
- * @param credential - The credential to be distributed.
- * @returns A Promise that resolves to the result of the API call.
- */
-export async function distributeCredential(credential) {
-
-    console.log('distributeCredential:', credential);
-    const encryptionPayload = {
-        senderDid: credential.issuer.id,
-        recipientDids: [credential.credentialSubject.id],
-        type: "issue",
-        payload: {
-            domain: "api.dock.io",
-            credentials: [credential.subject],
-        }
-    };
-
-    return await postRequest(
-        `${dockUrl}/messaging/encrypt`,
-        encryptionPayload
-    );
-};
 
 // export async function requestClaims(credential) {
 

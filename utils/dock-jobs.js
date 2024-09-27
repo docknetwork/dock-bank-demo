@@ -1,5 +1,4 @@
-import { apiGet } from "./request";
-import { dockUrl } from "./constants";
+import { apiGetLocal } from "./request";
 
 /**
  * Gets a job by ID.
@@ -7,8 +6,8 @@ import { dockUrl } from "./constants";
  * @returns {Promise<JobResult>} The job data.
  */
 export async function getJob(id) {
-    const result = await apiGet(
-        `${dockUrl}/jobs/${id}`
+    const result = await apiGetLocal(
+        `get-job?id=${id}`
     );
     return result.data;
 }

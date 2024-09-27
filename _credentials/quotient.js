@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { dockUrl } from 'utils/constants';
 import { validateEmail } from 'utils/validation';
 
 export function createBankIdCredential({
@@ -12,7 +11,6 @@ export function createBankIdCredential({
   console.log('Creating Quotient Bank Identity Credential for:', receiverDid);
 
   const credentialPayload = {
-    url: `${dockUrl}/credentials`,
     body: {
       anchor: false,
       algorithm: 'bbdt16',
