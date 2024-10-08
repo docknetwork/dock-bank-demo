@@ -8,7 +8,7 @@ export default async (req, res) => {
   }
 
   const result = await fetch(
-    `${dockUrl}/registries?did=${encodeURIComponent(req.query.did)}&type=${encodeURIComponent(req.query.searchType)}`,
+    `${dockUrl}/registries?did=${encodeURIComponent(req.query.did)}&type=${encodeURIComponent(req.query.type)}`,
     {
       method: 'GET',
       headers: {
