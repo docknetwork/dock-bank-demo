@@ -158,22 +158,22 @@ const UrbanScapePage = () => {
                 <title>Urbanscape - Application for Apartment</title>
             </Head>
             <Header />
-            <div className='p-4 min-h-screen mainContainer'>
+            <div className='min-h-screen p-4 mainContainer'>
                 {isSuccess ? (
                     <UrbanscapeSuccess />
                 ) : (
                     <>
-                        <div className='mb-4 mt-2'>
-                            <h2 className='font-medium text-3xl text-slate-700'>Application for Apartment</h2>
-                            <p className='font-medium text-base'>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
+                        <div className='mt-2 mb-4'>
+                            <h2 className='text-3xl font-medium text-slate-700'>Application for Apartment</h2>
+                            <p className='text-base font-medium'>Auto fill this form by using your banking app. Scan the QR Code on the right.</p>
                         </div>
                         <Form {...form}>
                             <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                                <div className='flex gap-4 flex-wrap'>
-                                    <div className='flex-1 w-full xl:w-2/3 md:w-2/3 space-y-4'>
+                                <div className='flex flex-wrap gap-4'>
+                                    <div className='flex-1 w-full space-y-4 xl:w-2/3 md:w-2/3'>
                                         <div className='space-y-2'>
-                                            <h2 className='text-urban font-bold'>APPLICANT INFORMATION</h2>
-                                            <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
+                                            <h2 className='font-bold text-urban'>APPLICANT INFORMATION</h2>
+                                            <div className='p-4 space-y-5 rounded-lg bg-neutral-50'>
                                                 <FormFieldApplicantId control={form.control} applicant={applicant} />
                                                 <Separator />
                                                 <FormFieldAddress control={form.control} applicant={applicant} />
@@ -184,26 +184,27 @@ const UrbanScapePage = () => {
 
                                         <div>
                                             <h2 className='font-semibold'>NAMES AND AGES OF ALL PERSONS TO OCCUPY APARTMENT</h2>
-                                            <div className='p-4 bg-neutral-50 rounded-lg space-y-5'>
+                                            <div className='p-4 space-y-5 rounded-lg bg-neutral-50'>
                                                 <FormFieldOccupants control={form.control} />
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                                    <div className='w-full flex-2 md:w-1/3 xl:w-1/3'>
                                         <QrCodeAuthentication
                                             required={true}
                                             proofTemplateId={proofTemplateId}
                                             title={qrCodeVerificationData.URBAN_BANKBIO.title}
                                             qrText={qrCodeVerificationData.URBAN_BANKBIO.qrText}
                                             qrTextAfter={qrCodeVerificationData.URBAN_BANKBIO.qrTextAfter}
+                                            filteredCredentials={['biometric', 'loan']}
                                         />
                                     </div>
                                 </div>
 
                                 <div className='mt-3'>
                                     <Button
-                                        className='col-span-2 w-fit md:place-self-end px-10 bg-emerald-700 text-lg'
+                                        className='col-span-2 px-10 text-lg w-fit md:place-self-end bg-emerald-700'
                                         type='submit'>
                                         Submit Application
                                     </Button>

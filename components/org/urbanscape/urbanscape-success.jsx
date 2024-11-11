@@ -43,18 +43,18 @@ const UrbanscapeSuccess = () => {
     return (
         <div>
             <div className='my-4'>
-                <h2 className='text-4xl text-urban font-semibold'>You have been approved!</h2>
-                <p className='font-semibold text-base'>To reserve your new appartment home, please pay total amount due now.</p>
+                <h2 className='text-4xl font-semibold text-urban'>You have been approved!</h2>
+                <p className='text-base font-semibold'>To reserve your new appartment home, please pay total amount due now.</p>
             </div>
-            <div className='flex gap-4 flex-wrap'>
-                <div className='flex-1 w-full xl:w-2/3 md:w-2/3 space-y-5'>
+            <div className='flex flex-wrap gap-4'>
+                <div className='flex-1 w-full space-y-5 xl:w-2/3 md:w-2/3'>
                     <div className='border rounded-lg'>
-                        <div className='border-b p-3 flex items-center justify-between'>
+                        <div className='flex items-center justify-between p-3 border-b'>
                             <p className='font-bold'>2 bedroom 2 bath with city view</p>
-                            <CheckCircle2 className='text-white bg-urban rounded-full' />
+                            <CheckCircle2 className='text-white rounded-full bg-urban' />
                         </div>
                         <div className='p-3'>
-                            <div className='flex space-x-1 items-center'>
+                            <div className='flex items-center space-x-1'>
                                 <h2 className='text-2xl font-bold'>$2,550</h2>
                                 <p className='text-sm'>per month</p>
                             </div>
@@ -62,12 +62,12 @@ const UrbanscapeSuccess = () => {
                         </div>
                     </div>
                     <div className='border rounded-lg'>
-                        <div className='border-b p-3 flex items-center justify-between'>
+                        <div className='flex items-center justify-between p-3 border-b'>
                             <p className='font-bold'>Deposit</p>
-                            <CheckCircle2 className='text-white bg-urban rounded-full' />
+                            <CheckCircle2 className='text-white rounded-full bg-urban' />
                         </div>
                         <div className='p-3 space-y-2'>
-                            <div className='flex space-x-1 items-center'>
+                            <div className='flex items-center space-x-1'>
                                 <h2 className='text-2xl font-bold'>{isWaived ? '$0' : '$1,440' }</h2>
                                 <p className='text-sm'>one time</p>
                             </div>
@@ -88,14 +88,14 @@ const UrbanscapeSuccess = () => {
                     <div className='space-y-3'>
                         <p className='font-bold'>TOTAL DUE NOW:</p>
                         <p className='text-3xl font-semibold text-green'>{isWaived ? ('$2,550') : ('$3,990')}</p>
-                        <Button className='bg-cyan-700 text-sm p-6 px-6 font-semibold'>Pay Now</Button>
+                        <Button className='p-6 px-6 text-sm font-semibold bg-cyan-700'>Pay Now</Button>
                     </div>
                     <Separator />
                     <div className='space-y-4'>
                         <p>{'Urbanscape is a part of the IdentityClarity\'s ecosystem called clarity partners.'}</p>
                         <Link href='/partners' target='_blank'>
                             <a target='_blank' rel='noopener noreferrer'>
-                                <div className='w-2/4 cursor-pointer mt-5 mb-5'>
+                                <div className='w-2/4 mt-5 mb-5 cursor-pointer'>
                                     <Image src={'/clarity_partners.png'} alt='clarity_partners' width={230} height={36} />
                                 </div>
                             </a>
@@ -104,7 +104,7 @@ const UrbanscapeSuccess = () => {
                 </div>
                 { !isWaived ?
                     (
-                        <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
+                        <div className='w-full flex-2 md:w-1/3 xl:w-1/3'>
                             <QrCodeAuthentication
                                 required={true}
                                 onlyCreditScore={true}
