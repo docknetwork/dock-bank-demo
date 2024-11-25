@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import * as Collapsible from '@radix-ui/react-collapsible';
+import { Check } from 'lucide-react';
 
 import { Separator } from 'components/ui/separator';
 import { Button } from 'components/ui/button';
@@ -10,7 +12,6 @@ import { apiGetLocal, postRequestLocal } from 'utils/request';
 import { dockUrl } from 'utils/constants';
 
 const baseUrl = process.env.NEXT_PUBLIC_DOCK_API_URL;
-
 const mdlProofRequest = {
   name: 'Proof request',
   nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
@@ -239,8 +240,10 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
 }
 
 export default function Home() {
+  const [showInstructions, setShowInstructions] = useState(false);
   const [res, setRes] = useState();
   const [error, setError] = useState();
+  const verifiedBadge = <Check className='text-green-600 h-6 w-6' />;
 
   function handlePres(res) {
     setRes(res);
@@ -261,7 +264,63 @@ export default function Home() {
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
+            <p className='text-justify mt-5'>
+              Use this page to test out mDL presentations.<br />
+              
+              Currently this page supports the Google Digital Credentials API implementation on Android.<br />
+            </p>
+            
+            <p className='text-justify mt-5'>
+              <Collapsible.Root open={showInstructions} onOpenChange={setShowInstructions} className="CollapsibleRoot">
+                    <div className='text-justify mt-5'>
+                    <Collapsible.Trigger asChild>
+                      <Button>
+                        {showInstructions ? '- Hide Instructions' : '+ View Instructions' }
+                      </Button>
+                    </Collapsible.Trigger>
+                    </div>
+                <Collapsible.Content>
+                  <div className='text-justify mt-5'>
+                    <div className='text-justify mt-5 text-lg'>Device Requirements</div>
+                    
+                    <ol>
+                      <li>Android device</li>
+                      <li>Google Play services 23.40 (or later)</li>
+                      <li>Chrome 128 (or later)</li>
+                      <li>Enable the flag at chrome://flags#web-identity-digital-credentials</li>
+                      <li>Ensure your device allows installs from, "Unknown Sources"</li>
+                    </ol>
+                  </div>
+
+                  <div className='text-justify mt-5'>
+                  <div className='text-justify mt-5 text-lg'>Setup the Google IC Wallet</div>
+
+                  <ol>
+                    <li>Download and install the apk from <a href="https://drive.google.com/file/d/1VVuN1b43FY8dpYsMDtYsQEbyabwcIrh6/view?usp=sharing" download>Google Drive</a></li>
+                    <li>Run the IC Wallet app</li>
+                    <li>Add a new credential by clicking the, "Add Self Signed Document" button and accepting the defaults</li>
+                  </ol>
+
+                  </div>
+
+                  <div className='text-justify mt-5'>
+                  <div className='text-justify mt-5 text-lg'>Test it out</div>
+
+                  <ol>
+                    <li>Open Chrome on your Android device</li>
+                    <li>Navigate to <a href="https://bank-demo.dock.io/mdl" target="_blank" rel="noreferrer">https://bank-demo.dock.io/mdl</a></li>
+                    <li>Try out the sample proof requests</li>
+                    <li>If successful, a Verified message will display and the response will be shown below</li>
+                  </ol>
+                  </div>
+
+                </Collapsible.Content>
+              </Collapsible.Root>
+            </p>
           </div>
+        </div>
+        <div className="mt-10 mb-10">
+          <Separator />
         </div>
         <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
           <OID4VPProofRequest
