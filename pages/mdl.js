@@ -243,7 +243,6 @@ export default function Home() {
   const [showInstructions, setShowInstructions] = useState(false);
   const [res, setRes] = useState();
   const [error, setError] = useState();
-  const verifiedBadge = <Check className='text-green-600 h-6 w-6' />;
 
   function handlePres(res) {
     setRes(res);
@@ -264,56 +263,75 @@ export default function Home() {
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
-            <p className='text-justify mt-5'>
-              Use this page to test out mDL presentations.<br />
-              
-              Currently this page supports the Google Digital Credentials API implementation on Android.<br />
+            <p className="text-justify mt-5">
+              Use this page to test out mDL presentations.
+              <br />
+              Currently this page supports the Google Digital Credentials API implementation on
+              Android.
+              <br />
             </p>
-            
-            <p className='text-justify mt-5'>
-              <Collapsible.Root open={showInstructions} onOpenChange={setShowInstructions} className="CollapsibleRoot">
-                    <div className='text-justify mt-5'>
-                    <Collapsible.Trigger asChild>
-                      <Button>
-                        {showInstructions ? '- Hide Instructions' : '+ View Instructions' }
-                      </Button>
-                    </Collapsible.Trigger>
-                    </div>
+
+            <p className="text-justify mt-5">
+              <Collapsible.Root
+                open={showInstructions}
+                onOpenChange={setShowInstructions}
+                className="CollapsibleRoot">
+                <div className="text-justify mt-5">
+                  <Collapsible.Trigger asChild>
+                    <Button>
+                      {showInstructions ? '- Hide Instructions' : '+ View Instructions'}
+                    </Button>
+                  </Collapsible.Trigger>
+                </div>
                 <Collapsible.Content>
-                  <div className='text-justify mt-5'>
-                    <div className='text-justify mt-5 text-lg'>Device Requirements</div>
-                    
+                  <div className="text-justify mt-5">
+                    <div className="text-justify mt-5 text-lg">Device Requirements</div>
                     <ol>
                       <li>Android device</li>
                       <li>Google Play services 23.40 (or later)</li>
                       <li>Chrome 128 (or later)</li>
                       <li>Enable the flag at chrome://flags#web-identity-digital-credentials</li>
-                      <li>Ensure your device allows installs from, "Unknown Sources"</li>
+                      <li>Ensure your device allows installs from, &quot;Unknown Sources&quot;</li>
                     </ol>
                   </div>
 
-                  <div className='text-justify mt-5'>
-                  <div className='text-justify mt-5 text-lg'>Setup the Google IC Wallet</div>
-
-                  <ol>
-                    <li>Download and install the apk from <a href="https://drive.google.com/file/d/1VVuN1b43FY8dpYsMDtYsQEbyabwcIrh6/view?usp=sharing" download>Google Drive</a></li>
-                    <li>Run the IC Wallet app</li>
-                    <li>Add a new credential by clicking the, "Add Self Signed Document" button and accepting the defaults</li>
-                  </ol>
-
+                  <div className="text-justify mt-5">
+                    <div className="text-justify mt-5 text-lg">Setup the Google IC Wallet</div>
+                    <ol>
+                      <li>
+                        Download and install the apk from
+                        <a
+                          href="https://drive.google.com/file/d/1VVuN1b43FY8dpYsMDtYsQEbyabwcIrh6/view?usp=sharing"
+                          download>
+                          Google Drive
+                        </a>
+                      </li>
+                      <li>Run the IC Wallet app</li>
+                      <li>
+                        Add a new credential by clicking the, &quot;Add Self Signed Document&quot;
+                        button and accepting the defaults
+                      </li>
+                    </ol>
                   </div>
 
-                  <div className='text-justify mt-5'>
-                  <div className='text-justify mt-5 text-lg'>Test it out</div>
+                  <div className="text-justify mt-5">
+                    <div className="text-justify mt-5 text-lg">Test it out</div>
 
-                  <ol>
-                    <li>Open Chrome on your Android device</li>
-                    <li>Navigate to <a href="https://bank-demo.dock.io/mdl" target="_blank" rel="noreferrer">https://bank-demo.dock.io/mdl</a></li>
-                    <li>Try out the sample proof requests</li>
-                    <li>If successful, a Verified message will display and the response will be shown below</li>
-                  </ol>
+                    <ol>
+                      <li>Open Chrome on your Android device</li>
+                      <li>
+                        Navigate to
+                        <a href="https://bank-demo.dock.io/mdl" target="_blank" rel="noreferrer">
+                          https://bank-demo.dock.io/mdl
+                        </a>
+                      </li>
+                      <li>Try out the sample proof requests</li>
+                      <li>
+                        If successful, a Verified message will display and the response will be
+                        shown below
+                      </li>
+                    </ol>
                   </div>
-
                 </Collapsible.Content>
               </Collapsible.Root>
             </p>
