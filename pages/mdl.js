@@ -284,9 +284,9 @@ export default function Home() {
                   </Collapsible.Trigger>
                 </div>
                 <Collapsible.Content>
-                  <div className="text-justify mt-5">
-                    <div className="text-justify mt-5 text-lg">Device Requirements</div>
-                    <ol>
+                  <div className="text-left mt-5">
+                    <div className="text-left mt-5 text-lg">Device Requirements</div>
+                    <ol className="pl-5 list-disc">
                       <li>Android device</li>
                       <li>Google Play services 23.40 (or later)</li>
                       <li>Chrome 128 (or later)</li>
@@ -295,9 +295,9 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-justify mt-5">
-                    <div className="text-justify mt-5 text-lg">Setup the Google IC Wallet</div>
-                    <ol>
+                  <div className="text-left mt-5">
+                    <div className="text-left mt-5 text-lg">Setup the Google IC Wallet</div>
+                    <ol className="pl-5 list-disc">
                       <li>
                         Download and install the apk from
                         <a
@@ -314,13 +314,13 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-justify mt-5">
-                    <div className="text-justify mt-5 text-lg">Test it out</div>
+                  <div className="text-left mt-5">
+                    <div className="text-left mt-5 text-lg">Test it out</div>
 
-                    <ol>
+                    <ol className="pl-5 list-disc">
                       <li>Open Chrome on your Android device</li>
                       <li>
-                        Navigate to
+                        Navigate to&nbsp;
                         <a href="https://bank-demo.dock.io/mdl" target="_blank" rel="noreferrer">
                           https://bank-demo.dock.io/mdl
                         </a>
