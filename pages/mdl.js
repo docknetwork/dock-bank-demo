@@ -7,6 +7,7 @@ import { Check } from 'lucide-react';
 
 import { Separator } from 'components/ui/separator';
 import { Button } from 'components/ui/button';
+import { Input } from 'components/ui/input';
 import { QRCodeGenerator } from 'components/qrcode/qr-generator';
 import { apiGetLocal, postRequestLocal } from 'utils/request';
 import { dockUrl } from 'utils/constants';
@@ -78,12 +79,13 @@ const mdlProofRequestName = {
 
 function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setError }) {
   const [proofRequest, setProofRequest] = useState();
+  const [customProofTemplateId, setCustomProofTemplateId] = useState();
   const [isVerified, setIsVerified] = useState(false);
 
-  async function createProofRequest() {
+  async function createProofRequest(setupObject = proofRequestSetupObject) {
     const { data: proofRequest } = await postRequestLocal('create-proof-request-object', {
       did: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
-      ...proofRequestSetupObject,
+      ...setupObject,
     });
 
     const { data: qrUrlData } = await postRequestLocal('get-oid4vp-url', {
@@ -115,10 +117,19 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
   }
 
   useEffect(() => {
-    if (!proofRequest) {
+    if (!proofRequest && proofRequestSetupObject) {
       createProofRequest();
     }
   });
+
+  async function handleSetCustomProofTemplateId() {
+    const { data: proofTemplate } = await apiGetLocal(
+      `get-proof-template?id=${encodeURIComponent(customProofTemplateId.trim())}`
+    );
+
+    delete proofTemplate.did;
+    await createProofRequest(proofTemplate);
+  }
 
   async function handleCredsRequest() {
     console.log('handleCredsRequest', proofRequest);
@@ -205,10 +216,10 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       </Head>
 
       <div className="orgCard">
-        <div className="cardImg valign-middle m-auto">
-          <p className="font-bold mb-5">{title}</p>
+        <div className="m-auto cardImg valign-middle">
+          <p className="mb-5 font-bold">{title}</p>
           {isVerified ? (
-            <div className="pt-5 min-h-28 text-sm">Verified!</div>
+            <div className="pt-5 text-sm min-h-28">Verified!</div>
           ) : (
             <div>
               {proofRequest && proofRequest.qrUrlData && proofRequest.qrUrlData.url ? (
@@ -222,7 +233,19 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
                   <br />
                 </>
               ) : (
-                <>Loading...</>
+                <div className="h-[195px]">Loading...</div>
+              )}
+              {!proofRequestSetupObject && !proofRequest && (
+                <>
+                  <Input
+                    placeholder="Custom Proof Template ID"
+                    value={customProofTemplateId}
+                    onChange={(e) => setCustomProofTemplateId(e.target.value)}
+                  />
+                  <Button className="my-2" onClick={handleSetCustomProofTemplateId}>
+                    Get Proof Request
+                  </Button>
+                </>
               )}
             </div>
           )}
@@ -254,7 +277,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="cardsContainer m-auto p-10 text-center">
+      <div className="p-10 m-auto text-center cardsContainer">
         <div className="flex">
           <div className="mr-5">
             <Image alt="docklogo" src="/docklogo.png" width={84} height={32} />
@@ -263,7 +286,7 @@ export default function Home() {
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
-            <p className="text-justify mt-5">
+            <p className="mt-5 text-justify">
               Use this page to test out mDL presentations.
               <br />
               Currently this page supports the Google Digital Credentials API implementation on
@@ -271,12 +294,12 @@ export default function Home() {
               <br />
             </p>
 
-            <p className="text-justify mt-5">
+            <p className="mt-5 text-justify">
               <Collapsible.Root
                 open={showInstructions}
                 onOpenChange={setShowInstructions}
                 className="CollapsibleRoot">
-                <div className="text-justify mt-5">
+                <div className="mt-5 text-justify">
                   <Collapsible.Trigger asChild>
                     <Button>
                       {showInstructions ? '- Hide Instructions' : '+ View Instructions'}
@@ -284,8 +307,8 @@ export default function Home() {
                   </Collapsible.Trigger>
                 </div>
                 <Collapsible.Content>
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Device Requirements</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Device Requirements</div>
                     <ol className="pl-5 list-disc">
                       <li>Android device</li>
                       <li>Google Play services 23.40 (or later)</li>
@@ -295,8 +318,8 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Setup the Google IC Wallet</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Setup the Google IC Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
                         Download and install the apk from
@@ -314,8 +337,8 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Test it out</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Test it out</div>
 
                     <ol className="pl-5 list-disc">
                       <li>Open Chrome on your Android device</li>
@@ -340,7 +363,7 @@ export default function Home() {
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
+        <div className="grid gap-4 pt-5 text-center xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1">
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequest}
             title="Over 18 check"
@@ -355,11 +378,17 @@ export default function Home() {
             onPres={handlePres}
             setError={handleError}
           />
+          <OID4VPProofRequest
+            title="Custom Proof Template"
+            desc="Scan this QR code with your OpenID compatible MDL Wallet to present your name to the Dock API."
+            onPres={handlePres}
+            setError={handleError}
+          />
         </div>
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="mt-5 m-auto" style={{ textAlign: 'left' }}>
+        <div className="m-auto mt-5" style={{ textAlign: 'left' }}>
           {error && <pre>Error: {error}</pre>}
           {res ? (
             <pre>
