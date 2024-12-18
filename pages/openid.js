@@ -200,10 +200,10 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject }) {
   return (
     <div>
       <div className="orgCard">
-        <div className="cardImg valign-middle m-auto">
-          <p className="font-bold mb-5">{title}</p>
+        <div className="m-auto cardImg valign-middle">
+          <p className="mb-5 font-bold">{title}</p>
           {isVerified ? (
-            <div className="pt-5 min-h-28 text-sm">
+            <div className="pt-5 text-sm min-h-28">
               Verified!
               <br />
               <br />
@@ -288,10 +288,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="cardsContainer m-auto p-10 text-center">
+      <div className="p-10 m-auto text-center cardsContainer">
         <div className="flex">
           <div className="mr-5">
-            <Image alt="docklogo" src="/docklogo.png" width={84} height={32} />
+            <Image alt="truveralogo" src="/truveralogoblack.png" width={144} height={32} />
           </div>
           <div>
             <h1 className="Header">
@@ -299,11 +299,11 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
+        <div className="grid gap-4 pt-5 text-center xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1">
           <div>
             <div className="orgCard">
-              <div className="cardImg valign-middle m-auto">
-                <p className="font-bold mb-5">OID4VCI</p>
+              <div className="m-auto cardImg valign-middle">
+                <p className="mb-5 font-bold">OID4VCI</p>
                 <div>
                   {credentialOffer ? (
                     <QRCodeGenerator url={credentialOffer.url} />
@@ -324,8 +324,8 @@ export default function Home() {
 
           <div>
             <div className="orgCard">
-              <div className="cardImg valign-middle m-auto">
-                <p className="font-bold mb-5">OID4VCI (no auth)</p>
+              <div className="m-auto cardImg valign-middle">
+                <p className="mb-5 font-bold">OID4VCI (no auth)</p>
                 <div>
                   {credentialOfferNoAuth ? (
                     <QRCodeGenerator url={credentialOfferNoAuth.url} />
@@ -359,7 +359,7 @@ export default function Home() {
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="mt-5 m-auto">
+        <div className="m-auto mt-5">
           <button className="launchBtn" style={{ width: '300px' }} onClick={generateEBSIUrls}>
             Generate EBSI Conformance URLs
           </button>
