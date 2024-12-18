@@ -255,14 +255,16 @@ export default function Home() {
   return (
     <>
       <div className="p-10 m-auto text-center cardsContainer">
-        <div className="flex">
-          <div className="mr-5">
-            <Image alt="truveralogo" src="/truveralogoblack.png" width={144} height={32} />
-          </div>
-          <div>
+        <div>
+          <div className="flex items-center">
+            <div className="mr-3 h-[24px]">
+              <Image alt="truveralogo" src="/truveralogoblack.png" width={108} height={24} />
+            </div>
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
+          </div>
+          <div>
             <p className="mt-5 text-justify">
               Use this page to test out mDL presentations.
               <br />
