@@ -10,10 +10,10 @@ import { Button } from 'components/ui/button';
 export default function Home() {
   return (
     <>
-      <div className="cardsContainer m-auto p-10 text-center">
-        <div className="flex">
-          <div className="mr-5">
-            <Image alt="docklogo" src="/docklogo.png" width={84} height={32} />
+      <div className="p-10 m-auto text-center cardsContainer">
+        <div className="flex items-center">
+          <div className="mr-3 h-[24px]">
+            <Image alt="truveralogo" src="/truveralogoblack.png" width={108} height={24} />
           </div>
           <div>
             <h1 className="Header">
@@ -21,7 +21,7 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <div className="pt-5 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
+        <div className="grid gap-4 pt-5 text-center xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1">
           {organizations.map((org, i) => (
             <div key={`card${i}`}>
               <div key={i} className="orgCard">
@@ -30,7 +30,7 @@ export default function Home() {
               {org.name === 'Quotient' && (
                 <div className="mt-2">
                   <Link href="/wallet">
-                    <Button className="w-full pt-6 pb-6 rounded-full font-bold" variant="outline">
+                    <Button className="w-full pt-6 pb-6 font-bold rounded-full" variant="outline">
                       <a className="text-blue-600" target="_blank" rel="noopener noreferrer">
                         Download the
                         <br />
@@ -47,7 +47,7 @@ export default function Home() {
           <Separator />
         </div>
         <DemoFlow />
-        <div className="mt-5 m-auto">
+        <div className="m-auto mt-5">
           <Link href="/org/quotient">
             <button className="launchBtn">Launch Demo</button>
           </Link>
