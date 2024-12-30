@@ -299,7 +299,7 @@ export default function Home() {
                     <div className="text-left mt-5 text-lg">Setup the Google IC Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
-                        Download the  
+                        Download the
                         <a
                           href="https://digitalcredentials.dev/docs/samples/android-wallet-sample/#install-the-apps"
                           download>
