@@ -305,7 +305,8 @@ export default function Home() {
                           download>
                           IC Wallet app linked in this page
                         </a>
-                        to your Android device. The source code can be found at the OpenWallet Foundation's Identity Credentials repository
+                        to your Android device. The source code can be found at the OpenWallet
+                        Foundation's Identity Credentials repository
                       </li>
                       <li>Run the IC Wallet app</li>
                       <li>
