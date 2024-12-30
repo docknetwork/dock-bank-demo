@@ -299,12 +299,13 @@ export default function Home() {
                     <div className="text-left mt-5 text-lg">Setup the Google IC Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
-                        Download and install the apk from
+                        Download the  
                         <a
-                          href="https://drive.google.com/file/d/1VVuN1b43FY8dpYsMDtYsQEbyabwcIrh6/view?usp=sharing"
+                          href="https://digitalcredentials.dev/docs/samples/android-wallet-sample/#install-the-apps"
                           download>
-                          Google Drive
+                          IC Wallet app linked in this page
                         </a>
+                        to your Android device. The source code can be found at the OpenWallet Foundation's Identity Credentials repository
                       </li>
                       <li>Run the IC Wallet app</li>
                       <li>
