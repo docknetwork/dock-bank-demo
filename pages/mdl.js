@@ -205,10 +205,10 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       </Head>
 
       <div className="orgCard">
-        <div className="cardImg valign-middle m-auto">
-          <p className="font-bold mb-5">{title}</p>
+        <div className="m-auto cardImg valign-middle">
+          <p className="mb-5 font-bold">{title}</p>
           {isVerified ? (
-            <div className="pt-5 min-h-28 text-sm">Verified!</div>
+            <div className="pt-5 text-sm min-h-28">Verified!</div>
           ) : (
             <div>
               {proofRequest && proofRequest.qrUrlData && proofRequest.qrUrlData.url ? (
@@ -254,16 +254,18 @@ export default function Home() {
 
   return (
     <>
-      <div className="cardsContainer m-auto p-10 text-center">
-        <div className="flex">
-          <div className="mr-5">
-            <Image alt="docklogo" src="/docklogo.png" width={84} height={32} />
-          </div>
-          <div>
+      <div className="p-10 m-auto text-center cardsContainer">
+        <div>
+          <div className="flex items-center">
+            <div className="mr-3 h-[24px]">
+              <Image alt="truveralogo" src="/truveralogoblack.png" width={108} height={24} />
+            </div>
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
-            <p className="text-justify mt-5">
+          </div>
+          <div>
+            <p className="mt-5 text-justify">
               Use this page to test out mDL presentations.
               <br />
               Currently this page supports the Google Digital Credentials API implementation on
@@ -271,12 +273,12 @@ export default function Home() {
               <br />
             </p>
 
-            <p className="text-justify mt-5">
+            <p className="mt-5 text-justify">
               <Collapsible.Root
                 open={showInstructions}
                 onOpenChange={setShowInstructions}
                 className="CollapsibleRoot">
-                <div className="text-justify mt-5">
+                <div className="mt-5 text-justify">
                   <Collapsible.Trigger asChild>
                     <Button>
                       {showInstructions ? '- Hide Instructions' : '+ View Instructions'}
@@ -284,8 +286,8 @@ export default function Home() {
                   </Collapsible.Trigger>
                 </div>
                 <Collapsible.Content>
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Device Requirements</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Device Requirements</div>
                     <ol className="pl-5 list-disc">
                       <li>Android device</li>
                       <li>Google Play services 23.40 (or later)</li>
@@ -295,8 +297,8 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Setup the Google IC Wallet</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Setup the Google IC Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
                         Download the
@@ -316,8 +318,8 @@ export default function Home() {
                     </ol>
                   </div>
 
-                  <div className="text-left mt-5">
-                    <div className="text-left mt-5 text-lg">Test it out</div>
+                  <div className="mt-5 text-left">
+                    <div className="mt-5 text-lg text-left">Test it out</div>
 
                     <ol className="pl-5 list-disc">
                       <li>Open Chrome on your Android device</li>
@@ -342,7 +344,7 @@ export default function Home() {
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="pt-5 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1 gap-4 text-center">
+        <div className="grid gap-4 pt-5 text-center xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1">
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequest}
             title="Over 18 check"
@@ -361,7 +363,7 @@ export default function Home() {
         <div className="mt-10 mb-10">
           <Separator />
         </div>
-        <div className="mt-5 m-auto" style={{ textAlign: 'left' }}>
+        <div className="m-auto mt-5" style={{ textAlign: 'left' }}>
           {error && <pre>Error: {error}</pre>}
           {res ? (
             <pre>
