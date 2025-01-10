@@ -278,14 +278,16 @@ export default function Home() {
   return (
     <>
       <div className="p-10 m-auto text-center cardsContainer">
-        <div className="flex">
-          <div className="mr-5">
-            <Image alt="docklogo" src="/docklogo.png" width={84} height={32} />
-          </div>
-          <div>
+        <div>
+          <div className="flex items-center">
+            <div className="mr-3 h-[24px]">
+              <Image alt="truveralogo" src="/truveralogoblack.png" width={108} height={24} />
+            </div>
             <h1 className="Header">
               <span className="mr-2">|</span> MDL Demo
             </h1>
+          </div>
+          <div>
             <p className="mt-5 text-justify">
               Use this page to test out mDL presentations.
               <br />
@@ -322,12 +324,14 @@ export default function Home() {
                     <div className="mt-5 text-lg text-left">Setup the Google IC Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
-                        Download and install the apk from
+                        Download the
                         <a
-                          href="https://drive.google.com/file/d/1VVuN1b43FY8dpYsMDtYsQEbyabwcIrh6/view?usp=sharing"
+                          href="https://digitalcredentials.dev/docs/samples/android-wallet-sample/#install-the-apps"
                           download>
-                          Google Drive
+                          IC Wallet app linked in this page
                         </a>
+                        to your Android device. The source code can be found at the OpenWallet
+                        Foundation&apos;s Identity Credentials repository
                       </li>
                       <li>Run the IC Wallet app</li>
                       <li>
