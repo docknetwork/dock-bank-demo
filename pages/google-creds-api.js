@@ -61,7 +61,7 @@ export default function GoogleCredsAPI({ title, desc, proofRequestSetupObject })
       <Head>
         <meta
           httpEquiv="origin-trial"
-          content="ApSITCHddV0QaCFrEYa/rwldMORVDXzULWdpxVeeSYhTdBLl2wgkuQxLGMg37Q3lBAA0Wq0KWqbcj+A3BA+kBQcAAABxeyJvcmlnaW4iOiJodHRwczovL2RvY2suaW86NDQzIiwiZmVhdHVyZSI6IldlYklkZW50aXR5RGlnaXRhbENyZWRlbnRpYWxzIiwiZXhwaXJ5IjoxNzQ0NzYxNTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0="
+          content="A+gxPtF69FtJQmWSJLQkXSHpoULImx6RKW/X45CSLtlZr1zWsBfyu92yugoGjxhPI8Gb3ZtZyfjv6HYYfrszUQEAAACIeyJvcmlnaW4iOiJodHRwczovL3RydXZlcmEuaW86NDQzIiwiZmVhdHVyZSI6IldlYklkZW50aXR5RGlnaXRhbENyZWRlbnRpYWxzIiwiZXhwaXJ5IjoxNzQ0NzYxNTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="
         />
       </Head>
       <button onClick={handleTestRequest}>test it now</button>
