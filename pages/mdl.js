@@ -126,7 +126,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
     const credsApiRequest = {
       protocol: 'openid4vp',
       request: JSON.stringify({
-        client_id: 'bank-demo.dock.io',
+        client_id: 'bank-demo.truvera.io',
         client_id_scheme: 'web-origin',
         response_type: 'vp_token',
         nonce: proofRequest.nonce,
