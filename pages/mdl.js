@@ -325,8 +325,8 @@ export default function Home() {
                       <li>Open Chrome on your Android device</li>
                       <li>
                         Navigate to&nbsp;
-                        <a href="https://bank-demo.dock.io/mdl" target="_blank" rel="noreferrer">
-                          https://bank-demo.dock.io/mdl
+                        <a href="https://bank-demo.truvera.io/mdl" target="_blank" rel="noreferrer">
+                          https://bank-demo.truvera.io/mdl
                         </a>
                       </li>
                       <li>Try out the sample proof requests</li>
@@ -348,14 +348,14 @@ export default function Home() {
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequest}
             title="Over 18 check"
-            desc="Scan this QR code with your OpenID compatible MDL Wallet to present an age over 18 check to the Dock API."
+            desc="Scan this QR code with your OpenID compatible MDL Wallet to present an age over 18 check to the Truvera API."
             onPres={handlePres}
             setError={handleError}
           />
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequestName}
             title="Get name check"
-            desc="Scan this QR code with your OpenID compatible MDL Wallet to present your name to the Dock API."
+            desc="Scan this QR code with your OpenID compatible MDL Wallet to present your name to the Truvera API."
             onPres={handlePres}
             setError={handleError}
           />

@@ -4,7 +4,7 @@ import Head from 'next/head';
 const credsApiRequest = {
   protocol: 'openid4vp',
   request:
-    '{"client_id": "bank-demo.dock.io", "client_id_scheme": "web-origin", "response_type": "vp_token", "nonce": "-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=", "presentation_definition": {"id": "mDL-request-demo", "input_descriptors": [{"id": "org.iso.18013.5.1.mDL", "format": {"mso_mdoc": {"alg": ["ES256"]}}, "constraints": {"limit_disclosure": "required", "fields": [{"path": ["$[\'org.iso.18013.5.1\'][\'family_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'given_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'age_over_21\']"], "intent_to_retain": false}]}}]}}',
+    '{"client_id": "bank-demo.truvera.io", "client_id_scheme": "web-origin", "response_type": "vp_token", "nonce": "-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=", "presentation_definition": {"id": "mDL-request-demo", "input_descriptors": [{"id": "org.iso.18013.5.1.mDL", "format": {"mso_mdoc": {"alg": ["ES256"]}}, "constraints": {"limit_disclosure": "required", "fields": [{"path": ["$[\'org.iso.18013.5.1\'][\'family_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'given_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'age_over_21\']"], "intent_to_retain": false}]}}]}}',
   state: {
     nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
     private_key: 'kN37SKg-iu3N3wSXAhuBXxwDkbo5rvUFYCr9BCm34Qs=',
