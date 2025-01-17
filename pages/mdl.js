@@ -191,7 +191,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       }
     } catch (e) {
       console.error(e);
-      setError(e.message || 'unknown');
+      setError(`${e.message || 'unknown error'} - ${e.stack || 'no stack'}`);
     }
   }
 
