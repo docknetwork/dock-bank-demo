@@ -17,7 +17,7 @@ const credential = {
 };
 
 const authProvider = {
-  url: 'https://creds.dock.io/claims',
+  url: 'https://creds.truvera.io/claims',
   scope: ['openid'],
   clientId:
     'eyAic2NoZW1hIjogImh0dHBzOi8vZG9ja25ldHdvcmsuZ2l0aHViLmlvL3ZjLXNjaGVtYXMvYmFzaWMtY3JlZGVudGlhbC5qc29uIiwgImNsYWltcyI6IFsibmFtZSJdIH0=',
