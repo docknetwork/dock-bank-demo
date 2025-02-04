@@ -1,8 +1,8 @@
-# Dock Sales Demo
+# Truvera Sales Demo
 
 ## Overview
 
-The Dock Sales Demo showcases the integration of KYC, biometric services, and verifiable credentials to demonstrate the capabilities of Dock's API and wallet. It simulates a customer journey through KYC verification, credential issuance, and verification across various scenarios, emphasizing integration ease and user experience.
+The Truvera Sales Demo showcases the integration of KYC, biometric services, and verifiable credentials to demonstrate the capabilities of Truvera's API and wallet. It simulates a customer journey through KYC verification, credential issuance, and verification across various scenarios, emphasizing integration ease and user experience.
 
 ## Quotient Wallet
 
@@ -21,7 +21,7 @@ This demo is designed to work with the demo Quotient Credit Union wallet app. Pl
 ### 📓Prerequisites
 
 - Node.js and npm installed.
-- Dock account with API access.
+- Truvera Workspace account with API access.
 
 ### 🔑 Configuration
 
@@ -30,13 +30,13 @@ This demo is designed to work with the demo Quotient Credit Union wallet app. Pl
 1. Clone the repo: `git clone <repo_url>`
 2. Install dependencies: `npm install` or `yarn`
 
-### Configuring Certs Dependencies
+### Configuring Truvera Dependencies
 
-Running this project depends on having an ecosystem, organizational profiles, and proof request templates configured properly in Certs. You can set these up automatically by using the [setup-certs](./scripts/setup-certs.mjs) command. To run it, follow these steps:
+Running this project depends on having an ecosystem, organizational profiles, and proof request templates configured properly in Truvera Workspace. You can set these up automatically by using the [setup-certs](./scripts/setup-certs.mjs) command. To run it, follow these steps:
 
 1. Configure the `.env` file by setting the following variables
-    * DOCK_API_KEY - sign into [Certs](https://certs.dock.io/) and generate a test environment key from `Developer -> API Keys`
-    * DOCK_API_URL=DOCK_API_URL="https://api-testnet.dock.io"
+    * DOCK_API_KEY - sign into the [Truvera Workspace](https://truvera.io/) and generate a test environment key from `Developer -> API Keys`
+    * DOCK_API_URL=DOCK_API_URL="https://api-testnet.truvera.io"
 2. Run `yarn setup-certs`
 3. This will generate a `.env.new` file populated with the environment variables you need to run the project. Copy this over the `.env` file
 
@@ -44,7 +44,7 @@ For reference the details about the ecosystem and some sample JSON request bodie
 
 ## 🧪 Testing the Project Workflow
 
-Before starting, remember to get the Dock Wallet mobile app, with the biometric service plugin enabled, is required. The Dock Wallet app is available on PlayStore or AppStore.
+Before starting, remember to get the Truvera Wallet mobile app, with the biometric service plugin enabled, is required. The Truvera Wallet app is available on PlayStore or AppStore.
 
 The demo workflow consists of going through the KYC process filling the formularies and scanning each QR code to get authenticated and test the organizations ecosystems.
 
@@ -58,21 +58,21 @@ It's based on an ecosystem called, "Clarity Partners". The ecosystem contains th
 
 **1. Create a Bank account:** On the main page organizations click on “New Bank Account” from Quotient.
 
-Fill the formulary required data and click on “Submit Application”. This will take you to the first QR code we need to scan with the Dock Wallet app using the option “Scan”. This QR code will trigger the biometric verification process on the mobile to get the Biometric credential.
+Fill the formulary required data and click on “Submit Application”. This will take you to the first QR code we need to scan with the Truvera Wallet app using the option “Scan”. This QR code will trigger the biometric verification process on the mobile to get the Biometric credential.
 
-Once QR code verification is successful, you will receive 2 credentials in your Dock Wallet, “Credit Score credential” and “BankId credential”.
+Once QR code verification is successful, you will receive 2 credentials in your Truvera Wallet, “Credit Score credential” and “BankId credential”.
 
 **2. Obtain Auto Loan:** On the main page click on “Obtain Auto Loan” from Quotient.
 
-Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score.
+Identify yourself scanning the QR code using your Truvera Wallet app and select the required credentials: Biometric, BankId, and Credit Score.
 
 On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
 
-On the success page, you will find a second QR code to scan with the Dock Wallet to proof your Credit Score from your credential.
+On the success page, you will find a second QR code to scan with the Truvera Wallet to proof your Credit Score from your credential.
 
 **3. Revoke & Reissue Credit Score:** On the main page click on “Visit Site” from Equinet. This page is the representation of a Credit Score credential history. You can revoke the actual Credit Score credential and issue another with one action. Click on “Revoke and Issue New credential” to test the functionality. Note: you need to complete previous steps to own this credential and revoke it.
 
-**4. Apply for an apartment:** On the main page click on “Visit Site” from Urbanscape. Identify yourself scanning the QR code using your Dock Wallet app and select the required credentials: Biometric, BankId, and Credit Score. 
+**4. Apply for an apartment:** On the main page click on “Visit Site” from Urbanscape. Identify yourself scanning the QR code using your Truvera Wallet app and select the required credentials: Biometric, BankId, and Credit Score. 
 
 On verification success will automatically fill the fields “First Name, Last Name, Street Address”, from your BankId credential details, then click on “Submit Application” to continue.
 
@@ -82,8 +82,8 @@ With this, we finish the workflow from the application where we can have an over
 
 ## Resources
 
-- [Dock](https://www.dock.io/)
-- [Dock API Documentation](https://docs.dock.io/developer-documentation/dock-api)
+- [Truvera](https://www.truvera.io/)
+- [Truvera API Documentation](https://docs.truvera.io/truvera-api)
 - [Next.js](https://nextjs.org/)
 
 # Developer Documentation
@@ -91,12 +91,12 @@ With this, we finish the workflow from the application where we can have an over
 ## Technologies Used 
 
 - Next.js 12.2.3
-- Dock API for decentralized identity and credential management.
+- Truvera API for decentralized identity and credential management.
 - Integration with biometric verification services on the mobile app.
 
 ##  📚 Libraries and Dependencies
 
-Our project, "dock-demo," incorporates a variety of technologies for optimal performance, state management, and UI aesthetics:
+Our project, "bank-demo," incorporates a variety of technologies for optimal performance, state management, and UI aesthetics:
 
 - **Next.js:** The core framework provides server-side rendering and static site generation.
 - **React:** Enables building our UI with a component-based approach.
@@ -115,7 +115,7 @@ Each library and dependency has been carefully selected for its performance, rel
 
 ## 📁 Folder Structure
 
-- `/pages/api` - Server side API integration and communication with Dock.
+- `/pages/api` - Server side API integration and communication with Truvera.
 - `/pages/org` - Organization pages for testing functionality.
 - `/components/ui` - Interface components from ShadCn library.
 - `/_credentials` - Credential Schemas used for issuing credentials.
@@ -132,7 +132,7 @@ Note: Most of the functions are documented inside of each file.
 The Qr code state is handle by `/store/qrCodeStore.js` folder, using the Zustand library, for updating the proof template Id and verification state.
 Qr code track this states: 
 
-    proofTemplateId -> Dock Cert Verification template id
+    proofTemplateId -> Truvera Verification template id
 
     qrCodeUrl -> Generated url from generateQR() function
 
@@ -150,7 +150,7 @@ Each value also contain setter function.
 
 ### Main Functions
 
-Under folder `/utils` are the files that handle all the communication with Dock API service.
+Under folder `/utils` are the files that handle all the communication with Truvera API service.
 
 `createRegistry(policyDid, type)` -> Creates Registry for a new credential.
 
