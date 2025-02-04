@@ -120,8 +120,7 @@ const QuotientBankForm = () => {
     }
 
     await createCredential(createBankIdCredential, quotient_Payload, false);
-    // TODO: We are facing some issues with revoked credentials, will need to enable that feature later
-    await createCredential(createCreditScoreCredential, credentialPayload, false);
+    await createCredential(createCreditScoreCredential, credentialPayload, true);
 
     toast.info('Credentials issued successfully.');
   }
