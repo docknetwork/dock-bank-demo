@@ -7,6 +7,7 @@ import {
 } from 'components/ui/form';
 import Image from 'next/image';
 import WebCamModal from './webcam-modal';
+import { Check } from 'lucide-react';
 
 /**
  * @description Form Field for user web cam photo
@@ -23,16 +24,16 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted }) => 
                 <FormItem className="relative h-full">
                     <div className='flex items-center justify-between'>
                         <div>
-                            <FormLabel className="font-semibold">Take a webcam photo for KYC check</FormLabel>
+                            <FormLabel className="font-semibold">Complete your KYC check</FormLabel>
                         </div>
                         <div>
-                            <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
+                            <Image src="/DaonLogo-FullColor.png" alt='id_clarity' width={87} height={24} />
                         </div>
                     </div>
                     <FormControl>
                         {isCaptureCompleted ? (
-                            <div className='grid place-items-center pt-12'>
-                                <Image src="/example_webcam.png" alt='webcam_oval' width={225} height={260} />
+                            <div className='grid place-items-center '>
+                                <Check className='text-green-600 h-100 w-100' />
                             </div>
                         ) : (
                             <div className='grid justify-items-center gap-4 pt-2 xl:pt-16'>

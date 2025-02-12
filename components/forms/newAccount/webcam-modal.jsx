@@ -32,7 +32,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
         <Dialog onOpenChange={handleOnOpenChanged}>
             <DialogTrigger asChild>
                 <div className='absolute bottom-0 left-0 right-0 m-auto '>
-                    <Button className='uploadBtn' variant='outline'>Take Photo</Button>
+                    <Button className='uploadBtn' variant='outline'>Start KYC</Button>
                 </div>
             </DialogTrigger>
             <DialogContent>
@@ -44,22 +44,19 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
 
                         </DialogHeader>
                         <div className='p-4 pt-5 grid justify-items-center relative'>
-                            <Image src="/webcam_oval.png" alt='webcam_oval' width={293} height={293} />
-                            <div className='absolute top-8'>
-                                <Image className='rounded-full' src="/euanFaceScan.gif" alt='webcam_oval' width={225} height={260} />
-                            </div>
+                            <Image src="/Daon-IDV.gif" alt='webcam_oval' width={284} height={611} />
                         </div>
                         <div className='ta-c mt-5'>
                             <p>
-                                Position your head so that your whole face is visible in the oval. Move head left and right, up and down.
+                                Please complete the identity verification process to proceed.
                             </p>
                         </div>
-                        <Button variant="outline" onClick={handleOnComplete}>Start Capture</Button>
+                        <Button variant="outline" onClick={handleOnComplete}>Close</Button>
                     </>
                 )}
                 <div className='grid justify-items-center gap-2'>
-                    <p className='text-sm'>Powered by IdentityClarity</p>
-                    <Image src="/id_clarity.png" alt='id_clarity' width={87} height={24} />
+                    <p className='text-sm'>Powered by Daon</p>
+                    <Image src="/DaonLogo-FullColor.png" alt='daon-logo' width={87} height={24} />
                 </div>
             </DialogContent>
         </Dialog>
