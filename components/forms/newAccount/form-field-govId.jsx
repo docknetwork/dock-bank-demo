@@ -15,7 +15,6 @@ import WebCamPhoto from './webcam-photo';
  * @param {*} control  react hook form controller
  * @param {*} isCaptureCompleted shows WebCamPhoto comp
  * @param {*} setIsCaptureCompleted setter 'isCaptureCompleted'
- * @param {*} setIsUploadPoDComplete setter 'isUploadPoDComplete' (passport or driver id)
  * @memberof QuotientBankForm
  * @returns React.FC Form Field
  */

@@ -44,7 +44,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
 
                         </DialogHeader>
                         <div className='p-4 pt-5 grid justify-items-center relative'>
-                            <Image src="/Daon-IDV.gif" alt='webcam_oval' width={284} height={611} />
+                            <Image src="/Daon-IDV.gif" alt='webcam_oval' width={278} height={473} />
                         </div>
                         <div className='ta-c mt-5'>
                             <p>
