@@ -6,8 +6,8 @@ import {
     FormMessage,
 } from 'components/ui/form';
 import Image from 'next/image';
-import WebCamModal from './webcam-modal';
 import { Check } from 'lucide-react';
+import WebCamModal from './webcam-modal';
 
 /**
  * @description Form Field for user web cam photo
