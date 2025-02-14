@@ -18,6 +18,7 @@ import qrCodeVerificationData from 'data/qrcode-text-data';
 import useQrCode from 'hooks/useQrCode';
 import { PROOFT_TEMPLATES_IDS } from 'utils/constants';
 import qrCodeStore from 'store/qrCodeStore';
+import DEFAULT_BANK_FORM_VALUES from 'data/bankFormValues';
 
 const DEFAULT_FORM_VALUES = {
     applicantFirstName: '',
@@ -31,8 +32,8 @@ const DEFAULT_FORM_VALUES = {
     zipCode: '',
     city: '',
     state: '',
-    email: 'euanmiller@email.com',
-    phoneNumber: '12312312321',
+    email: DEFAULT_BANK_FORM_VALUES.email,
+    phoneNumber: DEFAULT_BANK_FORM_VALUES.phoneNumber,
     occupants: [
         {
             firstName: '',
