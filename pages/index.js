@@ -13,7 +13,7 @@ export default function Home() {
       <div className="p-10 m-auto text-center cardsContainer">
         <div className="flex items-center">
           <div className="mr-3 h-[24px]">
-            <Image alt="truveralogo" src="/truveralogoblack.png" width={108} height={24} />
+            <Image alt="truveralogo" src="/DaonLogo-FullColor.png" width={108} height={35} />
           </div>
           <div>
             <h1 className="Header">

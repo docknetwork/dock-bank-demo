@@ -193,8 +193,9 @@ const QuotientBankForm = () => {
                 <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                   <FormFieldGovId
                     control={form.control}
-                    isCaptureCompleted={isCaptureCompleted}
+                    isSelfieCaptureCompleted={isCaptureCompleted}
                     setIsCaptureCompleted={setIsCaptureCompleted}
+                    isDocumentCaptureComplete={isUploadPoDComplete}
                     setIsUploadPoDComplete={setIsUploadPoDComplete}
                   />
                 </div>

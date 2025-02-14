@@ -14,7 +14,7 @@ const partners = [
         id: "forsur",
         logo: "/forsurwhite.png",
         url: "/partners/forsur",
-        description: "Forsur offers biometric credentials for such and such.",
+        description: "Forsur offers biometric credentials.",
         background: "#3D4C41",
         sizes: [93, 82],
         links: []

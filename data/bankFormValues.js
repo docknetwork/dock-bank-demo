@@ -1,18 +1,18 @@
 const DEFAULT_BANK_FORM_VALUES = {
-    firstName: 'Euan',
+    firstName: 'John',
     middleName: '',
-    lastName: 'Miller',
+    lastName: 'Doe',
     suffix: '',
-    dob: new Date('1987-11-22'), // Date Of Birthday
-    streetAddress: '123 Sample Street',
+    dob: new Date('1970-01-01'), // Date Of Birthday
+    streetAddress: '122 Burns Crescent',
     suite: '',
-    zipCode: '01234',
-    city: 'Sacramento',
-    state: 'California',
-    email: 'euan@example.com',
-    phoneNumber: '1-234-567-8900',
+    zipCode: 'SA1 6JL',
+    city: 'Swansea',
+    state: 'Wales',
+    email: 'john@example.com',
+    phoneNumber: '44-7825-100100',
     isUsaCitizen: 'Yes',
-    ssn: '547878978', // social security number,
+    ssn: '', // social security number,
     govId: '',
     webcamPic: '',
 };

@@ -73,7 +73,7 @@ const UsaCitizen = ({ control }) => (
         name="isUsaCitizen"
         render={({ field }) => (
           <FormItem className='w-20'>
-            <FormLabel>U.S Citizen?</FormLabel>
+            <FormLabel>U.K. Citizen?</FormLabel>
             <Select onValueChange={field.onChange} value={field.value}>
               <FormControl>
                 <SelectTrigger>

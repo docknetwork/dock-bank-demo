@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs';
 import EquinetTable from 'components/org/equinet/dataTable';
 import CredentialDetails from 'components/org/equinet/credential-details';
 import { Separator } from 'components/ui/separator';
+import DEFAULT_BANK_FORM_VALUES from 'data/bankFormValues';
 
 import Link from 'next/link';
 
@@ -69,7 +70,7 @@ const EquinetPage = () => {
                             </div>
                             <div className='flex items-center justify-between'>
                                 <div className='flex space-x-2 items-center w-fit'>
-                                    <h2 className='text-2xl font-semibold'>Users | Euan Miller</h2>
+                                    <h2 className='text-2xl font-semibold'>Users | {DEFAULT_BANK_FORM_VALUES.firstName} {DEFAULT_BANK_FORM_VALUES.lastName}</h2>
                                     <Info />
                                 </div>
                                 <Button variant='secondary' className='rounded-full'>Import</Button>
