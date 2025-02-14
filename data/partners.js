@@ -2,11 +2,11 @@ const partners = [
     {
         name: "Identity Clarity",
         id: "clarity",
-        logo: "/claritywhite.png",
+        logo: "/trust-x-logo.png",
         url: "/partners/clarity",
-        description: "IdentityClarity is the KYC provider to the clarity partners ecosystem",
+        description: "TrustX is the KYC provider to the clarity partners ecosystem",
         background: "#D19C3C",
-        sizes: [179, 49],
+        sizes: [198, 34],
         links: []
     },
     {
