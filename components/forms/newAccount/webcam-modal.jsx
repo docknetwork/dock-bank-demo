@@ -16,7 +16,7 @@ import { useState } from 'react';
  * @memberof WebCamPhoto
  * @returns React.FC Dialog
  */
-const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
+const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted, gif, buttonTxt }) => {
     const [isPicTaken, setIsPicTaken] = useState(false);
 
     const handleOnComplete = () => {
@@ -32,7 +32,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
         <Dialog onOpenChange={handleOnOpenChanged}>
             <DialogTrigger asChild>
                 <div className='absolute bottom-0 left-0 right-0 m-auto '>
-                    <Button className='uploadBtn' variant='outline'>Start KYC</Button>
+                    <Button className='uploadBtn' variant='outline'>{buttonTxt}</Button>
                 </div>
             </DialogTrigger>
             <DialogContent>
@@ -44,7 +44,7 @@ const WebCamModal = ({ isCaptureCompleted, setIsCaptureCompleted }) => {
 
                         </DialogHeader>
                         <div className='p-4 pt-5 grid justify-items-center relative'>
-                            <Image src="/Daon-IDV.gif" alt='webcam_oval' width={278} height={473} />
+                            <Image src={gif} alt='webcam_oval' width={278} height={473} />
                         </div>
                         <div className='ta-c mt-5'>
                             <p>

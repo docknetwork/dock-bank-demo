@@ -14,16 +14,16 @@ import WebCamModal from './webcam-modal';
  * @memberof FormFieldGovId
  * @returns React.FC Form Field
  */
-const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted, gif, capturedImage, placeholder, buttonTxt }) => (
+const WebCamPassport = ({ control, isCaptureCompleted, setIsCaptureCompleted, gif, capturedImage, placeholder, buttonTxt }) => (
     <div className="p-4 bg-neutral-50 rounded-lg h-80 xl:h-3/6">
         <FormField
             control={control}
-            name="webcamPic"
+            name="govId"
             render={({ field }) => (
                 <FormItem className="relative h-full">
                     <div className='flex items-center justify-between'>
                         <div>
-                            <FormLabel className="font-semibold">Take a webcam photo for KYC check</FormLabel>
+                            <FormLabel className="font-semibold">Upload Passport or Drivers License</FormLabel>
                         </div>
                         <div>
                             <Image src="/DaonLogo-FullColor.png" alt='id_clarity' width={87} height={24} />
@@ -31,12 +31,12 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted, gif, 
                     </div>
                     <FormControl>
                         {isCaptureCompleted ? (
-                            <div className='grid place-items-center '>
-                                <Image src={capturedImage} alt='webcam_oval' width={114} height={198} />
+                            <div className='grid justify-items-center gap-4 pt-2 xl:pt-16 '>
+                                <Image src={capturedImage} alt='webcam_oval' width={259} height={180} />
                             </div>
                         ) : (
                             <div className='grid justify-items-center gap-4 pt-2 xl:pt-16'>
-                                <Image src={placeholder} alt='background_replace' width={168} height={168} />
+                                <Image src={placeholder} alt='background_replace' width={149} height={186} />
                                 <WebCamModal
                                     isCaptureCompleted={isCaptureCompleted}
                                     setIsCaptureCompleted={setIsCaptureCompleted}
@@ -52,4 +52,4 @@ const WebCamPhoto = ({ control, isCaptureCompleted, setIsCaptureCompleted, gif, 
     </div>
 );
 
-export default WebCamPhoto;
+export default WebCamPassport;

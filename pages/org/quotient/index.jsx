@@ -60,6 +60,7 @@ const QuotientBankForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCaptureCompleted, setIsCaptureCompleted] = useState(false);
+  const [isUploadPoDComplete, setIsUploadPoDComplete] = useState(false);
   const proofTemplateId = PROOFT_TEMPLATES_IDS.BIOMETRIC_VERIFICATION;
   const verified = qrCodeStore((state) => state.verified);
   const setVerified = qrCodeStore((state) => state.setVerified);
@@ -140,11 +141,14 @@ const QuotientBankForm = () => {
   }, [verified]);
 
   useEffect(() => {
-    const [webcamPic] = [form.getValues('webcamPic')];
+    const [govId, webcamPic] = [form.getValues('govId'), form.getValues('webcamPic')];
     if (isCaptureCompleted && webcamPic === '') {
       form.resetField('webcamPic', { defaultValue: '/example_webcam.png' });
     }
-  }, [isCaptureCompleted, form]);
+    if (isUploadPoDComplete && govId === '') {
+      form.resetField('govId', { defaultValue: '/example_passport.png' });
+    }
+  }, [isCaptureCompleted, isUploadPoDComplete, form]);
 
   async function onSubmit(values) {
     console.log('values', values);
@@ -189,8 +193,10 @@ const QuotientBankForm = () => {
                 <div className='flex-2 w-full md:w-1/3 xl:w-1/3'>
                   <FormFieldGovId
                     control={form.control}
-                    isCaptureCompleted={isCaptureCompleted}
+                    isSelfieCaptureCompleted={isCaptureCompleted}
                     setIsCaptureCompleted={setIsCaptureCompleted}
+                    isDocumentCaptureComplete={isUploadPoDComplete}
+                    setIsUploadPoDComplete={setIsUploadPoDComplete}
                   />
                 </div>
               </div>
