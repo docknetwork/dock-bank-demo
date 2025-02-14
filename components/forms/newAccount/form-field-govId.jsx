@@ -29,9 +29,7 @@ const FormFieldGovId = ({ control, isSelfieCaptureCompleted, setIsCaptureComplet
             capturedImage="/example_passport.png"
             placeholder="/upload_file.png"
             buttonTxt="Upload Government Issued ID" />
-
     </>
 );
-
 
 export default FormFieldGovId;
