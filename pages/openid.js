@@ -261,6 +261,7 @@ export default function Home() {
           ...credential,
           issuer: process.env.NEXT_PUBLIC_QUOTIENT_ISSUER_ID,
         },
+        format: 'sdjwt',
       },
       singleUse: true,
     });

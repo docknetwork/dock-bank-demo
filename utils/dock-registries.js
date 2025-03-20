@@ -1,47 +1,14 @@
 import { toast } from 'sonner';
-import { apiGetLocal, postRequestLocal } from './request';
-
-/**
- * Creates a new registry by calling the Registries API endpoint.
- *
- * @param {string} policyDid - The DID of the policy to associate with the registry.
- * @param {string} type - The type of registry.
- * @returns {Promise<any>} A promise that resolves to the API response if successful, or rejects with an error.
- */
-export async function createRegistry(policyDid, type) {
-    const data = {
-        addOnly: false,
-        policy: [policyDid],
-        type,
-    };
-
-    try {
-        const response = await postRequestLocal(
-            'create-registry',
-            data,
-        );
-
-        console.log('Registries :', response);
-        if (response.data) {
-            return response.data;
-        } 
-            throw new Error('Data is not present on registries response');
-    } catch (error) {
-        console.error(error);
-    }
-
-    return undefined;
-}
+import { postRequestLocal } from './request';
 
 /**
  * Revokes a credential from the registry with the given ID.
  *
- * @param {string} registryId - The ID of the registry to revoke from.
  * @param {Credential} credential - The credential object containing the ID to revoke.
  * @returns {Promise<any>} A promise that resolves to the API response if successful, or rejects with an error.
  */
 
-export const revokeCredential = async (registryId, credentialId) => {
+export const revokeCredential = async (credentialId) => {
     const payload = {
         action: 'revoke',
         credentialIds: [
@@ -52,10 +19,7 @@ export const revokeCredential = async (registryId, credentialId) => {
     try {
         return await postRequestLocal(
             'revoke-action',
-            {
-                ...payload,
-                registryId,
-            },
+            payload,
         );
     } catch (error) {
         toast.warning('Error revoking this credential');
@@ -65,14 +29,11 @@ export const revokeCredential = async (registryId, credentialId) => {
 /**
  * Un-revokes a previously revoked credential from the registry with the given ID.
  *
- * @param {string} registryId - The ID of the registry to unrevoke from.
  * @param {Credential} credential - The credential object containing the ID to unrevoke.
  * @returns {Promise<any>} A promise that resolves to the API response if successful, or rejects with an error.
  */
-export async function unrevoke(registryId, credential) {
-    console.log('unrevoke:start:', { registryId, credential });
-
-    const url = `registries/${registryId}`;
+export async function unrevoke(credential) {
+    console.log('unrevoke:start:', { credential });
 
     const data = {
         action: 'unrevoke',
@@ -82,10 +43,7 @@ export async function unrevoke(registryId, credential) {
     try {
         const response = await postRequestLocal(
             'revoke-action',
-            {
-                ...data,
-                registryId,
-            },
+            data,
         );
 
         return response;
@@ -94,14 +52,4 @@ export async function unrevoke(registryId, credential) {
     }
 
     return undefined;
-}
-
-export async function getExistingRegistry(did, searchType) {
-    const registriesResponse = await apiGetLocal(`find-registry?did=${encodeURIComponent(did)}&type=${searchType}`);
-
-    if (!registriesResponse || !registriesResponse.data || registriesResponse.data.length === 0) {
-        return null;
-    }
-
-    return registriesResponse.data[0];
 }

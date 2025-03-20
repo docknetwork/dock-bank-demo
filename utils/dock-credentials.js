@@ -5,10 +5,10 @@ import { postRequestLocal } from "./request";
  * Wraps the credential in an object and sends an POST request to credentials/ to store it.
  * @returns A Promise that resolves to the credential data.
  */
-export async function createCredential(registryId, credential) {
+export async function createCredential(isRevocable, credential) {
     // Set the credential status to the registry ID.
-    if (registryId) {
-        credential.credential.status = registryId;
+    if (isRevocable) {
+        credential.revocable = true;
     }
 
     console.log("issuing credential", credential);
