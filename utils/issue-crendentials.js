@@ -11,7 +11,6 @@ export const issueRevokableCredential = async (credential, setRevokableCredentia
     if (isRevocable) {
         console.log(signed);
         setRevokableCredential({
-            // registryId: registry.id,
             credentialId: signed.data.id,
             userDid: _credential.subject.id
         });
