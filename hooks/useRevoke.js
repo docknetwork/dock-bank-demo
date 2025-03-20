@@ -20,14 +20,14 @@ export const useRevoke = () => {
     };
 
     async function handleRevoke() {
-        if (!revokableCredential.registryId || !revokableCredential.credentialId) {
+        if (!revokableCredential.credentialId) {
             toast.warning('There is no credential to revoke.')
             return
         }
 
         setLoadingRevokation(true);
         try {
-            const revokation = await revokeCredential(revokableCredential.registryId, revokableCredential.credentialId)
+            const revokation = await revokeCredential(revokableCredential.credentialId)
             if (revokation.status === 202) {
                 toast.success('Credential revoked successfully', { duration: 10000 })
                 setTimeout(async () => {

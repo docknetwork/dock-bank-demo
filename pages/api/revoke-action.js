@@ -7,17 +7,17 @@ export default async (req, res) => {
     return;
   }
 
-  const result = await fetch(`${dockUrl}/registries/${req.body.registryId}`, {
-    method: 'POST',
-    headers: {
-      'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      ...req.body,
-      registryId: undefined,
-    }),
-  });
+  const body = { ...req.body };
+  const result = await fetch(
+    `${dockUrl}/credentials/${encodeURIComponent(body.credentialIds[0])}/${body.action === 'revoke' ? 'revoke' : 'unrevoke'}`,
+    {
+      method: 'POST',
+      headers: {
+        'DOCK-API-TOKEN': `${process.env.DOCK_API_TOKEN}`,
+        'content-type': 'application/json',
+      },
+    }
+  );
 
   const response = await result.json();
   if (!result.ok) {
