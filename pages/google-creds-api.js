@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 
+const originTrialKey = process.env.NEXT_PUBLIC_ORIGIN_TRIAL_KEY;
 const credsApiRequest = {
   protocol: 'openid4vp',
   request:
@@ -61,7 +62,7 @@ export default function GoogleCredsAPI({ title, desc, proofRequestSetupObject })
       <Head>
         <meta
           httpEquiv="origin-trial"
-          content="A5Ymc2ukhbos5WjkzVmQ8Fhyeh/TpOMkFrabuHWLC7Z1d6ugFqVwbD3PsF1GkKpi6cqrEW97SMBFg4feqOJnfwAAAACSeyJvcmlnaW4iOiJodHRwczovL2JhbmstZGVtby50cnV2ZXJhLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJJZGVudGl0eURpZ2l0YWxDcmVkZW50aWFscyIsImV4cGlyeSI6MTc1MzE0MjQwMCwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="
+          content={originTrialKey}
         />
       </Head>
       <button onClick={handleTestRequest}>test it now</button>

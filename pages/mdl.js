@@ -12,6 +12,7 @@ import { apiGetLocal, postRequestLocal } from 'utils/request';
 import { dockUrl } from 'utils/constants';
 
 const baseUrl = process.env.NEXT_PUBLIC_DOCK_API_URL;
+const originTrialKey = process.env.NEXT_PUBLIC_ORIGIN_TRIAL_KEY;
 const mdlProofRequest = {
   name: 'Proof request',
   nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
@@ -200,7 +201,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       <Head>
         <meta
           httpEquiv="origin-trial"
-          content="A5Ymc2ukhbos5WjkzVmQ8Fhyeh/TpOMkFrabuHWLC7Z1d6ugFqVwbD3PsF1GkKpi6cqrEW97SMBFg4feqOJnfwAAAACSeyJvcmlnaW4iOiJodHRwczovL2JhbmstZGVtby50cnV2ZXJhLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJJZGVudGl0eURpZ2l0YWxDcmVkZW50aWFscyIsImV4cGlyeSI6MTc1MzE0MjQwMCwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="
+          content={originTrialKey}
         />
       </Head>
 
