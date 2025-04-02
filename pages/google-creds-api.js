@@ -60,10 +60,7 @@ export default function GoogleCredsAPI({ title, desc, proofRequestSetupObject })
   return (
     <div>
       <Head>
-        <meta
-          httpEquiv="origin-trial"
-          content={originTrialKey}
-        />
+        <meta httpEquiv="origin-trial" content={originTrialKey} />
       </Head>
       <button onClick={handleTestRequest}>test it now</button>
 

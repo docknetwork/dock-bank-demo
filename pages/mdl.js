@@ -199,10 +199,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
   return (
     <div>
       <Head>
-        <meta
-          httpEquiv="origin-trial"
-          content={originTrialKey}
-        />
+        <meta httpEquiv="origin-trial" content={originTrialKey} />
       </Head>
 
       <div className="orgCard">
