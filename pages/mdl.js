@@ -200,7 +200,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
       <Head>
         <meta
           httpEquiv="origin-trial"
-          content="AvtuWDKqY9MS251/xT6JOYwPcacC/v+7eBpPKAAGbhhDWm4mRrfiVDaBM2+S4QOoRKot7ROde+8kfPkvNpDF7QQAAAB0eyJvcmlnaW4iOiJodHRwczovL3RydXZlcmEuaW86NDQzIiwiZmVhdHVyZSI6IldlYklkZW50aXR5RGlnaXRhbENyZWRlbnRpYWxzIiwiZXhwaXJ5IjoxNzUzMTQyNDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZX0="
+          content="A5Ymc2ukhbos5WjkzVmQ8Fhyeh/TpOMkFrabuHWLC7Z1d6ugFqVwbD3PsF1GkKpi6cqrEW97SMBFg4feqOJnfwAAAACSeyJvcmlnaW4iOiJodHRwczovL2JhbmstZGVtby50cnV2ZXJhLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJJZGVudGl0eURpZ2l0YWxDcmVkZW50aWFscyIsImV4cGlyeSI6MTc1MzE0MjQwMCwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="
         />
       </Head>
 
