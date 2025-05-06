@@ -13,8 +13,7 @@ export default async (req, res) => {
     return;
   }
 
-  const { dock_wallet_id, email, vc_password, biometric_enrollment_id } =
-    req.body;
+  const { dock_wallet_id, email, vc_password, biometric_enrollment_id } = req.body;
 
   if (!dock_wallet_id) {
     res.status(400).json({ error: 'dock_wallet_id is required' });
@@ -33,9 +32,7 @@ export default async (req, res) => {
 
     if (!authResponse.ok) {
       const errorText = await authResponse.text();
-      throw new Error(
-        `TrustX Auth Error: ${authResponse.status} - ${errorText}`
-      );
+      throw new Error(`TrustX Auth Error: ${authResponse.status} - ${errorText}`);
     }
 
     const authData = await authResponse.json();
@@ -43,37 +40,32 @@ export default async (req, res) => {
     const processTokenName = `PM_${trustxTenant}_${uuidv4()}`;
 
     // Create process token using the authentication token
-    const processTokenResponse = await fetch(
-      `${baseURL}/api/process-manager/processTokens`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${authData.token}`,
-          'Content-Type': 'application/json',
+    const processTokenResponse = await fetch(`${baseURL}/api/process-manager/processTokens`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${authData.token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: processTokenName,
+        type: 'MULTI_USE_COUNT_LIMITED',
+        status: 'ACTIVE',
+        maxCount: 1,
+        uiUrl: `${baseURL}/web/trustweb`,
+        processDefnName,
+        processDefnVersion: parseInt(processDefnVersion, 10),
+        parameters: {
+          dock_wallet_id,
+          ...(email && { email }),
+          ...(vc_password && { vc_password }),
+          ...(biometric_enrollment_id && { biometric_enrollment_id }),
         },
-        body: JSON.stringify({
-          name: processTokenName,
-          type: 'MULTI_USE_COUNT_LIMITED',
-          status: 'ACTIVE',
-          maxCount: 1,
-          uiUrl: `${baseURL}/web/trustweb`,
-          processDefnName,
-          processDefnVersion: parseInt(processDefnVersion, 10),
-          parameters: {
-            dock_wallet_id,
-            ...(email && { email }),
-            ...(vc_password && { vc_password }),
-            ...(biometric_enrollment_id && { biometric_enrollment_id }),
-          },
-        }),
-      }
-    );
+      }),
+    });
 
     if (!processTokenResponse.ok) {
       const errorText = await processTokenResponse.text();
-      throw new Error(
-        `TrustX Process Token Error: ${processTokenResponse.status} - ${errorText}`
-      );
+      throw new Error(`TrustX Process Token Error: ${processTokenResponse.status} - ${errorText}`);
     }
 
     const processTokenData = await processTokenResponse.json();
