@@ -13,7 +13,7 @@ export default async (req, res) => {
     return;
   }
 
-  const { dock_wallet_id, email, vc_password, biometric_enrollment_id } = req.body;
+  const { dock_wallet_id, biometric_enrollment_id } = req.body;
 
   if (!dock_wallet_id) {
     res.status(400).json({ error: 'dock_wallet_id is required' });
@@ -56,8 +56,6 @@ export default async (req, res) => {
         processDefnVersion: parseInt(processDefnVersion, 10),
         parameters: {
           dock_wallet_id,
-          ...(email && { email }),
-          ...(vc_password && { vc_password }),
           ...(biometric_enrollment_id && { biometric_enrollment_id }),
         },
       }),
