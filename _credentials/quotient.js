@@ -17,7 +17,7 @@ export function createBankIdCredential({
       distribute: true,
       credential: {
         id: `https://creds-testnet.dock.io/${uuidv4()}`,
-        schema: 'https://schema.dock.io/QuotientBankIdentity-V4-1708715398120.json',
+        schema: 'https://schema.truvera.io/QuotientBankIdentity-V4-1747932534547.json',
         name: 'Quotient - Bank Identity',
         description: "The \"Quotient - Bank Identity\" schema provides a secure and standardized format for representing key aspects of an individual's bank identity.",
         type: [
