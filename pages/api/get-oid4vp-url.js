@@ -19,11 +19,12 @@ export default async (req, res) => {
     }),
   });
 
-  const response = await result.json();
   if (!result.ok) {
     const errorText = await result.text();
     throw new Error(`API Error: ${result.status} - ${errorText}`);
   }
+
+  const response = await result.json();
 
   res.status(202).send(response);
 };

@@ -3,9 +3,30 @@ import Head from 'next/head';
 
 const originTrialKey = process.env.NEXT_PUBLIC_ORIGIN_TRIAL_KEY;
 const credsApiRequest = {
-  protocol: 'openid4vp',
+  protocol: 'openid4vp-v1-unsigned',
   request:
-    '{"client_id": "bank-demo.truvera.io", "client_id_scheme": "web-origin", "response_type": "vp_token", "nonce": "-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=", "presentation_definition": {"id": "mDL-request-demo", "input_descriptors": [{"id": "org.iso.18013.5.1.mDL", "format": {"mso_mdoc": {"alg": ["ES256"]}}, "constraints": {"limit_disclosure": "required", "fields": [{"path": ["$[\'org.iso.18013.5.1\'][\'family_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'given_name\']"], "intent_to_retain": false}, {"path": ["$[\'org.iso.18013.5.1\'][\'age_over_21\']"], "intent_to_retain": false}]}}]}}',
+    {
+      client_metadata: {
+        client_id: 'bank-demo.truvera.io',
+        client_id_scheme: 'web-origin',
+        vp_formats_supported: { mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] } }
+      },
+      dcql_query: {
+        credentials: [{
+          claims: [
+            { path: ['org.iso.18013.5.1', 'family_name'] },
+            { path: ['org.iso.18013.5.1', 'given_name'] },
+            { path: ['org.iso.18013.5.1', 'age_over_21'] }
+          ],
+          format: 'mso_mdoc',
+          id: 'cred1',
+          meta: { doctype_value: 'org.iso.18013.5.1.mDL' }
+        }]
+      },
+      nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
+      response_mode: 'dc_api',
+      response_type: 'vp_token'
+    },
   state: {
     nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
     private_key: 'kN37SKg-iu3N3wSXAhuBXxwDkbo5rvUFYCr9BCm34Qs=',
@@ -19,15 +40,13 @@ export default function GoogleCredsAPI({ title, desc, proofRequestSetupObject })
   const [res, setRes] = useState();
   async function handleTestRequest() {
     try {
-      const credentialResponse = await navigator.identity.get({
+      const credentialResponse = await navigator.credentials.get({
         digital: {
-          providers: [
-            {
-              protocol: credsApiRequest.protocol,
-              request: credsApiRequest.request,
-            },
-          ],
-        },
+          requests: [{
+            protocol: credsApiRequest.protocol,
+            data: credsApiRequest.request
+          }]
+        }
       });
 
       if (credentialResponse.constructor.name === 'DigitalCredential') {
