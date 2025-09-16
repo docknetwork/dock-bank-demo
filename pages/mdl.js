@@ -43,9 +43,7 @@ const mdlProofRequest = {
   },
 };
 
-const mdlDCQLQueryClaims = [
-  { path: ['org.iso.18013.5.1', 'age_over_18'] },
-];
+const mdlDCQLQueryClaims = [{ path: ['org.iso.18013.5.1', 'age_over_18'] }];
 
 const mdlProofRequestName = {
   name: 'Proof request',
@@ -86,7 +84,14 @@ const mdlDCQLQueryClaimsName = [
   { path: ['org.iso.18013.5.1', 'given_name'] },
 ];
 
-function OID4VPProofRequest({ title, desc, proofRequestSetupObject, dcqlQueryClaims, onPres, setError }) {
+function OID4VPProofRequest({
+  title,
+  desc,
+  proofRequestSetupObject,
+  dcqlQueryClaims,
+  onPres,
+  setError,
+}) {
   const [proofRequest, setProofRequest] = useState();
   const [isVerified, setIsVerified] = useState(false);
 
@@ -143,15 +148,19 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, dcqlQueryCla
         client_metadata: {
           client_id: 'bank-demo.truvera.io',
           client_id_scheme: 'web-origin',
-          vp_formats_supported: { mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] } }
+          vp_formats_supported: {
+            mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] },
+          },
         },
         dcql_query: {
-          credentials: [{
-            claims: dcqlQueryClaims,
-            format: 'mso_mdoc',
-            id: REQUESTED_CRED_ID,
-            meta: { doctype_value: 'org.iso.18013.5.1.mDL' }
-          }]
+          credentials: [
+            {
+              claims: dcqlQueryClaims,
+              format: 'mso_mdoc',
+              id: REQUESTED_CRED_ID,
+              meta: { doctype_value: 'org.iso.18013.5.1.mDL' },
+            },
+          ],
         },
         response_mode: 'dc_api',
       },
@@ -323,13 +332,17 @@ export default function Home() {
                     <div className="mt-5 text-lg text-left">Setup the Google CM Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
-                        Download the
-                        {' '}
-                        <a href="https://github.com/digitalcredentialsdev/CMWallet" style={{ fontWeight: 'bold', textDecoration: 'underline' }} target="_blank" rel="noreferrer">
-                        CM Wallet app linked in this page
-                        </a>
-                        {' '}
-                        (check README.md for download instructions) to your Android device. The source code can be found at the digitalcredentialsdev&apos;s CMWallet repository
+                        Download the{' '}
+                        <a
+                          href="https://github.com/digitalcredentialsdev/CMWallet"
+                          style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+                          target="_blank"
+                          rel="noreferrer">
+                          CM Wallet app linked in this page
+                        </a>{' '}
+                        (check README.md for download instructions) to your Android device. The
+                        source code can be found at the digitalcredentialsdev&apos;s CMWallet
+                        repository
                       </li>
                       <li>Run the CM Wallet app</li>
                     </ol>
@@ -342,11 +355,18 @@ export default function Home() {
                       <li>Open Chrome on your Android device or on desktop</li>
                       <li>
                         Navigate to&nbsp;
-                        <a href="https://bank-demo.truvera.io/mdl" style={{ fontWeight: 'bold', textDecoration: 'underline' }} target="_blank" rel="noreferrer">
+                        <a
+                          href="https://bank-demo.truvera.io/mdl"
+                          style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+                          target="_blank"
+                          rel="noreferrer">
                           https://bank-demo.truvera.io/mdl
                         </a>
                       </li>
-                      <li>Try out the sample proof requests by clicking the Use google Creds API button</li>
+                      <li>
+                        Try out the sample proof requests by clicking the Use google Creds API
+                        button
+                      </li>
                       <li>Follow the on-screen instructions</li>
                       <li>
                         If successful, a Verified message will display and the response will be
