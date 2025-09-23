@@ -43,6 +43,8 @@ const mdlProofRequest = {
   },
 };
 
+const mdlDCQLQueryClaims = [{ path: ['org.iso.18013.5.1', 'age_over_18'] }];
+
 const mdlProofRequestName = {
   name: 'Proof request',
   nonce: '-vz4qxeHjbmcjvfVBKJ1PywWnLawwxLi50CVTrOAGmw=',
@@ -77,7 +79,19 @@ const mdlProofRequestName = {
   },
 };
 
-function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setError }) {
+const mdlDCQLQueryClaimsName = [
+  { path: ['org.iso.18013.5.1', 'family_name'] },
+  { path: ['org.iso.18013.5.1', 'given_name'] },
+];
+
+function OID4VPProofRequest({
+  title,
+  desc,
+  proofRequestSetupObject,
+  dcqlQueryClaims,
+  onPres,
+  setError,
+}) {
   const [proofRequest, setProofRequest] = useState();
   const [isVerified, setIsVerified] = useState(false);
 
@@ -123,16 +137,33 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
 
   async function handleCredsRequest() {
     console.log('handleCredsRequest', proofRequest);
+    const REQUESTED_CRED_ID = 'cred1';
 
     const credsApiRequest = {
-      protocol: 'openid4vp',
-      request: JSON.stringify({
-        client_id: 'bank-demo.truvera.io',
-        client_id_scheme: 'web-origin',
+      protocol: 'openid4vp-v1-unsigned',
+      request: {
         response_type: 'vp_token',
         nonce: proofRequest.nonce,
         presentation_definition: proofRequest.request,
-      }),
+        client_metadata: {
+          client_id: 'bank-demo.truvera.io',
+          client_id_scheme: 'web-origin',
+          vp_formats_supported: {
+            mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] },
+          },
+        },
+        dcql_query: {
+          credentials: [
+            {
+              claims: dcqlQueryClaims,
+              format: 'mso_mdoc',
+              id: REQUESTED_CRED_ID,
+              meta: { doctype_value: 'org.iso.18013.5.1.mDL' },
+            },
+          ],
+        },
+        response_mode: 'dc_api',
+      },
       state: {
         nonce: proofRequest.nonce,
         private_key: 'kN37SKg-iu3N3wSXAhuBXxwDkbo5rvUFYCr9BCm34Qs=',
@@ -142,12 +173,12 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
     };
 
     try {
-      const credentialResponse = await navigator.identity.get({
+      const credentialResponse = await navigator.credentials.get({
         digital: {
-          providers: [
+          requests: [
             {
               protocol: credsApiRequest.protocol,
-              request: credsApiRequest.request,
+              data: credsApiRequest.request,
             },
           ],
         },
@@ -159,11 +190,13 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
         const protocol = credentialResponse.protocol;
         responseForServer = {
           protocol,
-          data,
+          data: {
+            vp_token: data.vp_token[REQUESTED_CRED_ID][0],
+          },
           state: credsApiRequest.state,
         };
       } else if (credentialResponse.constructor.name === 'IdentityCredential') {
-        const data = credentialResponse.token;
+        const data = JSON.parse(credentialResponse.token);
         const protocol = 'oid4vp';
         responseForServer = {
           protocol,
@@ -174,7 +207,7 @@ function OID4VPProofRequest({ title, desc, proofRequestSetupObject, onPres, setE
         throw new Error('Unknown response type');
       }
 
-      const dataObj = JSON.parse(responseForServer.data);
+      const dataObj = responseForServer.data;
       if (dataObj.vp_token) {
         // we must act as the client submitting the presentation now
         try {
@@ -288,31 +321,30 @@ export default function Home() {
                     <div className="mt-5 text-lg text-left">Device Requirements</div>
                     <ol className="pl-5 list-disc">
                       <li>Android device</li>
-                      <li>Google Play services 23.40 (or later)</li>
-                      <li>Chrome 128 (or later)</li>
+                      <li>Google Play services 24.0 (or later)</li>
+                      <li>Chrome 136 (or later)</li>
                       <li>Enable the flag at chrome://flags#web-identity-digital-credentials</li>
                       <li>Ensure your device allows installs from, &quot;Unknown Sources&quot;</li>
                     </ol>
                   </div>
 
                   <div className="mt-5 text-left">
-                    <div className="mt-5 text-lg text-left">Setup the Google IC Wallet</div>
+                    <div className="mt-5 text-lg text-left">Setup the Google CM Wallet</div>
                     <ol className="pl-5 list-disc">
                       <li>
-                        Download the
+                        Download the{' '}
                         <a
-                          href="https://digitalcredentials.dev/docs/samples/android-wallet-sample/#install-the-apps"
-                          download>
-                          IC Wallet app linked in this page
-                        </a>
-                        to your Android device. The source code can be found at the OpenWallet
-                        Foundation&apos;s Identity Credentials repository
+                          href="https://github.com/digitalcredentialsdev/CMWallet"
+                          style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+                          target="_blank"
+                          rel="noreferrer">
+                          CM Wallet app linked in this page
+                        </a>{' '}
+                        (check README.md for download instructions) to your Android device. The
+                        source code can be found at the digitalcredentialsdev&apos;s CMWallet
+                        repository
                       </li>
-                      <li>Run the IC Wallet app</li>
-                      <li>
-                        Add a new credential by clicking the, &quot;Add Self Signed Document&quot;
-                        button and accepting the defaults
-                      </li>
+                      <li>Run the CM Wallet app</li>
                     </ol>
                   </div>
 
@@ -320,14 +352,22 @@ export default function Home() {
                     <div className="mt-5 text-lg text-left">Test it out</div>
 
                     <ol className="pl-5 list-disc">
-                      <li>Open Chrome on your Android device</li>
+                      <li>Open Chrome on your Android device or on desktop</li>
                       <li>
                         Navigate to&nbsp;
-                        <a href="https://bank-demo.truvera.io/mdl" target="_blank" rel="noreferrer">
+                        <a
+                          href="https://bank-demo.truvera.io/mdl"
+                          style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+                          target="_blank"
+                          rel="noreferrer">
                           https://bank-demo.truvera.io/mdl
                         </a>
                       </li>
-                      <li>Try out the sample proof requests</li>
+                      <li>
+                        Try out the sample proof requests by clicking the Use google Creds API
+                        button
+                      </li>
+                      <li>Follow the on-screen instructions</li>
                       <li>
                         If successful, a Verified message will display and the response will be
                         shown below
@@ -345,6 +385,7 @@ export default function Home() {
         <div className="grid gap-4 pt-5 text-center xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 sm:grid-cols-1">
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequest}
+            dcqlQueryClaims={mdlDCQLQueryClaims}
             title="Over 18 check"
             desc="Scan this QR code with your OpenID compatible MDL Wallet to present an age over 18 check to the Truvera API."
             onPres={handlePres}
@@ -352,6 +393,7 @@ export default function Home() {
           />
           <OID4VPProofRequest
             proofRequestSetupObject={mdlProofRequestName}
+            dcqlQueryClaims={mdlDCQLQueryClaimsName}
             title="Get name check"
             desc="Scan this QR code with your OpenID compatible MDL Wallet to present your name to the Truvera API."
             onPres={handlePres}
