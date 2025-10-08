@@ -84,29 +84,81 @@ function OID4VPProofRequest({
       request: {
         response_type: 'vp_token',
         nonce: proofRequest.nonce,
-        presentation_definition: proofRequest.request,
+        // presentation_definition: proofRequest.request,
         client_metadata: {
           client_id: 'bank-demo.truvera.io',
           client_id_scheme: 'web-origin',
-          vp_formats_supported: {
-            mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] },
-          },
+          // vp_formats_supported: {
+          //   mso_mdoc: { deviceauth_alg_values: [-7], issuerauth_alg_values: [-7] },
+          // },
         },
         dcql_query: {
           credentials: [
             {
-              claims: dcqlQueryClaims,
+              claims: [
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'family_name'
+                  ],
+                  intent_to_retain: false // set this to true if you are saving the value of the field
+                },
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'given_name'
+                  ],
+                  intent_to_retain: false
+                },
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'age_over_18'
+                  ],
+                  intent_to_retain: false
+                }
+              ],
               format: 'mso_mdoc',
               id: REQUESTED_MDL_CRED_ID,
               meta: { doctype_value: 'org.iso.18013.5.1.mDL' },
             },
             {
-              claims: dcqlQueryClaims,
+              claims: [
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'family_name'
+                  ],
+                  intent_to_retain: false // set this to true if you are saving the value of the field
+                },
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'given_name'
+                  ],
+                  intent_to_retain: false
+                },
+                {
+                  path: [
+                    'org.iso.18013.5.1',
+                    'age_over_18'
+                  ],
+                  intent_to_retain: false
+                }
+              ],
               format: 'mso_mdoc',
               id: REQUESTED_ID_PASS_CRED_ID,
               meta: { doctype_value: 'com.google.wallet.idcard.1' },
             },
           ],
+          credential_sets: [
+            {
+              options: [
+                [REQUESTED_MDL_CRED_ID],
+                [REQUESTED_ID_PASS_CRED_ID]
+              ]
+            }
+          ]
         },
         response_mode: 'dc_api',
       },
