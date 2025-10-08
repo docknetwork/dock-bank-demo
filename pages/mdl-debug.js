@@ -40,9 +40,7 @@ const mdlProofRequest = {
   },
 };
 
-const mdlDCQLQueryClaims = [
-  { path: ['org.iso.18013.5.1', 'family_name'] },
-];
+const mdlDCQLQueryClaims = [{ path: ['org.iso.18013.5.1', 'family_name'] }];
 
 function OID4VPProofRequest({
   title,
@@ -136,11 +134,12 @@ function OID4VPProofRequest({
       if (credentialResponse.constructor.name === 'DigitalCredential') {
         const data = credentialResponse.data;
         const protocol = credentialResponse.protocol;
-        const vp_token = data.vp_token[REQUESTED_MDL_CRED_ID] || data.vp_token[REQUESTED_ID_PASS_CRED_ID];
+        const vp_token =
+          data.vp_token[REQUESTED_MDL_CRED_ID] || data.vp_token[REQUESTED_ID_PASS_CRED_ID];
         responseForServer = {
           protocol,
           data: {
-            vp_token: vp_token[0],
+            vp_token,
           },
           state: credsApiRequest.state,
         };
