@@ -1,0 +1,19 @@
+name: Run Bank Demo Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  trigger-bank-demo-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.1.1
+        with:
+          token: ${{ secrets.WHITE_LABEL_TRIGGER_PAT }}
+          repository: docknetwork/dock-app-testautomation
+          event-type: trigger-bank-demo-tests
+          client-payload: '{"distribution_name": "bank-demo"}'
